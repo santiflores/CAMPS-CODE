@@ -10,3 +10,6 @@ function navDropdown() {
 function navDropdownCerrar() {
 	document.getElementById('navbar_dropdown').style.display='none'
 }
+function agregarEspecialidad() {
+	document.getElementById('agregar_especialidad').style.display='block'
+}

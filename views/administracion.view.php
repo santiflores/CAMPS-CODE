@@ -17,7 +17,13 @@
   <div class="titulo_medicos administracion">
     <h2>Panel de Administracion</h2>
     <div class="botones_panel">
-      <a class="botonestitulo botones_cards">Agregar especialidad</a>
+      <div>
+        <button class="botonestitulo botones_cards" onclick="agregarEspecialidad()">Agregar especialidad</button>
+        <form action="especialidad.php" action="post" class="agregar_especialidad">
+          <input type="text" name="nueva especialidad" placeholder="Especialidad...">
+          <input type="submit" value="Agregar especialidad">
+        </form>
+      </div>
       <a href="nuevo.php" class="botonestitulo botones_cards">Agregar medico</a>
     </div>
    </div>
