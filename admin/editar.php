@@ -12,21 +12,21 @@ if(!$conexion){
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$nombre = limpiarDatos($_POST['nombre']);
 	$especialidad = limpiarDatos($_POST['especialidad']);
-	$horario_de_atencion = $_POST['horario'];
+	$horario = $_POST['horario'];
 	$id = limpiarDatos($_POST['id']);
 
 	$statement = $conexion->prepare(
-		"UPDATE medicos SET
+		'UPDATE medicos SET
 		nombre = :nombre,
 		especialidad =:especialidad,
 		horario de atencion = :horario de atencion,
-		WHERE id = :id"
+		WHERE id = :id'
 	);
 	$statement->execute(array(
 		':nombre' => $nombre,
 		':especialidad' => $especialidad,
-		':horario de atencion' => $horario_de_atencion,
-		':id' => $id_medico
+		':horario' => $horario,
+		':id' => $id
 	));
 
 	header('Location: ' . RUTA . '/admin/administracion.php');
