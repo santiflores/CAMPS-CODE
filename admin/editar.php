@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		'UPDATE medicos SET
 		nombre = :nombre,
 		especialidad =:especialidad,
-		horario de atencion = :horario de atencion,
+		horario de atencion = :horario,
 		WHERE id = :id'
 	);
 	$statement->execute(array(

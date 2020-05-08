@@ -51,30 +51,27 @@
     <div class="titulo_medicos">
       <h2>Saca tu turno</h2>
       <form action="buscar.php" method="get" class="buscar">
-        <input type="text" placeholder="Buscar..." name="busqueda">
+        <input type="text" placeholder="Buscar..." name="buscar">
       </form>
     </div>
-      <?php foreach($especialidades as $especialidad):?>
-        <div class="especialidad">
-          <div class="separador">
-            <h2><?php echo $especialidad['especialidad'];?></h2>  
-          </div>
-          <div class="wrapper_medicos">
-            <?php $medicos = obtenerMedicos($conexion, $especialidad); ?>
-            <?php foreach($medicos as $medico):?>
-              <div class="medico">
-                <img src="images/user.jpg" class="foto_medico" alt="">
-                <div class="info_medico">
-                  <h4><?php echo $medico['nombre'];?></h4>
-                  <p><?php echo $medico['especialidad'];?></p>
-                  <p><?php echo $medico['horario de atencion'];?></p>
+      <div class="especialidad">
+        <div class="separador">
+          <h2><?php echo $titulo; ?></h2>
+        </div>
+        <div class="wrapper_medicos">
+          <?php foreach($resultados as $medico): ?>
+            <div class="medico">
+              <img src="images/user.jpg" class="foto_medico" alt="">
+              <div class="info_medico">
+                <h4><?php echo $medico['nombre'];?></h4>
+                <p><?php echo $medico['especialidad'];?></p>
+                <p><?php echo $medico['horario de atencion'];?></p>
                 </div>
                 <button class="boton_medicos" onclick="displayTurnos()">Saca tu turno</button>
-              </div>
-            <?php endforeach; ?>
-          </div>
+            </div>
+          <?php endforeach; ?>
         </div>
-      <?php endforeach;?>
+      </div>
     </section>
     <footer>
       <div class="wrapper_footer">

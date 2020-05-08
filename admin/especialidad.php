@@ -11,18 +11,16 @@ if(!$conexion){
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $nuevaespecialidad = $_POST['especialidad'];
+    $nuevaespecialidad = limpiarDatos($_POST['especialidad']);
     
     $statement = $conexion->prepare(
-        'INSERT INTO `camps`.`especialidades` (`ID`, `especialidad`) VALUES (NULL, :especialidad);'
+        'INSERT INTO `camps`.`especialidades` (`especialidad`) VALUES (:especialidad);'
     );
-	$statement->execute(array(
-		':especialidad' => $especialidad
+    $statement->execute(array(
+	':especialidad' => $nuevaespecialidad
 	));
     
     header('Location: ' . RUTA . '/admin/administracion.php');
 }
-
-require '../views/nuevo.view.php';
 
 ?>

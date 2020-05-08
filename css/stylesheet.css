@@ -2,6 +2,7 @@
   font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
  }
   /*
    * Header General
@@ -868,6 +869,7 @@
     border-bottom-left-radius: 15px;
   }
   .agregar_especialidad{
+    display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
@@ -935,8 +937,8 @@
     color: #EC5151;
   }
   .editar_borrar a:nth-child(even){
-    border-bottom-right-radius: 10px;    
+    border-bottom-right-radius: 10px;
   }
   .editar_borrar a:nth-child(odd){
-    border-bottom-left-radius: 10px;    
+    border-bottom-left-radius: 10px;
   }

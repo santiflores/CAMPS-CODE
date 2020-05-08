@@ -19,8 +19,8 @@
     <div class="botones_panel">
       <div>
         <button class="botonestitulo botones_cards" onclick="agregarEspecialidad()">Agregar especialidad</button>
-        <form action="especialidad.php" action="post" class="agregar_especialidad">
-          <input type="text" name="nueva especialidad" placeholder="Especialidad...">
+        <form action="especialidad.php" method="post" class="agregar_especialidad">
+          <input type="text" name="especialidad" placeholder="Especialidad...">
           <input type="submit" value="Agregar especialidad">
         </form>
       </div>
@@ -30,7 +30,7 @@
   <section class="wrapper_especialidades">
     <div class="titulo_medicos">
       <h2>Saca tu turno</h2>
-      <form action="medicos.php" method="get" class="buscar">
+      <form action="buscar.php" method="get" class="buscar">
         <input type="text" placeholder="Buscar..." name="buscar">
       </form>
     </div>
