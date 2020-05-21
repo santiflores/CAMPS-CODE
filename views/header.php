@@ -18,7 +18,7 @@
             <li><a href="<?php echo RUTA;?>/index.php">Inicio</a></li>
             <li><a href="<?php echo RUTA;?>/sobre_nosotros.php">Quienes somos</a></li>
             <li><a href="<?php echo RUTA;?>/medicos.php" class="botones">RESERVE SU TURNO</a></li>
-            <li><a href="<?php echo RUTA;?>/index.php" class="botones">CONTACANOS</a></li>
+            <li><a href="<?php echo RUTA;?>/sobre_nosotros.php" class="botones">CONTACANOS</a></li>
         </ul>
     </div>
     <nav>

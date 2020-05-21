@@ -51,7 +51,7 @@
     <div class="titulo_medicos">
       <h2>Saca tu turno</h2>
       <form action="buscar.php" method="get" class="buscar">
-        <input type="text" placeholder="Buscar..." name="buscar">
+        <input type="text" placeholder="Buscar..." name="busqueda">
       </form>
     </div>
       <div class="especialidad">
@@ -67,7 +67,7 @@
                 <p><?php echo $medico['especialidad'];?></p>
                 <p><?php echo $medico['horario de atencion'];?></p>
                 </div>
-                <button class="boton_medicos" onclick="displayTurnos()">Saca tu turno</button>
+                <button class="boton_medicos" onclick="displayTurnos()"><i class="fas fa-clipboard-list"></i> Saca tu turno</button>
             </div>
           <?php endforeach; ?>
         </div>

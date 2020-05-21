@@ -11,5 +11,11 @@ function navDropdownCerrar() {
 	document.getElementById('navbar_dropdown').style.display='none'
 }
 function agregarEspecialidad() {
-	document.getElementById('agregar_especialidad').style.display='block'
+	var estado = 'cerrado';
+	var agregarEspecialidad = document.getElementById('agregar');
+	if (agregarEspecialidad.style.display='none') {
+		agregarEspecialidad.style.display ='block';
+	} else {
+		agregarEspecialidad.style.display='none';
+	}
 }

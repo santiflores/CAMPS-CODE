@@ -11,17 +11,16 @@
     <script src="https://kit.fontawesome.com/aa681c14be.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <script>
-    </script>
     <?php require 'header.php'?>
   <div class="titulo_medicos administracion">
     <h2>Panel de Administracion</h2>
     <div class="botones_panel">
       <div>
-        <button class="botonestitulo botones_cards" onclick="agregarEspecialidad()">Agregar especialidad</button>
-        <form action="especialidad.php" method="post" class="agregar_especialidad">
-          <input type="text" name="especialidad" placeholder="Especialidad...">
-          <input type="submit" value="Agregar especialidad">
+        <button class="botonestitulo botones_cards" id="boton_especialidad" onclick="agregarEspecialidad()">Agregar especialidad</button>
+        <form id="agregar" method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>">
+         <h6><b>Agregar Especialidad</b></h6> 
+          <input type="text" name="especialidad" placeholder="Ej: Cardiología">
+          <input type="submit" class="submit" name="submit" value="Agregar Especialidad">
         </form>
       </div>
       <a href="nuevo.php" class="botonestitulo botones_cards">Agregar medico</a>

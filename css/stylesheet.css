@@ -507,12 +507,14 @@
   background-color:#EB5555;
   color: #FFF;
   font-size: 15px;
+  font-weight: 600;
   box-shadow: 0 0px 5px #BBB;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 .boton_medicos:hover{
-  background-color: #D63035;
-  transition: 0.5s;
+  background-color: #FFF;
+  color: #EB5555;
+  transition: 0.3s;
 }
  
   /*    Medicos medias   */
@@ -686,6 +688,7 @@
     background: #D13F3F;
     color:#FEFEFE;
     font-size: 20px;
+    font-weight: 600;
     border-radius: 3px;
     border:none;
     float: right;
@@ -696,15 +699,6 @@
   }
   .wrapper_calendario{
     display: flex;
-  }
-  .calendario{
-    background: #FFF;
-    height: 400px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    align-self: center;
-    justify-content: center;
   }
   /*  Turnos medias  */
   
@@ -844,75 +838,59 @@
     display: block;
   }
   .botones_panel{
-    width: 450px;
     margin-left: 50px;
     display: flex;
-    align-self: center;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
   }
-  .botones_panel a{
-    margin: 0;
+  .botones_panel a, .botones_panel button, .botones_panel div{
+    margin: auto;
+    margin: 0 10px;
     width: 210px;
   }
-  .botones_panel div{
-    position: relative;
-    display: inline-block;
+
+  #agregar{
+    position: absolute;
+    margin: 0 auto;
+    padding: 0 20px;
+    animation: especialidad 0.3s ease;
+    border-radius: 2px;
+    background-color: #FFF;
+    display: none;
+    width: 250px;
+    height: 150px;
+    margin: 0 10px;
+    box-shadow: 0 0px 6px #CCC;
+    z-index: 1;
+    border-top: none;
+  } 
+  #agregar h6{
+    margin: 10px 0;
   }
-  .editar_borrar{
+  .submit{
     width: 100%;
     height: 40px;
-    background: #EEE;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-  }
-  .agregar_especialidad{
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    animation: especialidad 0.3s ease;
+    border-radius: 3px;
+    border: none;
+    background-color: #D13F3F;
+    color: #FFF;
+    font-weight: 600;
   }
   @keyframes especialidad{
     from{
       height: 0;
     }
     to{
-      height: 100px;
+      height: 150px;
     }
   }
-  /*  Administración Medias  */
-  @media only screen and (max-width: 800px){
-    .administracion{
-      height: auto;
-      display: grid;
-      grid-template-columns:1fr;
-      grid-gap: 35px;
-    }
-    .administracion h2{
-      text-align: center;
-      margin: 0;
-    }
-    .botones_panel{
-      margin: auto;
-    }
-  }
-  @media only screen and (max-width: 500px){
-    .botones_panel{
-      width: 100%;
-    }
-    .botones_panel a{
-      margin: 15px;
-    }
-  }
-  /*
-    Nuevo y editar
-  */
   .editar_borrar{
+    background: #EEE;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
     grid-column: 1/3;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -941,4 +919,76 @@
   }
   .editar_borrar a:nth-child(odd){
     border-bottom-left-radius: 10px;
+  }
+  /*  Administración Medias  */
+  @media only screen and (max-width: 800px){
+    .administracion{
+      height: auto;
+      display: grid;
+      grid-template-columns:1fr;
+      grid-gap: 35px;
+    }
+    .administracion h2{
+      text-align: center;
+      margin: 0;
+    }
+    .botones_panel{
+      margin: auto;
+    }
+  }
+  @media only screen and (max-width: 500px){
+    .botones_panel{
+      width: 100%;
+    }
+    .botones_panel a{
+      margin: 15px;
+    }
+  }
+  /*
+    Nuevo y editar
+  */
+  .wrapper_agregar_editar{
+    height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+  .agregar_medico{
+    width: 1200px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    flex-wrap: wrap;
+    box-shadow: 0px 0 7px #CCC;
+    background-color: #EEE;
+  }
+  .agregar_medico_form{
+    width: 250px;
+    border-top: none;
+    background-color: #FFF;
+  }
+  .calendario{
+    width: 950px;
+    height: 400px;
+    align-self: center;
+    background-color: #FFF;
+    margin: 0;
+    padding: 0;
+    border-top: none;
+    color: #F9F9F9
+  }
+  tr{
+    margin: auto;
+    text-align: center;
+    height: 20px;
+  }
+  th, td{
+    background-color: lightgreen;
+    height: 50px;
+    width: 120px;
+  }
+  th{
+    font-weight: 400;
+    background-color: rgba(209, 63, 63, 0.9);
   }

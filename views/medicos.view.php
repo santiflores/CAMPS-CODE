@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio - CAMPS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lobster&family=Permanent+Marker&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/stylesheet.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">    <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="shortcut icon" type="image.png" href="images/favicon_CAMPS.png">
     <script src="<?php echo RUTA?>/js/scripts.js"></script>
@@ -18,7 +17,7 @@
     <div id="wrapper_turno_padre">
       <div class="wrapper_turno">
         <div class="form_title">
-          <h3><?php ?></h3>
+          <h3>Reserve su turmo: Dr. <?php echo('');?></h3>
           <button type="button" onclick="cerrar_turno()" name="button" class="cerrar_turno">
             <i class="fas fa-times fa-2x"></i>
           </button>
@@ -69,7 +68,7 @@
                   <p><?php echo $medico['especialidad'];?></p>
                   <p><?php echo $medico['horario de atencion'];?></p>
                 </div>
-                <button class="boton_medicos" onclick="displayTurnos()">Saca tu turno</button>
+                <button class="boton_medicos" onclick="displayTurnos()"><i class="fas fa-clipboard-list"></i> Saca tu turno</button>
               </div>
             <?php endforeach; ?>
           </div>

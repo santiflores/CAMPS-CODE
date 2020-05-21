@@ -11,8 +11,8 @@ if(!$conexion){
 if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['busqueda'])){
 	$busqueda = limpiarDatos($_GET['busqueda']);
 
-	$statement =$conexion->prepare(
-		"SELECT * FROM medicos WHERE nombre LIKE :busqueda or texto LIKE :busqueda"
+	$statement = $conexion->prepare(
+		"SELECT * FROM medicos WHERE nombre LIKE :busqueda or horario de atención LIKE :busqueda or especialidad LIKE :busqueda"
 	);
 	$statement->execute(array(':busqueda' => "%$busqueda%"));
 
@@ -25,9 +25,9 @@ if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['busqueda'])){
 	}
 
 } else {
-	header('Location:' . RUTA . '/admin/administracion.php');
+	header('Location:' . RUTA . '/medicos.php');
 }
 
-require 'views/buscar_admin.view.php';
+require 'views/buscar.view.php';
 
 ?>

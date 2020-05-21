@@ -16,11 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$id = limpiarDatos($_POST['id']);
 
 	$statement = $conexion->prepare(
-		'UPDATE medicos SET
-		nombre = :nombre,
-		especialidad = :especialidad,
-		horario de atencion = :horario
-		WHERE id = :id'
+		'UPDATE `camps`.`medicos` SET `nombre`=:nombre, `especialidad`=:especialidad, `horario de atencion`=:horario WHERE  `id`=:id;'
 	);
 	$statement->execute(array(
 		':nombre' => $nombre,
