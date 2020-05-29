@@ -19,52 +19,14 @@
           <h5>Agregar medico:</h5>
           <input type="text" name="nombre" placeholder="Nombre y Apellido">
           <input type="text" name="especialidad" placeholder="Especialidad">
-          <input type="text" name="horario" placeholder="Horario de atencion">
+          <input type="textarea" name="horario" placeholder="Horario de atencion">
           <input type="text" name="dni" placeholder="DNI">
           <input type="password" name="contraseña" placeholder="Contraseña del médico">
           <input type="file" name="thumb">
           <input class="submit" type="submit" name="submit" value="Agregar Medico">
         </div>
-        <div class="calendario form">
-          <table>
-            <tr class="table-header">
-              <th>
-                Lunes
-              </th>
-              <th>
-                Martes
-              </th>
-              <th>
-                Miercoles
-              </th>
-              <th>
-                Jueves
-              </th>
-              <th>
-                Viernes
-              </th>
-            </tr>
-            <tr><td></td></tr>
-            <?php foreach ($rango_horarios as $horario):?>
-              <tr>
-                <td>
-                  <input type="checkbox" name="horario[]" value="lunes <?php echo $horario->format("H:i");?>"> <?php echo $horario->format("H:i");?>
-                </td>
-                <td>
-                  <input type="checkbox" name="horario[]" value="martes <?php echo $horario->format("H:i");?>"> <?php echo $horario->format("H:i");?>
-                </td>
-                <td>
-                  <input type="checkbox" name="horario[]" value="miercoles <?php echo $horario->format("H:i");?>"> <?php echo $horario->format("H:i");?>
-                </td>
-                <td>
-                  <input type="checkbox" name="horario[]" value="jueves <?php echo $horario->format("H:i");?>"> <?php echo $horario->format("H:i");?>
-                </td>
-                <td>
-                  <input type="checkbox" name="horario[]" value="viernes <?php echo $horario->format("H:i");?>"> <?php echo $horario->format("H:i");?>
-                </td>
-              </tr>
-            <?php endforeach;?>
-          </table>
+        <div class="">
+       
         </div>
       </div>
     </form>

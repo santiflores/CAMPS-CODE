@@ -14,11 +14,11 @@ if(!$conexion){
 
 $inicio = '08:00';
 $fin = '20:00';
-$fecha_inicio = new DateTime($inicio);
-$fecha_fin = new DateTime($fin);
-$fecha_fin = $fecha_fin->modify('+15 minutes');
+$hora_inicial = new DateTime($inicio);
+$hora_final = new DateTime($fin);
+$hora_final = $hora_final->modify('+15 minutes');
 
-$rango_horarios = new DatePeriod($fecha_inicio, new DateInterval('PT15M'), $fecha_fin);
+$rango_horarios = new DatePeriod($hora_final, new DateInterval('PT15M'), $hora_final);
 
 //Recibir POST
 
@@ -33,7 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $archivo_subido = '../images' . $_FILES['thumb']['name'];
     move_uploaded_file($foto, $archivo_subido);
     $statement = $conexion->prepare(
-        'INSERT INTO `camps`.`medicos` (`nombre`, `especialidad`, `horario de atencion`, `dni`,`contraseña`, `foto`) VALUES (:nombre, :especialidad, :horario, :dni, :contraseña, :foto);'
+        'INSERT INTO `camps`.`medicos`
+        (`nombre`, `especialidad`, `horario de atencion`, `dni`,`contraseña`, `foto`)
+        VALUES (:nombre, :especialidad, :horario, :dni, :contraseña, :foto);'
     );
 	$statement->execute(array(
 		':nombre' => $nombre,
