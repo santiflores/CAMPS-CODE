@@ -14,7 +14,7 @@
   <body>
     <?php require 'header.php'?>
     <section class="form_editar">
-      <form class="" method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>">
+      <form class="form" method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>">
         <input type="hidden" name="id" value="<?php echo $medico['id']; ?>">
         <input type="text" name="nombre" value="<?php echo $medico['nombre']; ?>">
         <input type="text" name="especialidad" value="<?php echo $medico['especialidad']; ?>">

@@ -11,13 +11,13 @@ if(!$conexion){
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $nuevaespecialidad = limpiarDatos($_POST['especialidad']);
+    $nuevaEspecialidad = limpiarDatos($_POST['especialidad']);
     
     $statement = $conexion->prepare(
         'INSERT INTO `camps`.`especialidades` (`especialidad`) VALUES (:especialidad);'
     );
     $statement->execute(array(
-	':especialidad' => $nuevaespecialidad
+	':especialidad' => $nuevaEspecialidad
 	));
     
     header('Location: ' . RUTA . '/admin/administracion.php');

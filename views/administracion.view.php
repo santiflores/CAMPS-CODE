@@ -17,7 +17,7 @@
     <div class="botones_panel">
       <div>
         <button class="botonestitulo botones_cards" id="boton_especialidad" onclick="agregarEspecialidad()">Agregar especialidad</button>
-        <form id="agregar" method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>">
+        <form id="agregar" method="post" enctype="multipart/form-data" action="especialidad.php">
          <h6><b>Agregar Especialidad</b></h6> 
           <input type="text" name="especialidad" placeholder="Ej: Cardiología">
           <input type="submit" class="submit" name="submit" value="Agregar Especialidad">
@@ -36,7 +36,10 @@
       <?php foreach($especialidades as $especialidad):?>
         <div class="especialidad">
           <div class="separador">
-            <h2><?php echo $especialidad['especialidad'];?></h2>  
+            <h2><?php echo $especialidad['especialidad'];?></h2>
+            <a href="borrar_especialidad.php?id=<?php echo $especialidad['ID']?>">
+              <i class="far fa-trash-alt fa-lg"></i>
+            </a>
           </div>
           <div class="wrapper_medicos">
             <?php $medicos = obtenerMedicos($conexion, $especialidad); ?>
@@ -52,7 +55,7 @@
                   <a href="editar.php?id=<?php echo $medico['id'];?>">
                    <i class="far fa-edit fa-lg"></i>
                   </a>
-                  <a href="eliminar.php?id=<?php echo $medico['id'];?>">
+                  <a href="borrar.php?id=<?php echo $medico['id'];?>">
                     <i class="far fa-trash-alt fa-lg"></i>
                   </a>
                 </div>

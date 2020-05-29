@@ -24,7 +24,7 @@
           </button>
         </div>
         <div class="wrapper_formulario">
-          <form class="" action="<?php echo htmlspecialchars ($_SERVER['PHP_SELF']); ?>" method="post">
+          <form class="form" action="<?php echo htmlspecialchars ($_SERVER['PHP_SELF']); ?>" method="post">
             <h6>Nombre y Apellido:</h6>
             <input type="text" name="nombre" placeholder="Nombre" value="">
             <input type="text" name="Apellido" placeholder="Apellido" value="">

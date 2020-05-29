@@ -13,38 +13,61 @@
   </head>
   <body>
     <?php require 'header.php'?>
-    <section class="wrapper_agregar_editar">
+    <form class="wrapper_agregar_editar" method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>">
       <div class="agregar_medico">
-        <form class="agregar_medico_form" method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>">
+        <div class="agregar_medico_form form">
           <h5>Agregar medico:</h5>
-          <input type="text" name="medico" placeholder="Nombre y Apellido">
+          <input type="text" name="nombre" placeholder="Nombre y Apellido">
           <input type="text" name="especialidad" placeholder="Especialidad">
           <input type="text" name="horario" placeholder="Horario de atencion">
+          <input type="text" name="dni" placeholder="DNI">
+          <input type="password" name="contraseña" placeholder="Contraseña del médico">
+          <input type="file" name="thumb">
           <input class="submit" type="submit" name="submit" value="Agregar Medico">
-        </form>
-        <form class="calendario">
+        </div>
+        <div class="calendario form">
           <table>
-            <tr>
+            <tr class="table-header">
               <th>
-                <input type="checkbox"> Lunes 1/6
+                Lunes
               </th>
               <th>
-                <input type="checkbox"> Martes 2/6
+                Martes
               </th>
               <th>
-                <input type="checkbox"> Miercoles 3/6
+                Miercoles
               </th>
               <th>
-                <input type="checkbox"> Jueves 4/6
+                Jueves
               </th>
               <th>
-                <input type="checkbox"> Viernes 5/6
+                Viernes
               </th>
             </tr>
+            <tr><td></td></tr>
+            <?php foreach ($rango_horarios as $horario):?>
+              <tr>
+                <td>
+                  <input type="checkbox" name="horario[]" value="lunes <?php echo $horario->format("H:i");?>"> <?php echo $horario->format("H:i");?>
+                </td>
+                <td>
+                  <input type="checkbox" name="horario[]" value="martes <?php echo $horario->format("H:i");?>"> <?php echo $horario->format("H:i");?>
+                </td>
+                <td>
+                  <input type="checkbox" name="horario[]" value="miercoles <?php echo $horario->format("H:i");?>"> <?php echo $horario->format("H:i");?>
+                </td>
+                <td>
+                  <input type="checkbox" name="horario[]" value="jueves <?php echo $horario->format("H:i");?>"> <?php echo $horario->format("H:i");?>
+                </td>
+                <td>
+                  <input type="checkbox" name="horario[]" value="viernes <?php echo $horario->format("H:i");?>"> <?php echo $horario->format("H:i");?>
+                </td>
+              </tr>
+            <?php endforeach;?>
           </table>
-        </form>
+        </div>
       </div>
-    </section>
+    </form>
     <?php require 'footer.php'?>
   </body>
 </html>
