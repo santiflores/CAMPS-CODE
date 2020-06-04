@@ -34,18 +34,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     move_uploaded_file($foto, $archivo_subido);
     $statement = $conexion->prepare(
         'INSERT INTO `camps`.`medicos`
-        (`nombre`, `especialidad`, `horario de atencion`, `dni`,`contraseña`, `foto`)
-        VALUES (:nombre, :especialidad, :horario, :dni, :contraseña, :foto);'
+        (`nombre`, `especialidad`, `horario de atencion`) 
+        VALUES (:nombre, :especialidad, :horario);' // :dni, :contraseña, :foto * `dni`,`contraseña`, `foto`
     );
 	$statement->execute(array(
 		':nombre' => $nombre,
 		':especialidad' => $especialidad,
         ':horario' => $horario,
-        ':dni' => $dni,
-        ':contraseña' => $contraseña,
-        ':foto' => $_FILES['thumb']['name']
+        // ':dni' => $dni,
+        // ':contraseña' => $contraseña,
+        // ':foto' => $_FILES['thumb']['name']
 	));
-    // header('Location: ' . RUTA . '/admin/administracion.php');
+    header('Location: ' . RUTA . '/admin/administracion.php');
 }
 
 require '../views/nuevo.view.php';
