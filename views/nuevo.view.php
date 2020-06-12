@@ -25,8 +25,16 @@
           <input type="file" name="thumb">
           <input class="submit" type="submit" name="submit" value="Agregar Medico">
         </div>
-        <div class="">
-       
+        <div id="nueva_fila">
+          <button type="button" onclick="nuevaFila()">Agregar nueva fila</button>
+          <div class="fila">
+            <h3>Desde</h3>
+            <select name="desde">
+              <?php foreach($rango_horarios as $horario):?>
+                <option value="<?php echo $horario;?>"><?php echo $horario;?></option>
+              <?php endforeach;?>
+            </select>
+          </div>
         </div>
       </div>
     </form>

@@ -19,3 +19,6 @@ function agregarEspecialidad() {
 	}
 	return agregarEspecialidad;
 }
+function nuevaFila() {
+	document.getElementById('nueva_fila').insertAdjacentHTML('beforeend', '<div><h1>two<h1></div>');
+}
