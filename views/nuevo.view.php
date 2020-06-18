@@ -15,42 +15,49 @@
 	<?php require 'header.php'?>
 	<form class="wrapper_agregar_editar" method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>">
 	  <div class="agregar_medico">
-		<div class="agregar_medico_form form">
-			<h5>Agregar medico:</h5>
+		<h2>Nuevo Medico</h2>
+		<div class="form agregar_medico_form">
+			<h4>Informacion del medico</h4>
 			<input type="text" name="nombre" placeholder="Nombre y Apellido">
 			<input type="text" name="especialidad" placeholder="Especialidad">
 			<input type="text" name="horario" placeholder="Horario de atencion">
 			<input type="text" name="dni" placeholder="DNI">
 			<input type="password" name="contraseña" placeholder="Contraseña del médico">
-			<input type="file" name="thumb">
 			<input class="submit" type="submit" name="submit" value="Agregar Medico">
 		</div>
-		<div id="nueva_fila">
+		<div class="nuevo-archivo">
+			<h4>Selecciona una imagen:</h4>
+			<input type="file" name="thumb">
+		</div>
+		<div class="horarios">
+			<h4>Horario de atencion</h4>
+			<div id="nueva-fila">
+				<select name = 'fila[0][dia]' >
+					<option value="lunes">Lunes</option>
+					<option value="martes">Mates</option>
+					<option value="miercoles">Miercoles</option>
+					<option value="jueves">Jueves</option>
+					<option value="viernes">Viernes</option>
+				</select>
+				<label>Desde</label>
+				<select name="fila[0][desde]" id="">
+					<?php foreach ($rango_horarios as $horario):?>
+						<option value="<?php echo $horario->format('H:i');?>"><?php echo $horario->format('H:i');?></option>
+					<?php endforeach;?>
+				</select>
+				<label>Duración del turno:</label>
+				<select name="fila[0][intervalo]">
+					<option value="15">15 Minutos</option>
+					<option value="30">30 minutos</option>
+				</select>
+				<label>Hasta</label>
+				<select name="fila[0][hasta]">
+					<?php foreach ($rango_horarios as $horario):?>
+						<option value="<?php echo $horario->format('H:i');?>"><?php echo $horario->format('H:i');?></option>
+					<?php endforeach;?>
+				</select>
+			</div>
 			<button type="button" onclick="nuevaFila()">Agregar nueva fila</button>
-			<select name = 'fila[0][dia]' >
-				<option value="lunes">Lunes</option>
-				<option value="martes">Mates</option>
-				<option value="miercoles">Miercoles</option>
-				<option value="jueves">Jueves</option>
-				<option value="viernes">Viernes</option>
-			</select>
-			<label>Desde</label>
-			<select name="fila[0][desde]" id="">
-				<?php foreach ($rango_horarios as $horario):?>
-					<option value="<?php echo $horario->format('H:i');?>"><?php echo $horario->format('H:i');?></option>
-				<?php endforeach;?>
-		 	</select>
-			<label>Duración del turno:</label>
-			<select name="fila[0][intervalo]">
-				<option value="15">15 Minutos</option>
-				<option value="30">30 minutos</option>
-			</select>
-			<label>Hasta</label>
-			<select name="fila[0][hasta]">
-				<?php foreach ($rango_horarios as $horario):?>
-					<option value="<?php echo $horario->format('H:i');?>"><?php echo $horario->format('H:i');?></option>
-				<?php endforeach;?>
-			</select>
 		</div>
 	  </div>
 	</form>

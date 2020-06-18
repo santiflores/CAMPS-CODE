@@ -8,419 +8,419 @@
    * Header General
   */
   .menu{
-    background-color: #fff;
-    background-image: -webkit-linear-gradient(25deg, #fff 300px, #D13F3F 301px);
-    color: #333333;
-    height: 90px;
-    top: 0;
-    left: 0;
+	background-color: #fff;
+	background-image: -webkit-linear-gradient(25deg, #fff 300px, #D13F3F 301px);
+	color: #333333;
+	height: 90px;
+	top: 0;
+	left: 0;
   }
   .logoheader{
-    height: 90px;
-    width: 300px;
-    margin: 0;
-    padding: 25px;
-    display: inline-flex;
+	height: 90px;
+	width: 300px;
+	margin: 0;
+	padding: 25px;
+	display: inline-flex;
   }
   .logoheader img{
-    object-fit: contain;
-    width: auto;
-    height: 60px;
-    align-self: center;
-    justify-content: center;
+	object-fit: contain;
+	width: auto;
+	height: 60px;
+	align-self: center;
+	justify-content: center;
   }
   /*
    * Navegación
    */
   .nav_boton_dropdown{
-    transition-property: all;
-    transition: 0.1s;
-    transition-delay: 1s;
-    display: none;
-    background: none;
-    line-height: 70px;
-    height: 70px;
-    width: 70px;
-    margin-right: 10px;
-    border: none;
-    float: right;
-    padding: 10px;
+	transition-property: all;
+	transition: 0.1s;
+	transition-delay: 1s;
+	display: none;
+	background: none;
+	line-height: 70px;
+	height: 70px;
+	width: 70px;
+	margin-right: 10px;
+	border: none;
+	float: right;
+	padding: 10px;
   }
   .nav_boton_dropdown img{
-      height: 100%;
-      object-fit: cover;
+	  height: 100%;
+	  object-fit: cover;
   }
   .wrapper_drop_first{
-    min-width: 330px;
-    height: 90px;
+	min-width: 330px;
+	height: 90px;
   }
   .wrapper_drop_first .logoheader{
-    width: 250px;
+	width: 250px;
   }
   #navbar_dropdown{
-    animation-duration: 0.5s;
-    animation-name: slidein;
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100%;
-    margin: auto;
-    display: none;
+	animation-duration: 0.5s;
+	animation-name: slidein;
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 100%;
+	margin: auto;
+	display: none;
 	  background: #D13F3F;
   }
-    #navbar_dropdown ul{
-      min-width: 240px;
-      margin: 0;
-      list-style: none;
-      }
-          #navbar_dropdown ul li{
-              line-height: 90px;
-          }
-              #navbar_dropdown ul li a{
-          color: #FFF;
-          font-size: 15px;
-          transition: 0.3s ease;
-              }
+	#navbar_dropdown ul{
+	  min-width: 240px;
+	  margin: 0;
+	  list-style: none;
+	  }
+		  #navbar_dropdown ul li{
+			  line-height: 90px;
+		  }
+			  #navbar_dropdown ul li a{
+		  color: #FFF;
+		  font-size: 15px;
+		  transition: 0.3s ease;
+			  }
   @keyframes slidein {
-    from {
-      width: 0;
+	from {
+	  width: 0;
   }
-    to {
-      width: 330px;
-    }
+	to {
+	  width: 330px;
+	}
   }
   nav{
-       float: right;
+	   float: right;
   }
   
-      nav ul{
-          margin: 0;
-          list-style: none;
-          padding-right: 30px
-      }
+	  nav ul{
+		  margin: 0;
+		  list-style: none;
+		  padding-right: 30px
+	  }
   
-          nav ul li{
-              display: inline-block;
-              line-height: 90px;
-          }
+		  nav ul li{
+			  display: inline-block;
+			  line-height: 90px;
+		  }
   
-              nav ul li a{
-          color: #FFF;
-          font-size: 15px;
-                  padding: 0 10px;
-          text-decoration: underline;
-          transition: 0.3s ease;
-              }
-          nav ul li a:hover{
-            color: #FFF;
+			  nav ul li a{
+		  color: #FFF;
+		  font-size: 15px;
+				  padding: 0 10px;
+		  text-decoration: underline;
+		  transition: 0.3s ease;
+			  }
+		  nav ul li a:hover{
+			color: #FFF;
   }
   .botones{
-    border: 1px solid #fff;
-    padding: 15px 10px 15px 10px;
-    margin-right: 10px;
-    border-radius: 30px;
-    color: #fff;
-    text-decoration: none;
+	border: 1px solid #fff;
+	padding: 15px 10px 15px 10px;
+	margin-right: 10px;
+	border-radius: 30px;
+	color: #fff;
+	text-decoration: none;
   }
   .botones:hover{
-    background-color: #EC5151;
-    color: #FFF;
-    text-decoration: none;
-    transition: 0.3s ease-in-out;
+	background-color: #EC5151;
+	color: #FFF;
+	text-decoration: none;
+	transition: 0.3s ease-in-out;
   }
   @media only screen and (max-width: 850px){
-    .menu nav{
-      display: none;
-    }
-    .nav_boton_dropdown{
-      display: block;
-    }
+	.menu nav{
+	  display: none;
+	}
+	.nav_boton_dropdown{
+	  display: block;
+	}
   }
   @media only screen and (max-width: 450px){
-    .menu{
-      background: -webkit-linear-gradient(25deg, #fff 67%, #D13F3F 67.3%);
-    }
-    .logoheader{
-      width: 67%;
-    }
-    .wrapper_drop_first .logoheader{
-      width: 67%;
-    }
-    .logoheader img{
-      width: 100%;
-    }
-    @keyframes slidein {
-      from{
-        width: 0;
-      }
-      to{
-        width: 100%;
-      }
-    }
+	.menu{
+	  background: -webkit-linear-gradient(25deg, #fff 67%, #D13F3F 67.3%);
+	}
+	.logoheader{
+	  width: 67%;
+	}
+	.wrapper_drop_first .logoheader{
+	  width: 67%;
+	}
+	.logoheader img{
+	  width: 100%;
+	}
+	@keyframes slidein {
+	  from{
+		width: 0;
+	  }
+	  to{
+		width: 100%;
+	  }
+	}
   }
   @media only screen and (max-width: 330px){
-    .wrapper_drop_first{
-      min-width: 100%;
-    }
+	.wrapper_drop_first{
+	  min-width: 100%;
+	}
   }
   /*
-    Container de el titulo y botones
+	Container de el titulo y botones
   */
   .container_title{
-    background: url(http://localhost/centros_medicos/CAMPS/images/fondo_CAMPS.jpg);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: center;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    height: 500px;
-    box-shadow: 0px 0px 10px #999;
+	background: url(http://localhost/centros_medicos/CAMPS/images/fondo_CAMPS.jpg);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: center;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	height: 500px;
+	box-shadow: 0px 0px 10px #999;
   }
   /*
-    Media para en fondo del container del titulo
+	Media para en fondo del container del titulo
   */
   @media only screen and (max-width: 1200px) {
-    .container_title{
-      background-size: auto 100%;
-    }
+	.container_title{
+	  background-size: auto 100%;
+	}
   }
-    /*
-                  LOGO
-      RESERVE SU TURNO / CONTACTANOS
-    */
+	/*
+				  LOGO
+	  RESERVE SU TURNO / CONTACTANOS
+	*/
   .title{
-    width: 350px;
-    margin: 0 50px 50px 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
+	width: 350px;
+	margin: 0 50px 50px 0;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 20px;
   }
   .logotitulo{
-    height: 80px;
-    margin-left: auto;
-    margin-right: auto;
-    grid-column: 1/3;
+	height: 80px;
+	margin-left: auto;
+	margin-right: auto;
+	grid-column: 1/3;
   }
   .botonestitulo{
-    text-align: center;
-    width: 100%;
-    font-size: 18px;
-    height: 50px;
-    padding: 10px;
-    margin-right: 10px;
-    border-radius: 30px;
-    color: #fff;
-    background: #D13F3F;
-    text-decoration: none;
-    transition-property: initial none;
-    transition: 0.5s ease-out;
+	text-align: center;
+	width: 100%;
+	font-size: 18px;
+	height: 50px;
+	padding: 10px;
+	margin-right: 10px;
+	border-radius: 30px;
+	color: #fff;
+	background: #D13F3F;
+	text-decoration: none;
+	transition-property: initial none;
+	transition: 0.5s ease-out;
   }
   .botonestitulo:hover{
-    background-color: #EC5151;
-    color: #FFF;
-    text-decoration: none;
-    transition: 0.5s ease;
+	background-color: #EC5151;
+	color: #FFF;
+	text-decoration: none;
+	transition: 0.5s ease;
   }
   
   /*  Title medias  */
   
   @media only screen and (max-width: 750px){
-    .container_title{
-      display: flex;
-      height: 500px;
-    }
-    .title{
-      width: 280px;
-      margin: 0 auto 0 auto;
-      justify-content: center;
-      align-self: flex-end;
-      margin-bottom: 50px;
-    }
+	.container_title{
+	  display: flex;
+	  height: 500px;
+	}
+	.title{
+	  width: 280px;
+	  margin: 0 auto 0 auto;
+	  justify-content: center;
+	  align-self: flex-end;
+	  margin-bottom: 50px;
+	}
   }
   @media only screen and (max-width: 420px){
-    .title{
-      width: 200px;
-      margin: 20px auto;
-      display: block;
-    }
-    .logotitulo{
-      display: none;
-    }
-    .botonestitulo{
-      display: block;
-      width: 180px;
-      margin-top: 20px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+	.title{
+	  width: 200px;
+	  margin: 20px auto;
+	  display: block;
+	}
+	.logotitulo{
+	  display: none;
+	}
+	.botonestitulo{
+	  display: block;
+	  width: 180px;
+	  margin-top: 20px;
+	  margin-left: auto;
+	  margin-right: auto;
+	}
   }
   /*
-    Nuestros servicios
+	Nuestros servicios
   */
   .card_servicios{
-    padding: 0 20px 40px 20px;
+	padding: 0 20px 40px 20px;
   }
   .card_servicios h1{
-    font-size: 40px;
-    color: #3d3d3d;
-    text-align: center;
-    margin: 30px;
+	font-size: 40px;
+	color: #3d3d3d;
+	text-align: center;
+	margin: 30px;
   }
   .card_wrapper_servicios{
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
   
   }
   .service_card{
-    border-radius: 5px;
-    background: #F3F3F3;
-    max-width: 1300px;
-    margin: 10px 15px;
-    height: 325px;
-    width: 300px;
-    display: grid;
-    grid-auto-rows: 2fr 1fr;
-    background: #fff;
-    box-shadow: 0 0 10px #DDD;
+	border-radius: 5px;
+	background: #F3F3F3;
+	max-width: 1300px;
+	margin: 10px 15px;
+	height: 325px;
+	width: 300px;
+	display: grid;
+	grid-auto-rows: 2fr 1fr;
+	background: #fff;
+	box-shadow: 0 0 10px #DDD;
   }
-    .card_image{
-      border-top-right-radius: 5px;
-      border-top-left-radius: 5px;
-    }
-    .card_image img{
-      height: 234px;
-      width: 100%;
-      border-top-right-radius: 5px;
-      border-top-left-radius: 5px;
-      object-fit: cover;
-    }
-    .service_card div{
-      font-size: 15px;
-      text-align: center;
-      text-decoration: none;
-      color: #3D3D3D;
-      }
+	.card_image{
+	  border-top-right-radius: 5px;
+	  border-top-left-radius: 5px;
+	}
+	.card_image img{
+	  height: 234px;
+	  width: 100%;
+	  border-top-right-radius: 5px;
+	  border-top-left-radius: 5px;
+	  object-fit: cover;
+	}
+	.service_card div{
+	  font-size: 15px;
+	  text-align: center;
+	  text-decoration: none;
+	  color: #3D3D3D;
+	  }
   .botones_cards{
-    display: block;
-    width: 200px;
-    background: #EEE;
-    border: 1px solid #EEE;
-    font-weight: 600;
-    color: #3D3D3D;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    transition: 0.4s ease;
-      }
+	display: block;
+	width: 200px;
+	background: #EEE;
+	border: 1px solid #EEE;
+	font-weight: 600;
+	color: #3D3D3D;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	transition: 0.4s ease;
+	  }
   .botones_cards:hover{
-    background: #FFF;
-    color: #3D3D3D;
-    transition: 0.4s ease;
+	background: #FFF;
+	color: #3D3D3D;
+	transition: 0.4s ease;
   }
 
   /*
-    Contacto
+	Contacto
   */
   .contact_section{
-    height: 450px;
-    padding: 30px;
-    background: #D13F3F;
+	height: 450px;
+	padding: 30px;
+	background: #D13F3F;
   }
-    .contact_section h2{
-      color: #F0F0F0;
-      text-align: center;
-      font-size: 50px;
-      margin-bottom: 30px;
-    }
+	.contact_section h2{
+	  color: #F0F0F0;
+	  text-align: center;
+	  font-size: 50px;
+	  margin-bottom: 30px;
+	}
   .contact_wrapper{
-    height: 300px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 30px;
-    margin-bottom: 210px;
+	height: 300px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 30px;
+	margin-bottom: 210px;
   }
   .map{
-    grid-row: 1/3;
+	grid-row: 1/3;
   }
   .contact_info{
-    background-color: #ee4545;
-    border-radius: 5px;
-    color: #FFFFFF;
-    padding: 0 25px;
+	background-color: #ee4545;
+	border-radius: 5px;
+	color: #FFFFFF;
+	padding: 0 25px;
   }
   
   /*  Contact medias  */
   
   @media only screen and (max-width: 750px){
-    .contact_section{
-      height: 850px;
-    }
-    .contact_section iframe{
-      height: 250px;
-    }
-    .contact_wrapper{
-      display: block;
-    }
-    .contact_info{
-      padding: 15px;
-      margin-top: 15px;
-      height: 200px;
-    }
+	.contact_section{
+	  height: 850px;
+	}
+	.contact_section iframe{
+	  height: 250px;
+	}
+	.contact_wrapper{
+	  display: block;
+	}
+	.contact_info{
+	  padding: 15px;
+	  margin-top: 15px;
+	  height: 200px;
+	}
   }
   @media only screen and (max-width: 445px){
-    .contact_section h2{
-      font-size: 40px;
-    }
+	.contact_section h2{
+	  font-size: 40px;
+	}
   }
   /*
-    Footer
+	Footer
   */
   footer{
-    width: 100%;
-    padding: 50px 0 50px 0;
-    background: #E0E0E0;
+	width: 100%;
+	padding: 50px 0 50px 0;
+	background: #E0E0E0;
   }
   .wrapper_footer{
-    width: 450px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 25px;
-    padding-bottom: 10px;
+	width: 450px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 25px;
+	padding-bottom: 10px;
   }
   .logo_footer{
-    display: block;
-    margin: 10px auto;
+	display: block;
+	margin: 10px auto;
   }
   .footer_icon{
-    width: 27px;
+	width: 27px;
   }
   .wrapper_footer h4{
-    text-align: center;
+	text-align: center;
   }
   
   /*  Footer medias  */
   
   @media only screen and (max-width: 450px){
-    .wrapper_footer{
-      width: 100%;
-      padding: 0 21px 0 21px;
-    }
+	.wrapper_footer{
+	  width: 100%;
+	  padding: 0 21px 0 21px;
+	}
   }
   @media only screen and (max-width: 380px) {
-    .logo_footer{
-      width: 100%;
-    }
+	.logo_footer{
+	  width: 100%;
+	}
   }
   /*
-    Medicos
+	Medicos
   */
 .titulo_medicos{
 	padding: 20px;
@@ -522,516 +522,548 @@
   
 @media only screen and (max-width: 1250px){
   .wrapper_medicos{
-    width: 100%;
+	width: 100%;
   }
 }
 @media only screen and (max-width: 1150px){
   .wrapper_medicos{
-    grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(2, 1fr);
   }
 }
 @media only screen and (max-width: 750px){
   .wrapper_medicos{
-    display: block;
-    padding: 25px;
+	display: block;
+	padding: 25px;
   }
-    .medico{
-      width: 450px;
-      margin: 20px auto;
-      grid-template-columns: 1fr 2fr;
-      grid-template-rows: 150px 40px;
-      font-size: 15px;
-    }
-    .wrapper_especialidades{
-      padding: 0px;
-    }
-    .info_medico p {
-      margin: 20px auto;
-    }
-    .info_medico h4{
-      font-size: 20px;
-      margin: 0;
-    }
+	.medico{
+	  width: 450px;
+	  margin: 20px auto;
+	  grid-template-columns: 1fr 2fr;
+	  grid-template-rows: 150px 40px;
+	  font-size: 15px;
+	  overflow: hidden;
+	}
+	.wrapper_especialidades{
+	  padding: 0px;
+	}
+	.info_medico p {
+	  margin: 20px auto;
+	}
+	.info_medico h4{
+	  font-size: 20px;
+	  margin: 0;
+	}
   }
   @media only screen and (max-width: 500px){
-    .medico{
-      font-size: 15px;
-      width: 100%;
-      grid-template-rows: 150px 40px;
-      grid-template-columns: 150px 1fr;
-    }
+	.medico{
+	  font-size: 15px;
+	  width: 100%;
+	  grid-template-rows: 150px 40px;
+	  grid-template-columns: 150px 1fr;
+	}
   }
   @media only screen and (max-width: 420px){
-    .info_medico{
-      padding: 10px;
-    }
-    .medico{
-      grid-template-columns: 0fr 1fr;
-    }
+	.info_medico{
+	  padding: 10px;
+	}
+	.medico{
+	  grid-template-columns: 0fr 1fr;
+	}
   }
   /*
-    Sacar Turno
+	Sacar Turno
   */
   #wrapper_turno_padre{
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin-top: 100px;
-    padding: 50px;
-    filter: contrast(1);
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin-top: 100px;
+	padding: 50px;
+	filter: contrast(1);
   }
   .wrapper_turno{
-    background: #EEE;
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    border: 2px solid #EEE;
-    border-radius: 10px;
-    box-sizing: border-box;
-    width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
+	background: #EEE;
+	display: grid;
+	grid-template-columns: 300px 1fr;
+	border: 2px solid #EEE;
+	border-radius: 10px;
+	box-sizing: border-box;
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
   }
 
   .form_title{
-    background: #FFF;
-    grid-column: 1/5;
-    display: grid;
-    grid-template-columns: 1fr 60px;
+	background: #FFF;
+	grid-column: 1/5;
+	display: grid;
+	grid-template-columns: 1fr 60px;
   }
   .form_title h3{
-    display: inline-block;
-    line-height: 40px;
-    margin: 10px;
-    color: #3D3D3D;
+	display: inline-block;
+	line-height: 40px;
+	margin: 10px;
+	color: #3D3D3D;
   }
   .cerrar_turno{
-    background: #EEE;
-    border: 1px solid #EEE;
-    color: #999;
-    border-radius: 25px;
-    height: 50px;
-    width: 50px;
-    margin: 5px;
-    padding: 8px 13px;
-    float: right;
-    transition: 0.5s ease;
+	background: #EEE;
+	border: 1px solid #EEE;
+	color: #999;
+	border-radius: 25px;
+	height: 50px;
+	width: 50px;
+	margin: 5px;
+	padding: 8px 13px;
+	float: right;
+	transition: 0.5s ease;
   }
   .cerrar_turno:hover{
-    background: #FFF;
-    color: #777;
-    transition: 0.5s ease;
+	background: #FFF;
+	color: #777;
+	transition: 0.5s ease;
   }
   .wrapper_formulario{
-    background: #FFF;
-    width: 300px;
+	background: #FFF;
+	width: 300px;
   }
   .form{
-    width: 100%;
-    padding: 30px;
-    overflow: hidden;
-    font-size: 15px;
-    border-top: 4px solid #E91A21;
+	width: 100%;
+	padding: 30px;
+	overflow: hidden;
+	font-size: 15px;
+	border-top: 4px solid #E91A21;
   }
   form input[name="text"]:nth-child(-n+3){
-    display: inline-block;
+	display: inline-block;
   }
   .form_first_line{
-    height: 40px;
+	height: 40px;
   }
   form input[type="text"],
   form input[type="date"],
   form input[type="password"]{
-    border:1px solid #3D3D3D;
-    border-radius: 3px;
-    padding: 7px;
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
-    color:#3D3D3D;
-    transition: 0.1s ease;
+	border:1px solid #3D3D3D;
+	border-radius: 3px;
+	padding: 7px;
+	width: 100%;
+	display: block;
+	margin-bottom: 20px;
+	color:#3D3D3D;
+	transition: 0.1s ease;
   }
   form input[type="text"]:focus,
   form input[type="date"]:focus,
   form input[type="password"]:focus{
-    padding: 10px;
-    transition: 0.1s ease;
+	padding: 10px;
+	transition: 0.1s ease;
   }
   .input_calendario{
-    display: none;
-    border:1px solid #3D3D3D;
-    border-radius: 3px;
-    padding: 7px;
-    width: 100%;
-    margin-bottom: 20px;
-    color:#3D3D3D;
-    transition: 0.1s ease;
+	display: none;
+	border:1px solid #3D3D3D;
+	border-radius: 3px;
+	padding: 7px;
+	width: 100%;
+	margin-bottom: 20px;
+	color:#3D3D3D;
+	transition: 0.1s ease;
   }
   .fecha_del_turno{
-    display: none;
+	display: none;
   }
   .alert{
-    padding: 10px;
-    color: #fff;
-    border-radius: 2px;
-    margin-bottom: 20px;
-    font-size: 14px;
+	padding: 10px;
+	color: #fff;
+	border-radius: 2px;
+	margin-bottom: 20px;
+	font-size: 14px;
   }
   .alert.error{
-    background: #f2DEDE;
-    border: 1px solid #a94442;
-    color: #a94442;
+	background: #f2DEDE;
+	border: 1px solid #a94442;
+	color: #a94442;
   }
   .alert.success{
-    background: #4CAF50;
+	background: #4CAF50;
   }
   .boton_reservar{
-    padding:10px;
-    background: #D13F3F;
-    color:#FEFEFE;
-    font-size: 20px;
-    font-weight: 600;
-    border-radius: 3px;
-    border:none;
-    float: right;
-    cursor: pointer;
+	padding:10px;
+	background: #D13F3F;
+	color:#FEFEFE;
+	font-size: 20px;
+	font-weight: 600;
+	border-radius: 3px;
+	border:none;
+	float: right;
+	cursor: pointer;
   }
   input:hover{
-    box-shadow: 15px solid #999
+	box-shadow: 15px solid #999
   }
-    /*  Calendario  */
+	/*  Calendario  */
   .calendario{
-    display: flex;
-    justify-content: center;
-    overflow-y: scroll;
-    max-width: 950px;
-    height: 400px;
-    align-self: center;
-    background-color: #FFF;
-    margin: 0;
-    padding: 0;
-    border-top: none;
-    color: #000;
+	display: flex;
+	justify-content: center;
+	overflow-y: scroll;
+	max-width: 950px;
+	height: 400px;
+	align-self: center;
+	background-color: #FFF;
+	margin: 0;
+	padding: 0;
+	border-top: none;
+	color: #000;
   }
   tr{
-    margin: auto;
-    text-align: center;
-    height: 20px;
+	margin: auto;
+	text-align: center;
+	height: 20px;
   }
   th, td{
-    border: 1px solid #eee;
-    height: 50px;
-    width: 120px;
+	border: 1px solid #eee;
+	height: 50px;
+	width: 120px;
   }
   th{
-    color: #FFF;
-    border: none;
-    font-weight: 400;
-    background-color: rgba(209, 63, 63, 0.9);
+	color: #FFF;
+	border: none;
+	font-weight: 400;
+	background-color: rgba(209, 63, 63, 0.9);
   }
   .table-header{
-    position: fixed;
+	position: fixed;
   }
-    .wrapper_calendario{
-    display: flex;
+	.wrapper_calendario{
+	display: flex;
   }
   /*  Calendario medias  */
   @media (max-width: 1200px){
-    .wrapper_calendario{
-      width: 100%;
-    }
+	.wrapper_calendario{
+	  width: 100%;
+	}
   }
   @media (max-width: 850px){
-    .agregar_medico{
-      grid-template-columns: 1fr;
-      height: auto;
-    }
+	.agregar_medico{
+	  grid-template-columns: 1fr;
+	  height: auto;
+	}
   }
   /*  Turnos medias  */
   
   @media only screen and (max-width: 1300px){
-    .wrapper_turno{
-      width: 1000px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+	.wrapper_turno{
+	  width: 1000px;
+	  margin-left: auto;
+	  margin-right: auto;
+	}
   }
   @media only screen and (max-width: 1100px){
-    .wrapper_turno{
-      width: 100%;
-    }
+	.wrapper_turno{
+	  width: 100%;
+	}
   }
   @media only screen and (max-width: 950px) {
-    .about{
-      grid-template-columns: 1fr;
-      width: 100%;
-    }
-    .about_info:nth-child(even){
-      grid-row: 1/3;
-    }
+	.about{
+	  grid-template-columns: 1fr;
+	  width: 100%;
+	}
+	.about_info:nth-child(even){
+	  grid-row: 1/3;
+	}
   }
   @media only screen and (max-width: 600px){
-    .wrapper_turno{
-      width: 100%;
-      margin: 10px;
-      display: grid;
-      grid-template-columns: 1fr;
-    }
-    .input_calendario{
-      display: block;
-    }
-    .fecha_del_turno{
-      display: block;
-    }
+	.wrapper_turno{
+	  width: 100%;
+	  margin: 10px;
+	  display: grid;
+	  grid-template-columns: 1fr;
+	}
+	.input_calendario{
+	  display: block;
+	}
+	.fecha_del_turno{
+	  display: block;
+	}
   }
   @media only screen and (max-width: 420px){
-    .wrapper_formulario{
-      width: 100%;
-    }
+	.wrapper_formulario{
+	  width: 100%;
+	}
   }
   /*
-    About Us
+	About Us
   */
   .about{ 
-    width: 100%;
-    background: #EEE;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: 200px;
-    grid-gap: 30px;
-    padding: 30px;
+	width: 100%;
+	background: #EEE;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-auto-rows: 200px;
+	grid-gap: 30px;
+	padding: 30px;
   }
   .about_info{
-    background: #FFF;
-    border-radius: 5px;
+	background: #FFF;
+	border-radius: 5px;
   }
   .about_info:nth-child(2){
-    grid-row: 1/3;
+	grid-row: 1/3;
   }
   /*  About medias  */
   @media only screen and (max-width: 1000px){
-    .about{
-      grid-template-columns: 1fr; 
-    }
+	.about{
+	  grid-template-columns: 1fr; 
+	}
   }
   /*
-    Login
+	Login
   */
   .wrapper_login{
-    height: 100vh ;
-    background-color: #F9F9F9;
+	height: 100vh ;
+	background-color: #F9F9F9;
   }
   .login_form h2{
-    color:#3d3d3d;
+	color:#3d3d3d;
   }
   .login_form{
-    border: none;
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    justify-content: center;
-    border-radius: 15px;
-    height: 350px;
-    width: 570px;
-    padding: 0;
-    background-color: #FFF;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    box-shadow: 0 0 10px #EEE;
-    
+	border: none;
+	display: flex;
+	flex-direction: column; 
+	align-items: center;
+	justify-content: center;
+	border-radius: 15px;
+	height: 350px;
+	width: 570px;
+	padding: 0;
+	background-color: #FFF;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	box-shadow: 0 0 10px #EEE;
+	
   }
   .login_form input[type="text"],
   .login_form input[type="password"],
   .login_form input[type="submit"]{
-    color: #AAA;
-    border: 1px solid #EEE;
-    border-radius: 10px;
-    height: 70px;
-    width: 450px; 
-    margin: 10px;
-    padding: 20px;
-    font-size: 25px;
+	color: #AAA;
+	border: 1px solid #EEE;
+	border-radius: 10px;
+	height: 70px;
+	width: 450px; 
+	margin: 10px;
+	padding: 20px;
+	font-size: 25px;
   }
   .login_form input[type="submit"]{
-    background: #EC5151;
-    color: #EEE;
-    border: none;
-    font-weight: 600;
-    padding: 0;
-    transition: 0.4s ease;
+	background: #EC5151;
+	color: #EEE;
+	border: none;
+	font-weight: 600;
+	padding: 0;
+	transition: 0.4s ease;
   }
   .login_form input[type="submit"]:hover {
-    background-color: #ec6161;
-    transition: 0.4s ease;
+	background-color: #ec6161;
+	transition: 0.4s ease;
   }
   .login_form input[type="text"]:focus,
   .login_form input[type="password"]:focus {
-    padding: 25px;
+	padding: 25px;
   }
   
   /*
-    PAGINA ADMINISTRACION
+	PAGINA ADMINISTRACION
   */
   .administracion{
-    box-shadow: 0 -2px 6px #CCC;
+	box-shadow: 0 -2px 6px #CCC;
   }
   .administracion h2{
-    font-weight: 600;
-    margin: 0 0 0 30px;
-    display: block;
+	font-weight: 600;
+	margin: 0 0 0 30px;
+	display: block;
   }
   .botones_panel{
-    margin-left: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+	margin-left: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-wrap: wrap;
   }
   .botones_panel a, .botones_panel button, .botones_panel div{
-    margin: auto;
-    margin: 0 10px;
-    width: 210px;
+	margin: auto;
+	margin: 0 10px;
+	width: 210px;
   }
   #agregar{
-    position: absolute;
-    margin: 0 auto;
-    padding: 0 20px;
-    animation: especialidad 0.3s ease;
-    border-radius: 2px;
-    background-color: #FFF;
-    display: none;
-    width: 250px;
-    height: 150px;
-    margin: 0 10px;
-    box-shadow: 0 0px 6px #CCC;
-    z-index: 1;
-    border-top: none;
+	position: absolute;
+	margin: 0 auto;
+	padding: 0 20px;
+	animation: especialidad 0.3s ease;
+	border-radius: 2px;
+	background-color: #FFF;
+	display: none;
+	width: 250px;
+	height: 150px;
+	margin: 0 10px;
+	box-shadow: 0 0px 6px #CCC;
+	z-index: 1;
+	border-top: none;
   } 
   #agregar h6{
-    margin: 10px 0;
+	margin: 10px 0;
   }
   .submit{
-    width: 100%;
-    height: 40px;
-    border-radius: 3px;
-    border: none;
-    background-color: #D13F3F;
-    color: #FFF;
-    font-weight: 600;
+	width: 100%;
+	height: 40px;
+	border-radius: 3px;
+	border: none;
+	background-color: #D13F3F;
+	color: #FFF;
+	font-weight: 600;
   }
   @keyframes especialidad{
-    from{
-      height: 0;
-    }
-    to{
-      height: 150px;
-    }
+	from{
+	  height: 0;
+	}
+	to{
+	  height: 150px;
+	}
   }
   .separador a{
-    width: 60px;
-    height: 60px;
-    border-radius: 30px;
-    background-color: #EEE;
-    border: 1px solid #DDD;
-    color: #DDD;
-    justify-self: flex-end;
-    display: flex;  
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s ease-in-out;
+	width: 60px;
+	height: 60px;
+	border-radius: 30px;
+	background-color: #EEE;
+	border: 1px solid #DDD;
+	color: #DDD;
+	justify-self: flex-end;
+	display: flex;  
+	align-items: center;
+	justify-content: center;
+	transition: 0.3s ease-in-out;
   }
   .separador a:hover{
-    background-color: #FFF;
-    color: #EB5555;
-    border: 1px solid #EB5555;
+	background-color: #FFF;
+	color: #EB5555;
+	border: 1px solid #EB5555;
   }
   .editar_borrar{
-    background: #EEE;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    grid-column: 1/3;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    margin: 0px;
-    margin-left: auto;
-    margin-right: auto;
-    height: 40px;
-    width:100%;
-    font-size: 15px;
-    transition: 0.5s;
+	background: #EEE;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	grid-column: 1/3;
+	margin: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	height: 40px;
+	width:100%;
+	font-size: 15px;
+	transition: 0.5s;
   }
   .editar_borrar a{
-    background-color:#EC5151;
-    color: #FFF;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s ease;
+	background-color:#EC5151;
+	color: #FFF;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: 0.3s ease;
   }
   .editar_borrar a:hover{
-    background-color:#FFF;
-    color: #EC5151;
+	background-color:#FFF;
+	color: #EC5151;
   }
   .editar_borrar a:nth-child(even){
-    border-bottom-right-radius: 10px;
+	border-bottom-right-radius: 10px;
   }
   .editar_borrar a:nth-child(odd){
-    border-bottom-left-radius: 10px;
+	border-bottom-left-radius: 10px;
   }
   /*  Administración Medias  */
   @media only screen and (max-width: 800px){
-    .administracion{
-      height: auto;
-      display: grid;
-      grid-template-columns:1fr;
-      grid-gap: 35px;
-    }
-    .administracion h2{
-      text-align: center;
-      margin: 0;
-    }
-    .botones_panel{
-      margin: auto;
-    }
+	.administracion{
+	  height: auto;
+	  display: grid;
+	  grid-template-columns:1fr;
+	  grid-gap: 35px;
+	}
+	.administracion h2{
+	  text-align: center;
+	  margin: 0;
+	}
+	.botones_panel{
+	  margin: auto;
+	}
   }
   @media only screen and (max-width: 500px){
-    .botones_panel{
-      width: 100%;
-    }
-    .botones_panel a, .botones_panel div{
-      margin: 15px;
-    }
+	.botones_panel{
+	  width: 100%;
+	}
+	.botones_panel a, .botones_panel div{
+	  margin: 15px;
+	}
   }
   /*
-    Nuevo y editar
+	Nuevo y editar
   */
   .wrapper_agregar_editar{
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
   }
   .agregar_medico{
-    width: 1000px;
-    height:100%;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    flex-wrap: wrap;
-    box-shadow: 0px 0 7px #CCC;
-    background-color: #FFF;
+	width: 1000px;
+	height:100%;
+	margin: auto;
+	display: flex;
+	grid-template-columns: 300px 1fr;
+	justify-content: start;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	box-shadow: 0px 0 7px #CCC;
+	background-color: #FFF;
   }
+  .agregar_medico h2{
+	  width: 100%;
+	  margin: 20px 30px 0;
+  }
+  .agregar_medico
   .agregar_medico_form{
-    width: 300px;
-    height: 100%;
-    border-top: none;
-    background-color: #FFF;
-  }
-  input[type="file"]{
-    height: 100px;
-  }
+	width: 300px;
+	margin: 0;
+	height: 100%;
+	border-top: none;
+	background-color: #FFF;
+}
+.nuevo-archivo{
+	
+	margin: 35px;
+	margin-left: 0;
+}
+input[type="file"]{
+	background-color: #F9F9F9;
+	padding: 25px;
+	border: none;
+	border-radius: 5px;
+	width: 100%;
+	height: 325px;
+	color: #999;
+}
+.horarios{
+	margin: 0 30px;
+}
+	.horarios h4{
+	}
+	.horarios button{
+		width: 150px;
+		height: 35px;
+		margin-bottom: 10px;
+		font-size: 15px;
+		color: #FFF;
+		border: none;
+		background-color: #D13F3F;
+	}

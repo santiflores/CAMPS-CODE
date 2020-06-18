@@ -48,6 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		// ':foto' => $_FILES['thumb']['name']
 	));
 	
+	unset($statement);
+
 	$medico_id = $conexion->query(
 		'SELECT id FROM medicos ORDER BY id DESC LIMIT 1;
 	');
