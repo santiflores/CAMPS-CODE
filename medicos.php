@@ -23,6 +23,10 @@
         }
     }
     
+
+$nuevo_medico = obtenerMedicoActual($conexion, 15);
+print_r($nuevo_medico);
+
     $especialidades = obtenerEspecialidades($conexion);
     require 'views/medicos.view.php';
     
