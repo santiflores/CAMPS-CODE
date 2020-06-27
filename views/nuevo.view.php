@@ -31,7 +31,8 @@
 		</div>
 		<div class="horarios">
 			<h4>Horario de atencion</h4>
-			<div id="nueva-fila">
+			<button id="nueva-fila-btn" onclick="agregarFila()" type="button">Agregar nueva fila</button>
+			<div id="nueva-fila-wrap">
 				<select name = 'fila[0][dia]' >
 					<option value="lunes">Lunes</option>
 					<option value="martes">Mates</option>
@@ -41,9 +42,7 @@
 				</select>
 				<label>Desde</label>
 				<select name="fila[0][desde]" id="">
-					<?php foreach ($rango_horarios as $horario):?>
-						<option value="<?php echo $horario->format('H:i');?>"><?php echo $horario->format('H:i');?></option>
-					<?php endforeach;?>
+					<option value=""></option>
 				</select>
 				<label>Duración del turno:</label>
 				<select name="fila[0][intervalo]">
@@ -51,13 +50,9 @@
 					<option value="30">30 minutos</option>
 				</select>
 				<label>Hasta</label>
-				<select name="fila[0][hasta]">
-					<?php foreach ($rango_horarios as $horario):?>
-						<option value="<?php echo $horario->format('H:i');?>"><?php echo $horario->format('H:i');?></option>
-					<?php endforeach;?>
+				<select name="fila[0][hasta]" id="hasta">
 				</select>
 			</div>
-			<button type="button" onclick="nuevaFila()">Agregar nueva fila</button>
 		</div>
 	  </div>
 	</form>

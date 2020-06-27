@@ -57,6 +57,7 @@ function id_medico($id){
 function obtenerMedicoActual($conexion, $id){
     $medico =  $conexion->query("SELECT * FROM medicos WHERE id = $id");
     $medico = $medico->fetchAll();
+    
     $horarios_medico = $conexion->prepare("SELECT * FROM medicos WHERE medicos_id = $id");
     $horarios_medico = $horarios_medico->execute();
     return $horarios_medico;
