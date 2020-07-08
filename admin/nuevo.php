@@ -48,26 +48,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		// ':foto' => $_FILES['thumb']['name']
 	));
 	
-	unset($statement);
+	// unset($statement);
 
-	$medico_id = $conexion->query(
-		'SELECT id FROM medicos ORDER BY id DESC LIMIT 1;
-	');
+	// $medico_id = $conexion->query(
+	// 	'SELECT id FROM medicos ORDER BY id DESC LIMIT 1;
+	// ');
 
-	foreach ($_POST['fila'] as $fila) {
-		$statement = $conexion->prepare(
-			'INSERT INTO `camps` `horarios`
-			(`medico_id`, `dia`, `desde`, `intervalo`,  `hasta`)
-			VALUES(:medico_id, :dia, :desde, :intervalo, :hasta)'
-		);
-		$statement->execute(array(
-			':medico_id' => $medico_id,
-			':dia' => $fila['dia'],
-			':desde' => $fila['desde'],
-			':intervalo' => $fila['intervalo'],
-			':hasta' => $fila['hasta']
-		));
-	}
+	// foreach ($_POST['fila'] as $fila) {
+	// 	$statement = $conexion->prepare(
+	// 		'INSERT INTO `camps` `horarios`
+	// 		(`medico_id`, `dia`, `desde`, `intervalo`,  `hasta`)
+	// 		VALUES(:medico_id, :dia, :desde, :intervalo, :hasta)'
+	// 	);
+	// 	$statement->execute(array(
+	// 		':medico_id' => $medico_id,
+	// 		':dia' => $fila['dia'],
+	// 		':desde' => $fila['desde'],
+	// 		':intervalo' => $fila['intervalo'],
+	// 		':hasta' => $fila['hasta']
+	// 	));
+	// }
 	// header('Location: ' . RUTA . '/admin/administracion.php');
 }
 

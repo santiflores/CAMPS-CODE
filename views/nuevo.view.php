@@ -32,27 +32,7 @@
 		<div class="horarios">
 			<h4>Horario de atencion</h4>
 			<button id="nueva-fila-btn" onclick="agregarFila()" type="button">Agregar nueva fila</button>
-			<div id="nueva-fila-wrap">
-				<select name = 'fila[0][dia]' >
-					<option value="lunes">Lunes</option>
-					<option value="martes">Mates</option>
-					<option value="miercoles">Miercoles</option>
-					<option value="jueves">Jueves</option>
-					<option value="viernes">Viernes</option>
-				</select>
-				<label>Desde</label>
-				<select name="fila[0][desde]" id="">
-					<option value=""></option>
-				</select>
-				<label>Duración del turno:</label>
-				<select name="fila[0][intervalo]">
-					<option value="15">15 Minutos</option>
-					<option value="30">30 minutos</option>
-				</select>
-				<label>Hasta</label>
-				<select name="fila[0][hasta]" id="hasta">
-				</select>
-			</div>
+			<div id="nueva-fila-wrap"></div>
 		</div>
 	  </div>
 	</form>
