@@ -33,6 +33,7 @@
 			<h4>Horario de atencion</h4>
 			<button id="nueva-fila-btn" onclick="agregarFila()" type="button">Agregar nueva fila</button>
 			<div id="nueva-fila-wrap"></div>
+			<button class="" id="borrar-fila">Borrrar fila</button>
 		</div>
 	  </div>
 	</form>

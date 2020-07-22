@@ -38,7 +38,7 @@ function agregarFila() {
 		horarios[i] = ("0" + hh).slice(-2) + ':' + ("0" + mm).slice(-2); // pushing data in array in [00:00 - 12:00 AM/PM format]
 		inicio += x;
 	}
-	var nuevaFila = '<div id=\'nueva-fila\'><select name = \'fila[' + fila + '][dia]\'><option value=\'lunes\'>Lunes</option><option value=\'martes\'>Mates</option><option value=\'miercoles\'>Miercoles</option><option value=\'jueves\'>Jueves</option><option value=\'viernes\'>Viernes</option></select><label>Desde</label><select name=\'fila[' + fila + '][desde]\' id=\'desde' + fila + '\'></select><label>Duración del turno:</label><select name=\'fila[' + fila + '][intervalo]\'><option value=\'15\'>15 Minutos</option><option value=\'30\'>30 minutos</option></select><label>Hasta</label><select name=\'fila[' + fila +'][hasta]\' id=\'hasta'+fila+'\'></select></div>';
+	var nuevaFila = '<div id=\'nueva-fila\'' + fila + '><select name = \'fila[' + fila + '][dia]\'><option value=\'lunes\'>Lunes</option><option value=\'martes\'>Mates</option><option value=\'miercoles\'>Miercoles</option><option value=\'jueves\'>Jueves</option><option value=\'viernes\'>Viernes</option></select><label>Desde</label><select name=\'fila[' + fila + '][desde]\' id=\'desde' + fila + '\'></select><label>Duración del turno:</label><select name=\'fila[' + fila + '][intervalo]\'><option value=\'15\'>15 Minutos</option><option value=\'30\'>30 minutos</option></select><label>Hasta</label><select name=\'fila[' + fila +'][hasta]\' id=\'hasta'+fila+'\'></select></div>';
 	document.getElementById('nueva-fila-wrap').insertAdjacentHTML('beforeend', nuevaFila);
 	console.log(horarios);
 	
@@ -53,6 +53,8 @@ function agregarFila() {
 
 fila = agregarFila();
 
-function borrarFila() {
-	
-}
+var ultimafila = document.querySelector('#nueva-fila-' + (fila-1));
+const borrarFila = document.getElementById('borrar-fila');
+document.borrarFila.addEventListener('click',() => {
+	console.log(ultimaFila);
+});
