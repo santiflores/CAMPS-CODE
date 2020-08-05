@@ -10,17 +10,6 @@ if(!$conexion){
 	header('Location: ../error.php');
 }
 
-//  Rango horario de los turnos
-
-$inicio = '08:00';
-$fin = '20:00';
-
-$hora_inicio = new DateTime($inicio);
-$hora_fin = new DateTime($fin);
-$hora_fin = $hora_fin->modify('+30 minutes');
-
-$rango_horarios = new DatePeriod($hora_inicio, new DateInterval('PT30M'), $hora_fin);
-
 //Recibir POST
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -28,49 +17,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$especialidad = limpiarDatos($_POST['especialidad']);
 	$horario = limpiarDatos($_POST['horario']);
 	$dni = $_POST['dni'];
-	$contraseña = $_POST['contraseña'];
+	$contraseña = $_POST['password'];
+	$contraseña = password_hash($contraseña, PASSWORD_DEFAULT);
 	$filas = $_POST['fila'];
-
 	$foto = $_FILES['thumb']['tmp_name'];
-	$archivo_subido = '../images' . $_FILES['thumb']['name'];
-	move_uploaded_file($foto, $archivo_subido);
+	$archivo_subido = '../images/' . $_FILES['thumb']['name'];
 	
-	
+	//, `foto`, :foto
 	$statement = $conexion->prepare(
 		'INSERT INTO `camps`.`medicos`
-		(`nombre`, `especialidad`, `horario de atencion`) 
-		VALUES (:nombre, :especialidad, :horario);' // :dni, :contraseña, :foto * `dni`,`contraseña`, `foto`
+		(`nombre`, `especialidad`, `horario de atencion`, `dni`, `contra`) 
+		VALUES (:nombre, :especialidad, :horario, :dni, :contra);'
 	);
 	$statement->execute(array(
 		':nombre' => $nombre,
 		':especialidad' => $especialidad,
 		':horario' => $horario,
-		// ':dni' => $dni,
-		// ':contraseña' => $contraseña,
-		// ':foto' => $_FILES['thumb']['name']
+		':dni' => $dni,
+		':contra' => $contraseña
+		// ':foto' => $archivo_subido
 	));
 		
 	
 	$medico_id = $conexion->query("SELECT id FROM medicos ORDER BY id DESC LIMIT 1");
 	$medico_id = $medico_id->fetchAll();
 
-foreach ($filas as $fila) {
-	$statement = $conexion->prepare(
-		'INSERT INTO `camps` . `horarios`
-			(`medico_id`, `dia`, `desde`, `intervalo`, `hasta`)
-			VALUES(:medico_id, :dia, :desde, :intervalo, :hasta)'
-		);
-		$statement->execute(array(
-			':medico_id' => $medico_id[0]['id'],
-			':dia' => $fila['dia'],
-			':desde' => $fila['desde'],
-			':intervalo' => $fila['intervalo'],
-			':hasta' => $fila['hasta']
-		));
-	}
-	
-	var_dump($filas);
-	var_dump($medico_id);
+	foreach ($filas as $fila) {
+		$statement = $conexion->prepare(
+			'INSERT INTO `camps` . `horarios`
+				(`medico_id`, `dia`, `desde`, `intervalo`, `hasta`)
+				VALUES(:medico_id, :dia, :desde, :intervalo, :hasta)'
+			);
+			$statement->execute(array(
+				':medico_id' => $medico_id[0]['id'],
+				':dia' => $fila['dia'],
+				':desde' => $fila['desde'],
+				':intervalo' => $fila['intervalo'],
+				':hasta' => $fila['hasta']
+			));
+		}
 	// header('Location: ' . RUTA . '/admin/administracion.php');
 }
 

@@ -19,8 +19,8 @@
         <button class="botonestitulo botones_cards" id="boton_especialidad" onclick="agregarEspecialidad()">Agregar especialidad</button>
         <form id="agregar" method="post" enctype="multipart/form-data" action="especialidad.php">
          <h6><b>Agregar Especialidad</b></h6> 
-          <input type="text" name="especialidad" placeholder="Ej: Cardiología">
-          <input type="submit" class="submit" name="submit" value="Agregar Especialidad">
+          <input type="text" class="input-text" name="especialidad" placeholder="Ej: Cardiología">
+          <input type="submit" class="input-submit" class="submit" name="submit" value="Agregar Especialidad">
         </form>
       </div>
       <a href="nuevo.php" class="botonestitulo botones_cards">Agregar medico</a>
@@ -30,7 +30,7 @@
     <div class="titulo_medicos">
       <h2>Saca tu turno</h2>
       <form action="buscar.php" method="get" class="buscar">
-        <input type="text" placeholder="Buscar..." name="buscar">
+        <input type="text" class="input-text" placeholder="Buscar..." name="buscar">
       </form>
     </div>
       <?php foreach($especialidades as $especialidad):?>

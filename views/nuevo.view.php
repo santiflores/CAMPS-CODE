@@ -15,14 +15,16 @@
 	<?php require 'header.php'?>
 	<form class="wrapper_agregar_editar" method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>">
 	  <div class="agregar_medico">
-		<h2>Nuevo Medico</h2>
+			<div class="separador">
+				<h2>Nuevo Medico</h2>
+			</div>
 		<div class="form agregar_medico_form">
 			<h4>Informacion del medico</h4>
-			<input type="text" name="nombre" placeholder="Nombre y Apellido">
-			<input type="text" name="especialidad" placeholder="Especialidad">
-			<input type="text" name="horario" placeholder="Horario de atencion">
-			<input type="text" name="dni" placeholder="DNI">
-			<input type="password" name="contraseña" placeholder="Contraseña del médico">
+			<input type="text" class="input-text" name="nombre" placeholder="Nombre y Apellido">
+			<input type="text" class="input-text" name="especialidad" placeholder="Especialidad">
+			<input type="text" class="input-text" name="horario" placeholder="Horario de atencion">
+			<input type="text" class="input-text" name="dni" placeholder="DNI">
+			<input type="password" class="input-pass" name="password" placeholder="Contraseña del médico">
 			<input class="submit" type="submit" name="submit" value="Agregar Medico">
 		</div>
 		<div class="nuevo-archivo">

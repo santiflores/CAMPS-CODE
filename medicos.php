@@ -13,7 +13,7 @@
         $statement = $conexion->prepare(
             'SELECT * FROM medicos WHERE nombre LIKE :busqueda or especialidad LIKE :busqueda'
         );
-        $statement->excecute(array(':busqueda' => "%$busqueda%"));
+        $statement->execute(array(':busqueda' => "%$busqueda%"));
         $resultados = $statement->fetchAll();
         
         if (empty($resultados)) {
