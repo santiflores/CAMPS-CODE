@@ -20,7 +20,7 @@
         <form id="agregar" method="post" enctype="multipart/form-data" action="especialidad.php">
          <h6><b>Agregar Especialidad</b></h6> 
           <input type="text" class="input-text" name="especialidad" placeholder="Ej: Cardiología">
-          <input type="submit" class="input-submit" class="submit" name="submit" value="Agregar Especialidad">
+          <input type="submit" class="input-submit" class="input-submit" name="submit" value="Agregar Especialidad">
         </form>
       </div>
       <a href="nuevo.php" class="botonestitulo botones_cards">Agregar medico</a>

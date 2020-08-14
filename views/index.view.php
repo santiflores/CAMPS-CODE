@@ -20,8 +20,8 @@
         <a href="index.php" class="logotitulo">
           <img src="<?php echo RUTA?>/images/logo_camps.png" alt="CAMPS" class="logotitulo">
         </a>
-        <a href="medicos.php" class="botonestitulo">Reserve su turno</a>
-        <a href="sobre_nosotros.php" class="botonestitulo">Contactanos</a>
+        <a href="medicos.php" class="botonestitulo"><b>Reserve su turno</b></a>
+        <a href="sobre_nosotros.php" class="botonestitulo"><b>Contactanos</b></a>
       </div>
     </div>
       <section class="card_servicios">

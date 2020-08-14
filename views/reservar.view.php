@@ -84,7 +84,7 @@
 					<input type="text" class="input-text" name="especialidad" placeholder="Especialidad">
 					<input type="text" class="input-text" name="horario" placeholder="Horario de atencion">
 					<input type="text" class="input-text" name="dni" placeholder="DNI">
-					<input class="submit" type="submit" name="submit" value="Reservar turno">
+					<input class="input-submit" type="submit" name="submit" value="Reservar turno">
 				</div>
 				<div class="calendario">
 					<?php 

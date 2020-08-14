@@ -1007,7 +1007,6 @@
 	}
 	.agregar_medico h2{
 		width: 100%;
-		margin: 20px 30px 0;
 	}
 	.agregar_medico
 	.agregar_medico_form{
@@ -1018,9 +1017,8 @@
 	background-color: #FFF;
 }
 .nuevo-archivo{
-	
-	margin: 35px;
-	margin-left: 0;
+	width: 100%;
+	padding: 30px;
 }
 .input-file{
 	background-color: #F9F9F9;
@@ -1032,7 +1030,7 @@
 	color: #999;
 }
 .horarios{
-	margin: 0 30px;
+	padding: 30px;
 }
 	.horarios button{
 		width: 150px;
@@ -1041,7 +1039,11 @@
 		font-size: 15px;
 		color: #FFF;
 		border: none;
-		background-color: #D13F3F;
+		border-radius: 3px;
+		border: 2px solid #e65656;
+		background: #FFF;
+		color: #e65656;
+		font-weight: 600;
 	}
 
 /*
