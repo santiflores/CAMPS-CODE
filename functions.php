@@ -34,10 +34,10 @@ function obtenerMedicos($conexion, $especialidad){
 
 function comprobarSession(){
     if ($_SESSION['admin'] != 'secretaria'){
-        header ('Location: ' . RUTA . '/admin/login.php');
+        header ('Location: ' . RUTA . '/login.php');
     }
 }
-
+        // || $_SESSION['medico'] != 'medico')
 function medico($id){
 	return (int)limpiarDatos($id);
 }

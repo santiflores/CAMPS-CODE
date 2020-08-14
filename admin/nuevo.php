@@ -26,16 +26,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	//, `foto`, :foto
 	$statement = $conexion->prepare(
 		'INSERT INTO `camps`.`medicos`
-		(`nombre`, `especialidad`, `horario de atencion`, `dni`, `contra`) 
-		VALUES (:nombre, :especialidad, :horario, :dni, :contra);'
+		(`nombre`, `especialidad`, `horario de atencion`, `dni`, `contra`, `foto`) 
+		VALUES (:nombre, :especialidad, :horario, :dni, :contraseña, :foto);'
 	);
 	$statement->execute(array(
 		':nombre' => $nombre,
 		':especialidad' => $especialidad,
 		':horario' => $horario,
 		':dni' => $dni,
-		':contra' => $contraseña
-		// ':foto' => $archivo_subido
+		':contraseña' => $contraseña,
+		':foto' => $archivo_subido
 	));
 		
 	

@@ -1,11 +1,15 @@
-<?php session_start();
-  require 'config.php';
-  require '../functions.php';
+<?php
+session_start();
+  require 'admin/config.php';
+  require 'functions.php';
   $conexion = conexion($bd_config);
 	if (!$conexion) {
 		header('location: error.php');
 	}
-  require '../views/login.view.php';
+
+
+
+require 'views/login_admin.view.php';
 
   
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -32,4 +36,18 @@
 	  header('location: ' . RUTA . '/medicos/turnos.php?id='. $medico_id);
 		}
 	}
+
+	$user_id = $conexion->prepare(
+		'SELECT id from users WHERE email = :email AND pass = :pass;' 
+	  );
+	$user_id->execute(array(
+		  ':email' => $user,
+		  ':pass'=> $pass
+		));
+	$user_id = $user_id->fetchAll();
+	if  ($user_id) { 
+		$_SESSION['user'] = $user_id;
+		header('location: ' . RUTA . '/medicos.php');
+	}
+
 ?>

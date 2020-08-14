@@ -1,21 +1,22 @@
-const UIelements = {
+const DOMelements = {
 	ultimafila: document.querySelector('#nueva-fila-' + (fila-1)),
 	navDropdown: document.querySelector('#navbar-dropdown'),
 	agregarEsp: document.querySelector('#agregar'),
-	borrarFilaBtn = document.getElementById('borrar-fila')
+	borrarFilaBtn: document.getElementById('borrar-fila'),
+	NuevaFilaWrap: document.getElementById('nueva-fila-wrap')
 }
 
 
 function navDropdown() {
-	UIelements.navDropdown.style.display='block'
+	DOMelements.navDropdown.style.display='block'
 }
 
 function navDropdownCerrar() {
-	UIelements.navDropdown.style.display='none'
+	DOMelements.navDropdown.style.display='none'
 }
 
 function agregarEspecialidad() {
-	UIelements.agregarEsp.style.display ='block';
+	DOMelements.agregarEsp.style.display ='block';
 }
 
 
@@ -55,7 +56,7 @@ function agregarFila() {
 			<select name="fila[${fila}][hasta]" id="hasta${fila}"></select>
 		</div>`;
 
-	document.getElementById('nueva-fila-wrap').insertAdjacentHTML('beforeend', nuevaFilaHTML);
+	.insertAdjacentHTML('beforeend', nuevaFilaHTML);
 	
 	for (let i = 0; i < horarios.length; i++) {
 		
@@ -69,7 +70,7 @@ function agregarFila() {
 fila = agregarFila();
 
 
-UIelements.borrarFilaBtn.addEventListener('click',() => {
+DOMelements.borrarFilaBtn.addEventListener('click',() => {
 	console.log(ultimaFila);
 });
 

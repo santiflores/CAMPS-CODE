@@ -4,7 +4,10 @@ require 'config.php';
 require '../functions.php';
 
 comprobarSession();
-
+  
+echo('<pre>');
+print_r($_SESSION);
+echo('</pre>');
 $conexion = conexion($bd_config);
 $especialidades = obtenerEspecialidades($conexion);
 

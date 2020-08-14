@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 require '../admin/config.php';
 require '../functions.php';
 
@@ -7,7 +10,8 @@ $conexion = conexion($bd_config);
 		header('location: error.php');
 	}
 
-$medico_id = 64;
+$medico_id = $_SESSION['medico'];
+
 $fecha_actual = date_format(new DateTime, 'Y-m-d');
 
 $statement = $conexion->prepare(
@@ -32,5 +36,6 @@ foreach ($turnos_hoy as $turno) {
 	}
 }
 
-require '../views/turnos.view.php'
+require '../views/turnos.view.php';
+
 ?>

@@ -25,8 +25,8 @@
             <h3>Inicio de Sesion</h3>
         </div>
         <form action="login.php" method="POST" class="login_form">
-            <h5>Introduzca su Email</h5>
-            <input type="text" class="input-text" placeholder="Email" name="usuario">
+            <h5>Nombre de usuario:</h5>
+            <input type="text" class="input-text" placeholder="Ususario" name="usuario">
             <h5>Contraseña:</h5>
             <input type="password" class="input-pass" placeholder="Contraseña" name="contraseña">
             <div class="g-recaptcha" data-sitekey="your_site_key"></div>

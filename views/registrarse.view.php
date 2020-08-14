@@ -22,14 +22,24 @@
 <div class="wrapper_login">
     <div class="login">
         <div class="separador">
-            <h3>Inicio de Sesion</h3>
+            <h3>Registrarse</h3>
         </div>
-        <form action="login.php" method="POST" class="login_form">
-            <h5>Introduzca su Email</h5>
-            <input type="text" class="input-text" placeholder="Email" name="usuario">
-            <h5>Contraseña:</h5>
-            <input type="password" class="input-pass" placeholder="Contraseña" name="contraseña">
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST" class="login_form">
+            <input type="text" class="input-text" placeholder="Nombre" name="nombre">
+            <input type="text" class="input-text" placeholder="Apellido" name="apellido">
+            <input type="text" class="input-text" placeholder="Email" name="email">
+            <input type="password" class="input-pass" placeholder="Contraseña" name="password">
+            <input type="password" class="input-pass" placeholder="Repetir Contraseña" name="password2">
+            <input type="text" class="input-text" placeholder="DNI" name="dni">
+            <input type="text" class="input-text" placeholder="Telefono (opcional)" name="telefono">
+            <select class="input-text" name="obraSocial">
+                <option value="1"> 1 </option>
+                <option value="2"> 2 </option>
+                <option value="3"> 3 </option>
+                <option value="4"> 4 </option>
+            </select>
             <div class="g-recaptcha" data-sitekey="your_site_key"></div>
+            <ul><?php echo($errores);?></ul>
             <input type="submit" class="input-submit" value="Iniciar sesion">
         </form>
     </div>

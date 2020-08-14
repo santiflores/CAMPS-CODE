@@ -13,12 +13,6 @@
   </head>
   <body>
 	<?php require'header.php';?>
-	<pre>
-	<?php 
-		// print_r($_SERVER);
-	print_r ($fecha_actual); 
-	?>
-	</pre>;
 	<section class="wrapper_especialidades">
 	<div class="titulo_medicos">
 	  <h2>Saca tu turno</h2>
@@ -28,7 +22,7 @@
 	</div>
 		<div class="especialidad">
 		<div class="separador">
-			<h2><?php echo $titulo; ?></h2>
+			<h3><?php echo $titulo; ?></h3>
 		</div>
 		<div class="wrapper_medicos">
 			<?php foreach($resultados as $medico): ?>
