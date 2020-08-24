@@ -33,21 +33,19 @@ function obtenerMedicos($conexion, $especialidad){
 }
 
 function comprobarSession(){
-    if ($_SESSION['admin'] != 'secretaria'){
+    if (!isset($_SESSION['user']) || isset($_SESSION['medico']) || !isset($_SESSION['admin'])) {
         header ('Location: ' . RUTA . '/login.php');
     }
 }
-        // || $_SESSION['medico'] != 'medico')
 function medico($id){
 	return (int)limpiarDatos($id);
 }
 
 function obtener_medico_por_id($conexion, $id){
-	$resultado = $conexion->query("SELECT * FROM medicos WHERE id = $id LIMIT 1");
-	$resultado = $resultado->fetchAll();
+	$resultado = $conexion->query("SELECT id, nombre, especialidad FROM medicos WHERE id = $id LIMIT 1");
+	$resultado = $resultado->fetch();
 	return ($resultado) ? $resultado : false;
 }
-
 function id_medico($id){
 	return (int)limpiarDatos($id);
 }

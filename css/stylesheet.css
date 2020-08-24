@@ -3,36 +3,49 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
- }
+}
+.container{
+	width: 1200px;
+}
+.flex-center{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.flex-center-start{
+	display: flex;
+	align-items: center;
+	justify-content: start;
+}
 	/*
 	 * Header General
 	*/
-	.menu{
+.menu{
 	background-color: #fff;
 	background-image: -webkit-linear-gradient(25deg, #fff 300px, #D13F3F 301px);
 	color: #333333;
 	height: 90px;
 	top: 0;
 	left: 0;
-	}
-	.logoheader{
+}
+.logoheader{
 	height: 90px;
 	width: 300px;
 	margin: 0;
 	padding: 25px;
 	display: inline-flex;
-	}
+}
 	.logoheader img{
-	object-fit: contain;
-	width: auto;
-	height: 60px;
-	align-self: center;
-	justify-content: center;
+		object-fit: contain;
+		width: auto;
+		height: 60px;
+		align-self: center;
+		justify-content: center;
 	}
-	/*
-	 * Navegación
-	 */
-	.nav_boton_dropdown{
+/*
+ * Navegación
+*/
+.nav_boton_dropdown{
 	transition-property: all;
 	transition: 0.1s;
 	transition-delay: 1s;
@@ -45,7 +58,7 @@
 	border: none;
 	float: right;
 	padding: 10px;
-	}
+}
 	.nav_boton_dropdown img{
 		height: 100%;
 		object-fit: cover;
@@ -77,9 +90,10 @@
 				line-height: 90px;
 			}
 				#navbar_dropdown ul li a{
-			color: #FFF;
-			font-size: 15px;
-			transition: 0.3s ease;
+					color: #FFF;
+					text-decoration: none;
+					font-size: 15px;
+					transition: 0.3s ease;
 				}
 	@keyframes slidein {
 	from {
@@ -105,15 +119,16 @@
 			}
 	
 				nav ul li a{
-			color: #FFF;
-			font-size: 15px;
+					color: #FFF;
+					font-size: 15px;
 					padding: 0 10px;
-			text-decoration: underline;
-			transition: 0.3s ease;
+					text-decoration: none;
+					transition: 0.3s ease;
 				}
-			nav ul li a:hover{
-			color: #FFF;
-	}
+					nav ul li a:hover{
+						color: #FFF;
+						transition: 0.3s ease;
+					}
 	.botones{
 	border: 1px solid #fff;
 	padding: 15px 10px 15px 10px;
@@ -205,18 +220,20 @@
 	grid-column: 1/3;
 	}
 	.botonestitulo{
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	text-align: center;
-	width: 100%;
+	text-decoration: none;
+	font-weight: 700px;
 	font-size: 18px;
-	height: 50px;
-	padding: 10px;
-	margin-right: 10px;
-	border-radius: 30px;
 	color: #fff;
 	background: #D13F3F;
-	text-decoration: none;
-	transition-property: initial none;
-	transition: 0.5s ease-out;
+	width: 100%;
+	height: 50px;
+	margin-right: 10px;
+	border-radius: 30px;
+	transition: 0.5s ease;
 	}
 	.botonestitulo:hover{
 	background-color: #EC5151;
@@ -256,20 +273,20 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
-	}
-	/*
+}
+/*
 	Nuestros servicios
-	*/
+*/
 	.card_servicios{
-	padding: 0 20px 40px 20px;
+		padding: 0 20px 40px 20px;
 	}
 	.card_servicios h1{
-	font-size: 40px;
-	color: #3d3d3d;
-	text-align: center;
-	margin: 30px;
+		font-size: 40px;
+		color: #3d3d3d;
+		text-align: center;
+		margin: 30px;
 	}
-	.card_wrapper_servicios{
+.card_wrapper_servicios{
 	height: auto;
 	margin-left: auto;
 	margin-right: auto;
@@ -277,9 +294,8 @@
 	align-items: center;
 	justify-content: space-evenly;
 	flex-wrap: wrap;
-	
-	}
-	.service_card{
+}
+.service_card{
 	border-radius: 5px;
 	background: #F3F3F3;
 	max-width: 1300px;
@@ -290,26 +306,25 @@
 	grid-auto-rows: 2fr 1fr;
 	background: #fff;
 	box-shadow: 0 0 10px #DDD;
-	}
-	.card_image{
-		border-top-right-radius: 5px;
-		border-top-left-radius: 5px;
-	}
-	.card_image img{
-		height: 234px;
-		width: 100%;
-		border-top-right-radius: 5px;
-		border-top-left-radius: 5px;
-		object-fit: cover;
-	}
-	.service_card div{
-		font-size: 15px;
-		text-align: center;
-		text-decoration: none;
-		color: #3D3D3D;
-		}
-	.botones_cards{
-	display: block;
+}
+.card_image{
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+.card_image img{
+	height: 234px;
+	width: 100%;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	object-fit: cover;
+}
+.service_card div{
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none;
+	color: #3D3D3D;
+}
+.botones_cards{
 	width: 200px;
 	background: #EEE;
 	border: 1px solid #EEE;
@@ -319,47 +334,48 @@
 	margin-left: auto;
 	margin-right: auto;
 	transition: 0.4s ease;
-		}
+}
 	.botones_cards:hover{
-	background: #FFF;
-	color: #3D3D3D;
-	transition: 0.4s ease;
+		background: #FFF;
+		color: #3D3D3D;
+		transition: 0.4s ease;
 	}
 
-	/*
+/*
 	Contacto
-	*/
-	.contact_section{
+*/
+
+.contact_section{
 	height: 450px;
 	padding: 30px;
 	background: #D13F3F;
-	}
+}
 	.contact_section h2{
 		color: #F0F0F0;
 		text-align: center;
 		font-size: 50px;
 		margin-bottom: 30px;
 	}
-	.contact_wrapper{
+.contact_wrapper{
 	height: 300px;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 30px;
 	margin-bottom: 210px;
-	}
-	.map{
+}
+.map{
 	grid-row: 1/3;
-	}
-	.contact_info{
+}
+.contact_info{
 	background-color: #ee4545;
 	border-radius: 5px;
 	color: #FFFFFF;
 	padding: 0 25px;
-	}
+}
 	
 	/*  Contact medias  */
 	
-	@media only screen and (max-width: 750px){
+@media only screen and (max-width: 750px){
 	.contact_section{
 		height: 850px;
 	}
@@ -374,54 +390,55 @@
 		margin-top: 15px;
 		height: 200px;
 	}
-	}
-	@media only screen and (max-width: 445px){
+}
+@media only screen and (max-width: 445px){
 	.contact_section h2{
 		font-size: 40px;
 	}
-	}
-	/*
+}
+
+/*
 	Footer
-	*/
-	footer{
+*/
+footer{
 	width: 100%;
 	padding: 50px 0 50px 0;
 	background: #E0E0E0;
-	}
-	.wrapper_footer{
+}
+.wrapper_footer{
 	width: 450px;
 	margin-left: auto;
 	margin-right: auto;
 	font-size: 25px;
 	padding-bottom: 10px;
-	}
-	.logo_footer{
+}
+.logo_footer{
 	display: block;
 	margin: 10px auto;
-	}
-	.footer_icon{
+}
+.footer_icon{
 	width: 27px;
-	}
-	.wrapper_footer h4{
+}
+.wrapper_footer h4{
 	text-align: center;
-	}
+}
 	
 	/*  Footer medias  */
 	
-	@media only screen and (max-width: 450px){
+@media only screen and (max-width: 450px){
 	.wrapper_footer{
 		width: 100%;
 		padding: 0 21px 0 21px;
 	}
-	}
-	@media only screen and (max-width: 380px) {
+}
+@media only screen and (max-width: 380px) {
 	.logo_footer{
 		width: 100%;
 	}
-	}
-	/*
+}
+/*
 	Medicos
-	*/
+*/
 .titulo_medicos{
 	padding-right: 20px;
 	width: 100%;
@@ -479,27 +496,20 @@
 	padding: 10px;
 	text-align: center;
 }
-.info_medico h4{
-	margin: 0px;
-}
-.info_medico p{
-	padding: 0;
+.info_medico > *{
 	margin: 0;
+	padding: 0;
 }
-.info_medico p:nth-child(odd){
+.info_medico:nth-child(odd){
 	font-weight: lighter;
 }
 .foto_medico{
-	background: url(fotos/user.jpg)center no-repeat;
 	background-size: 100%;
 	height: auto;
 	width: 100%;
-	border-top-left-radius: 10px;
 	object-fit: cover;
 }
 .boton_medicos{
-	display: flex;
-	align-items: center;justify-content: center;
 	grid-column: 1/3;
 	height: 40px;
 	width:100%;
@@ -1084,4 +1094,118 @@
 }
 .three-dots img{
 	width: 30px;
+}
+/*
+	Turno
+*/
+.mis-turnos-wrapper{
+	width: 1200px;
+	min-height: 700px;
+	font-size: 20px;
+	margin: auto;
+	box-shadow: 0 0 10px #CCCCCC;
+}
+.mis-turnos-heading{
+	height: 60px;
+	background: #EEEEEE;
+	font-size: 25px;
+	color: #AFAFAF;
+	display: grid;
+	grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+}
+.mis-turnos-heading > span{
+	padding-left: 20px;
+	border-right: 1px solid #707070;
+}
+.mis-turnos-heading:nth-child(4){
+	border: none;
+}
+.mi-turno{
+	height: 80px;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+	border-bottom: 1px solid #EEE;
+}
+.mi-turno-info{
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 20px;
+
+}
+.mi-turno-cancelar{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+	color: #FFF;
+	background: #F35B5B;
+}
+.mi-turno-cancelar:hover{
+	color: #FFF;
+}
+/*	Mis turnos medias	*/
+
+/*
+	Turno medico - Consulta
+*/
+
+.wrapper_turno{
+	margin-top:60px;
+	margin-left:auto;
+	margin-right:auto;
+	display: grid;
+	width: 1200px;
+	height: 750px;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: repeat(5, 1fr);
+	grid-gap: 60px;
+	font-size: 30px;
+}
+.wrapper_turno > div {
+	border-radius: 7px;
+	box-shadow: 0 0 10px #CCCCCC;
+}
+.wrapper_info_paciente{
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(5, 1fr);
+	grid-row: 1/3;
+	width:100%;
+}
+.info_paciente_consulta{
+	grid-row:1/2;
+	width:100%;
+	padding:1vh;
+	background-color: #CCCCCC;
+}
+.paciente{
+	border:1px solid #EEE;
+	padding:1vh;
+}
+.wrapper_info_consulta{
+	display: grid;
+	grid-template-rows: repeat(4, 1fr);
+	width:100%;
+	grid-row:3/5;
+}
+.consulta text{
+	width:100%;
+	height:100%;
+}
+.receta{
+	grid-row: 1/5;
+	height: auto;
+}
+.titulo_receta{
+	background:#f35b5b;
+	height:95px;
+}
+.submit_turno{
+	height: 95px;
+	background:#f35b5b;
+	font-weight: 600;
+	color: #FFF;
+	border: 0;
 }

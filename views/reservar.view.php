@@ -40,7 +40,7 @@
 		<div class="wrapper-reservar_padre">
 			<div class="wrapper-reservar">
 				<div class="form_title">
-				<h3><?php echo $medico_actual[0]['nombre'];?></h3>
+				<h3><?php echo $medico_actual['nombre'];?></h3>
 			</div>
 			<div class="wrapper_formulario">
 				<form class="form" action="<?php echo htmlspecialchars ($_SERVER['PHP_SELF']); ?>" method="post">

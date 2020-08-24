@@ -32,6 +32,7 @@
             <input type="password" class="input-pass" placeholder="Repetir Contraseña" name="password2">
             <input type="text" class="input-text" placeholder="DNI" name="dni">
             <input type="text" class="input-text" placeholder="Telefono (opcional)" name="telefono">
+            <label for="">Obra Social</label>
             <select class="input-text" name="obraSocial">
                 <option value="1"> 1 </option>
                 <option value="2"> 2 </option>

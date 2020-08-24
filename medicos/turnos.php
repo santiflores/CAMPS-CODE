@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-
+print_r($_SESSION);
 require '../admin/config.php';
 require '../functions.php';
 
@@ -15,7 +15,7 @@ $medico_id = $_SESSION['medico'];
 $fecha_actual = date_format(new DateTime, 'Y-m-d');
 
 $statement = $conexion->prepare(
-	'SELECT paciente, hora FROM turnos WHERE medico_id = :medico_id AND fecha = :fecha;'
+	'SELECT id, paciente, hora FROM turnos WHERE medico_id = :medico_id AND fecha = :fecha;'
 );
 $statement->execute(array(
 	':medico_id' => $medico_id,

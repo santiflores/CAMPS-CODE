@@ -1,53 +1,81 @@
-<?php
+<?php 
 session_start();
+if (!empty($_SESSION)) {
+	session_destroy();
+	session_start();
+}
   require 'admin/config.php';
   require 'functions.php';
+
   $conexion = conexion($bd_config);
 	if (!$conexion) {
 		header('location: error.php');
 	}
-
-
-
-require 'views/login_admin.view.php';
-
-  
-  if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-	$user = limpiarDatos($_POST['usuario']);
-	$pass = limpiarDatos($_POST['contraseña']);
-	
-	if  ($user == $admin['username'] && $pass == $admin['password']) { 
-	  $_SESSION['admin'] = $admin['username'];
-	  header('location: ' . RUTA . '/admin/administracion.php');
+	$errores = '';
+	// Validar si es que quiere 
+	if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id'])){
+		$errores .= '<li>Debes iniciar sesion para reservar un turno.</li>';
+	} else {
+		$errores = '';
 	}
-	$medico_id = $conexion->prepare(
-	  'SELECT id from medicos WHERE username = :user AND pass = :pass;' 
-	);
-	$medico_id->execute(array(
-		':user' => $user,
-		':pass'=> $pass
-	));
-	$medico_id = $medico_id->fetchAll();
-	$medico_id = $medico_id[0]['id'];
-	print_r($medico_id);
-
-	if  ($medico_id) { 
-	  $_SESSION['medico'] = $medico_id;
-	  header('location: ' . RUTA . '/medicos/turnos.php?id='. $medico_id);
+	if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+		$email = limpiarDatos($_POST['email']);
+		$pass = limpiarDatos($_POST['contraseña']); 
+		$pass = hash('sha512', $pass);
+		// Admin
+		
+		if  ($email == $admin['username'] && $pass == $admin['password']) { 
+			$_SESSION['admin'] = $admin['username'];
+			header('location: ' . RUTA . '/admin/administracion.php');
 		}
-	}
-
-	$user_id = $conexion->prepare(
-		'SELECT id from users WHERE email = :email AND pass = :pass;' 
-	  );
-	$user_id->execute(array(
-		  ':email' => $user,
-		  ':pass'=> $pass
+		
+		// User
+		$user_id = $conexion->prepare(
+			'SELECT id from users WHERE email = :email AND pass = :pass;' 
+		);
+		$user_id->execute(array(
+			':email' => $email,
+			':pass'=> $pass
 		));
-	$user_id = $user_id->fetchAll();
-	if  ($user_id) { 
-		$_SESSION['user'] = $user_id;
-		header('location: ' . RUTA . '/medicos.php');
-	}
+		$user_id = $user_id->fetchAll();
+		
+		if  (!empty($user_id)) { 
+			
+			$user_id = $user_id[0]['id'];
+			$_SESSION['user'] = $user_id;
 
-?>
+			if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id'])) {
+			
+				$get_id = $_GET['id'];
+				header('location: ' . RUTA . '/reservar_turno.php?id='. $get_id);
+			
+			} else {
+			
+				header('location: ' . RUTA . '/medicos.php');
+			
+			}
+		}
+		
+		// MEDICO
+		
+		$medico_id = $conexion->prepare(
+			'SELECT id from medicos WHERE email = :email AND pass = :pass;' 
+		);
+		$medico_id->execute(array(
+			':email' => $email,
+			':pass'=> $pass
+		));
+		$medico_id = $medico_id->fetch();
+		
+		if  (!empty($medico_id)) { 
+			$medico_id = $medico_id['id'];
+			$_SESSION['medico'] = $medico_id;
+			header('location: ' . RUTA . '/medicos/turnos.php?id='. $medico_id);
+		} else {
+			$errores .= '<li>Credenciales incorrectas</li>';
+		}
+		
+		
+	}
+	require 'views/login.view.php';
+	?>

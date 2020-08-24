@@ -12,40 +12,47 @@ if(!$conexion){
 
 //Recibir POST
 
-$errores = "";
+$errores = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$nombre = limpiarDatos($_POST['nombre']);
 	$especialidad = limpiarDatos($_POST['especialidad']);
 	$horario = limpiarDatos($_POST['horario']);
 	$dni = $_POST['dni'];
-	$contraseña = $_POST['contraseña'];
-	$contraseña2 = $_POST['repetir-contraseña'];
+	$email = limpiardatos($_POST['email']);
+	$contraseña = $_POST['pass'];
+	$contraseña2 = $_POST['repetir-contra'];
 	$filas = $_POST['fila'];
-	$foto = $_FILES['thumb']['tmp_name'];
+	$thumb = $_FILES['thumb']['tmp_name'];
 	$archivo_subido = '../images/' . $_FILES['thumb']['name'];
+	move_uploaded_file($thumb, $archivo_subido);
 	
-	
-	if (empty($nombre) || empty($especialidad) || empty($horario) || empty($dni) || empty($archivo_subido) || empty($usuario) || empty($contraseña) || empty($filas)){
+	if (empty($nombre) || empty($especialidad) || empty($horario) || empty($dni) || empty($archivo_subido) || empty($email) || empty($contraseña) || empty($filas)){
 		$errores .= "<li>Complete todos los campos</li>";
-	} else {
-		$contraseña = hash('sha512', $password);
-		$contraseña2 = hash('sha512', $password2);
-
+	}
+	if ($contraseña !== $contraseña2) {
+		$errores .= "<li>Las contraseñas deben ser iguales</li>";
+	} 
+	if ($errores == '') {
+		$contraseña = hash('sha512', $contraseña);
+		$contraseña2 = hash('sha512', $contraseña2);
+	
 		$statement = $conexion->prepare(
-			'INSERT INTO `camps`.`medicos`
-			(`nombre`, `especialidad`, `horario de atencion`, `dni`, `foto`, `username`, `pass`,) 
-			VALUES (:nombre, :especialidad, :horario, :dni, :foto, :username, :contraseña);'
+			'INSERT INTO `camps`.`especialidades`
+				(nombre, especialidad, horario de atencion, foto, dni, email, pass) 
+			VALUES
+				(:nombre, :especialidad, :horario, :foto, :dni, :email, :pass);'
 		);
 		$statement->execute(array(
 			':nombre' => $nombre,
 			':especialidad' => $especialidad,
 			':horario' => $horario,
+			':foto' => $_FILES['thumb']['name'],
 			':dni' => $dni,
-			':foto' => $archivo_subido,
-			':username' => $username,
-			':contraseña' => $contraseña
+			':email' => $email,
+			':pass' => $contraseña
 		));
-			
+		
+		print_r($statement);
 		
 		$medico_id = $conexion->query("SELECT id FROM medicos ORDER BY id DESC LIMIT 1");
 		$medico_id = $medico_id->fetch();
@@ -65,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				));
 			}
 		// header('Location: ' . RUTA . '/admin/administracion.php');
+		
 	}
 }
 

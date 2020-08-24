@@ -36,7 +36,7 @@
 					<div class="turno">
 						<span><?php echo($turno['paciente']);?></span>
 						<span><?php echo(date_format(new Datetime($turno['hora']), 'H:i'));?></span>
-						<a href="turno?id=<?php echo($turno['id']);?>" class="three-dots">
+						<a href="turno.php?id=<?php echo($turno['id']);?>" class="three-dots">
 							<img src="../images/three-dots.svg" alt="" srcset="">
 						</a>
 					</div>

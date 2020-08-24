@@ -15,9 +15,32 @@
   </head>
 <body>
 <header class="menu" size="10vh 100%">
-    <a href="<?php echo RUTA;?>/index.php" class="logoheader">
-        <img src="<?php echo RUTA;?>/images/logo_camps.png" alt="CAMPS">
-    </a>
+	<a href="<?php echo RUTA;?>/index.php" class="logoheader">
+		<img src="<?php echo RUTA;?>/images/logo_camps.png" alt="CAMPS">
+	</a>
+	<button type="button" name="button" class="nav_boton_dropdown" onclick="navDropdown()">
+		<img src="images/nav_icon.png" alt="Menu">
+	</button>
+	<div id="navbar_dropdown">
+		<div class="wrapper_drop_first">
+			<button type="button" name="button" class="nav_boton_dropdown" onclick="navDropdownCerrar()">
+				<img src="images/nav_icon_cerrar.png" alt="Menu">
+			</button>
+			<a href="index.php" class="logoheader">
+				<img src="<?php echo RUTA;?>/images/logo_camps.png" alt="CAMPS">
+			</a>
+		</div>
+        <ul>
+            <li><a href="index.php">Inicio</a></li>
+            <li><a href="registrarse.php">Registrarse</a></li>
+        </ul>
+	</div>
+	<nav>
+        <ul>
+            <li><a href="index.php">Inicio</a></li>
+            <li><a href="registrarse.php">Registrarse</a></li>
+        </ul>
+	</nav>
 </header>
 <div class="wrapper_login">
     <div class="login">
@@ -26,10 +49,10 @@
         </div>
         <form action="login.php" method="POST" class="login_form">
             <h5>Introduzca su Email</h5>
-            <input type="text" class="input-text" placeholder="Email" name="usuario">
+            <input type="text" class="input-text" placeholder="Email" name="email">
             <h5>Contraseña:</h5>
             <input type="password" class="input-pass" placeholder="Contraseña" name="contraseña">
-            <div class="g-recaptcha" data-sitekey="your_site_key"></div>
+            <div class="errores"><?php echo($errores);?></div>
             <input type="submit" class="input-submit" value="Iniciar sesion">
         </form>
     </div>

@@ -1,7 +1,7 @@
 const DOMelements = {
-	nuevaFilaBtn: document.querySelector('#nueva-fila-btn'),
-	navDropdown: document.querySelector('#navbar-dropdown'),
-	agregarEsp: document.querySelector('#agregar'),
+	nuevaFilaBtn: document.getElementById('nueva-fila-btn'),
+	navDropdown: document.getElementById('navbar-dropdown'),
+	agregarEsp: document.getElementById('agregar'),
 	borrarFilaBtn: document.getElementById('borrar-fila'),
 	nuevaFilaWrap: document.getElementById('nueva-fila-wrap')
 }
@@ -15,6 +15,7 @@ function navDropdownCerrar() {
 }
 
 function agregarEspecialidad() {
+	console.log(DOMelements);
 	DOMelements.agregarEsp.style.display ='block';
 }
 

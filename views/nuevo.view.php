@@ -17,7 +17,6 @@
 		<div class="separador">
 			<h2>Nuevo Medico</h2>
 		</div>
-		<div class="errores"><?php echo($errores)?></div>
 		<div class="form agregar_medico_form">
 			<h4>Informacion del medico</h4>
 			<input type="text" class="input-text" name="nombre" placeholder="Nombre y Apellido">
@@ -26,9 +25,9 @@
 			<input type="text" class="input-text" name="dni" placeholder="DNI">
 
 			<h6>Datos para el inicio de sesión:</h6>
-			<input type="text" class="input-text" name="username" placeholder="Usuario">
-			<input type="password" class="input-pass" name="contraseña" placeholder="Contraseña del médico">
-			<input type="password" class="input-pass" name="repetir-conraseña" placeholder="Repetir contraseña">
+			<input type="text" class="input-text" name="email" placeholder="Email">
+			<input type="password" class="input-pass" name="pass" placeholder="Contraseña del médico">
+			<input type="password" class="input-pass" name="repetir-contra" placeholder="Repetir contraseña">
 		</div>
 		<div class="horarios">
 			<h4>Horario de atencion</h4>
@@ -40,6 +39,7 @@
 			<h4>Selecciona una imagen:</h4>
 			<input type="file" name="thumb">
 		</div>
+		<div><?php echo($errores);?></div>
 			<input class="input-submit" type="submit" name="submit" value="Agregar Medico">
 	  </div>
 	</form>
