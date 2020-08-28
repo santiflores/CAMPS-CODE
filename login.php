@@ -15,13 +15,12 @@ if (!empty($_SESSION)) {
 	// Validar si es que quiere 
 	if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id'])){
 		$errores .= '<li>Debes iniciar sesion para reservar un turno.</li>';
-	} else {
-		$errores = '';
 	}
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$email = limpiarDatos($_POST['email']);
 		$pass = limpiarDatos($_POST['contraseña']); 
-		$pass = hash('sha512', $pass);
+		// $pass = hash('sha512', $pass);
+		
 		// Admin
 		
 		if  ($email == $admin['username'] && $pass == $admin['password']) { 
@@ -29,20 +28,20 @@ if (!empty($_SESSION)) {
 			header('location: ' . RUTA . '/admin/administracion.php');
 		}
 		
-		// User
-		$user_id = $conexion->prepare(
-			'SELECT id from users WHERE email = :email AND pass = :pass;' 
+		// usuario
+		$usuario_id = $conexion->prepare(
+			'SELECT id from usuarios WHERE email = :email AND pass = :pass;' 
 		);
-		$user_id->execute(array(
+		$usuario_id->execute(array(
 			':email' => $email,
 			':pass'=> $pass
 		));
-		$user_id = $user_id->fetchAll();
+		$usuario_id = $usuario_id->fetchAll();
 		
-		if  (!empty($user_id)) { 
+		if  (!empty($usuario_id)) { 
 			
-			$user_id = $user_id[0]['id'];
-			$_SESSION['user'] = $user_id;
+			$usuario_id = $usuario_id[0]['id'];
+			$_SESSION['usuario'] = $usuario_id;
 
 			if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id'])) {
 			
@@ -56,7 +55,7 @@ if (!empty($_SESSION)) {
 			}
 		}
 		
-		// MEDICO
+		// Medico
 		
 		$medico_id = $conexion->prepare(
 			'SELECT id from medicos WHERE email = :email AND pass = :pass;' 
@@ -70,7 +69,7 @@ if (!empty($_SESSION)) {
 		if  (!empty($medico_id)) { 
 			$medico_id = $medico_id['id'];
 			$_SESSION['medico'] = $medico_id;
-			header('location: ' . RUTA . '/medicos/turnos.php?id='. $medico_id);
+			header('location: ' . RUTA . '/medicos/turnos.php');
 		} else {
 			$errores .= '<li>Credenciales incorrectas</li>';
 		}

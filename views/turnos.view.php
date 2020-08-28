@@ -8,41 +8,31 @@
 	<link rel="stylesheet" href="<?php echo RUTA?>/css/stylesheet.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="shortcut icon" type="image.png" href="images/favicon_CAMPS.png">
-	<script src="<?php echo RUTA?>/js/scripts.js"></script>
 	<script src="https://kit.fontawesome.com/aa681c14be.js" crossorigin="anonymous"></script>
   </head>
 <body>
 	<?php require 'header.php'?>
-
 	<section class="proximos-turnos">
-		<div class="separador">
-			<h2>Pepe Juarez - Turnos de hoy</h2>
+    	<div class="titulo_medicos">
+			<h2>
+				<?php echo($medico['nombre'] . ' - ' . $fecha_str);?>
+			</h2>
+			<div class="botones_panel">
+			<div>
+        		<button class="botonestitulo botones_cards" id="boton_dropdown" onclick="agregarEspecialidad()">Filtrar turnos</button>
+				<form id="agregar" method="GET" enctype="multipart/form-data" action="<?php htmlspecialchars($_SERVER['PHP_SELF'])?>">
+					<h6><b>Seleccionar fecha</b></h6> 
+					<input type="date" class="input-date" name="fecha">
+					<a href="turnos.php" class="border-button">Hoy</a>
+					<a href="turnos.php?fecha=<?php echo($mañana->format('Y-m-d'))?>" class="border-button">Mañana</a>
+					<input type="submit" class="input-submit" value="Filtrar">
+				</form>			
+			</div>
+			</div>
 		</div>
-		<h2>Turno mañana</h2>
-		<div class="turnos-am-pm">
-			<?php foreach ($turnos_am as $turno ):?>
-					<div class="turno">
-						<span><?php echo($turno['paciente']);?></span>
-						<span><?php echo(date_format(new Datetime($turno['hora']), 'H:i'));?></span>
-						<a href="turno?id=<?php echo($turno['id']);?>" class="three-dots">
-							<img src="../images/three-dots.svg" alt="" srcset="">
-						</a>
-					</div>
-			<?php endforeach;?>
-		</div>
-		<h2>Turno tarde</h2>
-		<div class="turnos-am-pm">
-			<?php foreach ($turnos_pm as $turno ):?>
-					<div class="turno">
-						<span><?php echo($turno['paciente']);?></span>
-						<span><?php echo(date_format(new Datetime($turno['hora']), 'H:i'));?></span>
-						<a href="turno.php?id=<?php echo($turno['id']);?>" class="three-dots">
-							<img src="../images/three-dots.svg" alt="" srcset="">
-						</a>
-					</div>
-			<?php endforeach;?>
-		</div>
+		<?php mostrarTurnos($turnos_hoy);?>
 	</section>
+	<script src="<?php echo RUTA?>/js/scripts.js"></script>
 	
 </body>
 </html>

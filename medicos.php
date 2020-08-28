@@ -24,7 +24,7 @@
                 $nombre = $medico['nombre'];
                 $horario = $medico['horario de atencion'];
                 $foto = (!empty($medico['foto'])) ? $medico['foto'] : 'user.jpg';
-                $checkSession = (isset($_SESSION['user'])) ? 'reservar_turno.php?id=' . $medico['id'] : 'login.php?id=' . $medico['id'];
+                $checkSession = (isset($_SESSION['usuario'])) ? 'reservar_turno.php?id=' . $medico['id'] : 'login.php?id=' . $medico['id'];
 
                 echo('
 				<div class="medico">

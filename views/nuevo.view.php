@@ -31,9 +31,9 @@
 		</div>
 		<div class="horarios">
 			<h4>Horario de atencion</h4>
-			<button id="nueva-fila-btn" type="button">Agregar nueva fila</button>
+			<button id="nueva-fila-btn" class="border-button">Agregar nueva fila</button>
 			<div id="nueva-fila-wrap"></div>
-			<button class="" id="borrar-fila">Borrar fila</button>
+			<button class="border-button" id="borrar-fila">Borrar fila</button>
 		</div>
 		<div class="nuevo-archivo">
 			<h4>Selecciona una imagen:</h4>

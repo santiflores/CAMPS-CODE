@@ -17,9 +17,37 @@
 	align-items: center;
 	justify-content: start;
 }
-	/*
-	 * Header General
-	*/
+.input-textarea{
+	width:100%;
+	border: none;
+	padding: 10px 1em;
+	font-size: 20px;
+}
+.input-submit{
+	width: 100%;
+	height: 40px;
+	border-radius: 3px;
+	border: none;
+	background-color: #D13F3F;
+	color: #FFF;
+	font-weight: 600;
+	padding: 5px;
+}
+.input-text,
+.input-date,
+.input-pass{
+	border:1px solid #3D3D3D;
+	border-radius: 3px;
+	padding: 7px;
+	width: 100%;
+	display: block;
+	margin-bottom: 20px;
+	color:#3D3D3D;
+	transition: 0.1s ease;
+}
+/*
+* Header General
+*/
 .menu{
 	background-color: #fff;
 	background-image: -webkit-linear-gradient(25deg, #fff 300px, #D13F3F 301px);
@@ -35,15 +63,15 @@
 	padding: 25px;
 	display: inline-flex;
 }
-	.logoheader img{
-		object-fit: contain;
-		width: auto;
-		height: 60px;
-		align-self: center;
-		justify-content: center;
-	}
+.logoheader img{
+	object-fit: contain;
+	width: auto;
+	height: 60px;
+	align-self: center;
+	justify-content: center;
+}
 /*
- * Navegación
+* Navegación
 */
 .nav_boton_dropdown{
 	transition-property: all;
@@ -59,18 +87,18 @@
 	float: right;
 	padding: 10px;
 }
-	.nav_boton_dropdown img{
-		height: 100%;
-		object-fit: cover;
-	}
-	.wrapper_drop_first{
+.nav_boton_dropdown img{
+	height: 100%;
+	object-fit: cover;
+}
+.wrapper_drop_first{
 	min-width: 330px;
 	height: 90px;
-	}
-	.wrapper_drop_first .logoheader{
+}
+.wrapper_drop_first .logoheader{
 	width: 250px;
-	}
-	#navbar_dropdown{
+}
+#navbar_dropdown{
 	animation-duration: 0.5s;
 	animation-name: slidein;
 	position: fixed;
@@ -79,79 +107,79 @@
 	height: 100%;
 	margin: auto;
 	display: none;
-		background: #D13F3F;
-	}
-	#navbar_dropdown ul{
-		min-width: 240px;
-		margin: 0;
-		list-style: none;
-		}
-			#navbar_dropdown ul li{
-				line-height: 90px;
-			}
-				#navbar_dropdown ul li a{
-					color: #FFF;
-					text-decoration: none;
-					font-size: 15px;
-					transition: 0.3s ease;
-				}
-	@keyframes slidein {
+	background: #D13F3F;
+}
+#navbar_dropdown ul{
+	min-width: 240px;
+	margin: 0;
+	list-style: none;
+}
+#navbar_dropdown ul li{
+	line-height: 90px;
+}
+#navbar_dropdown ul li a{
+	color: #FFF;
+	text-decoration: none;
+	font-size: 15px;
+	transition: 0.3s ease;
+}
+@keyframes slidein {
 	from {
 		width: 0;
 	}
 	to {
 		width: 330px;
 	}
-	}
-	nav{
-		 float: right;
-	}
-	
-		nav ul{
-			margin: 0;
-			list-style: none;
-			padding-right: 30px
-		}
-	
-			nav ul li{
-				display: inline-block;
-				line-height: 90px;
-			}
-	
-				nav ul li a{
-					color: #FFF;
-					font-size: 15px;
-					padding: 0 10px;
-					text-decoration: none;
-					transition: 0.3s ease;
-				}
-					nav ul li a:hover{
-						color: #FFF;
-						transition: 0.3s ease;
-					}
-	.botones{
+}
+nav{
+	float: right;
+}
+
+nav ul{
+	margin: 0;
+	list-style: none;
+	padding-right: 30px
+}
+
+nav ul li{
+	display: inline-block;
+	line-height: 90px;
+}
+
+nav ul li a{
+	color: #FFF;
+	font-size: 15px;
+	padding: 0 10px;
+	text-decoration: none;
+	transition: 0.3s ease;
+}
+nav ul li a:hover{
+	color: #FFF;
+	transition: 0.3s ease;
+}
+.botones{
 	border: 1px solid #fff;
 	padding: 15px 10px 15px 10px;
 	margin-right: 10px;
 	border-radius: 30px;
 	color: #fff;
 	text-decoration: none;
-	}
-	.botones:hover{
+}
+.botones:hover{
 	background-color: #EC5151;
 	color: #FFF;
 	text-decoration: none;
 	transition: 0.3s ease-in-out;
-	}
-	@media only screen and (max-width: 850px){
+}
+@media only screen and (max-width: 850px){
 	.menu nav{
 		display: none;
 	}
 	.nav_boton_dropdown{
 		display: block;
 	}
-	}
-	@media only screen and (max-width: 450px){
+}
+@media only screen and (max-width: 450px){
 	.menu{
 		background: -webkit-linear-gradient(25deg, #fff 67%, #D13F3F 67.3%);
 	}
@@ -166,22 +194,22 @@
 	}
 	@keyframes slidein {
 		from{
-		width: 0;
+			width: 0;
 		}
 		to{
-		width: 100%;
+			width: 100%;
 		}
 	}
-	}
-	@media only screen and (max-width: 330px){
+}
+@media only screen and (max-width: 330px){
 	.wrapper_drop_first{
 		min-width: 100%;
 	}
-	}
-	/*
-	Container de el titulo y botones
-	*/
-	.container_title{
+}
+/*
+Container de el titulo y botones
+*/
+.container_title{
 	background: url(http://localhost/centros_medicos/CAMPS/images/fondo_CAMPS.jpg);
 	background-repeat: no-repeat;
 	background-size: 100%;
@@ -193,33 +221,33 @@
 	justify-content: flex-end;
 	height: 500px;
 	box-shadow: 0px 0px 10px #999;
-	}
-	/*
-	Media para en fondo del container del titulo
-	*/
-	@media only screen and (max-width: 1200px) {
+}
+/*
+Media para en fondo del container del titulo
+*/
+@media only screen and (max-width: 1200px) {
 	.container_title{
 		background-size: auto 100%;
 	}
-	}
-	/*
-					LOGO
-		RESERVE SU TURNO / CONTACTANOS
-	*/
-	.title{
+}
+/*
+LOGO
+RESERVE SU TURNO / CONTACTANOS
+*/
+.title{
 	width: 350px;
 	margin: 0 50px 50px 0;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 20px;
-	}
-	.logotitulo{
+}
+.logotitulo{
 	height: 80px;
 	margin-left: auto;
 	margin-right: auto;
 	grid-column: 1/3;
-	}
-	.botonestitulo{
+}
+.botonestitulo{
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -234,17 +262,17 @@
 	margin-right: 10px;
 	border-radius: 30px;
 	transition: 0.5s ease;
-	}
-	.botonestitulo:hover{
+}
+.botonestitulo:hover{
 	background-color: #EC5151;
 	color: #FFF;
 	text-decoration: none;
 	transition: 0.5s ease;
-	}
-	
-	/*  Title medias  */
-	
-	@media only screen and (max-width: 750px){
+}
+
+/*  Title medias  */
+
+@media only screen and (max-width: 750px){
 	.container_title{
 		display: flex;
 		height: 500px;
@@ -256,8 +284,8 @@
 		align-self: flex-end;
 		margin-bottom: 50px;
 	}
-	}
-	@media only screen and (max-width: 420px){
+}
+@media only screen and (max-width: 420px){
 	.title{
 		width: 200px;
 		margin: 20px auto;
@@ -275,17 +303,17 @@
 	}
 }
 /*
-	Nuestros servicios
+Nuestros servicios
 */
-	.card_servicios{
-		padding: 0 20px 40px 20px;
-	}
-	.card_servicios h1{
-		font-size: 40px;
-		color: #3d3d3d;
-		text-align: center;
-		margin: 30px;
-	}
+.card_servicios{
+	padding: 0 20px 40px 20px;
+}
+.card_servicios h1{
+	font-size: 40px;
+	color: #3d3d3d;
+	text-align: center;
+	margin: 30px;
+}
 .card_wrapper_servicios{
 	height: auto;
 	margin-left: auto;
@@ -335,14 +363,14 @@
 	margin-right: auto;
 	transition: 0.4s ease;
 }
-	.botones_cards:hover{
-		background: #FFF;
-		color: #3D3D3D;
-		transition: 0.4s ease;
-	}
+.botones_cards:hover{
+	background: #FFF;
+	color: #3D3D3D;
+	transition: 0.4s ease;
+}
 
 /*
-	Contacto
+Contacto
 */
 
 .contact_section{
@@ -350,12 +378,12 @@
 	padding: 30px;
 	background: #D13F3F;
 }
-	.contact_section h2{
-		color: #F0F0F0;
-		text-align: center;
-		font-size: 50px;
-		margin-bottom: 30px;
-	}
+.contact_section h2{
+	color: #F0F0F0;
+	text-align: center;
+	font-size: 50px;
+	margin-bottom: 30px;
+}
 .contact_wrapper{
 	height: 300px;
 	display: grid;
@@ -372,9 +400,9 @@
 	color: #FFFFFF;
 	padding: 0 25px;
 }
-	
-	/*  Contact medias  */
-	
+
+/*  Contact medias  */
+
 @media only screen and (max-width: 750px){
 	.contact_section{
 		height: 850px;
@@ -398,7 +426,7 @@
 }
 
 /*
-	Footer
+Footer
 */
 footer{
 	width: 100%;
@@ -422,9 +450,9 @@ footer{
 .wrapper_footer h4{
 	text-align: center;
 }
-	
-	/*  Footer medias  */
-	
+
+/*  Footer medias  */
+
 @media only screen and (max-width: 450px){
 	.wrapper_footer{
 		width: 100%;
@@ -436,11 +464,13 @@ footer{
 		width: 100%;
 	}
 }
+
 /*
-	Medicos
+	Profesionales
 */
+
 .titulo_medicos{
-	padding-right: 20px;
+	padding: 0 1em;
 	width: 100%;
 	height: 80px;
 	display: flex;
@@ -526,23 +556,23 @@ footer{
 	color: #EB5555;
 	transition: 0.3s;
 }
- 
-	/*    Medicos medias   */
-	
+
+/*    Medicos medias   */
+
 @media only screen and (max-width: 1250px){
 	.wrapper_medicos{
-	width: 100%;
+		width: 100%;
 	}
 }
 @media only screen and (max-width: 1150px){
 	.wrapper_medicos{
-	grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(2, 1fr);
 	}
 }
 @media only screen and (max-width: 750px){
 	.wrapper_medicos{
-	display: block;
-	padding: 25px;
+		display: block;
+		padding: 25px;
 	}
 	.medico{
 		width: 450px;
@@ -562,27 +592,27 @@ footer{
 		font-size: 20px;
 		margin: 0;
 	}
-	}
-	@media only screen and (max-width: 500px){
+}
+@media only screen and (max-width: 500px){
 	.medico{
 		font-size: 15px;
 		width: 100%;
 		grid-template-rows: 150px 40px;
 		grid-template-columns: 150px 1fr;
 	}
-	}
-	@media only screen and (max-width: 420px){
+}
+@media only screen and (max-width: 420px){
 	.info_medico{
 		padding: 10px;
 	}
 	.medico{
 		grid-template-columns: 0fr 1fr;
 	}
-	}
-	/*
-	Sacar Turno
-	*/
-	.wrapper-reservar{
+}
+/*
+Sacar Turno
+*/
+.wrapper-reservar{
 	background: #EEE;
 	display: grid;
 	grid-template-columns: 300px 1fr;
@@ -590,21 +620,21 @@ footer{
 	width: 1200px;
 	margin-left: auto;
 	margin-right: auto;
-	}
+}
 
-	.form_title{
+.form_title{
 	background: #FFF;
 	grid-column: 1/5;
 	display: grid;
 	grid-template-columns: 1fr 60px;
-	}
-	.form_title h3{
+}
+.form_title h3{
 	display: inline-block;
 	line-height: 40px;
 	margin: 10px;
 	color: #3D3D3D;
-	}
-	.cerrar_turno{
+}
+.cerrar_turno{
 	background: #EEE;
 	border: 1px solid #EEE;
 	color: #999;
@@ -615,47 +645,35 @@ footer{
 	padding: 8px 13px;
 	float: right;
 	transition: 0.5s ease;
-	}
-	.cerrar_turno:hover{
+}
+.cerrar_turno:hover{
 	background: #FFF;
 	color: #777;
 	transition: 0.5s ease;
-	}
-	.wrapper_formulario{
+}
+.wrapper_formulario{
 	background: #FFF;
 	width: 300px;
-	}
-	.form{
+}
+.form{
 	width: 100%;
 	padding: 30px;
 	overflow: hidden;
 	font-size: 15px;
-	}
-	input[name="text"]:nth-child(-n+3){
+}
+input[name="text"]:nth-child(-n+3){
 	display: inline-block;
-	}
-	.form_first_line{
+}
+.form_first_line{
 	height: 40px;
-	}
-	.input-text,
-	.input-date,
-	.input-pass{
-	border:1px solid #3D3D3D;
-	border-radius: 3px;
-	padding: 7px;
-	width: 100%;
-	display: block;
-	margin-bottom: 20px;
-	color:#3D3D3D;
-	transition: 0.1s ease;
-	}
-	.input-text:focus,
-	.input-date:focus,
-	.input-pass:focus{
+}
+.input-text:focus,
+.input-date:focus,
+.input-pass:focus{
 	padding: 10px;
 	transition: 0.1s ease;
-	}
-	.input_calendario{
+}
+.input_calendario{
 	display: none;
 	border:1px solid #3D3D3D;
 	border-radius: 3px;
@@ -664,26 +682,26 @@ footer{
 	margin-bottom: 20px;
 	color:#3D3D3D;
 	transition: 0.1s ease;
-	}
-	.fecha_del_turno{
+}
+.fecha_del_turno{
 	display: none;
-	}
-	.alert{
+}
+.alert{
 	padding: 10px;
 	color: #fff;
 	border-radius: 2px;
 	margin-bottom: 20px;
 	font-size: 14px;
-	}
-	.alert.error{
+}
+.alert.error{
 	background: #f2DEDE;
 	border: 1px solid #a94442;
 	color: #a94442;
-	}
-	.alert.success{
+}
+.alert.success{
 	background: #4CAF50;
-	}
-	.boton_reservar{
+}
+.boton_reservar{
 	padding:10px;
 	background: #D13F3F;
 	color:#FEFEFE;
@@ -693,13 +711,13 @@ footer{
 	border:none;
 	float: right;
 	cursor: pointer;
-	}
-	input:hover{
+}
+input:hover{
 	box-shadow: 15px solid #999
-	}
-	/*  Calendario  */
+}
+/*  Calendario  */
 
-	.calendario{
+.calendario{
 	display: flex;
 	justify-content: center;
 	overflow-y: scroll;
@@ -710,56 +728,56 @@ footer{
 	padding: 0;
 	border-top: none;
 	color: #000;
-	}
-	.calen-header, .calen-item{
+}
+.calen-header, .calen-item{
 	line-height: 50px;
 	text-align: center;
 	border: 1px solid #eee;
 	height: 50px;
 	width: 120px;
 	display: block;
-	}
-	.calen-column{
-		width: 120px;
-	}
-	.calen-header{
+}
+.calen-column{
+	width: 120px;
+}
+.calen-header{
 	color: #FFF;
 	border: 1px solid #EEE;
 	font-weight: 400;
 	background-color: rgba(209, 63, 63, 0.9);
-	}
-	.wrapper_calendario{
+}
+.wrapper_calendario{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	}
-	/*  Calendario medias  */
-	@media (max-width: 1200px){
+}
+/*  Calendario medias  */
+@media (max-width: 1200px){
 	.wrapper_calendario{
 		width: 100%;
 	}
-	}
-	@media (max-width: 850px){
+}
+@media (max-width: 850px){
 	.agregar_medico{
 		grid-template-columns: 1fr;
 		height: auto;
 	}
-	}
-	/*  Turnos medias  */
-	
-	@media only screen and (max-width: 1300px){
+}
+/*  Turnos medias  */
+
+@media only screen and (max-width: 1300px){
 	.wrapper-reservar{
 		width: 1000px;
 		margin-left: auto;
 		margin-right: auto;
 	}
-	}
-	@media only screen and (max-width: 1100px){
+}
+@media only screen and (max-width: 1100px){
 	.wrapper-reservar{
 		width: 100%;
 	}
-	}
-	@media only screen and (max-width: 950px) {
+}
+@media only screen and (max-width: 950px) {
 	.about{
 		grid-template-columns: 1fr;
 		width: 100%;
@@ -767,8 +785,8 @@ footer{
 	.about_info:nth-child(even){
 		grid-row: 1/3;
 	}
-	}
-	@media only screen and (max-width: 600px){
+}
+@media only screen and (max-width: 600px){
 	.wrapper-reservar{
 		width: 100%;
 		margin: 10px;
@@ -781,16 +799,16 @@ footer{
 	.fecha_del_turno{
 		display: block;
 	}
-	}
-	@media only screen and (max-width: 420px){
+}
+@media only screen and (max-width: 420px){
 	.wrapper_formulario{
 		width: 100%;
 	}
-	}
-	/*
-	About Us
-	*/
-	.about{ 
+}
+/*
+About Us
+*/
+.about{
 	width: 100%;
 	background: #EEE;
 	display: grid;
@@ -798,95 +816,94 @@ footer{
 	grid-auto-rows: 200px;
 	grid-gap: 30px;
 	padding: 30px;
-	}
-	.about_info{
+}
+.about_info{
 	background: #FFF;
 	border-radius: 5px;
-	}
-	.about_info:nth-child(2){
+}
+.about_info:nth-child(2){
 	grid-row: 1/3;
-	}
-	/*  About medias  */
-	@media only screen and (max-width: 1000px){
+}
+/*  About medias  */
+@media only screen and (max-width: 1000px){
 	.about{
-		grid-template-columns: 1fr; 
+		grid-template-columns: 1fr;
 	}
-	}
-	/*
-	Login
-	*/
-	.wrapper_login{
+}
+/*
+Login
+*/
+.wrapper_login{
 	height: 90vh;
 	background-color: #F9F9F9;
 	padding-top: 150px;
-	}
-	.login{
+}
+.login{
 	border-top: 5px solid #ec6161;
 	border-radius: 5px;
 	background-color: #FFF;
 	width: 350px;
 	margin:auto;
 	box-shadow: 0 0 10px #EEE;
-
-	}
-	.login_form{
+}
+.login_form{
 	display: flex;
-	flex-direction: column; 
+	flex-direction: column;
 	align-items: start;
 	justify-content: center;
 	padding: 25px;
-	}
-	.login div{
+}
+.login div{
 	padding: 10px 25px ;
 	color:#3d3d3d;
-	}
-	.login_form .input-text,
-	.login_form .input-pass,
-	.login_form .input-submit{
+}
+.login_form .input-text,
+.login_form .input-pass,
+.login_form .input-submit{
 	color: #AAA;
 	border: 1px solid #EEE;
 	border-radius: 3px;
 	height: 50px;
-	width: 100%; 
+	width: 100%;
 	padding: 2	5px;
 	font-size: 20px;
-	}
-	.login_form .input-submit{
+}
+.login_form .input-submit{
 	background: #ec6161;
 	color: #EEE;
 	border: none;
 	font-weight: 600;
 	width: 200px;
-	}
-	.login_form .input-text:focus,
-	.login_form .input-pass:focus {
+}
+.login_form .input-text:focus,
+.login_form .input-pass:focus {
 	padding: 15px;
-	}
-	
-	/*
-	PAGINA ADMINISTRACION
-	*/
-	.administracion{
+}
+
+/*
+PAGINA ADMINISTRACION
+*/
+.administracion{
 	box-shadow: 0 -2px 6px #CCC;
-	}
-	.administracion h2{
+}
+.administracion h2{
 	font-weight: 600;
 	margin: 0 0 0 30px;
 	display: block;
-	}
-	.botones_panel{
+}
+.botones_panel{
 	margin-left: 50px;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
 	flex-wrap: wrap;
-	}
-	.botones_panel a, .botones_panel button, .botones_panel div{
+}
+.botones_panel a, .botones_panel button, .botones_panel div{
 	margin: auto;
 	margin: 0 10px;
 	width: 210px;
-	}
-	#agregar{
+}
+#agregar{
 	position: absolute;
 	margin: 0 auto;
 	padding: 0 20px;
@@ -895,33 +912,27 @@ footer{
 	background-color: #FFF;
 	display: none;
 	width: 250px;
-	height: 150px;
+	height: 170px;
 	margin: 0 10px;
 	box-shadow: 0 0px 6px #CCC;
 	z-index: 1;
 	border-top: none;
-	} 
-	#agregar h6{
+}
+#agregar h6{
 	margin: 10px 0;
-	}
-	.input-submit{
-	width: 100%;
-	height: 40px;
-	border-radius: 3px;
-	border: none;
-	background-color: #D13F3F;
-	color: #FFF;
-	font-weight: 600;
-	}
-	@keyframes especialidad{
+}
+#agregar .input-date{
+	margin: 10px;
+}
+@keyframes especialidad{
 	from{
 		height: 0;
 	}
 	to{
 		height: 150px;
 	}
-	}
-	.separador a{
+}
+.separador a{
 	width: 60px;
 	height: 60px;
 	border-radius: 30px;
@@ -929,17 +940,17 @@ footer{
 	border: 1px solid #DDD;
 	color: #DDD;
 	justify-self: flex-end;
-	display: flex;  
+	display: flex;
 	align-items: center;
 	justify-content: center;
 	transition: 0.3s ease-in-out;
-	}
-	.separador a:hover{
+}
+.separador a:hover{
 	background-color: #FFF;
 	color: #EB5555;
 	border: 1px solid #EB5555;
-	}
-	.editar_borrar{
+}
+.editar_borrar{
 	background: #EEE;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -953,27 +964,27 @@ footer{
 	width:100%;
 	font-size: 15px;
 	transition: 0.5s;
-	}
-	.editar_borrar a{
+}
+.editar_borrar a{
 	background-color:#EC5151;
 	color: #FFF;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	transition: 0.3s ease;
-	}
-	.editar_borrar a:hover{
+}
+.editar_borrar a:hover{
 	background-color:#FFF;
 	color: #EC5151;
-	}
-	.editar_borrar a:nth-child(even){
+}
+.editar_borrar a:nth-child(even){
 	border-bottom-right-radius: 10px;
-	}
-	.editar_borrar a:nth-child(odd){
+}
+.editar_borrar a:nth-child(odd){
 	border-bottom-left-radius: 10px;
-	}
-	/*  Administración Medias  */
-	@media only screen and (max-width: 800px){
+}
+/*  Administración Medias  */
+@media only screen and (max-width: 800px){
 	.administracion{
 		height: auto;
 		display: grid;
@@ -987,23 +998,23 @@ footer{
 	.botones_panel{
 		margin: auto;
 	}
-	}
-	@media only screen and (max-width: 500px){
+}
+@media only screen and (max-width: 500px){
 	.botones_panel{
 		width: 100%;
 	}
 	.botones_panel a, .botones_panel div{
 		margin: 15px;
 	}
-	}
-	/*
-	Nuevo y editar
-	*/
-	.wrapper_agregar_editar{
+}
+/*
+Nuevo y editar
+*/
+.wrapper_agregar_editar{
 	display: flex;
 	align-items: center;
-	}
-	.agregar_medico{
+}
+.agregar_medico{
 	width: 1000px;
 	height:100%;
 	margin: auto;
@@ -1014,12 +1025,12 @@ footer{
 	flex-wrap: wrap;
 	box-shadow: 0px 0 7px #CCC;
 	background-color: #FFF;
-	}
-	.agregar_medico h2{
-		width: 100%;
-	}
-	.agregar_medico
-	.agregar_medico_form{
+}
+.agregar_medico h2{
+	width: 100%;
+}
+.agregar_medico
+.agregar_medico_form{
 	width: 300px;
 	margin: 0;
 	height: 100%;
@@ -1042,20 +1053,24 @@ footer{
 .horarios{
 	padding: 30px;
 }
-	.horarios button{
-		width: 150px;
-		height: 35px;
-		margin-bottom: 10px;
-		font-size: 15px;
-		color: #FFF;
-		border: none;
-		border-radius: 3px;
-		border: 2px solid #e65656;
-		background: #FFF;
-		color: #e65656;
-		font-weight: 600;
-	}
-
+.border-button{
+	width: 150px;
+	height: 35px;
+	padding: 5px;
+	margin: 10px;
+	font-size: 15px;
+	color: #FFF;
+	border: none;
+	border-radius: 3px;
+	border: 2px solid #e65656;
+	background: #FFF;
+	color: #e65656;
+	font-weight: 600;
+}
+.border-button:hover{
+	color: #e65656;
+	text-decoration: none;
+}
 /*
 	Pagina de medicos
 */
@@ -1063,9 +1078,15 @@ footer{
 .turnos-am-pm{
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: left;
 	flex-wrap: wrap;
 	padding: 100px 20px;
+}
+.sin-turnos{
+	width: 100%;
+	text-align: center;
+	font-size: 15px;
+	color: #CCC;
 }
 .turno{
 	background-color: #FFF;
@@ -1073,30 +1094,42 @@ footer{
 	border-radius: 5px;
 	height: 80px;
 	width: 400px;
-	margin: 20px;
+	margin: 20px 5%;
 	padding: 0 20px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	box-shadow: 0 0 10px #E0E0E0;
+	font-size: 30px;
 }
-	.turno span{
-		font-size: 30px;
-	}
 .three-dots{
 	min-height: 40px;
 	min-width: 40px;
-	border-radius: 20px;
 	border: 1px solid #999;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	border-radius: 20px;
 }
 .three-dots img{
 	width: 30px;
 }
+
+/*	Turnos medias	*/
+
+@media only screen and (max-width: 1040px){
+	.turno{
+		margin: 20px 20px;
+	}
+}
+@media only screen and (max-width: 920px){
+	.turno{
+		margin: 20px auto;
+	}
+	.turnos-am-pm{
+		padding: 30px 10px;
+	}
+}
+
 /*
-	Turno
+Turno
 */
 .mis-turnos-wrapper{
 	width: 1200px;
@@ -1148,59 +1181,69 @@ footer{
 /*	Mis turnos medias	*/
 
 /*
-	Turno medico - Consulta
+Turno medico - Consulta
 */
 
 .wrapper_turno{
-	margin-top:60px;
-	margin-left:auto;
-	margin-right:auto;
+	margin: 60px auto;
 	display: grid;
 	width: 1200px;
 	height: 750px;
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows: repeat(5, 1fr);
-	grid-gap: 60px;
-	font-size: 30px;
+	grid-template-rows: 3fr 2fr;
+	row-gap: 25px;
+	column-gap: 60px;
+	font-size: 25px;
+	color: #6D6D6D;
 }
 .wrapper_turno > div {
 	border-radius: 7px;
+	overflow: hidden;
 	box-shadow: 0 0 10px #CCCCCC;
 }
-.wrapper_info_paciente{
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: repeat(5, 1fr);
-	grid-row: 1/3;
-	width:100%;
+.wrapper_info_paciente > *{
+	height: 75px;
 }
 .info_paciente_consulta{
-	grid-row:1/2;
+	height: 65px;
 	width:100%;
-	padding:1vh;
-	background-color: #CCCCCC;
+	padding-left: 1em;
+	background-color: #F9F9F9;
+	color: #3D3D3D;
 }
 .paciente{
-	border:1px solid #EEE;
-	padding:1vh;
+	border-bottom: 1px solid #EEE;
+	padding-left: 1em;
 }
-.wrapper_info_consulta{
-	display: grid;
-	grid-template-rows: repeat(4, 1fr);
-	width:100%;
-	grid-row:3/5;
+.boton_historia{
+	background: #f35b5b;
+	color: #FFF;
+	font-size: 25px;
 }
-.consulta text{
-	width:100%;
-	height:100%;
+.boton_historia:hover{
+	color: #FFF;
+	text-decoration: none;
+}
+.consulta_text{
+	height: 177px;
+	max-height: 177px;
 }
 .receta{
-	grid-row: 1/5;
+	grid-row: 1/3;
+	grid-column: 2/3;
 	height: auto;
 }
 .titulo_receta{
 	background:#f35b5b;
-	height:95px;
+	height:100px;
+	color: #FFF;
+	font-weight: 600;
+	padding-left: 1em;
+
+}
+.receta_text{
+	height: 530px;
+	max-height: 530px;
 }
 .submit_turno{
 	height: 95px;

@@ -1,7 +1,8 @@
 const DOMelements = {
 	nuevaFilaBtn: document.getElementById('nueva-fila-btn'),
 	navDropdown: document.getElementById('navbar-dropdown'),
-	agregarEsp: document.getElementById('agregar'),
+	dropdownBtn: document.getElementById('boton_dropdown'),
+	dropdown: document.getElementById('agregar'),
 	borrarFilaBtn: document.getElementById('borrar-fila'),
 	nuevaFilaWrap: document.getElementById('nueva-fila-wrap')
 }
@@ -13,16 +14,23 @@ function navDropdown() {
 function navDropdownCerrar() {
 	DOMelements.navDropdown.style.display='none'
 }
-
-function agregarEspecialidad() {
-	console.log(DOMelements);
-	DOMelements.agregarEsp.style.display ='block';
+if (DOMelements.dropdownBtn != null) {
+	DOMelements.dropdownBtn.addEventListener('click', function() {
+		if (DOMelements.dropdown.style.display =='block') {
+			DOMelements.dropdown.style.display ='none';
+		} else{
+			DOMelements.dropdown.style.display ='block';
+		} 
+	})
 }
 
-DOMelements.borrarFilaBtn.addEventListener('click', function(){
-	let ultimafila = document.querySelector(`#nueva-fila${fila - 1}`);
-	ultimafila.innerHTML('');
-});
+
+// DOMelements.borrarFilaBtn.addEventListener('click', function(){
+// 	if (fila < 2) {	
+// 		let anteultimaFila = document.querySelector(`#nueva-fila${fila - 2}`);
+// 		anteultimaFila.nextElementSibling.remove();
+// 	}
+// });
 
 
 var fila = 0

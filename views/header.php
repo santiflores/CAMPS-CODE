@@ -3,15 +3,15 @@ if (isset($_SESSION['admin'])) {
 	$header = '
 	<li><a href="'. RUTA .'/index.php">Inicio CAMPS</a></li>
 	<li><a href="../cerrar_sesion.php">Cerrar Sesion</a></li>
-	<li><a href="administracion.php">Panel de administracion</a></li>
+	<li><a href="administracion.php" class="botones">Panel de administracion</a></li>
 	';
 }elseif (isset($_SESSION['medico'])) {
 	$header = '
 		<li><a href="'. RUTA .'/index.php">Inicio</a></li>
 		<li><a href="'. RUTA .'/cerrar_sesion.php">Cerrar Sesion</a></li>
-		<li><a href="usuarios/mis_turnos.php" class="botones">MIS TURNOS</a></li>
+		<li><a href="turnos.php" class="botones">PROXIMOS TURNOS</a></li>
 	';
-} elseif (isset($_SESSION['user'])) {
+} elseif (isset($_SESSION['usuario'])) {
 	$header = '
 		<li><a href="'. RUTA .'/index.php">Inicio</a></li>
 		<li><a href="'. RUTA .'/sobre_nosotros.php">Quienes somos</a></li>

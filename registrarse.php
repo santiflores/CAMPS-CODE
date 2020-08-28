@@ -16,22 +16,22 @@ $errores = '';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	// Validamos que los datos hayan sido rellenados
-	$firstName = limpiarDatos($_POST['nombre']);
-	$surname = limpiardatos($_POST['apellido']);
+	$nombre = limpiarDatos($_POST['nombre']);
+	$apellido = limpiardatos($_POST['apellido']);
 	$password = limpiarDatos($_POST['password']);
 	$password2 = limpiarDatos($_POST['password2']);
 	$email = limpiarDatos($_POST['email']);
 	$dni = limpiarDatos($_POST['dni']);
-	$phone = limpiarDatos($_POST['telefono']);
+	$telefono = limpiarDatos($_POST['telefono']);
 	$obraSocial = limpiarDatos($_POST['obraSocial']);
 	
 
 
-	if (empty($firstName) or empty($surname) or empty($password) or empty($email) or empty($dni) or empty($obraSocial)) {
+	if (empty($nombre) or empty($apellido) or empty($password) or empty($email) or empty($dni) or empty($obraSocial)) {
 		$errores = '<li>Por favor rellena todos los datos correctamente</li>';
 	} else {
 
-		$statement = $conexion->prepare('SELECT * FROM users WHERE email = :email LIMIT 1');
+		$statement = $conexion->prepare('SELECT * FROM usuarios WHERE email = :email LIMIT 1');
 		$statement->execute(array(':email' => $email));
 
 		$resultado = $statement->fetch();
@@ -49,14 +49,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 
 	if ($errores == '') {
-		$statement = $conexion->prepare('INSERT INTO users (firstName, surname, pass, email, dni, phone, obraSocial) VALUES (:firstName, :surname, :pass, :email, :dni, :phone, :obraSocial);');
+		$statement = $conexion->prepare('INSERT INTO usuarios (nombre, apellido, pass, email, dni, telefono, obraSocial) VALUES (:nombre, :apellido, :pass, :email, :dni, :telefono, :obraSocial);');
 		$statement->execute(array(
-			':firstName' => $firstName,
-			':surname' =>  $surname,
+			':nombre' => $nombre,
+			':apellido' =>  $apellido,
 			':pass' => $password,
 			':email' => $email,
 			':dni' => $dni,
-			':phone' => $phone,
+			':telefono' => $telefono,
 			':obraSocial' => $obraSocial
 		));
 

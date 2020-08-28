@@ -32,11 +32,12 @@ function obtenerMedicos($conexion, $especialidad){
     return $sentencia->fetchAll();
 }
 
-function comprobarSession(){
-    if (!isset($_SESSION['user']) || isset($_SESSION['medico']) || !isset($_SESSION['admin'])) {
+function comprobarSession($session_type){
+    if (!isset($_SESSION[$session_type])) {
         header ('Location: ' . RUTA . '/login.php');
     }
 }
+
 function medico($id){
 	return (int)limpiarDatos($id);
 }

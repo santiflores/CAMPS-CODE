@@ -11,6 +11,8 @@
 
     $admin = array(
         'username' => 'secretaria',
-        'password' => hash('sha512', 'asd')
+        // 'password' => hash('sha512', 'asd')
+        'password' => 'asd'
+
     );
 ?>

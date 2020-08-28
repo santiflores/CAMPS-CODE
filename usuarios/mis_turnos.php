@@ -7,11 +7,11 @@ $conexion = conexion($bd_config);
 if (!$conexion) {
 	header('location: error.php');
 }
-if (isset($_SESSION['user'])){
-	$id = $_SESSION['user'];
+if (isset($_SESSION['usuario'])){
+	$id = $_SESSION['usuario'];
 	
 	$statement = $conexion->prepare(
-		'SELECT * FROM turnos WHERE user_id = :id ORDER BY fecha DESC;'
+		'SELECT * FROM turnos WHERE usuario_id = :id ORDER BY fecha DESC;'
 	);
 	$statement->execute(array(
 		':id' => $id

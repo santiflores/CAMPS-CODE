@@ -13,37 +13,42 @@
   </head>
 <body>
 	<?php require '../views/header.php';?>
-
-<div class="separador"> YOU F#KING NIPPLE </div>
+<div class="separador">
+	<h2><?php echo($nombre.' - '. $horario);?></h2>
+</div>
 <form class="wrapper_turno" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST">
 	<div class="wrapper_info_paciente">
-		<div class="info_paciente_consulta">
-		Informacion del paciente
+		<div class="flex-center-start info_paciente_consulta">
+			Informacion del paciente
 		</div>
-		<div class="paciente">
-
+		<div class="flex-center-start paciente">
+			<?php echo ($nombre);?> 
 		</div>
-		<div class="paciente">
-		
+		<div class="flex-center-start paciente">
+			Dni: <?php echo $dni?>
 		</div>
-		<a href="../medicos/historial.php" class="boton_historial"></a>
-	</div>
-	<div class="receta">
-		<div class="titulo_receta">
-		Receta
+		<div class="flex-center-start paciente">
+			Obra Social: <?php echo $obra_social?>
 		</div>
+		<a href="../medicos/historial.php" class="flex-center boton_historia">
+			Ver historia clinica
+		</a>
 	</div>
 	<div class="wrapper_info_consulta">
-		<div class="info_paciente_consulta">
-		Informacion de la consulta
+		<div class="flex-center-start info_paciente_consulta">
+			Informacion de la consulta
 		</div>
-		<div class="consulta" >
-			<input type="text">
+		<textarea name="info_consulta" class="input-textarea consulta_text" placeholder="Introduzca los datos de la consulta..."></textarea>
+	</div>
+	<div class="receta">
+		<div class="flex-center-start titulo_receta">
+			Receta
 		</div>
+		<textarea name="receta" class="input-textarea receta_text" placeholder="Introduzca la preescripcion (si es necesario)..."></textarea>
 	</div>
 	<input type="submit" value="Enviar Informe" class="submit_turno">
 </form>
 
-
+<?php require '../views/footer.php'?>
 </body>
 </html>
