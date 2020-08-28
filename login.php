@@ -19,7 +19,7 @@ if (!empty($_SESSION)) {
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$email = limpiarDatos($_POST['email']);
 		$pass = limpiarDatos($_POST['contraseña']); 
-		// $pass = hash('sha512', $pass);
+		$pass = hash('sha512', $pass);
 		
 		// Admin
 		

@@ -25,12 +25,6 @@ if (DOMelements.dropdownBtn != null) {
 }
 
 
-// DOMelements.borrarFilaBtn.addEventListener('click', function(){
-// 	if (fila < 2) {	
-// 		let anteultimaFila = document.querySelector(`#nueva-fila${fila - 2}`);
-// 		anteultimaFila.nextElementSibling.remove();
-// 	}
-// });
 
 
 var fila = 0
@@ -45,39 +39,47 @@ DOMelements.nuevaFilaBtn.addEventListener('click', function() {
 		horarios[i] = ("0" + hh).slice(-2) + ':' + ("0" + mm).slice(-2); // pushing data in array in [00:00 - 12:00 AM/PM format]
 		inicio += x;
 	}
-
+	
 	var nuevaFilaHTML = `
-		<div id="nueva-fila${fila}">
-			<select name = "fila[${fila}][dia]">
-				<option value="lunes">Lunes</option>
-				<option value="martes">Mates</option>
-				<option value="miercoles">Miercoles</option>
-				<option value="jueves">Jueves</option>
-				<option value="viernes">Viernes</option>
-			</select>
+	<div id="nueva-fila${fila}">
+	<select name = "fila[${fila}][dia]">
+	<option value="lunes">Lunes</option>
+	<option value="martes">Mates</option>
+	<option value="miercoles">Miercoles</option>
+	<option value="jueves">Jueves</option>
+	<option value="viernes">Viernes</option>
+	</select>
 	
-			<label>Desde</label>
-			<select name="fila[${fila}][desde]" id="desde${fila}"></select>
+	<label>Desde</label>
+	<select name="fila[${fila}][desde]" id="desde${fila}"></select>
 	
-			<label>Duración del turno:</label>
-			<select name="fila[${fila}][intervalo]">
-				<option value="15">15 Minutos</option>
-				<option value="30">30 minutos</option>
-			</select>
+	<label>Duración del turno:</label>
+	<select name="fila[${fila}][intervalo]">
+	<option value="15">15 Minutos</option>
+	<option value="30">30 minutos</option>
+	</select>
 	
-			<label>Hasta</label>
-			<select name="fila[${fila}][hasta]" id="hasta${fila}"></select>
-		</div>`;
-
+	<label>Hasta</label>
+	<select name="fila[${fila}][hasta]" id="hasta${fila}"></select>
+	</div>`;
+	
 	DOMelements.nuevaFilaWrap.insertAdjacentHTML('beforeend', nuevaFilaHTML);
-
+	
 	for (let i = 0; i < horarios.length; i++) {
-
+		
 		document.getElementById('desde' + fila).innerHTML += '<option value="' + horarios[i] + '">' + horarios[i] + '</option>';
 		document.getElementById('hasta' + fila).innerHTML += '<option value="' + horarios[i] + '">' + horarios[i] + '</option>';
 	}
 	fila++;
 	return fila;
+});
+
+DOMelements.borrarFilaBtn.addEventListener('click', function(){
+	if (fila < 2) {	
+		console.log(fila);
+		let anteultimaFila = document.querySelector(`#nueva-fila${fila - 2}`);
+		anteultimaFila.nextElementSibling.remove();
+	}
 });
 
 

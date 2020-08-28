@@ -12,7 +12,7 @@
   </head>
   <body>
 	<?php require 'header.php'?>
-	<form class="wrapper_agregar_editar" method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>">
+	<form class="wrapper_agregar_editar" method="post" enctype="multipart/form-data" action="<?php echo (htmlspecialchars($_SERVER['PHP_SELF']));?>">
 	  <div class="agregar_medico">
 		<div class="separador">
 			<h2>Nuevo Medico</h2>
@@ -27,13 +27,13 @@
 			<h6>Datos para el inicio de sesión:</h6>
 			<input type="text" class="input-text" name="email" placeholder="Email">
 			<input type="password" class="input-pass" name="pass" placeholder="Contraseña del médico">
-			<input type="password" class="input-pass" name="repetir-contra" placeholder="Repetir contraseña">
+			<input type="password" class="input-pass" name="repetir_pass" placeholder="Repetir contraseña">
 		</div>
 		<div class="horarios">
 			<h4>Horario de atencion</h4>
-			<button id="nueva-fila-btn" class="border-button">Agregar nueva fila</button>
+			<button id="nueva-fila-btn" class="border-button" type="button">Agregar nueva fila</button>
 			<div id="nueva-fila-wrap"></div>
-			<button class="border-button" id="borrar-fila">Borrar fila</button>
+			<button class="border-button" id="borrar-fila" type="button">Borrar fila</button>
 		</div>
 		<div class="nuevo-archivo">
 			<h4>Selecciona una imagen:</h4>
