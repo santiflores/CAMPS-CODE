@@ -28,41 +28,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$archivo_subido = '../images/' . $_FILES['thumb']['name'];
 	move_uploaded_file($thumb, $archivo_subido);
 	
-	// if (empty($nombre) || empty($especialidad) || empty($horario) || empty($dni) ||/* empty($archivo_subido) ||*/empty($email) || empty($contraseña) || empty($filas)){
-	// 	$errores .= "<li>Complete todos los campos</li>";
-	// }
+	$foto = (!empty($_FILES['thumb']['name'])) ? $_FILES['thumb']['name'] : 'user.jpg';
+
+	if (empty($nombre) || empty($especialidad) || empty($horario) || empty($dni) ||/* empty($archivo_subido) ||*/empty($email) || empty($contraseña) || empty($filas)){
+		$errores .= "<li>Complete todos los campos</li>";
+	}
 
 	if ($contraseña !== $contraseña2) {
 		$errores .= "<li>Las contraseñas deben ser iguales</li>";
 	} 
 
 	if ($errores == '') {
-	
-
-
-
-
 		$statement = $conexion->prepare(
 			'INSERT INTO `camps`.`medicos`
 		(`nombre`, `especialidad`, `horario de atencion`, `dni`, `foto`, `email`, `pass`) 
 		VALUES (:nombre, :especialidad, :horario, :dni, :foto, :email, :pass);' 
-		); //, foto dni, , pass , 
+		);
 		$statement->execute(array(
 			':nombre' => $nombre,
 			':especialidad' => $especialidad,
 			':horario' => $horario,
 			':dni' => $dni,
-			':foto' => $_FILES['thumb']['name'],
+			':foto' => $foto,
 			':email' => $email,
 			':pass' => $contraseña
 		));
-
-
-
-
-
-
-
 
 		$medico_id = $conexion->query("SELECT id FROM medicos ORDER BY id DESC LIMIT 1");
 		$medico_id = $medico_id->fetch();

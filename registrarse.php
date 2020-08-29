@@ -22,12 +22,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$password2 = limpiarDatos($_POST['password2']);
 	$email = limpiarDatos($_POST['email']);
 	$dni = limpiarDatos($_POST['dni']);
-	$telefono = limpiarDatos($_POST['telefono']);
-	$obraSocial = limpiarDatos($_POST['obraSocial']);
+	$telefono = isset($_POST['telefono']) ? limpiarDatos($_POST['telefono']) : '';
+	$obra_social = limpiarDatos($_POST['obra_social']);
 	
 
 
-	if (empty($nombre) or empty($apellido) or empty($password) or empty($email) or empty($dni) or empty($obraSocial)) {
+	if (empty($nombre) or empty($apellido) or empty($password) or empty($email) or empty($dni) or empty($obra_social)) {
 		$errores = '<li>Por favor rellena todos los datos correctamente</li>';
 	} else {
 
@@ -49,7 +49,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 
 	if ($errores == '') {
-		$statement = $conexion->prepare('INSERT INTO usuarios (nombre, apellido, pass, email, dni, telefono, obraSocial) VALUES (:nombre, :apellido, :pass, :email, :dni, :telefono, :obraSocial);');
+		$statement = $conexion->prepare(
+			'INSERT INTO `camps` . `usuarios` 
+			(`nombre`, `apellido`, `pass`, `email`, `dni`, `telefono`, `obra social`) 
+			VALUES (:nombre, :apellido, :pass, :email, :dni, :telefono, :obraSocial);');
 		$statement->execute(array(
 			':nombre' => $nombre,
 			':apellido' =>  $apellido,
@@ -57,7 +60,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			':email' => $email,
 			':dni' => $dni,
 			':telefono' => $telefono,
-			':obraSocial' => $obraSocial
+			':obraSocial' => $obra_social
 		));
 
 		// Despues de registrar al usuario redirigimos para que inicie sesion.

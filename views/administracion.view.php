@@ -15,7 +15,7 @@
     <h2>Panel de Administracion</h2>
     <div class="botones_panel">
       <div>
-        <button class="botonestitulo botones_cards" id="boton_especialidad" onclick="agregarEspecialidad()">Agregar especialidad</button>
+        <button class="botonestitulo botones_cards" id="boton_dropdown" onclick="agregarEspecialidad()">Agregar especialidad</button>
         <form id="agregar" method="post" enctype="multipart/form-data" action="especialidad.php">
          <h6><b>Agregar Especialidad</b></h6> 
           <input type="text" class="input-text" name="especialidad" placeholder="Ej: Cardiología">
@@ -44,7 +44,7 @@
             <?php $medicos = obtenerMedicos($conexion, $especialidad); ?>
             <?php foreach($medicos as $medico):?>
               <div class="medico">
-                <img src="<?php echo RUTA;?>/images/user.jpg" class="foto_medico" alt="">
+                <img src="<?php echo RUTA;?>/images/<?php echo ($medico['foto'])?>" class="foto_medico" alt="">
                 <div class="info_medico">
                   <h4><?php echo $medico['nombre'];?></h4>
                   <p><?php echo $medico['especialidad'];?></p>

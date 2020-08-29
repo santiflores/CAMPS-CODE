@@ -836,14 +836,15 @@ Login
 .wrapper_login{
 	height: 90vh;
 	background-color: #F9F9F9;
-	padding-top: 150px;
 }
 .login{
+	position: relative;
+	top: 5vh;
+	margin: auto;
+	width: 350px;
 	border-top: 5px solid #ec6161;
 	border-radius: 5px;
 	background-color: #FFF;
-	width: 350px;
-	margin:auto;
 	box-shadow: 0 0 10px #EEE;
 }
 .login_form{

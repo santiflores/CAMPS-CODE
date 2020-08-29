@@ -3,6 +3,8 @@ session_start();
 require '../admin/config.php';
 require '../functions.php';
 
+comprobarSession('medico');
+
 $conexion = conexion($bd_config);
 	if (!$conexion) {
 		header('location: error.php');
@@ -37,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 	$nombre = $usuario['nombre'].' '. $usuario['apellido'];
 	$dni = $usuario['dni'];
-	$obra_social = $usuario['obra_social'];
+	$obra_social = $usuario['obra social'];
 }
 
 

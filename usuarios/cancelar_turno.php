@@ -1,8 +1,9 @@
 <?php
 session_start();
-require 'config.php';
+require '../admin/config.php';
 require '../functions.php';
-comprobarSession('admin');
+
+comprobarSession('usuario');
 
 $conexion = conexion($bd_config);
 if(!$conexion){

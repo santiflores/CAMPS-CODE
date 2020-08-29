@@ -1,6 +1,8 @@
-<?php
+<?php session_start();
 require '../admin/config.php';
 require '../views/historial.view.php';
+
+comprobarSession('medico');
 
 $conexion = conexion($bd_config);
 	if (!$conexion) {

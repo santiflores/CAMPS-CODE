@@ -33,13 +33,12 @@
             <input type="text" class="input-text" placeholder="DNI" name="dni">
             <input type="text" class="input-text" placeholder="Telefono (opcional)" name="telefono">
             <label for="">Obra Social</label>
-            <select class="input-text" name="obraSocial">
+            <select class="input-text" name="obra_social">
                 <option value="1"> 1 </option>
                 <option value="2"> 2 </option>
                 <option value="3"> 3 </option>
                 <option value="4"> 4 </option>
             </select>
-            <div class="g-recaptcha" data-sitekey="your_site_key"></div>
             <ul><?php echo($errores);?></ul>
             <input type="submit" class="input-submit" value="Iniciar sesion">
         </form>

@@ -3,6 +3,8 @@ session_start();
 require '../admin/config.php';
 require '../functions.php';
 
+comprobarSession('usuario');
+
 $conexion = conexion($bd_config);
 if (!$conexion) {
 	header('location: error.php');
@@ -11,7 +13,7 @@ if (isset($_SESSION['usuario'])){
 	$id = $_SESSION['usuario'];
 	
 	$statement = $conexion->prepare(
-		'SELECT * FROM turnos WHERE usuario_id = :id ORDER BY fecha DESC;'
+		'SELECT * FROM turnos WHERE usuario_id = :id ORDER BY fecha ASC;'
 	);
 	$statement->execute(array(
 		':id' => $id
@@ -21,24 +23,24 @@ if (isset($_SESSION['usuario'])){
 	
 	function mostrarTurnos($conexion, $turnos){
 		
-		if (!empty($turnos)) {
-			
-			echo('
-			<div class="mis-turnos-heading">
-			<span class="flex-center-start">
-			Medico
-			</span>
-			<span class="flex-center-start">
-			Especialidad
-			</span>
-			<span class="flex-center-start">
-			Fecha
-			</span>
-			<span class="flex-center-start">
-			Hora
-			</span>
-			</div>
-			');
+		echo('
+		<div class="mis-turnos-heading">
+		<span class="flex-center-start">
+		Medico
+		</span>
+		<span class="flex-center-start">
+		Especialidad
+		</span>
+		<span class="flex-center-start">
+		Fecha
+		</span>
+		<span class="flex-center-start">
+		Hora
+		</span>
+		</div>
+		');
+		
+		if (!empty($turnos)) {	
 			
 			foreach ($turnos as $turno) {
 				
@@ -46,8 +48,8 @@ if (isset($_SESSION['usuario'])){
 				$fecha = new DateTime($turno['fecha']);
 				$fecha = date_format($fecha, 'd-m-Y');
 				$hora = $turno['hora'];
-				$id_medico = $turno['medico_id'];
-				$medico = obtener_medico_por_id($conexion, '64');
+				$medico_id = $turno['medico_id'];
+				$medico = obtener_medico_por_id($conexion, $medico_id);
 				$nombre_medico = $medico['nombre'];
 				$especialidad = $medico['especialidad'];
 				
@@ -73,7 +75,11 @@ if (isset($_SESSION['usuario'])){
 				
 			}
 		} else {
-			echo('<p>No tienes ningun turno reservado</p>');
+			echo('
+			<div class="turnos-am-pm">
+			<p class="sin-turnos" >No tienes ningun turno reservado</p>
+			</div>
+			');
 		}
 	}	
 }

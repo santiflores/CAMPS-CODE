@@ -23,7 +23,7 @@
             foreach ($medicos as $medico) {
                 $nombre = $medico['nombre'];
                 $horario = $medico['horario de atencion'];
-                $foto = (!empty($medico['foto'])) ? $medico['foto'] : 'user.jpg';
+                $foto = $medico['foto'];
                 $checkSession = (isset($_SESSION['usuario'])) ? 'reservar_turno.php?id=' . $medico['id'] : 'login.php?id=' . $medico['id'];
 
                 echo('
