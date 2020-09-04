@@ -61,13 +61,13 @@
         	<div class="wrapper_calendario">
         	<div class="calendario">
 					<?php 
-						for ($i=0; $i < count($dia_de_semana); $i++) {
-							echo '<div class="calen-column">';
-							echo '<div class="calen-header">' . ucfirst($dia_de_semana[$i]) . '</div>';
-							mostrarHorarios($dias);
-							echo '</div>';
+						// for ($i=0; $i < count($dia_de_semana); $i++) {
+						// 	echo '<div class="calen-column">';
+						// 	echo '<div class="calen-header">' . ucfirst($dia_de_semana[$i]) . '</div>';
+						// 	mostrarHorarios($dias);
+						// 	echo '</div>';
 							
-						}?>
+						// }?>
 					</div>
 
           	</div>
