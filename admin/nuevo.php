@@ -24,10 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$contraseña = hash('sha512', $contraseña);
 	$contraseña2 = hash('sha512', $contraseña2);
 	$filas = $_POST['fila'];
+	$valores = $_POST['valor'];
 	$thumb = $_FILES['thumb']['tmp_name'];
 	$archivo_subido = '../images/' . $_FILES['thumb']['name'];
 	move_uploaded_file($thumb, $archivo_subido);
-	
+
+
+
 	$foto = (!empty($_FILES['thumb']['name'])) ? $_FILES['thumb']['name'] : 'user.jpg';
 
 	if (empty($nombre) || empty($especialidad) || empty($horario) || empty($dni) ||/* empty($archivo_subido) ||*/empty($email) || empty($contraseña) || empty($filas)){
@@ -38,10 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$errores .= "<li>Las contraseñas deben ser iguales</li>";
 	} 
 
+
+
 	if ($errores == '') {
 		$statement = $conexion->prepare(
-			'INSERT INTO `camps`.`medicos`
-		(`nombre`, `especialidad`, `horario de atencion`, `dni`, `foto`, `email`, `pass`) 
+		'INSERT INTO `camps`.`medicos`
+			(`nombre`, `especialidad`, `horario`, `dni`, `foto`, `email`, `pass`) 
 		VALUES (:nombre, :especialidad, :horario, :dni, :foto, :email, :pass);' 
 		);
 		$statement->execute(array(
@@ -71,8 +76,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 					':hasta' => $fila['hasta']
 				));
 			}
-		// header('Location: ' . RUTA . '/admin/administracion.php');
-		
+			foreach ($valores as $valor) {
+				$statement = $conexion->prepare(
+					'INSERT INTO precios
+					(medico_id, tipo, valor)
+					VALUES(:medico_id, :tipo, :valor);'
+				);
+				$statement->execute(array(
+					':medico_id' => $medico_id['id'],
+					':tipo' => $fila['tipo'],
+					':valor' => $fila['valor']
+				));
+			}
+			// header('Location: ' . RUTA . '/admin/administracion.php');
 	}
 }
 

@@ -45,6 +45,18 @@
 	color:#3D3D3D;
 	transition: 0.1s ease;
 }
+.input-text:focus,
+.input-date:focus,
+.input-pass:focus{
+	padding: 10px;
+	transition: 0.1s ease;
+}
+.form{
+	width: 100%;
+	padding: 30px;
+	overflow: hidden;
+	font-size: 15px;
+}
 /*
 * Header General
 */
@@ -171,7 +183,7 @@ nav ul li a:hover{
 	text-decoration: none;
 	transition: 0.3s ease-in-out;
 }
-@media only screen and (max-width: 850px){
+@media only screen and (max-width: 970px){
 	.menu nav{
 		display: none;
 	}
@@ -613,78 +625,22 @@ footer{
 Sacar Turno
 */
 .wrapper-reservar{
-	background: #EEE;
+	width: 1200px;
+	margin: auto;
 	display: grid;
 	grid-template-columns: 300px 1fr;
-	box-shadow: 0 10px 15px #EEE;
-	width: 1200px;
-	margin-left: auto;
-	margin-right: auto;
+	box-shadow: 0 0 10px #CCC;
 }
-
-.form_title{
-	background: #FFF;
-	grid-column: 1/5;
-	display: grid;
-	grid-template-columns: 1fr 60px;
-}
-.form_title h3{
-	display: inline-block;
-	line-height: 40px;
-	margin: 10px;
-	color: #3D3D3D;
-}
-.cerrar_turno{
-	background: #EEE;
-	border: 1px solid #EEE;
-	color: #999;
-	border-radius: 25px;
-	height: 50px;
-	width: 50px;
-	margin: 5px;
-	padding: 8px 13px;
-	float: right;
-	transition: 0.5s ease;
-}
-.cerrar_turno:hover{
-	background: #FFF;
-	color: #777;
-	transition: 0.5s ease;
-}
-.wrapper_formulario{
+.info-consulta{
 	background: #FFF;
 	width: 300px;
 }
-.form{
-	width: 100%;
-	padding: 30px;
-	overflow: hidden;
-	font-size: 15px;
+.info-consulta div > div{
+	padding:0 0 10px 20px;
 }
-input[name="text"]:nth-child(-n+3){
-	display: inline-block;
-}
-.form_first_line{
-	height: 40px;
-}
-.input-text:focus,
-.input-date:focus,
-.input-pass:focus{
-	padding: 10px;
-	transition: 0.1s ease;
-}
-.input_calendario{
-	display: none;
-	border:1px solid #3D3D3D;
-	border-radius: 3px;
-	padding: 7px;
-	width: 100%;
-	margin-bottom: 20px;
-	color:#3D3D3D;
-	transition: 0.1s ease;
-}
-.fecha_del_turno{
-	display: none;
+.lista-precio{
+	list-style: circle;
+	list-style-position: inside;
 }
 .alert{
 	padding: 10px;
@@ -692,68 +648,107 @@ input[name="text"]:nth-child(-n+3){
 	border-radius: 2px;
 	margin-bottom: 20px;
 	font-size: 14px;
-}
-.alert.error{
 	background: #f2DEDE;
 	border: 1px solid #a94442;
 	color: #a94442;
 }
-.alert.success{
-	background: #4CAF50;
-}
-.boton_reservar{
-	padding:10px;
-	background: #D13F3F;
-	color:#FEFEFE;
-	font-size: 20px;
-	font-weight: 600;
-	border-radius: 3px;
-	border:none;
-	float: right;
-	cursor: pointer;
-}
-input:hover{
-	box-shadow: 15px solid #999
-}
 /*  Calendario  */
-
-.calendario{
+.wrapper-calendario{
 	display: flex;
+	flex-direction: column;
+	align-items: center;
 	justify-content: center;
-	overflow-y: scroll;
-	max-width: 950px;
-	height: 400px;
-	background-color: #FFF;
-	margin: 0;
-	padding: 0;
-	border-top: none;
-	color: #000;
+	padding: 0 0 20px 0;
+	background: #F9F9F9;
 }
-.calen-header, .calen-item{
-	line-height: 50px;
-	text-align: center;
-	border: 1px solid #eee;
-	height: 50px;
-	width: 120px;
-	display: block;
-}
-.calen-column{
-	width: 120px;
+.calendario{
+	width: 620px;
+	height: 420px;
 }
 .calen-header{
+	width: 100%;
+	text-align: center;
+	height: 70px;
 	color: #FFF;
 	border: 1px solid #EEE;
-	font-weight: 400;
+	font-weight: 600;
 	background-color: rgba(209, 63, 63, 0.9);
 }
-.wrapper_calendario{
+.calen-semana{
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+}
+.calen-grid{
+	width: 100%;
+	height: 335px;
+	display: inline-grid;
+	grid-template-columns:repeat(7, 1fr);
+	grid-template-rows:repeat(5, 1fr);
+	gap: 1em;
+	padding: 10px;
+}
+.calen-dia{
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	font-size: 20px;
+	color: #3D3D3D;
+	background: #FFF;
+	border-radius: 5px;
+	box-shadow: 0 0 5px #DDD;
+	transition: 0.3s;
+	cursor: pointer;
 }
+.calen-dia:hover{
+	color: #636363;
+	text-decoration: none;
+	box-shadow: 0 0 10px #CCC;
+	transition: 0.3s;
+}
+.calen-dia--focus{
+	color: #636363;
+	text-decoration: none;
+	box-shadow: 0 0 10px #CCC;
+}
+.dia-bloqueado{
+	opacity: 0.3;
+}
+.dia-bloqueado:hover{
+	color: #3D3D3D;
+	box-shadow: 0 0 5px #DDD;
+	text-decoration: none;
+	cursor: not-allowed;
+}
+.horarios-header{
+	width: 100%;
+	align-self: flex-start;
+	padding: 10px 25px;
+	background-color: #EB5959;
+	color: #FFF;
+	font-weight: 800;
+}
+.wrapper-horarios{
+	padding: 40px 60px 0;
+}
+.wrapper-horarios h3{
+	margin: 25px 0;
+}
+.wrapper-horarios div{
+	padding: 40px 0;
+	display: flex;
+	width: auto;
+	flex-wrap: wrap;
+}
+.wrapper-horarios .calen-dia{
+	height: 60px;
+	width: 80px;
+	margin: 15px;
+	border-radius:5px;
+}
+
 /*  Calendario medias  */
 @media (max-width: 1200px){
-	.wrapper_calendario{
+	.wrapper-reservar{
 		width: 100%;
 	}
 }
@@ -763,41 +758,44 @@ input:hover{
 		height: auto;
 	}
 }
+@media (max-width: 620px){
+	.calendario{
+		width: 100%;
+		height: 350px;
+	}
+	.calen-grid{
+		gap: 5px;
+		height: 280px;
+	}
+	.wrapper-calendario{
+		display: block;
+	}
+}
 /*  Turnos medias  */
 
 @media only screen and (max-width: 1300px){
-	.wrapper-reservar{
+	.reservar-turno{
 		width: 1000px;
 		margin-left: auto;
 		margin-right: auto;
 	}
 }
 @media only screen and (max-width: 1100px){
-	.wrapper-reservar{
+	.reservar-turno{
 		width: 100%;
 	}
 }
-@media only screen and (max-width: 950px) {
-	.about{
-		grid-template-columns: 1fr;
-		width: 100%;
-	}
-	.about_info:nth-child(even){
-		grid-row: 1/3;
+@media only screen and (max-width: 920px) {
+	.wrapper-reservar{
+		display: block;
 	}
 }
 @media only screen and (max-width: 600px){
-	.wrapper-reservar{
+	.reservar-turno{
 		width: 100%;
 		margin: 10px;
 		display: grid;
 		grid-template-columns: 1fr;
-	}
-	.input_calendario{
-		display: block;
-	}
-	.fecha_del_turno{
-		display: block;
 	}
 }
 @media only screen and (max-width: 420px){

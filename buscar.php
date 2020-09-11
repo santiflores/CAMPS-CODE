@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['busqueda'])){
 	$busqueda = limpiarDatos($_GET['busqueda']);
 
 	$statement =$conexion->prepare(
-		"SELECT nombre, especialidad, horario de atencion, foto FROM medicos WHERE nombre LIKE :busqueda or especialidad LIKE :busqueda or horario de atencion LIKE :busqueda;"
+		"SELECT nombre, especialidad, horario, foto FROM medicos WHERE nombre LIKE :busqueda or especialidad LIKE :busqueda or horario LIKE :busqueda;"
 	);
 
 	$statement->execute(array(':busqueda' => "%$busqueda%"));

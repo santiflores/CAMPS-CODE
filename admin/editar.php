@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	$statement = $conexion->prepare(
 		'UPDATE `camps`.`medicos`
-		SET `nombre`=:nombre, `especialidad`=:especialidad, `horario de atencion`=:horario
+		SET `nombre`=:nombre, `especialidad`=:especialidad, `horario`=:horario
 		WHERE  `id`=:id;'
 	);
 	$statement->execute(array(

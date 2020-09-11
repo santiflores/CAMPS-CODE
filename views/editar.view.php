@@ -18,7 +18,7 @@
         <input type="hidden" name="id" value="<?php echo $medico['id']; ?>">
         <input type="text" class="input-text" name="nombre" value="<?php echo $medico['nombre']; ?>">
         <input type="text" class="input-text" name="especialidad" value="<?php echo $medico['especialidad']; ?>">
-        <input type="text" class="input-text" name="horario" value="<?php echo $medico['horario de atencion']; ?>">
+        <input type="text" class="input-text" name="horario" value="<?php echo $medico['horario']; ?>">
 
         <input type="submit" class="input-submit" name="submit" value="Editar Medico">
       </form>

@@ -38,12 +38,8 @@ function comprobarSession($session_type){
     }
 }
 
-function medico($id){
-	return (int)limpiarDatos($id);
-}
-
 function obtener_medico_por_id($conexion, $id){
-	$resultado = $conexion->query("SELECT id, nombre, especialidad FROM medicos WHERE id = $id LIMIT 1");
+	$resultado = $conexion->query("SELECT id, nombre, especialidad, horario FROM medicos WHERE id = $id LIMIT 1");
 	$resultado = $resultado->fetch();
 	return ($resultado) ? $resultado : false;
 }

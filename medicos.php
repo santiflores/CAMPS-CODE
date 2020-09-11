@@ -22,7 +22,7 @@
             ');
             foreach ($medicos as $medico) {
                 $nombre = $medico['nombre'];
-                $horario = $medico['horario de atencion'];
+                $horario = $medico['horario'];
                 $foto = $medico['foto'];
                 $checkSession = (isset($_SESSION['usuario'])) ? 'reservar_turno.php?id=' . $medico['id'] : 'login.php?id=' . $medico['id'];
 
