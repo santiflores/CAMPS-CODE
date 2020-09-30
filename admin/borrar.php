@@ -10,18 +10,18 @@ if(!$conexion){
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $id_medico = $_GET['id'];
-      if (!$id_medico) {
-        header('Location:' . RUTA . '/admin/administracion.php');
-      }
-    $statement = $conexion->prepare(
-        'DELETE FROM medicos WHERE ID= :id'
-    );
-    $statement->execute(array(
-        ':id'=> $id_medico
-    ));
+		$id_medico = $_GET['id'];
+			if (!$id_medico) {
+				header('Location:' . RUTA . '/admin/administracion.php');
+			}
+		$statement = $conexion->prepare(
+				'DELETE FROM medicos WHERE ID = :id'
+		);
+		$statement->execute(array(
+				':id'=> $id_medico
+		));
 
-    $statement->fetchAll();
-    header('Location: '. RUTA .'/admin/administracion.php');
+		$statement->fetchAll();
+		header('Location: '. RUTA .'/admin/administracion.php');
 }
 ?>

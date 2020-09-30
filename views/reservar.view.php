@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="es" dir="ltr">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
 			<h2>Reservar turno</h2>
 		</div>
 		<div class="wrapper-reservar">			
-			<?php displayReservarTurno($conexion, $medico_id, $semana_horarios, $precios, $medico_actual, $errores);?>
+			<?php displayReservarTurno($conexion, $medico_id, $semana_horarios, $precios, $medico_actual);?>
         </div>
 		<?php require 'footer.php'?>
 		<script src="<?php echo RUTA?>/js/scripts.js"></script>

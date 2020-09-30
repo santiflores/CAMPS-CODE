@@ -1,41 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="es" dir="ltr">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Inicio - CAMPS</title>
-	<link href="https://fonts.googleapis.com/css2?family=Anton&family=Lobster&family=Permanent+Marker&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="css/stylesheet.css">
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="shortcut icon" type="image.png" href="images/favicon_CAMPS.png">
-	<script src="<?php echo RUTA?>/js/scripts.js"></script>
+	<link rel="stylesheet" href="<?php echo RUTA?>/css/stylesheet.css">
+	<link rel="shortcut icon" type="image.png" href="<?php echo(RUTA);?>/images/favicon_CAMPS.png">
 	<script src="https://kit.fontawesome.com/aa681c14be.js" crossorigin="anonymous"></script>
   </head>
   <body>
 	<?php require'header.php';?>
 	<section class="wrapper_especialidades">
 	<div class="titulo_medicos">
-	  <h2>Saca tu turno</h2>
-	  <form action="buscar.php" method="get" class="buscar">
-		<input type="text" class="input-text" placeholder="Buscar..." name="busqueda">
-	  </form>
+		<h2>Saca tu turno</h2>
+		<form action="buscar.php" method="get" class="buscar">
+			<input type="text" class="input-text" placeholder="Buscar..." name="busqueda">
+		</form>
+		<form action="medicos.php" method="get">
+			<select class="" name="especialidad">
+				<?php foreach($todas_especialidades as $especialidad):?>
+					<option value="<?php echo($especialidad[1]);?>"> <?php echo(ucfirst($especialidad[1]));?> </option>
+				<?php endforeach;?>
+			</select>
+		</form>
 	</div>
 		<div class="especialidad">
 		<div class="separador">
-			<h3><?php echo $titulo; ?></h3>
+			<h3><b><?php echo $titulo; ?></b></h3>
 		</div>
 		<div class="wrapper_medicos">
-			<?php foreach($resultados as $medico): ?>
+			<?php foreach($resultados as $medico){	
+			$nombre = $medico['nombre'];
+			$especialidad_actual = $medico['especialidad'];
+			$horario = $medico['horario'];
+			$foto = $medico['foto'];
+			$checkSession = (isset($_SESSION['usuario'])) ? 'reservar_turno.php?id=' . $medico['id'] : 'login.php?id=' . $medico['id'];	
+			?>
 				<div class="medico">
-					<img src="images/user.jpg" class="foto_medico" alt="">
+					<img src="images/<?php echo($foto)?>" class="foto_medico" alt="">
 					<div class="info_medico">
-						<h4><?php echo $medico['nombre'];?></h4>
-						<p><?php echo $medico['especialidad'];?></p>
-						<p><?php echo $medico['horario'];?></p>
+					<h4><?php echo($nombre);?></h4>
+					<p><?php echo($especialidad_actual);?></p>
+					<p><?php echo($horario);?></p>
 					</div>
-					<button class="boton_medicos" onclick="displayTurnos()"><i class="fas fa-clipboard-list"></i> Saca tu turno</button>
+					<a class="flex-center boton_medicos" href="'. $checkSession .'" >Saca tu turno</a>
 				</div>
-			<?php endforeach; ?>
+			<?php } ?>
 		</div>
 	</div>
 	</section>

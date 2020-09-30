@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 	$usuario_id = $paciente_actual['usuario_id'];
 	$medico_id = $paciente_actual['medico_id'];
-	$paciente = $paciente_actual['paciente'];
+	$paciente = obtenerPacientePorId($conexion, $paciente_actual['id']);
 	$horario = new DateTime($paciente_actual['hora']);
 	$horario = date_format($horario, 'H:i');
 	
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 	$nombre = $usuario['nombre'].' '. $usuario['apellido'];
 	$dni = $usuario['dni'];
-	$obra_social = $usuario['obra social'];
+	$obra_social = $usuario['obra_social'];
 }
 
 

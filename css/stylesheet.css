@@ -6,6 +6,7 @@
 }
 .container{
 	width: 1200px;
+	box-shadow: 0 0 10px #CCC;
 }
 .flex-center{
 	display: flex;
@@ -25,19 +26,20 @@
 }
 .input-submit{
 	width: 100%;
-	height: 40px;
-	border-radius: 3px;
-	border: none;
-	background-color: #D13F3F;
+	height: 50px;
 	color: #FFF;
-	font-weight: 600;
 	padding: 5px;
+	background: #ec6161;
+	border: none;
+	font-weight: 600;
+	width: 200px;
 }
 .input-text,
 .input-date,
 .input-pass{
-	border:1px solid #3D3D3D;
-	border-radius: 3px;
+	border: none;
+	border-bottom: 1px solid #CCC;
+	border-radius: 0px;
 	padding: 7px;
 	width: 100%;
 	display: block;
@@ -48,14 +50,23 @@
 .input-text:focus,
 .input-date:focus,
 .input-pass:focus{
-	padding: 10px;
+	outline: none;
+	border-bottom: 1px solid #3D3D3D;
+	padding-left: 10px;
 	transition: 0.1s ease;
+}
+option{
+	border: 1px solid
 }
 .form{
 	width: 100%;
 	padding: 30px;
 	overflow: hidden;
 	font-size: 15px;
+}
+.borrar-btn{
+	text-align: center;
+	cursor: pointer;
 }
 /*
 * Header General
@@ -72,26 +83,21 @@
 	height: 90px;
 	width: 300px;
 	margin: 0;
-	padding: 25px;
 	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 }
 .logoheader img{
 	object-fit: contain;
 	width: auto;
-	height: 60px;
-	align-self: center;
-	justify-content: center;
+	max-height: 60px;
 }
 /*
 * Navegación
 */
 .nav_boton_dropdown{
-	transition-property: all;
-	transition: 0.1s;
-	transition-delay: 1s;
 	display: none;
 	background: none;
-	line-height: 70px;
 	height: 70px;
 	width: 70px;
 	margin-right: 10px;
@@ -99,18 +105,37 @@
 	float: right;
 	padding: 10px;
 }
+.drop_cerrar > *{
+	transition: all 0.5s ease-in-out;
+}
+/* #drop_cerrar3{
+	transform-origin: 24.7487px 0;
+	transform: rotate(45deg 24.7487px 0);
+}
+#drop_cerrar2{
+	display: none;
+}
+#drop_cerrar1{
+	transform-origin: 0.197735px 212.132px;
+	transform: rotate(-45deg 0.197735px 212.132px);
+} */
 .nav_boton_dropdown img{
 	height: 100%;
 	object-fit: cover;
 }
 .wrapper_drop_first{
 	min-width: 330px;
-	height: 90px;
+	display: flex;
+	justify-content: space-between;
 }
-.wrapper_drop_first .logoheader{
-	width: 250px;
+.wrapper_drop_first > .logoheader > img{
+	max-height: 60px;
+	max-width: 210px;
 }
 #navbar_dropdown{
+	z-index: 1;
+	max-width: 400px;
+	display: none;
 	animation-duration: 0.5s;
 	animation-name: slidein;
 	position: fixed;
@@ -118,18 +143,32 @@
 	right: 0;
 	height: 100%;
 	margin: auto;
-	display: none;
 	background: #D13F3F;
 }
 #navbar_dropdown ul{
-	min-width: 240px;
-	margin: 0;
+	width: 100%;
+	margin: auto;
+	text-align: center;
 	list-style: none;
 }
-#navbar_dropdown ul li{
+#navbar_dropdown ul > li{
+	width: 100%;
 	line-height: 90px;
+	font-weight: 600;
 }
-#navbar_dropdown ul li a{
+#navbar_dropdown ul > li .botones{
+	border: none;
+	background: none;
+}
+#navbar_dropdown ul > li .botones:hover{
+	background: none;
+}
+#navbar_dropdown ul > li:hover{
+	background-color: #FF7070;
+	transition: all 0.3s ease-in-out;
+}
+#navbar_dropdown ul > li > a{
+	font-size: 35px;
 	color: #FFF;
 	text-decoration: none;
 	font-size: 15px;
@@ -140,7 +179,7 @@
 		width: 0;
 	}
 	to {
-		width: 330px;
+		width: 400px;
 	}
 }
 nav{
@@ -182,6 +221,26 @@ nav ul li a:hover{
 	color: #FFF;
 	text-decoration: none;
 	transition: 0.3s ease-in-out;
+}
+.header_icon{
+	z-index: 0;
+	border: none;
+	padding: 0;
+	background-color: transparent;
+}
+.header_icon--btn{
+	width: 60px;
+	height: 60px;
+}
+.header_icon:hover{
+	background-color: transparent;
+}
+.dropdown-item{
+	line-height: 20px;
+	height: 30px;
+}
+.show:focus{
+	border: none;
 }
 @media only screen and (max-width: 970px){
 	.menu nav{
@@ -489,10 +548,6 @@ footer{
 	align-items: center;
 	box-shadow: 0 0 10px #999;
 }
-.wrapper_especialidades h2{
-	display: inline;
-	margin: 30px;
-}
 .buscar{
 	padding: 0;
 	border: none;
@@ -510,29 +565,37 @@ footer{
 	box-shadow: inset 0 -3px 10px 0 #CCC;
 }
 .separador{
-	height: 90px;
+	min-height: 90px;
 	display: flex;
 	align-items: center;
-	padding: 0 30px;
+	padding: 20px 25px;
 	background-color: #EEE;
 	color: #3D3D3D;
 	width: 100%;
 }
+.separador h2{
+	margin: 0;
+}
 .wrapper_medicos{
-	width: 1250px;
-	padding: 100px 25px;
+	max-width: 1400px;
+	padding: 100px 0px;
 	margin: auto;
-	display: grid;
-	grid-gap: 100px;
-	grid-template-columns: repeat(3, 1fr);
+	display: flex;
+	flex-wrap: wrap;
+	/* display: grid;
+	gap: 100px;
+	grid-template-columns: repeat(3, 1fr);*/
 }
 .medico{
+	margin: 50px;
+	width: 100%;
+	max-width: 350px;
 	border-radius: 10px;
 	overflow: hidden;
 	display: grid;
-	grid-template-columns: 110px 1fr;
-	grid-template-rows: 110px 40px;
-	box-shadow: 0 0 5px #BBB;
+	grid-template-columns: 120px 1fr;
+	grid-template-rows: 120px 40px;
+	box-shadow: 0 0 15px #EEE;
 }
 .info_medico{
 	padding: 10px;
@@ -542,13 +605,14 @@ footer{
 	margin: 0;
 	padding: 0;
 }
-.info_medico:nth-child(odd){
-	font-weight: lighter;
+.info_medico p:nth-child(even){
+	display: none;
+}
+.info_medico p {
+	font-size: 14px;
 }
 .foto_medico{
-	background-size: 100%;
-	height: auto;
-	width: 100%;
+	height: 100%;
 	object-fit: cover;
 }
 .boton_medicos{
@@ -556,61 +620,28 @@ footer{
 	height: 40px;
 	width:100%;
 	background-color:#EB5555;
+	border-top: 1px solid #EB5555;
 	color: #FFF;
 	font-size: 15px;
 	font-weight: 600;
-	box-shadow: 0 0 10px #BBB;
-	transition: 0.3s;
+	transition: all 0.2s;
 }
 .boton_medicos:hover{
 	text-decoration: none;
+	border-top: 1px solid #EEE;
 	background-color: #FFF;
 	color: #EB5555;
-	transition: 0.3s;
 }
 
 /*    Medicos medias   */
 
-@media only screen and (max-width: 1250px){
+@media only screen and (max-width: 945px){
 	.wrapper_medicos{
-		width: 100%;
-	}
-}
-@media only screen and (max-width: 1150px){
-	.wrapper_medicos{
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
-@media only screen and (max-width: 750px){
-	.wrapper_medicos{
-		display: block;
-		padding: 25px;
+		padding: 20px;
+		justify-content: center;
 	}
 	.medico{
-		width: 450px;
 		margin: 20px auto;
-		grid-template-columns: 1fr 2fr;
-		grid-template-rows: 150px 40px;
-		font-size: 15px;
-		overflow: hidden;
-	}
-	.wrapper_especialidades{
-		padding: 0px;
-	}
-	.info_medico p {
-		margin: 20px auto;
-	}
-	.info_medico h4{
-		font-size: 20px;
-		margin: 0;
-	}
-}
-@media only screen and (max-width: 500px){
-	.medico{
-		font-size: 15px;
-		width: 100%;
-		grid-template-rows: 150px 40px;
-		grid-template-columns: 150px 1fr;
 	}
 }
 @media only screen and (max-width: 420px){
@@ -618,11 +649,18 @@ footer{
 		padding: 10px;
 	}
 	.medico{
-		grid-template-columns: 0fr 1fr;
+		grid-template-columns: 120px 1fr;
+	}
+	.separador{
+		padding: 20px;
+		font-size: 15px;
 	}
 }
+
 /*
+
 Sacar Turno
+
 */
 .wrapper-reservar{
 	width: 1200px;
@@ -635,7 +673,7 @@ Sacar Turno
 	background: #FFF;
 	width: 300px;
 }
-.info-consulta div > div{
+.info-consulta > * > div > div {
 	padding:0 0 10px 20px;
 }
 .lista-precio{
@@ -646,7 +684,6 @@ Sacar Turno
 	padding: 10px;
 	color: #fff;
 	border-radius: 2px;
-	margin-bottom: 20px;
 	font-size: 14px;
 	background: #f2DEDE;
 	border: 1px solid #a94442;
@@ -658,8 +695,11 @@ Sacar Turno
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 0 0 20px 0;
+	padding: 20px 0;
 	background: #F9F9F9;
+}
+.wrapper-calendario h2{
+	margin: 0 auto 25px;
 }
 .calendario{
 	width: 620px;
@@ -673,6 +713,19 @@ Sacar Turno
 	border: 1px solid #EEE;
 	font-weight: 600;
 	background-color: rgba(209, 63, 63, 0.9);
+}
+.calen-title{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 22px;
+}
+.calen-title > *{ 
+	color: #FFF;
+	margin:  0 10px;
+}
+.calen-title a:hover{
+	color: #EEE;
 }
 .calen-semana{
 	display: grid;
@@ -707,6 +760,7 @@ Sacar Turno
 }
 .calen-dia--focus{
 	color: #636363;
+	border: 1px solid #fcbdbd;
 	text-decoration: none;
 	box-shadow: 0 0 10px #CCC;
 }
@@ -728,13 +782,14 @@ Sacar Turno
 	font-weight: 800;
 }
 .wrapper-horarios{
-	padding: 40px 60px 0;
+	width: 100%;
+	padding: 20px;
 }
 .wrapper-horarios h3{
 	margin: 25px 0;
 }
 .wrapper-horarios div{
-	padding: 40px 0;
+	padding: 20px 0;
 	display: flex;
 	width: auto;
 	flex-wrap: wrap;
@@ -857,22 +912,19 @@ Login
 	color:#3d3d3d;
 }
 .login_form .input-text,
-.login_form .input-pass,
-.login_form .input-submit{
+.login_form .input-pass{
 	color: #AAA;
 	border: 1px solid #EEE;
 	border-radius: 3px;
 	height: 50px;
 	width: 100%;
-	padding: 2	5px;
+	padding: 25px;
 	font-size: 20px;
 }
 .login_form .input-submit{
-	background: #ec6161;
-	color: #EEE;
-	border: none;
-	font-weight: 600;
-	width: 200px;
+	font-size: 20px;
+	width: 100%;
+
 }
 .login_form .input-text:focus,
 .login_form .input-pass:focus {
@@ -880,7 +932,7 @@ Login
 }
 
 /*
-PAGINA ADMINISTRACION
+	Pagina Administracion
 */
 .administracion{
 	box-shadow: 0 -2px 6px #CCC;
@@ -924,7 +976,7 @@ PAGINA ADMINISTRACION
 	margin: 10px;
 }
 	#agregar .input-date:focus {
-		padding: 7px;
+		padding-left: 7px;
 	}
 #agregar .input-submit{
 	margin-top: 10px;
@@ -938,11 +990,12 @@ PAGINA ADMINISTRACION
 	}
 }
 .separador a{
-	width: 60px;
+	min-width: 60px;
 	height: 60px;
 	border-radius: 30px;
+	margin-left: 30px;
 	background-color: #EEE;
-	border: 1px solid #DDD;
+	border: 1px solid #CCC;
 	color: #DDD;
 	justify-self: flex-end;
 	display: flex;
@@ -959,8 +1012,6 @@ PAGINA ADMINISTRACION
 	background: #EEE;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	border-bottom-right-radius: 15px;
-	border-bottom-left-radius: 15px;
 	grid-column: 1/3;
 	margin: 0px;
 	margin-left: auto;
@@ -981,12 +1032,6 @@ PAGINA ADMINISTRACION
 .editar_borrar a:hover{
 	background-color:#FFF;
 	color: #EC5151;
-}
-.editar_borrar a:nth-child(even){
-	border-bottom-right-radius: 10px;
-}
-.editar_borrar a:nth-child(odd){
-	border-bottom-left-radius: 10px;
 }
 /*  Administración Medias  */
 @media only screen and (max-width: 800px){
@@ -1013,50 +1058,72 @@ PAGINA ADMINISTRACION
 	}
 }
 /*
-Nuevo y editar
+	Nuevo y editar
 */
 .wrapper_agregar_editar{
 	display: flex;
 	align-items: center;
 }
 .agregar_medico{
-	width: 1000px;
+	max-width: 1200px;
 	height:100%;
 	margin: auto;
 	display: flex;
-	grid-template-columns: 300px 1fr;
-	justify-content: start;
 	align-items: flex-start;
 	flex-wrap: wrap;
-	box-shadow: 0px 0 7px #CCC;
-	background-color: #FFF;
+	box-shadow: 0 0 10px #EEE;
 }
 .agregar_medico h2{
 	width: 100%;
 }
-.agregar_medico
 .agregar_medico_form{
-	width: 300px;
+	width: 350px;
 	margin: 0;
 	height: 100%;
 	border-top: none;
 	background-color: #FFF;
+	box-shadow: 0 0 10px #EEE;
+	justify-self: self-start;
 }
+.agregar_medico_form label{
+	font-weight: 600;
+	margin-top: 10px;
+} 
 .nuevo-archivo{
-	width: 100%;
+	border-radius: 10px;
+	box-shadow: 0 0 10px #DDD;
 	padding: 30px;
+	margin: 20px;
 }
 .input-file{
 	background-color: #F9F9F9;
 	padding: 25px;
 	border: none;
 	border-radius: 5px;
-	width: 100%;
-	height: 325px;
-	color: #999;
+	color: #CCC;
 }
 .horarios{
+	width: 100%;
+	max-width: 425px;
 	padding: 30px;
+}
+.nueva-fila{
+	border-radius: 10px;
+	font-size: 16px;
+	color: #AAA;
+	padding: 25px;
+	margin: 20px;
+	max-width: 380px;
+	box-shadow: 0 0 10px #DDD;
+}
+.horarios .input-select,
+.horarios .input-text{
+	margin-bottom: 10px;
+	outline: none;
+	border: none;
+	border-bottom: 1px solid #CCC;
+	padding: 5px;
+	height: 30px;
 }
 .border-button{
 	width: 150px;
@@ -1075,6 +1142,16 @@ Nuevo y editar
 .border-button:hover{
 	color: #e65656;
 	text-decoration: none;
+}
+.border-button:focus{
+	outline: none;
+	border: 2px solid #e65656;
+}
+/*	Nuevo y editar medias	*/
+@media only screen and (max-width: 770px){
+	.agregar_medico > *{
+		width: 100%;
+	}
 }
 /*
 	Pagina de medicos
@@ -1143,47 +1220,164 @@ Turno
 	margin: auto;
 	box-shadow: 0 0 10px #CCCCCC;
 }
-.mis-turnos-heading{
+.mis-turnos-wrapper p{
+	margin: 0;
+}
+.mis-turnos-header{
 	height: 60px;
+	width: 100%;
 	background: #EEEEEE;
-	font-size: 25px;
+	font-size: 1em;
 	color: #AFAFAF;
 	display: grid;
-	grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+	grid-template-columns: 4fr 4fr 2fr 1fr 3fr;
 }
-.mis-turnos-heading > span{
-	padding-left: 20px;
+.mis-turnos-header > span{
+	padding-left: 1em;
 	border-right: 1px solid #707070;
-}
-.mis-turnos-heading:nth-child(4){
-	border: none;
 }
 .mi-turno{
 	height: 80px;
 	width: 100%;
 	display: grid;
-	grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+	grid-template-columns: 4fr 4fr 2fr 1fr 3fr;
 	border-bottom: 1px solid #EEE;
+	font-size: 1em;
+}
+.turno-cancelado{
+	height: 80px;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 8fr 2fr 1fr 3fr;
+	border-bottom: 1px solid #EEE;
+	font-size: 1em;
 }
 .mi-turno-info{
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	padding: 20px;
-
+	padding: 0 1em;
 }
-.mi-turno-cancelar{
+.mi-turno-btns{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1px;
+}
+.mi-turno-btn{
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding: 5px;
 	font-weight: 600;
 	color: #FFF;
 	background: #F35B5B;
+	transition: all 0.3s ease-in-out;
+}
+.mi-turno-btn:hover{
+	background-color: #FFF;
+	color: #F35B5B;
+	text-decoration: none;
 }
 .mi-turno-cancelar:hover{
 	color: #FFF;
 }
 /*	Mis turnos medias	*/
+@media only screen and (max-width: 1200px){
+	.mis-turnos-wrapper{
+		width: 100%;
+		font-size: 16px;
+	}
+}
+@media only screen and (max-width: 1000px){
+	.mi-turno-btns{
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr 1fr;
+	}
+	.mi-turno,
+	.turno-cancelado{
+		height: 120px;
+	}
+}
+@media only screen and (max-width: 800px){
+	.mi-turno-especialidad{
+		display: none;
+	}
+	.mi-turno,
+	.mis-turnos-header{
+		grid-template-columns: 3fr 2fr 1fr 2fr;
+	}
+}
+@media only screen and (max-width: 550px){
+	.mis-turnos-wrapper{
+		font-size: 12;
+	}
+}
+@media only screen and (max-width: 420px){
+	.mi-turno-hora{
+		display: none;
+	}
+	.mis-turnos-header,
+	.mi-turno{
+		grid-template-columns: 3fr 2fr 2fr;
+	}
+	.turno-cancelado{
+		grid-template-columns: 2fr 1fr;
+	}
+	.turno-cancelado a{
+		grid-column: 1/6;
+	}
+}
+/*
+	Informacion de la reserva
+*/
+.info-reserva-container{
+	margin: auto;
+	width: 1200px;
+	box-shadow: 0 0 10px #CCC;
+}
+.reserva-exitosa{
+	padding: 50px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+.reserva-exitosa--header{
+	align-self: start;
+	width: 100%;
+	font-weight: 600px;
+	padding-left: 25px;
+	height: 100px;
+	color: #FFF;
+	background-color: #F35B5B; 
+}
+.mensaje-reserva{
+	width: 350px;
+	font-size: 20px;
+}
+.wrapper_info_reserva{
+	width: 335px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px #CCC;
+	overflow: hidden;
+	display: grid;
+	row-gap: 1px;
+}
+.wrapper_info_reserva > *{
+	height: 55px;
+}
+.wrapper_info_reserva a :nth-child(odd){
+	border-top: 1px solid #FFF;
+}
+
+/*	Informacion de la reserva medias	*/
+
+@media only screen and (max-width: 1200px){
+	.info-reserva-container{
+		width: 100%;
+	}
+}
 
 /*
 Turno medico - Consulta
@@ -1223,10 +1417,13 @@ Turno medico - Consulta
 .boton_historia{
 	background: #f35b5b;
 	color: #FFF;
-	font-size: 25px;
+	font-weight: 600;
+	font-size: 20px;
+	transition: all 0.3s ease-in-out;
 }
 .boton_historia:hover{
-	color: #FFF;
+	background-color: #FFF;
+	color: #f35b5b;
 	text-decoration: none;
 }
 .consulta_text{
@@ -1256,4 +1453,64 @@ Turno medico - Consulta
 	font-weight: 600;
 	color: #FFF;
 	border: 0;
+}
+/*
+	Verificacion
+*/
+.verificacion{
+	background-color: #FFF;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	display: grid;
+	grid-template-rows: 70px 1fr 50px;
+	border: 1px solid #EEE;
+	border-radius: 10px;
+	max-width: 550px;
+	height: 270px;
+	overflow: hidden;
+	box-shadow: 0 0 10px #EEE;
+}
+.verificacion > *{
+	padding: 25px;
+}
+.verificacion--title{
+	background:#f35b5b;
+	width: 100%;
+	max-height: 70px;
+	font-weight: 600;
+	font-size: 20px;
+	color: #FFF;
+}
+.verificacion--buttons{
+	padding: 0;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 1px;
+	font-weight: 600;
+}
+.verificacion--buttons a{
+	background-color: #DDD;
+	transition: all 0.2s ease-in-out;
+}
+.verificacion--button{
+	color: #3D3D3D;
+}
+.verificacion--button:hover{
+	background-color: #EEE;
+	color: #3D3D3D;
+}
+.verificacion--danger{
+	color: #f35b5b;
+}
+.verificacion--danger:hover{
+	background-color: #f35b5b;
+	color: #FFF;
+}
+.verificacion--buttons a:hover{
+	text-decoration: none;
 }

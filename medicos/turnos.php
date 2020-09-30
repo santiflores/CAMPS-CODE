@@ -11,9 +11,9 @@ $conexion = conexion($bd_config);
 	}
 
 $medico_id = $_SESSION['medico'];
-$medico = obtener_medico_por_id($conexion, $medico_id);
+$medico = obtenerMedicoPorId($conexion, $medico_id);
 
-if (!empty($_GET['fecha'])) { //Despues tiene que ser post
+if (!empty($_GET['fecha'])) {
 	$fecha = new DateTime($_GET['fecha']);
 	$fecha_str = date_format($fecha, 'd-m-Y');
 	$fecha = date_format($fecha, 'Y-m-d');
@@ -26,7 +26,7 @@ if (!empty($_GET['fecha'])) { //Despues tiene que ser post
 
 
 $statement = $conexion->prepare(
-	'SELECT id, paciente, hora FROM turnos WHERE medico_id = :medico_id AND fecha = :fecha;'
+	'SELECT id, usuario_id, hora, no_registrado_id FROM turnos WHERE medico_id = :medico_id AND fecha = :fecha;'
 );
 $statement->execute(array(
 	':medico_id' => $medico_id,
@@ -38,7 +38,7 @@ $turnos_hoy = $statement;
 $mañana = new DateTime();
 $mañana->modify('+1 day');
 
-function mostrarTurnos($turnos_hoy){
+function mostrarTurnos($turnos_hoy, $conexion){
 	$turnos_am = array();
 	$turnos_pm = array();
 	
@@ -65,12 +65,21 @@ function mostrarTurnos($turnos_hoy){
 	} else {
 
 		foreach ($turnos_am as $turno) {
-			$paciente = $turno['paciente'];
 			$hora = date_format(new Datetime($turno['hora']), 'H:i');
 			$turno_id = $turno['id'];
+			$paciente_id = $turno['usuario_id'];
+			
+			$pnr = $turno['no_registrado_id'];
+			
+			if ($pnr != null) {
+				$paciente = obtenerPnrPorId($conexion, $pnr);
+			} else {
+				$paciente = obtenerPacientePorId($conexion, $paciente_id);
+			}
+			$nombre_paciente = $paciente['nombre'] .' '. $paciente['apellido'];
 			echo('
 				<div class="turno">
-					<span>'.$paciente .'</span>
+					<span>'.$nombre_paciente .'</span>
 					<span>'. $hora .'</span>
 					<a href="turno.php?id='. $turno_id .'" class="flex-center three-dots">
 						<img src="../images/three-dots.svg" alt="" srcset="">
@@ -96,12 +105,20 @@ function mostrarTurnos($turnos_hoy){
 	} else {
 
 		foreach ($turnos_pm as $turno) {
-			$paciente = $turno['paciente'];
 			$hora = date_format(new Datetime($turno['hora']), 'H:i');
 			$turno_id = $turno['id'];
+			$paciente_id = $turno['usuario_id'];
+			$pnr = $turno['no_registrado_id'];
+			
+			if ($pnr != null) {
+				$paciente = obtenerPnrPorId($conexion, $pnr);
+			} else {
+				$paciente = obtenerPacientePorId($conexion, $paciente_id);
+			}
+			$nombre_paciente = $paciente['nombre'] .' '. $paciente['apellido'];
 			echo('
 				<div class="turno">
-					<span>'.$paciente .'</span>
+					<span>'.$nombre_paciente .'</span>
 					<span>'. $hora .'</span>
 					<a href="turno.php?id='. $turno_id .'" class="flex-center three-dots">
 						<img src="../images/three-dots.svg" alt="" srcset="">

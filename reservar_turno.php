@@ -4,9 +4,23 @@ session_start();
 require 'admin/config.php';
 require 'functions.php';
 
+comprobarSession('usuario');
+
 $conexion = conexion($bd_config);
 if(!$conexion){
 	header('Location: error.php');
+}
+
+
+if (isset($_GET['id'])) {
+	setcookie('medico_id', $_GET['id'], time()+3600);
+}
+
+if (empty($_GET['id']) && !isset($_COOKIE['medico_id'])){
+	header('location: medicos.php');
+} else if (empty($_GET['id']) && isset($_COOKIE['medico_id'])) {
+	$id = $_COOKIE['medico_id'];
+	header('Location: reservar_turno.php?id='. $id);
 }
 
 
@@ -59,7 +73,33 @@ function checkearTurnoDisponible($conexion, $dia_actual, $medico_id){
 }
 function mostrarCalen($conexion, $medico_id, $semana_horarios){	
 
+	
+	if (empty($_GET['mes'])) {
+		$mes_seleccionado =  new DateTime;
+		$año = date_format($mes_seleccionado, 'Y');
+		$mes = date_format($mes_seleccionado, 'm');
+	} else {
+		$mes_seleccionado = new DateTime;
+		$mes = $mes_seleccionado->modify('+1 month');
+		$año = date_format($mes_seleccionado, 'Y');
+		$mes = date_format($mes_seleccionado, 'm');
+	}
 
+	$meses = [
+		'01' => 'Enero',
+		'02' => 'Febrero',
+		'03' => 'Marzo',
+		'04' => 'Abril',
+		'05' => 'Mayo',
+		'06' => 'Junio',
+		'07' => 'Julio',
+		'08' => 'Agosto',
+		'09' => 'Septiembre',
+		'10' => 'Octubre',
+		'11' => 'Noviembre',
+		'12' => 'Diciembre'
+	];
+	
 	$statement = $conexion->prepare(
 		"SELECT fecha FROM feriados;"
 	);
@@ -105,7 +145,7 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 
 
 	$mes_desde_hoy = array();
-	$dias_por_mes = date('t');
+	$dias_por_mes = date_format($mes_seleccionado, 't');
 	$desde = new DateTime;
 	$dia_inicio = new DateTime;
 	$dia_fin = $desde->modify('+'. $dias_por_mes .' days');
@@ -121,10 +161,12 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 	$mes_completo = array();
 	for($d=1; $d<=31; $d++)
 	{
-		$time=mktime(12, 0, 0, date('m'), $d, date('Y'));
-		if (date('m', $time)==date('m'))
+		$time=mktime(12, 0, 0, $mes, $d, $año);
+		if (date('m', $time)==$mes)
 			$mes_completo[]=date('d-m-Y', $time);
 	}
+	
+	
 	while (date_format(new DateTime($mes_completo[0]), 'D') != 'Sun') {			
 		$primer_dia = new DateTime($mes_completo[0]);
 		$nuevo_dia = $primer_dia->modify('-1 day');
@@ -135,7 +177,23 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 	echo('
 	<div class="calendario">
 		<div class="calen-header">
-			<h4>Septiembre 2020</h4>
+			<div class="calen-title">');
+			if (isset($_GET['mes'])) {
+				echo('
+				<a href="reservar_turno.php?id='. $medico_id.'">
+					<i class="fas fa-arrow-left"></i>
+				</a>');
+			}
+			
+				echo($meses[$mes] .' '. $año);
+
+			if (empty($_GET['mes'])) {
+				echo('
+				<a href="reservar_turno.php?id='.$medico_id.'&mes=prox">
+					<i class="fas fa-arrow-right"></i>
+				</a>');
+			}
+			echo('</div>
 			<div class="calen-semana">
 				<p>Dom</p>
 				<p>Lun</p>
@@ -188,7 +246,8 @@ function mostrarHorarios($conexion, $medico_id, $semana_horarios) {
 	$dia_actual = date_format($dia_actual, 'D');
 
 	$turnos_hoy = $semana_horarios[$dia_actual];
-	
+	$horarios_camps = rangoHorario();
+
 	$statement = $conexion->prepare(
 		"SELECT hora FROM turnos WHERE fecha = :fecha AND medico_id = :medico_id"
 	);
@@ -207,7 +266,7 @@ function mostrarHorarios($conexion, $medico_id, $semana_horarios) {
 	}
 
 	foreach ($turnos_hoy as $horario) {	
-		if (!in_array($horario, $turnos_arr_formateado)) {
+		if (!in_array($horario, $turnos_arr_formateado) && in_array($horario, $horarios_camps)) {
 			array_push($horarios_arr, $horario);
 		}
 	}
@@ -224,14 +283,35 @@ function mostrarPrecios($precios) {
 	return $valor;
 }
 
-function displayReservarTurno($conexion, $medico_id, $semana_horarios, $precios, $medico_actual, $errores){
+function displayReservarTurno($conexion, $medico_id, $semana_horarios, $precios, $medico_actual){
 	$precios = mostrarPrecios($precios);
+	$error = '';
+	if (isset($_GET['error'])) {
+		if ($_GET['error'] == '1') {
+			$error .='<li>Complete todos los campos</li>';
+		}
+		if ($_GET['error'] == '2') {
+			$error .='<li>Seleccione el horario del turno</li>';
+		}
+		if ($_GET['error'] == '3') {
+			$error .='<li>Complete todos los campos</li><li>Seleccione el horario del turno</li>';
+		}
+		if ($_GET['error'] == '4') {
+			$error .='<li>Seleccione la fecha del turno</li>';
+		}
+	}
+		if (isset($_GET['fecha']) && empty($_GET['fecha'])) {
+			$error .='<li>Seleccione la fecha del turno</li>';
+		}
 	
-	if (isset($_GET['id']) && isset($_GET['fecha'])) {
+
+	if (isset($_GET['id']) && !empty($_GET['fecha'])) {
+
 		
 		$horarios_hoy = mostrarHorarios($conexion, $medico_id, $semana_horarios);
 		$horarios_am = '';
 		$horarios_pm = '';
+
 		foreach ($horarios_hoy as $horario) {
 			$horario = new DateTime($horario);
 			$mediodia = new Datetime('12:00:00');
@@ -246,6 +326,7 @@ function displayReservarTurno($conexion, $medico_id, $semana_horarios, $precios,
 			}
 		}
 
+
 		$fecha = $_GET['fecha'];
 		$ur = $_GET['ur'];
 		$dia_de_semana = date_format(new DateTime($fecha), 'D');
@@ -258,32 +339,41 @@ function displayReservarTurno($conexion, $medico_id, $semana_horarios, $precios,
 		];
 		$dia_de_semana = $semana[$dia_de_semana];
 
-		if ( $_GET['ur'] == 'false') {
+
+		if ( !empty($_GET['ur']) && $_GET['ur'] == 'false') {
 			echo('
 			<div class="info-consulta">
-				<form class="form" method="post" action="'. $_SERVER["PHP_SELF"] .'">
+				<form class="form" id="reservar_turno" method="post" action="'. $_SERVER["PHP_SELF"] .'">
 					<div>
 						<input type="hidden" id="id" name="id" value="'. $medico_id .'">
-						<input type="hidden" name="fecha-seleccionada" value="'. $fecha .'">
-						<input type="hidden" id="selected-time" name="hora-seleccionada" value="">
-						<input type="hidden name="ur" value="'. $ur .'">
-						<h4>Introduzca los datos del paciente:</h4>
+						<input type="hidden" name="fecha" value="'. $fecha .'">
+						<input type="hidden" id="selected-time" name="hora" value="">
+						<input type="hidden" name="ur" value="'. $ur .'">
+						<h3>'. $medico_actual['nombre'] .'</h3>
+						<h4>Precio de la consulta:</h4>
+						<div>
+							<ul class="lista-precio">
+							'. $precios .'
+							</ul>
+						</div>
+						<h5>Introduzca los datos del paciente:</h5>
 						<input type="text" class="input-text" name="nombre" placeholder="Nombre" value="">
-						<input type="text" class="input-text" name="Apellido" placeholder="Apellido" value="">
+						<input type="text" class="input-text" name="apellido" placeholder="Apellido" value="">
 						<input type="text" class="input-text" name="dni" placeholder="DNI">
 						<h6>Fecha de nacimiento:</h6>
-						<input type="date" class="input-date" name="fecha_de_nacimiento" value="">
-						<h4>Horario del turno</h4>
+						<input type="date" min="'. date_format(new DateTime, 'Y-m-d') .'" max="" class="input-date" name="fecha_de_nac" value="">
+						<h5>Horario del turno</h5>
 						<div>
 							<b id="hora-del-turno">Seleccione un horario</b>
-						</div>');
+						</div>
+						<span>');
 						
-						if (!empty($errores)) {
-							echo('<div class="alert">'. $errores .'</div>');
+						if (!empty($error)) {
+							echo('<div class="alert">'. $error .'</div>');
 						}
 						echo('
-						<input type="submit" class="input-submit" value="Reservar turno">
-					</div>
+						</span>
+						</div>
 				</form>
 			</div>
 			<div class="wrapper-calendario">
@@ -301,16 +391,19 @@ function displayReservarTurno($conexion, $medico_id, $semana_horarios, $precios,
 						'. $horarios_pm .'
 					</div>
 				</div>
+				<input type="submit" class="input-submit" value="Reservar turno">
+			<div>
 			');
 			
-		} else {
+		} else if (!empty($_GET['ur']) && $_GET['ur'] == 'true') {
+			
 			echo('
 			<div class="info-consulta">
-				<form class="form" method="post" action="'. $_SERVER["PHP_SELF"] .'">
+				<form class="form" id="reservar_turno" method="post" action="'. $_SERVER["PHP_SELF"] .'">
 					<div>
 						<input type="hidden" id="id" name="id" value="'. $medico_id .'">
-						<input type="hidden" name="fecha-seleccionada" value="'. $fecha .'">
-						<input type="hidden" id="selected-time" name="hora-seleccionada" value="">
+						<input type="hidden" name="fecha" value="'. $fecha .'">
+						<input type="hidden" id="selected-time" name="hora" value="">
 						<h3>'. $medico_actual['nombre'] .'</h3>
 						<br>
 							<h4>Precio de la consulta:</h4>
@@ -322,14 +415,16 @@ function displayReservarTurno($conexion, $medico_id, $semana_horarios, $precios,
 						<h4>Horario del turno</h4>
 						<div>
 							<b id="hora-del-turno">Seleccione un horario</b>
-						</div>');
+						</div>
+						<span>');
 						
-						if (!empty($errores)) {
-							echo('<div class="alert">'. $errores .'</div>');
+						if (!empty($error)) {
+							echo('<div class="alert">'. $error .'</div>');
 						}
 						echo('
+						</span>
+						</div>
 						<input type="submit" class="input-submit" value="Reservar turno">
-					</div>
 				</form>
 			</div>
 			<div class="wrapper-calendario">
@@ -347,8 +442,11 @@ function displayReservarTurno($conexion, $medico_id, $semana_horarios, $precios,
 						'. $horarios_pm .'
 					</div>
 				</div>
+			<div>
 			');
 
+		} else {
+			header('location: reservar_turno.php?id='. $medico_id);
 		}
 
 		mostrarHorarios($conexion, $medico_id, $semana_horarios);
@@ -357,13 +455,12 @@ function displayReservarTurno($conexion, $medico_id, $semana_horarios, $precios,
 		</div>
 		</div>
 		');
-		
 
 
-	} else {
+	} else if ($_GET['id'] == true) {	
 		echo('
 		<div class="info-consulta">
-			<form class="form" method="get" action="'. $_SERVER["PHP_SELF"] .'">
+			<form class="form" id="reservar_turno" method="get" action="'. $_SERVER["PHP_SELF"] .'">
 				<h3>'. $medico_actual['nombre'] .'</h3>
 				<br>
 				<div>
@@ -385,67 +482,159 @@ function displayReservarTurno($conexion, $medico_id, $semana_horarios, $precios,
 					</div>
 					<h4>Fecha del turno</h4>
 					<div>
-						<b id="fecha-del-turno">Seleccione una fecha</b>
-					</div>');
+						<b id="fecha-del-turno">Seleccione un horario</b>
+					</div>
+					<span>');
 					
-					if (!empty($errores)) {
-						echo('<div class="alert">'. $errores .'</div>');
+					if (!empty($error)) {
+						echo('<div class="alert">'. $error .'</div>');
 					}
 					echo('
-					<input type="submit" class="input-submit" value="Reservar turno">
-				</div>
+					</span>
+					</div>
 			</form>
 		</div>
 		<div class="wrapper-calendario">
-		<h2 style="text-align: center;">Seleccione la fecha</h2>
-		');
-		mostrarCalen($conexion, $medico_id, $semana_horarios);
-		
-		echo('
-			</div>
+			<h2 style="text-align: center;">Seleccione la fecha</h2>');
+
+			mostrarCalen($conexion, $medico_id, $semana_horarios);
+			
+		echo('</div>
 		</div>
 		');
 
 	}
 }
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 
-if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])){
 
 	$medico_id = $_GET['id'];
-	$medico_actual = obtener_medico_por_id($conexion, $medico_id);
-	$semana_horarios = [
-		'Mon' => rangoHorarioDiario($medico_id, 'lunes', $conexion),
-		'Tue' => rangoHorarioDiario($medico_id, 'martes', $conexion),
-		'Wed' => rangoHorarioDiario($medico_id, 'miercoles', $conexion),
-		'Thu' => rangoHorarioDiario($medico_id, 'jueves', $conexion),
-		'Fri' => rangoHorarioDiario($medico_id, 'viernes', $conexion)
-	];
+	$medico_actual = obtenerMedicoPorId($conexion, $medico_id);
+	if ($medico_actual == false) {
+		$id = $_COOKIE['medico_id'];
+		header('Location: reservar_turno.php?id='. $id);
+	}	
+		$semana_horarios = [
+			'Mon' => rangoHorarioDiario($medico_id, 'lunes', $conexion),
+			'Tue' => rangoHorarioDiario($medico_id, 'martes', $conexion),
+			'Wed' => rangoHorarioDiario($medico_id, 'miercoles', $conexion),
+			'Thu' => rangoHorarioDiario($medico_id, 'jueves', $conexion),
+			'Fri' => rangoHorarioDiario($medico_id, 'viernes', $conexion)
+		];
+		
+		$statement = $conexion->prepare(
+			'SELECT * FROM precios_consultas WHERE medico_id = :id'
+		);
+		$statement->execute(array(
+			':id' => $medico_id
+		));
+		$precios = $statement->fetchAll();
 
-	$statement = $conexion->prepare(
-		'SELECT * FROM precios_consultas WHERE medico_id = :id'
-	);
-	$statement->execute(array(
-		':id' => $medico_id
-	));
-	$precios = $statement->fetchAll();
+		
+} else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-} else {
-	header('Location: medicos.php');	
-}
 
-$errores = '';
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	$errores = 0;
 	$usuario_id = $_SESSION['usuario'];
 	$medico_id = limpiarDatos($_POST['id']);
 	$fecha = limpiarDatos($_POST['fecha']);
 	$hora = limpiarDatos($_POST['hora']);
+	$ur = limpiarDatos($_POST['ur']);
+	$np_id = null;
+	$fechaYmd = date_format(new DateTime($fecha), 'Y-m-d');
 
-	$statement = $conexion->prepare(
-		'INSERT INTO turnos ()'
-	);
+	if (empty($hora)) {
+		$errores += 2;
+	}
+
+
+
+	if ($ur == 'false') {
+
+		$pn_nombre = limpiarDatos($_POST['nombre']);
+		$pn_apellido = limpiarDatos($_POST['apellido']);
+		$pn_dni = limpiarDatos($_POST['dni']);
+		$pn_fecha_de_nac = limpiarDatos($_POST['fecha_de_nac']);
+
+		if (empty($pn_nombre) || empty($pn_apellido) || empty($pn_dni) || empty($pn_fecha_de_nac) || empty($ur)) {
+			$errores += 1;
+		}
+
+		if (empty($errores)) {
+
+			$statement = $conexion->prepare(
+				'INSERT INTO usuarios_no_registrados 
+				(`emisor_id`, `nombre`, `apellido`, `dni`, `fecha_de_nac`)
+				VALUES (:emisor_id, :nombre, :apellido, :dni, :fecha_nac)'
+			);
+
+			$statement->execute(array(
+				':emisor_id' => $usuario_id,
+				':nombre' => $pn_nombre,
+				':apellido' => $pn_apellido,
+				':dni' => $pn_dni,
+				':fecha_nac' => $pn_fecha_de_nac
+			));
+
+			$statement = $conexion->query('SELECT id FROM usuarios_no_registrados ORDER BY id DESC LIMIT 1');
+			$statement = $statement->fetch();
+			
+			$np_id = $statement[0]; 
+		}
+	}
+
+
+
+	if (empty($errores)) {
+		
+		$statement = $conexion->prepare(
+			'INSERT INTO turnos (`usuario_id`, `medico_id`, `no_registrado_id`, `fecha`, `hora`)
+			VALUES (:usuario_id, :medico_id, :no_registrado_id, :fecha, :hora)'
+		);
+		$statement->execute(array(
+			':usuario_id' => $usuario_id,
+			':medico_id' => $medico_id,
+			':no_registrado_id' => $np_id,
+			':fecha' => $fechaYmd,
+			':hora' => $hora
+		));
+
+		
+		$statement = $conexion->prepare(
+			'SELECT * FROM turnos ORDER BY id DESC LIMIT 1'
+		);
+		$statement->execute();
+		$turno = $statement->fetch();
+		
+		$hora = date_format(new DateTime($turno['hora']), 'H:i');
+		$fecha = date_format(new DateTime($turno['fecha']), 'd-m-Y');
+		$medico_id = $turno['medico_id'];
+		$usuario_id = $turno['usuario_id'];
+		$pnr_id = $turno['no_registrado_id'];
+		
+		if ($pnr_id != null) {
+			$paciente = obtenerPnrPorId($conexion, $pnr_id);
+		} else {
+			$paciente = obtenerPacientePorId($conexion, $usuario_id);
+		}
+
+		$medico_actual = obtenerMedicoPorId($conexion, $medico_id);
+		$especialidad = $medico_actual['especialidad'];
+
+		
+
+		require('mail/reserva_mail.php');
+		header('Location: usuarios/reserva_exitosa.php?id='. $turno['id']);
+
+	} else {
+		$ur = ($ur == 'false') ? 'false' : 'true';
+		header('Location: reservar_turno.php?id='. $medico_id .'&fecha='. $fecha .'&ur='. $ur .'&error='. $errores);
+	}
+
+
+} else {
+	header('Location: medicos.php');
 }
-
-
 
 require 'views/reservar.view.php';
 ?>

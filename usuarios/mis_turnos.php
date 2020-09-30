@@ -18,23 +18,23 @@ if (isset($_SESSION['usuario'])){
 	$statement->execute(array(
 		':id' => $id
 	));
-	$statement = $statement->fetchAll();
+	$turnos = $statement->fetchAll();
 	
 	
 	function mostrarTurnos($conexion, $turnos){
 		
 		echo('
-		<div class="mis-turnos-heading">
+		<div class="mis-turnos-header">
 		<span class="flex-center-start">
 		Medico
 		</span>
-		<span class="flex-center-start">
+		<span class="flex-center-start mi-turno-especialidad">
 		Especialidad
 		</span>
 		<span class="flex-center-start">
 		Fecha
 		</span>
-		<span class="flex-center-start">
+		<span class="flex-center-start mi-turno-hora">
 		Hora
 		</span>
 		</div>
@@ -45,34 +45,69 @@ if (isset($_SESSION['usuario'])){
 			foreach ($turnos as $turno) {
 				
 				$id_turno = $turno['id'];
+				$estado = $turno['estado'];
 				$fecha = new DateTime($turno['fecha']);
 				$fecha = date_format($fecha, 'd-m-Y');
-				$hora = $turno['hora'];
+				$hora = date_format(new DateTime($turno['hora']), 'H:i');
 				$medico_id = $turno['medico_id'];
-				$medico = obtener_medico_por_id($conexion, $medico_id);
-				$nombre_medico = $medico['nombre'];
-				$especialidad = $medico['especialidad'];
+				$medico = obtenerMedicoPorId($conexion, $medico_id);
+				if ($medico == false) {
+					$nombre_medico = 'Hubo un problema, contactate con CAMPS';
+					$especialidad = ' ';
+				} else {
+					$nombre_medico = $medico['nombre'];
+					$especialidad = $medico['especialidad'];
+				}
 				
-				echo('
-				<div class="mi-turno">
-				<span class="mi-turno-info">
-				<strong>'. $nombre_medico .'</strong>
-				</span>
-				<span class="mi-turno-info">
-				'. $especialidad .'
-				</span>
-				<span class="mi-turno-info">
-				'. $fecha .'
-				</span>
-				<span class="mi-turno-info">
-				'. $hora .'
-				</span>
-				<a href="cancelar_turno.php?id='. $id_turno .'" class="mi-turno-cancelar">
-				Cancelar turno
-				</a>
-				</div>
-				');
-				
+				if ($estado != null) {
+					echo('
+					<div class="turno-cancelado">
+						<span class="mi-turno-info">
+							<p class="sin-turnos">Tu turno fue cancelado. Comunicate con CAMPS para mas informacion.</p>
+						</span>
+						<span class="mi-turno-info">
+						'. $fecha .'
+						</span>
+						<span class="mi-turno-info mi-turno-hora">
+						'. $hora .'
+						</span>
+						<a href="reserva_exitosa.php?id='. $id_turno .'" class="mi-turno-btn">
+							Mas info
+						</a>
+					</div>
+					');
+				} else {
+					echo('
+					<div class="mi-turno">
+					<span class="mi-turno-info">');
+					if ($medico == false) {
+						echo('<p class="sin-turnos">'. $nombre_medico .'</p>');
+					} else {
+						echo($nombre_medico);
+					}	
+					echo('
+					</span>
+					<span class="mi-turno-info mi-turno-especialidad">
+					'. $especialidad .'
+					</span>
+					<span class="mi-turno-info">
+					'. $fecha .'
+					</span>
+					<span class="mi-turno-info mi-turno-hora">
+					'. $hora .'
+					</span>
+					<div class="mi-turno-btns">
+						<a href="reserva_exitosa.php?id='. $id_turno .'" class="mi-turno-btn">
+						Mas info
+						</a>
+						<span data-route="cancelar_turno.php?id='. $id_turno .'" class="flex-center mi-turno-btn borrar-btn" id="turno">
+							Cancelar Turno
+							<!--<i class="far fa-trash-alt fa-lg"></i>-->
+						</span>
+					</div>
+					</div>
+					');
+				}
 			}
 		} else {
 			echo('

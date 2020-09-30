@@ -10,6 +10,8 @@ if(!$conexion){
 	header('Location: ../error.php');
 }
 
+$especialidades = obtenerEspecialidades($conexion);
+
 //Recibir POST
 
 $errores = '';
@@ -30,10 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	move_uploaded_file($thumb, $archivo_subido);
 
 
-
 	$foto = (!empty($_FILES['thumb']['name'])) ? $_FILES['thumb']['name'] : 'user.jpg';
 
-	if (empty($nombre) || empty($especialidad) || empty($horario) || empty($dni) ||/* empty($archivo_subido) ||*/empty($email) || empty($contraseña) || empty($filas)){
+	if (empty($nombre) || empty($especialidad) || empty($horario) || empty($dni) || empty($email) || empty($contraseña) || empty($filas) || empty($valores)){
 		$errores .= "<li>Complete todos los campos</li>";
 	}
 
@@ -45,9 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	if ($errores == '') {
 		$statement = $conexion->prepare(
-		'INSERT INTO `camps`.`medicos`
-			(`nombre`, `especialidad`, `horario`, `dni`, `foto`, `email`, `pass`) 
-		VALUES (:nombre, :especialidad, :horario, :dni, :foto, :email, :pass);' 
+		'INSERT INTO`medicos`
+		(`nombre`, `especialidad`, `horario`, `foto`, `dni`, `email`, `pass`) 
+		VALUES (:nombre, :especialidad, :horario, :foto, :dni, :email, :pass);' 
 		);
 		$statement->execute(array(
 			':nombre' => $nombre,
@@ -68,27 +69,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 					(medico_id, dia, desde, intervalo, hasta)
 					VALUES(:medico_id, :dia, :desde, :intervalo, :hasta);'
 				);
-				$statement->execute(array(
-					':medico_id' => $medico_id['id'],
-					':dia' => $fila['dia'],
-					':desde' => $fila['desde'],
-					':intervalo' => $fila['intervalo'],
-					':hasta' => $fila['hasta']
-				));
-			}
-			foreach ($valores as $valor) {
-				$statement = $conexion->prepare(
-					'INSERT INTO precios
-					(medico_id, tipo, valor)
-					VALUES(:medico_id, :tipo, :valor);'
-				);
-				$statement->execute(array(
-					':medico_id' => $medico_id['id'],
-					':tipo' => $fila['tipo'],
-					':valor' => $fila['valor']
-				));
-			}
-			// header('Location: ' . RUTA . '/admin/administracion.php');
+			$statement->execute(array(
+				':medico_id' => $medico_id['id'],
+				':dia' => $fila['dia'],
+				':desde' => $fila['desde'],
+				':intervalo' => $fila['intervalo'],
+				':hasta' => $fila['hasta']
+			));
+		}
+
+		foreach ($valores as $valor) {
+			$statement = $conexion->prepare(
+				'INSERT INTO precios_consultas
+				(medico_id, tipo, valor)
+				VALUES(:medico_id, :tipo, :valor);'
+			);
+			$statement->execute(array(
+				':medico_id' => $medico_id['id'],
+				':tipo' => $valor['tipo'],
+				':valor' => $valor['valor']
+			));
+		}
+
+			header('Location: ' . RUTA . '/admin/administracion.php');
 	}
 }
 

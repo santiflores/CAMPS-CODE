@@ -15,14 +15,13 @@ if (isset($_SESSION['usuario'])) {
 $errores = '';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-	// Validamos que los datos hayan sido rellenados
 	$nombre = limpiarDatos($_POST['nombre']);
 	$apellido = limpiardatos($_POST['apellido']);
 	$password = limpiarDatos($_POST['password']);
 	$password2 = limpiarDatos($_POST['password2']);
 	$email = limpiarDatos($_POST['email']);
 	$dni = limpiarDatos($_POST['dni']);
-	$telefono = isset($_POST['telefono']) ? limpiarDatos($_POST['telefono']) : '';
+	$telefono = isset($_POST['telefono']) ? limpiarDatos($_POST['telefono']) : null;
 	$obra_social = limpiarDatos($_POST['obra_social']);
 	
 
@@ -50,8 +49,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	if ($errores == '') {
 		$statement = $conexion->prepare(
-			'INSERT INTO `camps` . `usuarios` 
-			(`nombre`, `apellido`, `pass`, `email`, `dni`, `telefono`, `obra social`) 
+			'INSERT INTO `usuarios` 
+			(`nombre`, `apellido`, `pass`, `email`, `dni`, `telefono`, `obra_social`) 
 			VALUES (:nombre, :apellido, :pass, :email, :dni, :telefono, :obraSocial);');
 		$statement->execute(array(
 			':nombre' => $nombre,

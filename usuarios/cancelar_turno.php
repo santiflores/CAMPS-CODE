@@ -3,7 +3,7 @@ session_start();
 require '../admin/config.php';
 require '../functions.php';
 
-comprobarSession('usuario');
+comprobarSession('usuario'); 
 
 $conexion = conexion($bd_config);
 if(!$conexion){
