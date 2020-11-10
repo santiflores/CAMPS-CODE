@@ -65,7 +65,7 @@ function obtenerMedicoPorId($conexion, $id){
 }
 
 function obtenerPacientePorId($conexion, $id){
-	$resultado = $conexion->query("SELECT `id`, `nombre`, `apellido`, `dni`, `telefono`, `obra_social` FROM usuarios WHERE id = $id LIMIT 1");
+	$resultado = $conexion->query("SELECT `id`, `nombre`, `apellido`, `dni`, `telefono`, `obra_social`, `email`, `pass` FROM usuarios WHERE id = $id LIMIT 1");
 	$resultado = $resultado->fetch();
 	return ($resultado) ? $resultado : false;
 }
@@ -101,5 +101,11 @@ function rangoHorario(){
         }
     }
     return $rango_horarios;
+}
+//trae las obras sociales de la base de datos
+function obrasSociales($conexion){
+	$resultado = $conexion->query("SELECT * FROM obras_sociales");
+	$resultado = $resultado->fetch();
+	return ($resultado) ? $resultado : false;
 }
 ?>

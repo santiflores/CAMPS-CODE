@@ -73,16 +73,19 @@ option{
 */
 .menu{
 	background-color: #fff;
-	background-image: -webkit-linear-gradient(25deg, #fff 300px, #D13F3F 301px);
 	color: #333333;
-	height: 90px;
+	height: 170px;
 	top: 0;
 	left: 0;
+	display: flex;
+	align-content: center;
+	flex-wrap: wrap;
+	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
 }
 .logoheader{
 	height: 90px;
-	width: 300px;
-	margin: 0;
+	width: 100%;
+	margin: auto;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -90,7 +93,7 @@ option{
 .logoheader img{
 	object-fit: contain;
 	width: auto;
-	max-height: 60px;
+	max-height: 70px;
 }
 /*
 * Navegación
@@ -108,17 +111,6 @@ option{
 .drop_cerrar > *{
 	transition: all 0.5s ease-in-out;
 }
-/* #drop_cerrar3{
-	transform-origin: 24.7487px 0;
-	transform: rotate(45deg 24.7487px 0);
-}
-#drop_cerrar2{
-	display: none;
-}
-#drop_cerrar1{
-	transform-origin: 0.197735px 212.132px;
-	transform: rotate(-45deg 0.197735px 212.132px);
-} */
 .nav_boton_dropdown img{
 	height: 100%;
 	object-fit: cover;
@@ -183,30 +175,45 @@ option{
 	}
 }
 nav{
-	float: right;
+	max-width: 1200px;
+	margin: auto;
 }
 
 nav ul{
-	margin: 0;
 	list-style: none;
-	padding-right: 30px
+	height: 80px;
+	margin: 0;
+	display: flex;
 }
 
 nav ul li{
+	height: 80px;
+	width: 170px;
 	display: inline-block;
-	line-height: 90px;
+	margin: 0 20px;
+	display: flex;
+	justify-content: center;
+	transition: all 0.1s ;
 }
-
 nav ul li a{
-	color: #FFF;
-	font-size: 15px;
-	padding: 0 10px;
+	line-height: 80px;
+	height: 80px;
+	color: #646464;
+	font-size: 20px;
+	font-weight: 600;
+	margin: auto;
+	text-align: center;
 	text-decoration: none;
-	transition: 0.3s ease;
 }
 nav ul li a:hover{
-	color: #FFF;
-	transition: 0.3s ease;
+	color: #646464;
+	text-decoration: none;
+}
+nav ul li:hover{
+	border-bottom: 8px solid #EC5151;
+}
+.active{
+	border-bottom: 8px solid #EC5151;
 }
 .botones{
 	border: 1px solid #fff;
@@ -218,7 +225,7 @@ nav ul li a:hover{
 }
 .botones:hover{
 	background-color: #EC5151;
-	color: #FFF;
+	color: #646464;
 	text-decoration: none;
 	transition: 0.3s ease-in-out;
 }
@@ -281,7 +288,7 @@ nav ul li a:hover{
 Container de el titulo y botones
 */
 .container_title{
-	background: url(http://localhost/centros_medicos/CAMPS/images/fondo_CAMPS.jpg);
+	background-image: url(../images/fondo_CAMPS.png);
 	background-repeat: no-repeat;
 	background-size: 100%;
 	background-position: center;
@@ -290,8 +297,7 @@ Container de el titulo y botones
 	display: flex;
 	align-items: flex-end;
 	justify-content: flex-end;
-	height: 500px;
-	box-shadow: 0px 0px 10px #999;
+	height: 475px;
 }
 /*
 Media para en fondo del container del titulo
@@ -302,8 +308,8 @@ Media para en fondo del container del titulo
 	}
 }
 /*
-LOGO
-RESERVE SU TURNO / CONTACTANOS
+	LOGO
+	RESERVE SU TURNO / CONTACTANOS
 */
 .title{
 	width: 350px;
@@ -720,7 +726,7 @@ Sacar Turno
 	justify-content: center;
 	font-size: 22px;
 }
-.calen-title > *{ 
+.calen-title > *{
 	color: #FFF;
 	margin:  0 10px;
 }
@@ -911,7 +917,7 @@ Login
 	padding: 10px 25px ;
 	color:#3d3d3d;
 }
-.login_form .input-text,
+/* .login_form .input-text,
 .login_form .input-pass{
 	color: #AAA;
 	border: 1px solid #EEE;
@@ -920,7 +926,7 @@ Login
 	width: 100%;
 	padding: 25px;
 	font-size: 20px;
-}
+} */
 .login_form .input-submit{
 	font-size: 20px;
 	width: 100%;
@@ -1088,7 +1094,7 @@ Login
 .agregar_medico_form label{
 	font-weight: 600;
 	margin-top: 10px;
-} 
+}
 .nuevo-archivo{
 	border-radius: 10px;
 	box-shadow: 0 0 10px #DDD;
@@ -1350,7 +1356,7 @@ Turno
 	padding-left: 25px;
 	height: 100px;
 	color: #FFF;
-	background-color: #F35B5B; 
+	background-color: #F35B5B;
 }
 .mensaje-reserva{
 	width: 350px;
@@ -1378,6 +1384,22 @@ Turno
 		width: 100%;
 	}
 }
+/*
+	Mi cuenta
+*/
+.wrapper_mi_cuenta{
+	width:1200px;
+}
+.wrapper_mi_cuenta > *{
+	height: 50px;
+	border-bottom: 1px solid #e3e3e3;
+
+}
+.cambiar_contraseña{
+	height:180px;
+	
+}
+/*	Mi cuenta- medias	*/
 
 /*
 Turno medico - Consulta

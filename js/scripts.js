@@ -1,5 +1,5 @@
 const DOMelements = {
-
+	headerItems: document.querySelectorAll('.header-item'),
 	nuevoHorarioBtn: document.getElementById('nuevo-horario-btn'),
 	nuevoHorarioWrap: document.getElementById('nuevo-horario-wrap'),
 	filasExistentes: document.querySelectorAll('.nueva-fila'),
@@ -24,6 +24,13 @@ const DOMelements = {
 
 }
 
+DOMelements.headerItems.forEach(item => {
+	let link = item.childNodes[0].href;
+	if (window.location.href == link) {
+		item.classList.add('active')
+	}
+});
+
 function displayDropdown(button, dropdown) {
 	button.forEach(el=>{
 		el.addEventListener('click', ()=>{
@@ -41,7 +48,6 @@ displayDropdown(DOMelements.navDropBtn, DOMelements.navDropdown);
 if (DOMelements.dropdownBtn != null) {
 	displayDropdown(DOMelements.dropdownBtn, DOMelements.dropdown);
 }
-
 
 
 if (DOMelements.nuevoHorarioBtn != null) {
@@ -118,7 +124,13 @@ if (DOMelements.nuevoPrecioBtn != null) {
 		<div id="nueva-fila${valor}" class="nueva-fila">
 		
 		<label><b>Tipo:</b></label>
-		<input type="text" class="input-text" name="valor[${valor}][tipo]" placeholder="Ej: Asispre, OSDE, etc">		
+		<select class="input-text" name="valor[${valor}][tipo]">
+		<option value="Sin obra social">Sin obra social<option>
+		<option value="OSDE">OSDE<option>
+		<option value="ASUNT">ASUNT<option>
+		<option value="GALENO">GALENO<option>
+		<option value="SWISS MEDICAL">SWISS MEDICAL<option>
+		</select>		
 		<label><b>Valor:</b></label>
 		<input type="number" class="input-text" name="valor[${valor}][valor]">
 		</div>`;
@@ -202,7 +214,6 @@ if (DOMelements.dataInputTime != null) {
 			var curDataHora = day.dataset.selectedTime;
 			DOMelements.dataInputTime.value = curDataHora;
 			DOMelements.horaEnUI.innerHTML = curDataHora;
-			DOMelements.bookForm.sumbit();
 		});
 	})
 

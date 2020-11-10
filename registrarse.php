@@ -14,10 +14,20 @@ if (isset($_SESSION['usuario'])) {
 }
 $errores = '';
 
+$obras_sociales = obrasSociales($conexion);
+$nombre = '';
+$apellido = '';
+$contraseña_guardada = '';
+$email = '';
+$dni = '';
+$telefono = '';
+$obra_social = '';
+
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$nombre = limpiarDatos($_POST['nombre']);
 	$apellido = limpiardatos($_POST['apellido']);
 	$password = limpiarDatos($_POST['password']);
+	$contraseña_guardada = limpiarDatos($_POST['password']);
 	$password2 = limpiarDatos($_POST['password2']);
 	$email = limpiarDatos($_POST['email']);
 	$dni = limpiarDatos($_POST['dni']);

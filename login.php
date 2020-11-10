@@ -4,19 +4,21 @@ if (!empty($_SESSION)) {
 	session_destroy();
 	session_start();
 }
+
 require 'admin/config.php';
 require 'functions.php';
-
 $conexion = conexion($bd_config);
 if (!$conexion) {
 	header('location: error.php');
 }
-$errores = '';
+
 $medico_id = isset($_GET['id']) ? $_GET['id'] : false;
+$errores = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id'])){
 	$errores .= '<li>Debes iniciar sesion para reservar un turno.</li>';
 }
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	
 	$ip = $_SERVER["REMOTE_ADDR"];

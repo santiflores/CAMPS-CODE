@@ -80,7 +80,8 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 		$mes = date_format($mes_seleccionado, 'm');
 	} else {
 		$mes_seleccionado = new DateTime;
-		$mes = $mes_seleccionado->modify('+1 month');
+		$dias = cal_days_in_month(CAL_GREGORIAN, date_format($mes_seleccionado, 'm'), date_format($mes_seleccionado, 'Y'));
+		$mes = $mes_seleccionado->modify("+$dias days");
 		$año = date_format($mes_seleccionado, 'Y');
 		$mes = date_format($mes_seleccionado, 'm');
 	}
@@ -284,6 +285,9 @@ function mostrarPrecios($precios) {
 }
 
 function displayReservarTurno($conexion, $medico_id, $semana_horarios, $precios, $medico_actual){
+	
+	//Cargo los errores pasados por GET
+	
 	$precios = mostrarPrecios($precios);
 	$error = '';
 	if (isset($_GET['error'])) {
@@ -298,6 +302,9 @@ function displayReservarTurno($conexion, $medico_id, $semana_horarios, $precios,
 		}
 		if ($_GET['error'] == '4') {
 			$error .='<li>Seleccione la fecha del turno</li>';
+		}
+		if ($_GET['error'] == '5') {
+			$error .='<li>Lo sentimos, este horario ya no esta disponible. Seleccione otro.</li>';
 		}
 	}
 		if (isset($_GET['fecha']) && empty($_GET['fecha'])) {
@@ -547,6 +554,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 		$errores += 2;
 	}
 
+	// Checkeo si el turno esta tomado en la base de datos 
+	$statement = $conexion->prepare('SELECT id FROM turnos WHERE fecha = :fecha AND hora = :hora');
+	$statement->execute(array(
+		':fecha' => $fechaYmd,
+		':hora' => $hora
+	));
+	$turno = $statement->fetch();
+
+	if ($turno != false) {
+		$errores = 5;
+	}
 
 
 	if ($ur == 'false') {

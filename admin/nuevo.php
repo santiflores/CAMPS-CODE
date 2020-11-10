@@ -13,8 +13,15 @@ if(!$conexion){
 $especialidades = obtenerEspecialidades($conexion);
 
 //Recibir POST
-
+$obras_sociales = obrasSociales($conexion);
 $errores = '';
+$nombre = '';
+$especialidad = '';
+$horario = '';
+$dni = '';
+$email = '';
+$contraseña = '';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$nombre = limpiarDatos($_POST['nombre']);
 	$especialidad = limpiarDatos($_POST['especialidad']);
