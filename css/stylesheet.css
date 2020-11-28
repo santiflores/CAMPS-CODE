@@ -71,22 +71,30 @@ option{
 /*
 * Header General
 */
-.menu{
+.header{
 	background-color: #fff;
 	color: #333333;
-	height: 170px;
+	height: 180px;
+	width: 100%;
 	top: 0;
 	left: 0;
 	display: flex;
+	flex-direction: column;
 	align-content: center;
-	flex-wrap: wrap;
+	justify-content: center;
 	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
 }
+.header-collapsed{
+	height: 100px;
+	flex-direction: row;
+	align-items: stretch;
+	justify-content: space-between;
+	position: fixed;
+}
 .logoheader{
-	height: 90px;
-	width: 100%;
-	margin: auto;
-	display: inline-flex;
+	max-height: 90px;
+	padding: 10px;
+	display:flex;
 	align-items: center;
 	justify-content: center;
 }
@@ -176,18 +184,20 @@ option{
 }
 nav{
 	max-width: 1200px;
-	margin: auto;
 }
 
 nav ul{
 	list-style: none;
-	height: 80px;
+	max-width: 1200px;
+	height: 90px;
 	margin: 0;
 	display: flex;
+	align-self: center;
+	justify-content: center;
 }
 
 nav ul li{
-	height: 80px;
+	height: 90px;
 	width: 170px;
 	display: inline-block;
 	margin: 0 20px;
@@ -196,8 +206,9 @@ nav ul li{
 	transition: all 0.1s ;
 }
 nav ul li a{
-	line-height: 80px;
-	height: 80px;
+	line-height: 90px;
+	height: 90px;
+	width: 100%;
 	color: #646464;
 	font-size: 20px;
 	font-weight: 600;
@@ -250,7 +261,7 @@ nav ul li:hover{
 	border: none;
 }
 @media only screen and (max-width: 970px){
-	.menu nav{
+	.header nav{
 		display: none;
 	}
 	.nav_boton_dropdown{
@@ -258,7 +269,7 @@ nav ul li:hover{
 	}
 }
 @media only screen and (max-width: 450px){
-	.menu{
+	.header{
 		background: -webkit-linear-gradient(25deg, #fff 67%, #D13F3F 67.3%);
 	}
 	.logoheader{
@@ -893,29 +904,47 @@ About Us
 Login
 */
 .wrapper_login{
-	height: 90vh;
-	background-color: #F9F9F9;
+	max-width:100vh;
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+	grid-template-rows: 90vh
 }
 .login{
-	position: relative;
-	top: 5vh;
-	margin: auto;
-	width: 350px;
-	border-top: 5px solid #ec6161;
-	border-radius: 5px;
-	background-color: #FFF;
-	box-shadow: 0 0 10px #EEE;
+	height:100%;
 }
 .login_form{
+	width:300px;
+	margin:auto;
 	display: flex;
 	flex-direction: column;
-	align-items: start;
+	align-items: center;
 	justify-content: center;
-	padding: 25px;
+	padding: auto;
 }
 .login div{
 	padding: 10px 25px ;
 	color:#3d3d3d;
+}
+.login-bg{
+	height: 80vh;
+	display:block;
+	text-align:center;
+}
+.login-bg img{
+	max-width: 100%;
+	max-height: 100%;
+}
+/*
+Registrarse
+*/
+.registrarse{
+	position: relative;
+	top: 5vh;
+	justify-content:flex-start;
+	height:100%;
+	width: 500px;
+	border-radius: 5px;
+	background-color: #FFF;
 }
 /* .login_form .input-text,
 .login_form .input-pass{
@@ -1388,19 +1417,86 @@ Turno
 	Mi cuenta
 */
 .wrapper_mi_cuenta{
-	width:1200px;
+	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
+	max-width:1200px;
+	margin: auto;
+	padding: 40px 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
-.wrapper_mi_cuenta > *{
-	height: 50px;
+.mi_cuenta_titulo{
+	max-width: 1060px;
+	width: 100%;
+	font-weight: 600;
+	font-size: 35px;
+}
+.mi_cuenta_info{
+	width: 100%;
+	max-width:850px;
+	margin: 40px 20px 0 20px;
+	border-radius: 5px;
 	border-bottom: 1px solid #e3e3e3;
-
+	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
+	color: #646464;
+}
+.cuenta_info_titulo{
+	height: 65px;
+	font-size: 24px;
+	font-weight: 600;
+	padding: 15px;
+}
+.cuenta_info_item{
+	border-top: 1px solid #E3E3E3;
+	height: 50px;
+	padding: 10px 50px;
+	align-items: center;
+	display:flex;
+}
+.cuenta_info_item span:nth-child(odd){
+	font-weight: 600;
+	width: 50%;
+}
+.cuenta_info_item span:nth-child(even){
+	width: 50%;
+}
+.nueva-repetir-contraseña{
+	display:grid;
+	grid-template-columns:1fr 1fr;
+	gap: 10px;
+}
+.nueva-repetir-contraseña > *{
+	width: 100%;
 }
 .cambiar_contraseña{
 	height:180px;
-	
+	display:grid;
+}
+.contraseña-actual{
+	grid-column: 1/3;
+}
+.cambiar_contraseña input{
+	height: 30px;
+	border-radius: 3px;
+	padding: 5px;
+	color: #E3E3E3;
+	border: 1px solid #E3E3E3;
+}
+.cambiar_contraseña .input-submit{
+	margin-top: 10px;
+	height: 35px;
+	border-radius: 3px;
+	margin-right: 5px;
+	float: right;
+	background-color: #FC7474;
 }
 /*	Mi cuenta- medias	*/
-
+@media only screen and(max-width: 660px){
+	.nueva-repetir-contraseña{
+		display: block;
+	}
+}
 /*
 Turno medico - Consulta
 */
@@ -1479,7 +1575,15 @@ Turno medico - Consulta
 /*
 	Verificacion
 */
+.verificacion-background{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(0, 0, 0, 40%);
+}
 .verificacion{
+	backdrop-filter: brightness(60%);
 	background-color: #FFF;
 	position: fixed;
 	top: 0;
@@ -1489,12 +1593,10 @@ Turno medico - Consulta
 	margin: auto;
 	display: grid;
 	grid-template-rows: 70px 1fr 50px;
-	border: 1px solid #EEE;
-	border-radius: 10px;
+	border-radius: 5px;
 	max-width: 550px;
 	height: 270px;
 	overflow: hidden;
-	box-shadow: 0 0 10px #EEE;
 }
 .verificacion > *{
 	padding: 25px;

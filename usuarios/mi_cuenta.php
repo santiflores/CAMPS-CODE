@@ -17,36 +17,38 @@ $nombre = $usuario['nombre'];
 $apellido = $usuario['apellido'];
 $dni = $usuario['dni'];
 $email = $usuario['email'];
-$contraseña = $usuario['pass'];
+$contraseña_DB = $usuario['pass'];
 $obra_social = $usuario['obra_social'];
 $telefono = $usuario['telefono'];
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$nombre = limpiarDatos($_POST['nombre']);
-	$apellido = limpiarDatos($_POST['apellido']);
-	$dni = $_POST['dni'];
-	$email = limpiardatos($_POST['email']);
-	$contraseña = $_POST['pass'];
-	$contraseña = hash('sha512', $contraseña);
-	$obra_social = limpiardatos($_POST['obra_social']);
-	$telefono = limpiardatos($_POST['telefono']);
-
-
-	$statement = $conexion->prepare(
-		'UPDATE `usuario`
-		SET `nombre` = :nombre, `apellido` = :apellido, `dni` = :dni, `email` = :email, `contraseña` = :contraseña, `obra_social` = :obra_social, `telefono` = :telefono
-		WHERE  `id` = :id;'
-	);
-	$statement->execute(array(
-		':nombre' => $nombre,
-		':apellido' => $apellido,
-		':dni' => $dni,
-		':email' => $email,
-		':contraseña' => $contraseña,
-		':obra_social' => $obra_social,
-		':telefono' => $telefono
-	));
+	$contraseña_actual = hash('sha512', $_POST['contraseña_actual']);
+	$nueva_contraseña = hash('sha512', $_POST['nueva_contraseña']);
+	$repetir_contraseña = hash('sha512', $_POST['repetir_contraseña']);
+	
+	if ($contraseña_DB == $contraseña_actual && $repetir_contraseña == $nueva_contraseña && !empty($contraseña_actual)) {
+		print_r($contraseña_DB);
+		echo('<br>');
+		print_r($contraseña_actual);
+		echo('<br>');
+		echo('........');
+		echo('<br>');
+		print_r($nueva_contraseña);
+		echo('<br>');
+		print_r($repetir_contraseña);
+		$contraseña_DB = $nueva_contraseña;
+		$statement = $conexion->prepare(
+			'UPDATE `usuarios`
+			SET `pass` = :pass
+			WHERE  `id` = :id;'
+		);
+		$statement->execute(array(
+			':pass' => $contraseña_DB,
+			':id' => $user_id
+		));
+	}
 }
+
 require '../views/mi_cuenta.view.php'
 ?>

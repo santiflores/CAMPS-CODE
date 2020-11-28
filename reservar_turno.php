@@ -560,9 +560,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 		':fecha' => $fechaYmd,
 		':hora' => $hora
 	));
-	$turno = $statement->fetch();
-
-	if ($turno != false) {
+	$turno_tomado = $statement->fetch();
+	print_r($turno_tomado);
+	if ($turno_tomado != false) {
 		$errores = 5;
 	}
 

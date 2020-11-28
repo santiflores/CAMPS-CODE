@@ -14,10 +14,7 @@
 <body>
 	<?php require'header.php'?>
 	<div class="wrapper_login">
-		<div class="login">
-			<div class="separador">
-				<h3>Registrarse</h3>
-			</div>
+		<div class="registrarse">
 			<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST" class="login_form">
 				<input type="text" class="input-text" placeholder="Nombre" name="nombre" value="<?php echo($nombre)?>">
 				<input type="text" class="input-text" placeholder="Apellido" name="apellido" value="<?php echo($apellido);?>">

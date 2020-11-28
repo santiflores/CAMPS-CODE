@@ -1,4 +1,5 @@
 const DOMelements = {
+	header: document.querySelector('.header'),
 	headerItems: document.querySelectorAll('.header-item'),
 	nuevoHorarioBtn: document.getElementById('nuevo-horario-btn'),
 	nuevoHorarioWrap: document.getElementById('nuevo-horario-wrap'),
@@ -23,6 +24,15 @@ const DOMelements = {
 	borrarBtns: document.querySelectorAll(".borrar-btn")
 
 }
+window.addEventListener('scroll', ()=>{
+	scrollPosition = window.scrollY;
+	if (scrollPosition >= 170) {
+		DOMelements.header.classList.add('header-collapsed')
+	} else {
+		console.log(scrollPosition);
+		DOMelements.header.classList.remove('header-collapsed')
+	}
+})
 
 DOMelements.headerItems.forEach(item => {
 	let link = item.childNodes[0].href;
@@ -222,7 +232,7 @@ if (DOMelements.dataInputTime != null) {
 if (DOMelements.borrarBtns != null) {
 	DOMelements.borrarBtns.forEach(function(btn) {
 		btn.addEventListener('click', function(){
-
+			console.log(btn);
 			var btnId, title, text, link, options, HTMLverif;
 			btnId = btn.id;
 			link = btn.dataset.route;
@@ -242,23 +252,24 @@ if (DOMelements.borrarBtns != null) {
 					text = 'Si la elimina, todos los medicos dentro de esta especialidad no estaran disponibles para el publico.';
 					options = ['No, conservar especialidad', 'Si, eliminar especialidad'];				
 				break;
-				default:
-				break;
 			}
 			HTMLverif = document.createElement("div");
 			document.body.appendChild(HTMLverif);
-			HTMLverif.className = ('verificacion');
+			HTMLverif.className = ('verificacion-background');
 			HTMLverif.innerHTML = `
-				<div class="flex-center-start verificacion--title">
-					${title}
+				<div class="verificacion">
+					<div class="flex-center-start verificacion--title">
+						${title}
+					</div>
+					<div class="verificacion--body">
+						<p>${text}</p>
+					</div>
+					<div class="verificacion--buttons">
+						<a href="" class="flex-center verificacion--button">${options[0]}</a>
+						<a href="${link}" class="flex-center verificacion--danger">${options[1]}</a>
+					</div>
 				</div>
-				<div class="verificacion--body">
-					<p>${text}</p>
-				</div>
-				<div class="verificacion--buttons">
-					<a href="" class="flex-center verificacion--button">${options[0]}</a>
-					<a href="${link}" class="flex-center verificacion--danger">${options[1]}</a>
-				</div>
+				
 			`;
 			
 		})

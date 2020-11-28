@@ -12,29 +12,51 @@
 	</head>
 	<body>
 		<?php require 'header.php'?>
-		<div class="container">
-			<div class="wrapper_mi_cuenta">
-				<h2>Información para el inicio de sesión</h2>
-				<span>Email:</span><span><?php echo ($email)?></span>
-				<div class="cambiar_contraseña">
-					<span>Cambiar contraseña</span>	
-					<form action="POST">
-						<input type="text" placeholder="Nueva contraseña">
-						<input type="text" placeholder="Repetir nueva contraseña">
-						<input type="text" placeholder="Contraseña actual">
-						<button type="submit">Cambiar Contraseña</button>
-					</form>
+		<div class="wrapper_mi_cuenta">
+			<span class="mi_cuenta_titulo">Mi cuenta</span>
+			<div class="mi_cuenta_info">
+				<div class="cuenta_info_titulo">
+					Información para el inicio de sesión
+				</div>
+				<div class="cuenta_info_item">
+					<span>Email:</span><span><?php echo ($email)?></span>
+				</div>
+				<div class="cuenta_info_item cambiar_contraseña">
+					<div>
+						<span>Cambiar contraseña</span>	
+						<form action="<?php echo($_SERVER['PHP_SELF'])?>" method="POST">
+							<div class="nueva-repetir-contraseña">
+								<input type="password" placeholder="Nueva contraseña" name="nueva_contraseña">
+								<input type="password" placeholder="Repetir nueva contraseña" name="repetir_contraseña">
+								<input class="contraseña-actual"type="password" placeholder="Contraseña actual" name="contraseña_actual">
+							</div>
+							<span class="input-submit borrar-btn"type="submit" id="cambiar_contraseña" data-route=>Cambiar Contraseña</span>
+						</form>
+					</div> 
 				</div>
 			</div>
-			
-			<div class="wrapper_mi_cuenta">
-				<h2>Datos personales</h2>
-				<span>Nombre y apellido</span><span><?php echo ($nombre . $apellido)?></span>
-				<span>Documento</span><span><?php echo ('DNI'. $dni)?></span>
-				<span>Telefono</span><span><?php echo ($telefono)?></span>
-				<span>Obra social</span><span><?php echo ($obra_social)?></span>
+
+			<div class="mi_cuenta_info">
+				<div class="cuenta_info_titulo">
+					Datos personales
+				</div>
+				<div class="cuenta_info_item">
+					<span>Nombre y apellido</span>
+					<span><?php echo ($nombre .' '. $apellido)?></span>
+				</div>
+				<div class="cuenta_info_item">
+					<span>Documento</span>
+					<span><?php echo ('DNI '. $dni)?></span>
+				</div>
+				<div class="cuenta_info_item">
+					<span>Telefono</span>
+					<span><?php echo ($telefono)?></span>
+				</div>
+				<div class="cuenta_info_item">
+					<span>Obra social</span>
+					<span><?php echo ($obra_social)?></span>
+				</div>
 			</div>
-		
 		</div>
 		<?php require '../views/footer.php';?>
 		<script src="<?php echo RUTA?>/js/scripts.js"></script>

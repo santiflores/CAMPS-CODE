@@ -61,7 +61,7 @@ if (isset($_SESSION['admin'])) {
 	}
 
 ?>
-<header class="menu">
+<header class="header ">
 	<a href="<?php echo RUTA;?>/index.php" class="logoheader">
 		<img src="<?php echo RUTA;?>/images/logo_camps.png" alt="CAMPS">
 	</a>

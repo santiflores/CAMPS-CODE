@@ -19,23 +19,23 @@ try {
 		)
 	);
 
-    //Server settings
-    $mail->SMTPDebug= 0;                      // Enable verbose debug output
-    $mail->isSMTP();                                            // Send using SMTP
-    $mail->Host= "smtp.gmail.com";                    // Set the SMTP server to send through
-    $mail->SMTPAuth= true;                                   // Enable SMTP authentication
-    $mail->Username= "santiflooresss@gmail.com";                     // SMTP username
-    $mail->Password= "dni45062";                               // SMTP password
-    $mail->SMTPSecure= PHPMailer::ENCRYPTION_SMTPS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-    $mail->Port= 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+	//Server settings
+	$mail->SMTPDebug= 0;                      // Enable verbose debug output
+	$mail->isSMTP();                                            // Send using SMTP
+	$mail->Host= "smtp.gmail.com";                    // Set the SMTP server to send through
+	$mail->SMTPAuth= true;                                   // Enable SMTP authentication
+	$mail->Username= "santiflooresss@gmail.com";                     // SMTP username
+	$mail->Password= "dni45062";                               // SMTP password
+	$mail->SMTPSecure= PHPMailer::ENCRYPTION_SMTPS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+	$mail->Port= 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
-    //Recipients
-    $mail->setFrom("no-responder@camps.com", "CAMPS");
-    $mail->addAddress("santiflores@outlook.com", "Santiago Flores");     // Add a recipient
+	//Recipients
+	$mail->setFrom("no-responder@camps.com", "CAMPS");
+	$mail->addAddress("santiflores@outlook.com", "Santiago Flores");     // Add a recipient
 
-    // Content
-    $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'CAMPS - Reserva exitosa';
+	// Content
+	$mail->isHTML(true);                                  // Set email format to HTML
+	$mail->Subject = 'CAMPS - Reserva exitosa';
 	$mail->Body = '
 	<style>
 	.flex-center{	
@@ -151,7 +151,7 @@ try {
 	Paciente: '. $paciente['nombre'] .' '. $paciente['apellido'] .'
 
 	';
-    $mail->send();
+	$mail->send();
 	echo 'Message has been sent';
 	
 } catch (Exception $e) {
