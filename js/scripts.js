@@ -193,7 +193,7 @@ if (DOMelements.borrarFila != null) {
 }
 
 if (DOMelements.dataInput != null) {
-	
+
 	DOMelements.CalenDays.forEach(function(day) {
 		if (day.className  != 'calen-dia dia-bloqueado') {
 			day.addEventListener('click',function() {
@@ -205,7 +205,9 @@ if (DOMelements.dataInput != null) {
 				var curDataDate = day.dataset.selectedDate;
 				DOMelements.dataInput.value = curDataDate;
 				DOMelements.fechaEnUI.innerHTML = curDataDate;
-				DOMelements.bookForm.submit();
+
+				var ajaxPetition = new XMLHttpRequest();
+				
 			});
 		}
 	})

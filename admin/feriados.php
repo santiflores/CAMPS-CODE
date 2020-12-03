@@ -11,15 +11,19 @@ if(!$conexion){
     header('Location: ../error.php');
 }
 
-$statement = $conexion->prepare(
-    'INSERT INTO camps feriados
-    (fecha, descripcion)
-    VALUE (:fecha, :descripcion)'
-);
-$statement->execute(array(
-    ':fecha' => $fecha,
-    ':descripcion' => $descripcion
-));
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {  
+    
+    $statement = $conexion->prepare(
+        'INSERT INTO feriados
+        (fecha, descripcion)
+        VALUE (:fecha, :descripcion)'
+    );
+    $statement->execute(array(
+        ':fecha' => $fecha,
+        ':descripcion' => $descripcion
+    ));
+
+}
 
 require '../feriados.view.php';
 ?>

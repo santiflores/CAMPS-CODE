@@ -184,6 +184,7 @@ option{
 }
 nav{
 	max-width: 1200px;
+	overflow: hidden;
 }
 
 nav ul{
