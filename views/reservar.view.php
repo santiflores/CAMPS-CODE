@@ -15,7 +15,7 @@
 			<h2>Reservar turno</h2>
 		</div>
 		<div class="wrapper-reservar">			
-			<?php displayReservarTurno($conexion, $medico_id, $semana_horarios, $precios, $medico_actual);?>
+			<?php displayReservarTurno($conexion, $medico_id, $semana_horarios, $medico_actual);?>
         </div>
 		<?php require 'footer.php'?>
 		<script src="<?php echo RUTA?>/js/scripts.js"></script>

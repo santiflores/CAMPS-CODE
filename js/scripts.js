@@ -14,26 +14,38 @@ const DOMelements = {
 	navDropdown: document.querySelector('#navbar_dropdown'),
 	dropdownBtn: document.getElementById('boton_dropdown'),
 	dropdown: document.getElementById('agregar'),
+
 	bookForm: document.getElementById('reservar_turno'),
-	CalenDays: document.querySelectorAll(".calen-dia"),
+	appointmentInfo: document.querySelectorAll('.reservar--card'),
+	calendar: document.querySelector('.calen-grid'),
+	medic_id: document.getElementById('medico_id'),
 	dataInput: document.getElementById("selected-day"),
-	fechaEnUI: document.getElementById("fecha-del-turno"),
 	CalenHoras: document.querySelectorAll(".horarios"),
+	calenDays: document.querySelectorAll(".calen-dia"),
 	dataInputTime: document.getElementById("selected-time"),
-	horaEnUI: document.getElementById("hora-del-turno"),
-	borrarBtns: document.querySelectorAll(".borrar-btn")
+	fechaEnUI: document.getElementById("fecha-del-turno"),
+	appointmentFormBtns: document.querySelectorAll('.turno-formulario-buttons'),
+	appointmentForm: document.querySelector('#turno-formulario'),
+	
+	borrarBtns: document.querySelectorAll(".borrar-btn"),
+	changePassForm: document.getElementById('cambiar_contraseña_form'),
+	changePassBtn: document.getElementById("cambiar_contraseña")
 
 }
+let loader = document.createElement('div');
+loader.classList.add('loader-active');
+loader.innerHTML = '<img src="images/loader.png">'
+
 window.addEventListener('scroll', ()=>{
 	scrollPosition = window.scrollY;
-	if (scrollPosition >= 170) {
+	if (scrollPosition >= 180) {
 		DOMelements.header.classList.add('header-collapsed')
+		document.body.style.padding = '180px 0 0 0';
 	} else {
-		console.log(scrollPosition);
 		DOMelements.header.classList.remove('header-collapsed')
+		document.body.style.padding = '0 0 0 0';
 	}
 })
-
 DOMelements.headerItems.forEach(item => {
 	let link = item.childNodes[0].href;
 	if (window.location.href == link) {
@@ -176,7 +188,7 @@ if (DOMelements.borrarFila != null) {
 					parentNode = document.querySelector('#nuevo-precio-wrap')
 					let valorBorrado = parentNode.removeChild(parentNode.lastElementChild);
 					valorBorrado = valorBorrado.firstElementChild.value;
-					console.log(valorBorrado);
+					
 					if (valorBorrado != null) {
 						DOMelements.nuevoPrecioWrap.insertAdjacentHTML('beforebegin',`
 							<input type="hidden" name="precio_borrado_id[${precioBorradoCount}]" value="${valorBorrado}">
@@ -192,50 +204,136 @@ if (DOMelements.borrarFila != null) {
 	});
 }
 
-if (DOMelements.dataInput != null) {
 
-	DOMelements.CalenDays.forEach(function(day) {
+
+if (DOMelements.calenDays != null) {
+	DOMelements.calenDays.forEach(function(day) {
 		if (day.className  != 'calen-dia dia-bloqueado') {
 			day.addEventListener('click',function() {
 				
-				DOMelements.CalenDays.forEach(function name(day) {
+				DOMelements.calenDays.forEach(function(day) {
 					day.classList.remove('calen-dia--focus')
 				})
 				day.classList.add('calen-dia--focus');
-				var curDataDate = day.dataset.selectedDate;
+				
+				let curDataDate = day.dataset.selectedDate;
 				DOMelements.dataInput.value = curDataDate;
 				DOMelements.fechaEnUI.innerHTML = curDataDate;
-
-				var ajaxPetition = new XMLHttpRequest();
+				
+				loadSchedule(curDataDate);
 				
 			});
 		}
 	})
+}
+
+function loadSchedule(date) {
+	
+	// Obtener horarios tomados por Ajax
+	
+	let ajaxPetition = new XMLHttpRequest();
+	ajaxPetition.open('POST', 'traer_horarios.php');
+
+	let medic_id = DOMelements.medic_id.value;
+	if (date != '' & medic_id != '') {
+		let parameters = 'medico_id=' + medic_id + '&fecha=' + date; 
+		
+		ajaxPetition.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+		ajaxPetition.send(parameters)
+	}
+	loadScheduleUI(ajaxPetition, date)
+	
+}
+
+function loadScheduleUI(petition, date){
+	let oldAppointments = document.querySelector('.horarios-modal')
+	if (oldAppointments !== null) {
+
+		oldAppointments.parentNode.removeChild(oldAppointments);
+	}
+	let appointments = document.createElement('div');
+	appointments.classList.add('horarios-modal');
+	DOMelements.calendar.appendChild(appointments);
+
+	appointments.appendChild(loader)
+	
+	petition.onload = ()=>{	
+		let data = JSON.parse(petition.responseText);
+		appointments.removeChild(loader);
+		appointments.innerHTML += `<h4>Turnos disponibles el dia ${date}</h4>`;
+		for (let i = 0; i < data.length; i++) {
+			const appointment = data[i]['horario'];
+			appointments.innerHTML += `
+			<a class="calen-dia horarios" data-selected-time="${appointment}">${appointment}</a>
+			
+			`;
+		}
+		calenHorasEvents(date);
+	} 
 
 }
-		
-if (DOMelements.dataInputTime != null) {
+
+function calenHorasEvents(date) {
 	
-	DOMelements.CalenHoras.forEach(function(day) {
-		day.addEventListener('click',function() {
+	calenHoras = document.querySelectorAll(".horarios");
+		
+	calenHoras.forEach( (time) => {
+		console.log(time);
+		time.addEventListener('click', () => {
 			
-			DOMelements.CalenHoras.forEach(function name(day) {
-				day.classList.remove('calen-dia--focus')
+			calenHoras.forEach(function name(time) {
+				time.classList.remove('calen-dia--focus')
 			})
-			day.classList.add('calen-dia--focus');
-			var curDataHora = day.dataset.selectedTime;
+			time.classList.add('calen-dia--focus');
+			let curDataHora = time.dataset.selectedTime;
 			DOMelements.dataInputTime.value = curDataHora;
-			DOMelements.horaEnUI.innerHTML = curDataHora;
+			
+			DOMelements.fechaEnUI.innerHTML = date;
+			DOMelements.fechaEnUI.innerHTML += ' a las ' + curDataHora;
 		});
 	})
 
 }
 
+function getOffset(el) {
+	const rect = el.getBoundingClientRect();
+	return {
+		top: rect.top + window.scrollY,
+		bottom: rect.bottom + window.scrollY
+	};
+}
+
+if (DOMelements.appointmentFormBtns != null) {
+	DOMelements.appointmentFormBtns.forEach((btn)=>{
+
+		btn.addEventListener('click',()=>{
+
+			let parentDiv = btn.parentNode;
+			parentDiv.classList.add('turno-formulario');
+			let childOffset = []
+			DOMelements.appointmentInfo.forEach((div)=>{
+				let position = getOffset(div)
+				console.log(position);
+				position = [position.top, position.bottom]
+				childOffset.push(position)
+			})
+			console.log(childOffset);
+			parentDiv.style.top = childOffset[0][0] + 'px';
+			parentDiv.style.height = childOffset[2][1] - childOffset[0][0] + 'px';
+			parentDiv.style.width = DOMelements.appointmentInfo[0].style.width;
+			console.log(DOMelements.appointmentInfo[0].style);
+		});
+
+	});
+
+}
+	
 if (DOMelements.borrarBtns != null) {
-	DOMelements.borrarBtns.forEach(function(btn) {
-		btn.addEventListener('click', function(){
+	DOMelements.borrarBtns.forEach((btn) => {
+		btn.addEventListener('click', () => {
 			console.log(btn);
-			var btnId, title, text, link, options, HTMLverif;
+			let btnId, title, text, link, options, HTMLverif;
 			btnId = btn.id;
 			link = btn.dataset.route;
 			switch (btnId) {
@@ -257,7 +355,7 @@ if (DOMelements.borrarBtns != null) {
 			}
 			HTMLverif = document.createElement("div");
 			document.body.appendChild(HTMLverif);
-			HTMLverif.className = ('verificacion-background');
+			HTMLverif.className = ('overlay');
 			HTMLverif.innerHTML = `
 				<div class="verificacion">
 					<div class="flex-center-start verificacion--title">
@@ -276,4 +374,30 @@ if (DOMelements.borrarBtns != null) {
 			
 		})
 	})
+}
+
+
+if (DOMelements.changePassBtn != null) {
+	
+		DOMelements.changePassBtn.addEventListener('click', ()=>{
+			let HTMLverif = document.createElement("div");
+			document.body.appendChild(HTMLverif);
+		HTMLverif.className = ('overlay');
+		HTMLverif.innerHTML = `
+		<div class="verificacion">
+		<div class="flex-center-start verificacion--title">
+		¿Estas seguro que queres cambiar tu contraseña?
+		</div>
+		<div class="verificacion--body">
+		<p>Esta accion no se puede deshacer.</p>
+		</div>
+		<div class="verificacion--buttons">
+		<span class="flex-center verificacion--button">No</span>
+		<span class="flex-center verificacion--danger">Si</span>
+		</div>
+		</div>
+		
+		`;
+		
+	});
 }

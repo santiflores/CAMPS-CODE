@@ -9,8 +9,7 @@ if(!$conexion){
 }
 
 if (isset($_SESSION['usuario'])) {
-	header('Location: index.php');
-	die();
+	header('Location: index.php');;
 }
 $errores = '';
 
@@ -24,8 +23,8 @@ $telefono = '';
 $obra_social = '';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$nombre = limpiarDatos($_POST['nombre']);
-	$apellido = limpiardatos($_POST['apellido']);
+	$nombre = ucfirst(limpiarDatos($_POST['nombre']));
+	$apellido = ucfirst(limpiardatos($_POST['apellido']));
 	$password = limpiarDatos($_POST['password']);
 	$contraseña_guardada = limpiarDatos($_POST['password']);
 	$password2 = limpiarDatos($_POST['password2']);
@@ -57,12 +56,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 	}
 
+	// Validamos que la direccion de mail sea correcta
+
+	if (filter_var($email, FILTER_VALIDATE_EMAIL) != TRUE) {
+		$errores .= '<li>El mail ingresado no es valido</li>';
+	}
+
 	if ($errores == '') {
+		$hash = md5(rand(0,1000));
 		$statement = $conexion->prepare(
-			'INSERT INTO `usuarios` 
-			(`nombre`, `apellido`, `pass`, `email`, `dni`, `telefono`, `obra_social`) 
-			VALUES (:nombre, :apellido, :pass, :email, :dni, :telefono, :obraSocial);');
+			'INSERT INTO `cuentas_a_activar` 
+			(`hash`, `nombre`, `apellido`, `pass`, `email`, `dni`, `telefono`, `obra_social`) 
+			VALUES (:h, :nombre, :apellido, :pass, :email, :dni, :telefono, :obraSocial);');
 		$statement->execute(array(
+			':h' => $hash,
 			':nombre' => $nombre,
 			':apellido' =>  $apellido,
 			':pass' => $password,
@@ -71,12 +78,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			':telefono' => $telefono,
 			':obraSocial' => $obra_social
 		));
-
-		// Despues de registrar al usuario redirigimos para que inicie sesion.
-		header('Location: login.php');
+		require 'mail/verificacion_mail.php';
+		// Despues de registrar al usuario redirigimos para activar la cuenta.	
+		header('Location: activar.php');
 	}
-
-
+		
+	
 }
 
 require 'views/registrarse.view.php';

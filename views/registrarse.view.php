@@ -24,10 +24,11 @@
 				<input type="text" class="input-text" placeholder="DNI" name="dni" value="<?php echo($dni);?>">
 				<input type="text" class="input-text" placeholder="Telefono (opcional)" name="telefono" value="<?php echo($telefono);?>">
 				<label for="">Obra Social</label>
-				<select class="select" name="obra_social">
+				<select class="input-text" name="obra_social">
+					<option disabled="true" selected>Seleccione una</option>
 					<?php
 					foreach ($obras_sociales as $obra_social) {
-						'<option value="'.$obra_social.'">'.$obra_social.'</option>';
+						echo('<option value="'.$obra_social['obra_social'].'">'.$obra_social['obra_social'].'</option>');
 					}
 					?>
 				</select>

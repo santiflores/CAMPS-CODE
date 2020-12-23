@@ -21,6 +21,7 @@ $contraseña_DB = $usuario['pass'];
 $obra_social = $usuario['obra_social'];
 $telefono = $usuario['telefono'];
 
+$mensaje = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$contraseña_actual = hash('sha512', $_POST['contraseña_actual']);
@@ -28,15 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$repetir_contraseña = hash('sha512', $_POST['repetir_contraseña']);
 	
 	if ($contraseña_DB == $contraseña_actual && $repetir_contraseña == $nueva_contraseña && !empty($contraseña_actual)) {
-		print_r($contraseña_DB);
-		echo('<br>');
-		print_r($contraseña_actual);
-		echo('<br>');
-		echo('........');
-		echo('<br>');
-		print_r($nueva_contraseña);
-		echo('<br>');
-		print_r($repetir_contraseña);
+		
 		$contraseña_DB = $nueva_contraseña;
 		$statement = $conexion->prepare(
 			'UPDATE `usuarios`
@@ -47,7 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			':pass' => $contraseña_DB,
 			':id' => $user_id
 		));
+		$mensaje = '<span class="sin-turnos">Tu contraseña se cambió correctamente.</span>';
 	}
+	
 }
 
 require '../views/mi_cuenta.view.php'

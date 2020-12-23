@@ -2,7 +2,7 @@
 
 function conexion($bd_config)  {
 	try {
-		$conexion = new PDO('mysql:host=localhost;dbname=' . $bd_config['basedatos'], $bd_config['usuario'], $bd_config['pass']);
+		$conexion = new PDO('mysql:host=' . $bd_config['host'] . ';dbname=' . $bd_config['basedatos'], $bd_config['usuario'], $bd_config['pass']);
 		return $conexion;
 	} catch (PDOexception $e) {
 		return false;
@@ -105,7 +105,7 @@ function rangoHorario(){
 //trae las obras sociales de la base de datos
 function obrasSociales($conexion){
 	$resultado = $conexion->query("SELECT * FROM obras_sociales");
-	$resultado = $resultado->fetch();
+	$resultado = $resultado->fetchAll();
 	return ($resultado) ? $resultado : false;
 }
 ?>

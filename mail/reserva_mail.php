@@ -37,6 +37,9 @@ try {
 	$mail->isHTML(true);                                  // Set email format to HTML
 	$mail->Subject = 'CAMPS - Reserva exitosa';
 	$mail->Body = '
+	<head>
+	<meta charset=UTF-8″>
+	</head>
 	<style>
 	.flex-center{	
 		display: flex;
@@ -107,7 +110,6 @@ try {
 	}
 	</style>
 	<body>
-	<meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
 	<div class="flex-center separador">
 		<h2>Informacion de la reserva</h2>
 	</div>

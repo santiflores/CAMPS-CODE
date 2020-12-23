@@ -24,13 +24,14 @@
 				<div class="cuenta_info_item cambiar_contraseña">
 					<div>
 						<span>Cambiar contraseña</span>	
-						<form action="<?php echo($_SERVER['PHP_SELF'])?>" method="POST">
+						<form action="<?php echo($_SERVER['PHP_SELF'])?>" method="POST" id="cambiar_contraseña_form">
 							<div class="nueva-repetir-contraseña">
 								<input type="password" placeholder="Nueva contraseña" name="nueva_contraseña">
 								<input type="password" placeholder="Repetir nueva contraseña" name="repetir_contraseña">
 								<input class="contraseña-actual"type="password" placeholder="Contraseña actual" name="contraseña_actual">
 							</div>
-							<span class="input-submit borrar-btn"type="submit" id="cambiar_contraseña" data-route=>Cambiar Contraseña</span>
+							<?php echo($mensaje)?>
+							<span class="input-submit" id="cambiar_contraseña">
 						</form>
 					</div> 
 				</div>
