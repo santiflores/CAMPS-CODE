@@ -46,6 +46,7 @@ if (isset($_GET['h']) && !empty($_GET['h'])) {
 		$titulo = 'Tu cuenta fue activada correctamente.';
 		$texto = 'Podes cerrar esta pestaña o ir a la pagina de <a href="index.php">inicio</a>';
 		$imagen = 'undraw_confirmed.svg';
+		require 'mail/bienvenida_mail.php';
 	}
 }else {	
 	$titulo = '¡Activa tu cuenta!';

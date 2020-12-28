@@ -29,7 +29,8 @@ const DOMelements = {
 	
 	borrarBtns: document.querySelectorAll(".borrar-btn"),
 	changePassForm: document.getElementById('cambiar_contraseña_form'),
-	changePassBtn: document.getElementById("cambiar_contraseña")
+	changePassBtn: document.getElementById("cambiar_contraseña"),
+	
 
 }
 let loader = document.createElement('div');
@@ -306,23 +307,38 @@ function getOffset(el) {
 
 if (DOMelements.appointmentFormBtns != null) {
 	DOMelements.appointmentFormBtns.forEach((btn)=>{
-
+// 		//parentDiv son los divs adentro del wrapperDiv
 		btn.addEventListener('click',()=>{
+			let parentDiv = btn.parentNode,
+				parentDivOffset = getOffset(parentDiv),
+				wrapperDiv = parentDiv.parentNode,
+				patientForm = document.createElement('div');
+			patientForm.classList.add('reservar--card');
+			
+			patientForm.style.width = parentDiv.offsetWidth+'px'
+			patientForm.style.height = parentDiv.offsetHeight+'px'
+			wrapperDiv.appendChild(patientForm);
+			patientForm.classList.add('turno-formulario');
+			parentDiv.style.display = "none";
+			// 	wrapperDivBottom = getOffset(wrapperDiv),
+			// 	firstSibling = DOMelements.appointmentInfo[0],
+			// 	firstSiblingTop = getOffset(firstSibling);
 
-			let parentDiv = btn.parentNode;
-			parentDiv.classList.add('turno-formulario');
-			let childOffset = []
-			DOMelements.appointmentInfo.forEach((div)=>{
-				let position = getOffset(div)
-				console.log(position);
-				position = [position.top, position.bottom]
-				childOffset.push(position)
-			})
-			console.log(childOffset);
-			parentDiv.style.top = childOffset[0][0] + 'px';
-			parentDiv.style.height = childOffset[2][1] - childOffset[0][0] + 'px';
-			parentDiv.style.width = DOMelements.appointmentInfo[0].style.width;
-			console.log(DOMelements.appointmentInfo[0].style);
+			// firstSiblingTop = firstSiblingTop.top;
+			// wrapperDivBottom = wrapperDivBottom.bottom;
+			// parentDiv.classList.add('turno-formulario');
+
+			//Siblings = divs dentro del wrapper
+			// let siblings = DOMelements.appointmentInfo,
+			// 	siblingsWidth = wrapperDiv.offsetWidth,
+			// 	secondSiblingHeight = siblings[2].offsetHeight + 50;
+
+			// siblings[1].style.margin = "0px 30px " + secondSiblingHeight + 'px 30px'
+			// parentDiv.style.top = firstSiblingTop + 'px';
+			// parentDiv.style.height = wrapperDivBottom - firstSiblingTop + 'px';
+			// parentDiv.style.width = siblingsWidth + 'px';
+			// parentDiv.style.width = DOMelements.appointmentInfo[0].style.width;
+			// console.log(DOMelements.appointmentInfo[0].style);
 		});
 
 	});

@@ -702,6 +702,7 @@ Sacar Turno
 	height: 100%;
 }
 .reservar--card{
+	background-color: #FFF;
 	border-radius: 5px;
 	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
 	padding: 15px 20px;
@@ -720,9 +721,25 @@ Sacar Turno
 .reservar--card .input-text{
 	margin: 0;
 }
+@keyframes pacinteFormulario{
+	from{
+		position: absolute;
+		height: inherit;
+		width: inherit;
+		margin: inherit;
+	} to {
+		position: relative;
+		height: 100%;
+		width: 100%;
+		margin: 0;
+	}
+}
 .turno-formulario{
-	position: absolute;
-	background-color: #FFF;
+	-webkit-animation: pacinteFormulario 2s ease;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	margin: 0;
 }
 .reserva-submit{
 	height: 50px;
