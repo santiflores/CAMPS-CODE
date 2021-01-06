@@ -25,8 +25,8 @@ if (isset($_SESSION['admin'])) {
 				</button>
 				<div class="dropdown-menu dropdown-menu-right">
 					<a href="'. RUTA .'/medicos/turnos.php" class="dropdown-item">Proximos Turnos</a>
-					<a href="'. RUTA .'/cerrar_sesion.php" class="dropdown-item">Cerrar sesion</a>
 					<a href="" class="dropdown-item disabled">Mi cuenta</a>
+					<a href="'. RUTA .'/cerrar_sesion.php" class="dropdown-item">Cerrar sesion</a>
 				</div>
 			</div>
 		</li>		
@@ -44,8 +44,8 @@ if (isset($_SESSION['admin'])) {
  				</button>
   				<div class="dropdown-menu dropdown-menu-right">
 				  <a href="'. RUTA .'/usuarios/mis_turnos.php" class="dropdown-item">Mis Turnos</a>
-				  <a href="'. RUTA .'/cerrar_sesion.php" class="dropdown-item">Cerrar sesion</a>
 				  <a href="'. RUTA .'/usuarios/mi_cuenta.php" class="dropdown-item">Mi cuenta</a>
+				  <a href="'. RUTA .'/cerrar_sesion.php" class="dropdown-item">Cerrar sesion</a>
 				</div>
 			</div>
 		</li>
@@ -65,12 +65,12 @@ if (isset($_SESSION['admin'])) {
 	<a href="<?php echo RUTA;?>/index.php" class="logoheader">
 		<img src="<?php echo RUTA;?>/images/logo_camps.png" alt="CAMPS">
 	</a>
-	<div class="nav_boton_dropdown">
-		<svg width="60" height="70" viewBox="0 0 300 231" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<rect y="184" width="300" height="35" rx="15" fill="white"/>
-			<rect y="92" width="300" height="35" rx="15" fill="white"/>
-			<rect width="300" height="35" rx="15" fill="white"/>
-		</svg>
+		<div class="nav_boton_dropdown">
+			<svg width="60" height="70" viewBox="0 0 300 231" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<rect y="184" width="300" height="35" rx="15" fill="white"/>
+				<rect y="92" width="300" height="35" rx="15" fill="white"/>
+				<rect width="300" height="35" rx="15" fill="white"/>
+			</svg>
 	</div>
 	
 	<div id="navbar_dropdown">

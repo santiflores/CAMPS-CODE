@@ -38,10 +38,10 @@ loader.classList.add('loader-active');
 loader.innerHTML = '<img src="images/loader.png">'
 
 window.addEventListener('scroll', ()=>{
-	scrollPosition = window.scrollY;
-	if (scrollPosition >= 180) {
+	let scrollPosition = window.scrollY;
+	if (scrollPosition >= 140) {
 		DOMelements.header.classList.add('header-collapsed')
-		document.body.style.padding = '180px 0 0 0';
+		document.body.style.padding = '140px 0 0 0';
 	} else {
 		DOMelements.header.classList.remove('header-collapsed')
 		document.body.style.padding = '0 0 0 0';

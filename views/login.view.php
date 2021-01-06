@@ -29,7 +29,7 @@
 		</form>
 	</div>	
 	<div class="login-bg">
-		<img src="images/medicos_login.png" alt="">
+		<!-- <img src="images/medicos_login.png" alt=""> -->
 	</div>
 </div>
 	<script src="<?php echo(RUTA)?>/js/scripts.js"></script>

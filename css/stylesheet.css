@@ -22,7 +22,7 @@
 	width:100%;
 	border: none;
 	padding: 10px 1em;
-	font-size: 20px;
+	font-size: 1.3em;
 }
 .input-submit{
 	width: 100%;
@@ -61,7 +61,7 @@ option{
 .form{
 	width: 100%;
 	padding: 30px;
-	font-size: 15px;
+	font-size: 1em;
 }
 .borrar-btn{
 	text-align: center;
@@ -90,7 +90,7 @@ option{
 	text-align: center;
 	text-decoration: none;
 	font-weight: 700px;
-	font-size: 18px;
+	font-size: 1.1em;
 	color: #fff;
 	background: #D13F3F;
 	width: 100%;
@@ -136,7 +136,7 @@ option{
 .header{
 	background-color: #fff;
 	color: #333333;
-	height: 180px;
+	height: 140px;
 	width: 100%;
 	top: 0;
 	left: 0;
@@ -148,9 +148,9 @@ option{
 }
 .header-collapsed{
 	background-color: #ffffffd0;
-	height: 90px;
+	height: 70px;
 	flex-direction: row;
-	align-items: stretch;
+	align-items: center;
 	justify-content: space-between;
 	position: fixed;
 }
@@ -164,7 +164,7 @@ option{
 .logoheader img{
 	object-fit: contain;
 	width: auto;
-	max-height: 70px;
+	max-height: 50px;
 }
 /*
 * Navegación
@@ -231,10 +231,10 @@ option{
 	transition: all 0.3s ease-in-out;
 }
 #navbar_dropdown ul > li > a{
-	font-size: 35px;
+	font-size: 2em;
 	color: #FFF;
 	text-decoration: none;
-	font-size: 15px;
+	font-size: 1em;
 	transition: 0.3s ease;
 }
 @keyframes slidein {
@@ -252,7 +252,7 @@ nav{
 
 nav ul{
 	list-style: none;
-	height: 90px;
+	height: 70px;
 	margin: auto;
 	display: flex;
 	align-self: center;
@@ -260,7 +260,7 @@ nav ul{
 }
 
 nav ul li{
-	height: 90px;
+	height: 70px;
 	width: 170px;
 	display: inline-block;
 	margin: 0 20px;
@@ -269,11 +269,11 @@ nav ul li{
 	transition: all 0.1s ;
 }
 nav ul li a{
-	line-height: 90px;
-	height: 90px;
+	line-height: 70px;
+	height: 70px;
 	width: 100%;
 	color: #646464;
-	font-size: 20px;
+	font-size: 1.3em;
 	font-weight: 600;
 	margin: auto;
 	text-align: center;
@@ -319,12 +319,10 @@ nav ul li:hover{
 .dropdown-item{
 	line-height: 20px;
 	height: 30px;
-}
-.show:focus{
-	border: none;
-}
+}	
 @media only screen and (max-width: 970px){
 	.header nav{
+		font-size: small;
 		display: none;
 	}
 	.nav_boton_dropdown{
@@ -332,8 +330,9 @@ nav ul li:hover{
 	}
 }
 @media only screen and (max-width: 450px){
-	.header{
-		background: -webkit-linear-gradient(25deg, #fff 67%, #D13F3F 67.3%);
+
+	header, header *{
+		max-height: 40px;
 	}
 	.logoheader{
 		width: 67%;
@@ -409,11 +408,11 @@ Atencion medica
 }
 .atencion-medica--info h2{
 	font-weight: 600;
-	font-size: 40px;
+	font-size: 2.5em;
 	max-width: 350px;
 }
 .atencion-medica--info p{
-	font-size: 25px;
+	font-size: 1.5em;
 	max-width: 450px;
 	gap: 60px;
 }
@@ -468,15 +467,14 @@ Contacto
 .contact_info{
 	border-radius: 5px;
 	padding: 50px;
-	text-align: right;
 	color: #6B6B6B;
 }
 .contact_section h2{
 	font-weight: 600;
-	font-size: 50px;
+	font-size: 3.1em;
 }
 .contact_section p{
-	font-size: 25px;
+	font-size: 1.5em;
 }
 
 /*  Contact medias  */
@@ -497,11 +495,6 @@ Contacto
 		height: 200px;
 	}
 }
-@media only screen and (max-width: 445px){
-	.contact_section h2{
-		font-size: 40px;
-	}
-}
 
 /*
 Footer
@@ -515,7 +508,7 @@ footer{
 	width: 450px;
 	margin-left: auto;
 	margin-right: auto;
-	font-size: 25px;
+	font-size: 1.5em;
 	padding-bottom: 10px;
 }
 .logo_footer{
@@ -548,12 +541,11 @@ footer{
 */
 
 .titulo_medicos{
-	padding: 0 1em;
+	padding: 1em;
 	width: 100%;
 	height: 80px;
 	display: flex;
 	align-items: center;
-	box-shadow: 0 0 10px #999;
 }
 .buscar{
 	padding: 0;
@@ -616,7 +608,7 @@ footer{
 	display: none;
 }
 .info_medico p {
-	font-size: 14px;
+	font-size: 1em;
 }
 .foto_medico{
 	height: 100%;
@@ -629,7 +621,7 @@ footer{
 	background-color:#EB5555;
 	border-top: 1px solid #EB5555;
 	color: #FFF;
-	font-size: 15px;
+	font-size: 1em;
 	font-weight: 600;
 	transition: all 0.2s;
 }
@@ -660,7 +652,7 @@ footer{
 	}
 	.separador{
 		padding: 20px;
-		font-size: 15px;
+		font-size: 1em;
 	}
 }
 
@@ -674,7 +666,7 @@ Sacar Turno
 	margin: auto;
 	display: grid;
 	grid-template-columns: 350px 1fr;
-	box-shadow: 0 0 10px #CCC;
+	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
 }
 .info-consulta{
 	background: #FFF;
@@ -752,14 +744,14 @@ Sacar Turno
 	font-weight: 600;
 }
 .bloqueado{
-	cursor: not-allowed;
-	opacity: 60%;
+	z-index: -1;
+	background-color: #e9676786;
 }
 .alert{
 	padding: 10px;
 	color: #fff;
 	border-radius: 2px;
-	font-size: 14px;
+	font-size: 0.9em;
 	background: #f2DEDE;
 	border: 1px solid #a94442;
 	color: #a94442;
@@ -795,7 +787,7 @@ Sacar Turno
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 22px;
+	font-size: 1.3em;
 }
 .calen-title > *{
 	color: #FFF;
@@ -1157,7 +1149,6 @@ Registrarse
 	margin-right: auto;
 	height: 40px;
 	width:100%;
-	font-size: 15px;
 	transition: 0.5s;
 }
 .editar_borrar a{
@@ -1248,7 +1239,6 @@ Registrarse
 }
 .nueva-fila{
 	border-radius: 10px;
-	font-size: 16px;
 	color: #AAA;
 	padding: 25px;
 	margin: 20px;
@@ -1269,7 +1259,6 @@ Registrarse
 	height: 35px;
 	padding: 5px;
 	margin: 5px 10px 5px 0;
-	font-size: 15px;
 	color: #FFF;
 	border: none;
 	border-radius: 3px;
@@ -1306,7 +1295,6 @@ Registrarse
 .sin-turnos{
 	width: 100%;
 	text-align: center;
-	font-size: 15px;
 	color: #CCC;
 }
 .turno{
@@ -1534,7 +1522,7 @@ Turno
 	max-width: 1060px;
 	width: 100%;
 	font-weight: 600;
-	font-size: 35px;
+	font-size: 2.1em;
 }
 .mi_cuenta_info{
 	width: 100%;
@@ -1547,7 +1535,7 @@ Turno
 }
 .cuenta_info_titulo{
 	height: 65px;
-	font-size: 24px;
+	font-size: 1.5em;
 	font-weight: 600;
 	padding: 15px;
 }
@@ -1614,7 +1602,7 @@ Turno medico - Consulta
 	grid-template-rows: 3fr 2fr;
 	row-gap: 25px;
 	column-gap: 60px;
-	font-size: 25px;
+	font-size: 1.5em;
 	color: #6D6D6D;
 }
 .wrapper_turno > div {
