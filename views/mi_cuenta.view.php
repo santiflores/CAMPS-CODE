@@ -31,9 +31,9 @@
 								<input class="contraseña-actual"type="password" placeholder="Contraseña actual" name="contraseña_actual">
 							</div>
 							<?php echo($mensaje)?>
-							<span class="input-submit" id="cambiar_contraseña">
+							<input type="submit" class="input-submit" id="cambiar_contraseña" value="Cambiar contraseña">
 						</form>
-					</div> 
+					</div>
 				</div>
 			</div>
 

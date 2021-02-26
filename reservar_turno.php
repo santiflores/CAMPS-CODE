@@ -249,58 +249,56 @@ function displayReservarTurno($conexion, $medico_id, $semana_horarios, $medico_a
 	$medico_actual = obtenerMedicoPorId($conexion, $medico_id);
 	if ($_GET['id'] == true) {	
 		echo('
-			<form class="info-consulta" id="reservar_turno" method="get" action="'. $_SERVER["PHP_SELF"] .'">
-				<input type="hidden" id="medico_id" name="id" value="'. $medico_id .'">
+			<form class="info-consulta" id="reservar_turno" method="post" action="'. $_SERVER["PHP_SELF"] .'">	
+				<input type="hidden" id="id" name="id" value="'. $_SESSION['usuario'] .'">
+				<input type="hidden" id="medico_id" name="medico_id" value="'. $medico_id .'">
 				<input type="hidden" name="fecha" id="selected-day" value="">
 				<input type="hidden" name="hora" id="selected-time" value="">
+
+				<input type="hidden" name="pnr" id="pnr" value="">
+				<input type="hidden" name="nombre" id="nombre" value="">
+				<input type="hidden" name="apellido" id="apellido" value="">
+				<input type="hidden" name="dni" id="dni" value="">
+				<input type="hidden" name="fecha_de_nac" id="fecha-nac" value="">
+		
 				
+
 				<span class="flex-center-start reservar-turno--header">
 					<a href="medicos.php" class="flecha-volver">
 						<img src="images/flecha.svg">
 					</a>
-					<h3>'. $medico_actual['nombre'] .'</h3>
+					<p class="info-consulta--nombre">'. $medico_actual['nombre'] .'</p>
 				</span>
-				
-				<div class="reservar--card">
-					<b>Precio de la consulta:</b>
-						<ul class="lista-precio">
-						'. $precios .'
-						</ul>
-				</div>
-				<div class="wrapper-para-mi" style="display:none">
-					<h5>Para quien es el turno?</h5>
-					<div>
-						<input type="text" class="input-text form-para-mi" placeholder="Nombre"></input>
-						<input type="text" class="input-text form-para-mi" placeholder="Apellido"></input>
-						<input type="text" class="input-text form-para-mi" placeholder="DNI"></span>
-						<input type="text" class="input-text form-para-mi" placeholder="Fecha de nacimiento"></input>
-						<button class="border-button">Cancelar</button>
-						<button class="border-button">Guardar</button>
-					</div>
+				<div>
+					<div class="reservar--card">
+						<b>Precio de la consulta:</b>
+							<ul class="lista-precio">
+							'. $precios .'
+							</ul>
 					</div>
 
-				<div class="reservar--card">
-					<b>Fecha seleccionada</b>
-					<span class="input-text" id="fecha-del-turno">Seleccione una fecha </span>
+					<div class="reservar--card">
+						<b>Fecha del turno</b>
+						<span class="input-text" id="fecha-del-turno">Seleccione una fecha </span>
+					</div>
+
+					<div class="reservar--card" id="turno-formulario">
+					
+						<b>¿Para quien es el turno?</b>
+						<div class="turno-formulario-buttons border-button" id="btn-para-mi">Para mi</div>
+						<div class="turno-formulario-buttons border-button" id="btn-pnr">Otra persona</div>
+					</div>
+
+					<span>');
+					
+					if (!empty($error)) {
+						echo('<div class="alert">'. $error .'</div>');
+					}
+					echo('
+					</span>
+
+					<input class="flex-center reserva-submit bloqueado" type="submit" value="Reservar turno">
 				</div>
-
-				<div class="reservar--card" id="turno-formulario">
-				
-					<b>¿Para quien es el turno?</b>
-					<div class="turno-formulario-buttons border-button">Para mi</div>
-					<div class="turno-formulario-buttons border-button">Otra persona</div>
-				</div>
-
-				<span>');
-				
-				if (!empty($error)) {
-					echo('<div class="alert">'. $error .'</div>');
-				}
-				echo('
-				</span>
-
-				<span class="flex-center reserva-submit bloqueado" type="submit">Reservar turno</span>
-
 			</form>
 		<div class="wrapper-calendario">
 			<h2 style="text-align: center;">Seleccione la fecha</h2>');
@@ -331,17 +329,113 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 		'Fri' => rangoHorarioDiario($medico_id, 'viernes', $conexion)
 	];
 	
-} else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+} else if ($_SERVER['REQUEST_METHOD'] == 'POST') {	
 
 	$errores = 0;
 	$usuario_id = $_SESSION['usuario'];
-	$medico_id = limpiarDatos($_POST['id']);
+	$medico_id = limpiarDatos($_POST['medico_id']);
 	$fecha = limpiarDatos($_POST['fecha']);
 	$hora = limpiarDatos($_POST['hora']);
-	$ur = limpiarDatos($_POST['ur']);
-	$np_id = null;
+	$pnr = limpiarDatos($_POST['pnr']);
+	$pnr_id = null;
 	$fechaYmd = date_format(new DateTime($fecha), 'Y-m-d');
+
+	if (empty($hora)) {
+		$errores += 2;
+	}
+
+	// Checkeo si el turno esta tomado en la base de datos 
+	$statement = $conexion->prepare('SELECT id FROM turnos WHERE fecha = :fecha AND hora = :hora');
+	$statement->execute(array(
+		':fecha' => $fechaYmd,
+		':hora' => $hora
+	));
+	$turno_tomado = $statement->fetch();
+	
+	if ($turno_tomado != false) {
+		$errores = 5;
+	}
+
+
+	if ($pnr == 'true') {
+
+		$pnr_nombre = limpiarDatos($_POST['nombre']);
+		$pnr_apellido = limpiarDatos($_POST['apellido']);
+		$pnr_dni = limpiarDatos($_POST['dni']);
+		$pnr_fecha_de_nac = limpiarDatos($_POST['fecha_de_nac']);
+
+		if (empty($pnr_nombre) || empty($pnr_apellido) || empty($pnr_dni) || empty($pnr_fecha_de_nac) || empty($pnr)) {
+			$errores += 1;
+		}
+
+		if (empty($errores)) {
+
+			$statement = $conexion->prepare(
+				'INSERT INTO usuarios_no_registrados 
+				(`emisor_id`, `nombre`, `apellido`, `dni`, `fecha_de_nac`)
+				VALUES (:emisor_id, :nombre, :apellido, :dni, :fecha_nac)'
+			);
+
+			$statement->execute(array(
+				':emisor_id' => $usuario_id,
+				':nombre' => $pnr_nombre,
+				':apellido' => $pnr_apellido,
+				':dni' => $pnr_dni,
+				':fecha_nac' => $pnr_fecha_de_nac
+			));
+
+			$statement = $conexion->query('SELECT id FROM usuarios_no_registrados ORDER BY id DESC LIMIT 1');
+			$statement = $statement->fetch();
+			
+			$pnr_id = $statement[0]; 
+		}
+	}
+
+
+
+	if (empty($errores)) {
+		
+		$statement = $conexion->prepare(
+			'INSERT INTO turnos (`usuario_id`, `medico_id`, `no_registrado_id`, `fecha`, `hora`)
+			VALUES (:usuario_id, :medico_id, :no_registrado_id, :fecha, :hora)'
+		);
+		$statement->execute(array(
+			':usuario_id' => $usuario_id,
+			':medico_id' => $medico_id,
+			':no_registrado_id' => $pnr_id,
+			':fecha' => $fechaYmd,
+			':hora' => $hora
+		));
+
+		$statement = $conexion->prepare(
+			'SELECT * FROM turnos ORDER BY id DESC LIMIT 1'
+		);
+		$statement->execute();
+		$turno = $statement->fetch();
+		
+		$hora = date_format(new DateTime($turno['hora']), 'H:i');
+		$fecha = date_format(new DateTime($turno['fecha']), 'd-m-Y');
+		$medico_id = $turno['medico_id'];
+		$usuario_id = $turno['usuario_id'];
+		$pnr_id = $turno['no_registrado_id'];
+		
+		if ($pnr_id != null) {
+			$paciente = obtenerPnrPorId($conexion, $pnr_id);
+		} else {
+			$paciente = obtenerPacientePorId($conexion, $usuario_id);
+		}
+
+		$medico_actual = obtenerMedicoPorId($conexion, $medico_id);
+		$especialidad = $medico_actual['especialidad'];
+
+		
+
+		require('mail/reserva_mail.php');
+		header('Location: usuarios/reserva_exitosa.php?id='. $turno['id']);
+
+	} else {
+		header('Location: reservar_turno.php?id='. $medico_id .'&error='. $errores);
+	}
 }
 require 'views/reservar.view.php';
 ?>

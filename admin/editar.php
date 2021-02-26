@@ -48,10 +48,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (!empty($foto)) {
 		$statement = $conexion->prepare(
 			'UPDATE `medicos`
-			SET `foto` = :foto'
+			SET `foto` = :foto
+			WHERE `id` = :id;'
 		);
 		$statement->execute(array(
-			':foto' => $foto
+			':foto' => $foto,
+			':id' => $medico_id,			
 		));
 	}
 

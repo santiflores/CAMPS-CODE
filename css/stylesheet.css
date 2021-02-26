@@ -29,6 +29,7 @@
 	height: 50px;
 	color: #FFF;
 	padding: 5px;
+	border-radius: 3px;
 	background: #ec6161;
 	border: none;
 	font-weight: 600;
@@ -83,7 +84,7 @@ option{
 	color: #3D3D3D;
 	transition: 0.4s ease;
 }
-.botonestitulo{
+.botones-titulo{
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -91,19 +92,17 @@ option{
 	text-decoration: none;
 	font-weight: 700px;
 	font-size: 1.1em;
-	color: #fff;
-	background: #D13F3F;
+	color: #3D3D3D;
 	width: 100%;
 	height: 50px;
 	margin-right: 10px;
 	border-radius: 30px;
-	transition: 0.5s ease;
+	transition: 0.3s ease;
 }
-.botonestitulo:hover{
-	background-color: #EC5151;
-	color: #FFF;
+.botones-titulo:hover{
+	color: #AAA;
 	text-decoration: none;
-	transition: 0.5s ease;
+	transition: 0.3s ease;
 }
 /*
 	Global loader
@@ -134,7 +133,7 @@ option{
 * Header General
 */
 .header{
-	background-color: #fff;
+	background-color: #FFF;
 	color: #333333;
 	height: 140px;
 	width: 100%;
@@ -157,6 +156,7 @@ option{
 .logoheader{
 	max-height: 90px;
 	padding: 10px;
+	margin: auto;
 	display:flex;
 	align-items: center;
 	justify-content: center;
@@ -330,18 +330,20 @@ nav ul li:hover{
 	}
 }
 @media only screen and (max-width: 450px){
-
+	header{
+		padding: 10px;
+	}
 	header, header *{
-		max-height: 40px;
+		max-height: 50px;
 	}
 	.logoheader{
-		width: 67%;
+		height: 100%;
 	}
 	.wrapper_drop_first .logoheader{
 		width: 67%;
 	}
 	.logoheader img{
-		width: 100%;
+		height: 100%;
 	}
 	@keyframes slidein {
 		from{
@@ -450,6 +452,19 @@ Atencion medica
 .medicosya-card a{
 	color: inherit;
 	font-weight: 600;
+}
+/*
+Atencion Medica Medias
+*/
+@media only screen and (max-width: 450px){
+.atencion-medica--info{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	flex-direction: column;
+	margin: 0 0 0 0;
+}
 }
 /*
 Contacto
@@ -667,9 +682,13 @@ Sacar Turno
 	display: grid;
 	grid-template-columns: 350px 1fr;
 	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
+	overflow: hidden;
 }
 .info-consulta{
 	background: #FFF;
+}
+.info-consulta > div{
+	padding-bottom:30px;
 }
 .reservar-turno--header{
 	height: 90px;
@@ -693,10 +712,19 @@ Sacar Turno
 .flecha-volver img{
 	height: 100%;
 }
+.info-consulta--nombre{
+	font-size: 1.5em;
+	font-weight: 600;
+	margin: 0;
+}
+#turno-formulario{
+	height: 160px;
+	overflow: hidden;
+}
 .reservar--card{
 	background-color: #FFF;
 	border-radius: 5px;
-	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
+	box-shadow: 0 0 10px rgb(0, 0, 0, 16%);
 	padding: 15px 20px;
 	margin: 0 30px 25px;
 }
@@ -713,25 +741,22 @@ Sacar Turno
 .reservar--card .input-text{
 	margin: 0;
 }
-@keyframes pacinteFormulario{
+.reservar--card .input-text:focus{
+	border: 1px solid #3D3D3D;
+}
+
+@keyframes pacienteFormulario{
 	from{
-		position: absolute;
-		height: inherit;
-		width: inherit;
-		margin: inherit;
+		margin-top: 100%;
 	} to {
-		position: relative;
-		height: 100%;
-		width: 100%;
-		margin: 0;
+		margin-top: 0;
 	}
 }
 .turno-formulario{
-	-webkit-animation: pacinteFormulario 2s ease;
-	position: relative;
-	height: 100%;
-	width: 100%;
+	-webkit-animation: pacienteFormulario 0.5s ease;
 	margin: 0;
+	border-top: 5px solid #EB5555;
+	box-shadow: 0 0 10px rgb(0, 0, 0, 20%);
 }
 .reserva-submit{
 	height: 50px;
@@ -757,7 +782,6 @@ Sacar Turno
 	color: #a94442;
 }
 
-.para
 /*  Calendario  */
 .wrapper-calendario{
 	display: flex;
@@ -765,7 +789,7 @@ Sacar Turno
 	align-items: center;
 	justify-content: center;
 	padding: 20px 0;
-	background: #F9F9F9;
+	background-color: #F9F9F9;
 }
 .wrapper-calendario h2{
 	margin: 0 auto 25px;
@@ -773,6 +797,7 @@ Sacar Turno
 .calendario{
 	width: 620px;
 	height: 420px;
+	margin: auto;
 }
 .calen-header{
 	width: 100%;
@@ -844,52 +869,79 @@ Sacar Turno
 	text-decoration: none;
 	cursor: not-allowed;
 }
-.horarios-header{
-	width: 100%;
-	align-self: flex-start;
-	padding: 10px 25px;
-	background-color: #EB5959;
-	color: #FFF;
-	font-weight: 800;
-}
 .wrapper-horarios{
 	width: 100%;
-	padding: 20px;
-}
-.wrapper-horarios h3{
-	margin: 25px 0;
-}
-.wrapper-horarios div{
 	padding: 20px 0;
 	display: flex;
 	width: auto;
 	flex-wrap: wrap;
 }
 .wrapper-horarios .calen-dia{
-	height: 60px;
-	width: 80px;
+	height: 100%;
+	width: 100%;
+	max-height: 60px;
+	max-width: 80px;
 	margin: 15px;
 	border-radius:5px;
 }
-.wrapper-para-mi{
+.form-paciente{
+	margin-top: 20px;
 	display: flex;
-	height: 580px;
-	width:340px;
-	
-}
-.wrapper-para-mi div{
-	display: flex;
-	width:100%;
-	margin:auto;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: auto;
 }
-.form-para-mi{
-	color:#D8D8D8;
-	border:1px solid #D8D8D8;
-	border-radius: 5px	;
+.pnr-input{
+	border: 1px solid #d8d8d8;
+	height: 40px;
+	max-width: 270px;
+	border-radius: 5px;
+}
+.pnr-card{
+	height: 100px;
+	width:100%;
+	max-width: 220px;
+	background-color: #FFF;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgb(0, 0, 0, 16%);
+	padding: 0px 10px;
+	margin: 7px auto 25px;
+	border: 3px solid #E96767;
+}
+.pnr-card--info{
+	color:#5c5c5c;
+	width: 100%;
+	height: 100%;
+	font-size: 16px;
+	font-weight: 600;
+	flex-direction: column;
+}
+.pnr-card b{
+	text-align: left;
+	font-size: 13px;
+	color:#2b2b2b;
+}
+#pnr-errores{
+	display: none;
+}
+.form-paciente--buttons{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.form-paciente--buttons > *{
+	width: 40%;
+	text-align: center;
+	max-width:140px;
+}
+.form-paciente--buttons > *:nth-child(even){
+	background-color: #EB5959;
+	color:#fff;
+}
+.form-paciente--buttons > *:nth-child(even):hover{
+	background-color: #EB5959;
+	color:#fff;
 }
 /*  Calendario medias  */
 @media (max-width: 1200px){
@@ -902,6 +954,7 @@ Sacar Turno
 		grid-template-columns: 1fr;
 		height: auto;
 	}
+	
 }
 @media (max-width: 620px){
 	.calendario{
@@ -909,8 +962,12 @@ Sacar Turno
 		height: 350px;
 	}
 	.calen-grid{
-		gap: 5px;
 		height: 280px;
+	}
+	.calen-dia{
+		font-size: 20px;
+		height: 35px;
+		width: 35px;
 	}
 	.wrapper-calendario{
 		display: block;
@@ -962,13 +1019,14 @@ Sacar Turno
 }
 .horarios-modal{
     -webkit-animation: modal-open 0.5s ease;
+	padding: 25px;
 	grid-column: 1/8;
 	grid-row: 1/6;
 	height: 310px;
 	border-radius: 5px;
 	background-color: #FFF;
 	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
-	overflow: hidden;
+	overflow-y: scroll;
 }
 
 /*
@@ -999,32 +1057,58 @@ About Us
 /*
 Login
 */
-.wrapper_login{
-	max-width:100vh;
+.login-header{
+	height: 10vh;
+}
+.wrapper-login{
+	width: 100%;
 	display: grid;
-	grid-template-columns: 1fr 4fr;
-	grid-template-rows: 90vh
+	grid-template-columns:  5fr 2fr;
+	height: 90vh;
+	gap: 0px;
 }
 .login{
 	height:100%;
+	width: 100%;
+	margin: 0;
 }
-.login_form{
-	width:300px;
-	margin:auto;
+.login-form{
+	width: 300px;
+	padding: 10px 25px ;
+	margin: 10vh auto;
+	color:#3d3d3d;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	padding: auto;
 }
-.login div{
-	padding: 10px 25px ;
-	color:#3d3d3d;
+.login-text{
+	color: #FFF;
+	position: relative;
+	text-align: left;
+	top: 30%;
+	margin: auto;
+	width: 370px;
+}
+.login-text b{
+	font-size: 50px;
+}
+.login-text p{
+	font-size: 25px;
 }
 .login-bg{
-	height: 80vh;
+	background-image: url(../images/medicos_login.png);
+	background-size: cover;
+	background-attachment: scroll;
+	width: 100%;
+	height: 90vh;
 	display:block;
 	text-align:center;
+}
+.login-angle{
+	height: 100%;
+	float: right;
 }
 .login-bg img{
 	max-width: 100%;
@@ -1042,26 +1126,39 @@ Registrarse
 	border-radius: 5px;
 	background-color: #FFF;
 }
-/* .login_form .input-text,
-.login_form .input-pass{
-	color: #AAA;
-	border: 1px solid #EEE;
-	border-radius: 3px;
-	height: 50px;
-	width: 100%;
-	padding: 25px;
-	font-size: 20px;
-} */
-.login_form .input-submit{
+.login-form .input-submit{
 	font-size: 20px;
 	width: 100%;
 
 }
-.login_form .input-text:focus,
-.login_form .input-pass:focus {
+.login-form .input-text:focus,
+.login-form .input-pass:focus {
 	padding: 15px;
 }
-
+/*
+ Media Login/Registrarse
+*/
+@media only screen and (max-width: 1024px){
+	.wrapper-login{
+		display:block;
+		height: auto;
+		
+	}
+	.login-bg{
+		display:none;
+	}
+	.login{
+		width:100%;
+		max-width:350px;
+		display:flex;
+		margin: auto;
+	}
+	.login-form{
+		margin:25px auto;
+		box-shadow:0 0 10px rgb(0, 0, 0, 15%);
+		border-radius: 5px;
+	}
+}
 /*
 	Pagina Administracion
 */
@@ -1255,14 +1352,16 @@ Registrarse
 	height: 30px;
 }
 .border-button{
-	width: 150px;
+	width: 160px;
 	height: 35px;
-	padding: 5px;
 	margin: 5px 10px 5px 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	color: #FFF;
 	border: none;
 	border-radius: 3px;
-	border: 2px solid #e65656;
+	border: 3px solid #e65656;
 	background: #FFF;
 	color: #e65656;
 	font-weight: 600;
@@ -1543,8 +1642,8 @@ Turno
 	border-top: 1px solid #E3E3E3;
 	height: 50px;
 	padding: 10px 50px;
-	align-items: center;
 	display:flex;
+	align-items: center;
 }
 .cuenta_info_item span:nth-child(odd){
 	font-weight: 600;
@@ -1583,10 +1682,36 @@ Turno
 	float: right;
 	background-color: #FC7474;
 }
-/*	Mi cuenta- medias	*/
-@media only screen and(max-width: 660px){
+/*	Mi cuenta medias	*/
+@media only screen and (max-width: 660px){
 	.nueva-repetir-contraseña{
 		display: block;
+	}
+}
+@media only screen and (max-width: 500px){
+	.cuenta_info_item{
+		padding:5px 25px;
+	}
+	.nueva-repetir-contraseña{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	.cuenta_info_titulo{
+		display: flex;
+		align-items: center;
+		justify-content: start;
+		height: 65px;
+		font-size: 1.2em;
+		font-weight: 600;
+		padding: 15px;
+	}
+}
+@media only screen and (max-width: 350px){
+	.cuenta_info_item{
+		padding:5px 25px;
+		height:100px;
 	}
 }
 /*

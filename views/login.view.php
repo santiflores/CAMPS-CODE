@@ -13,9 +13,18 @@
   </head>
 <body>
 <?php require('views/header.php');?>
-<div class="wrapper_login">
+<div class="wrapper-login">	
+	<div class="login-bg flex-center">
+		<img src="images/rectangle 4.png" alt="" class="login-angle">
+		<div class="login-text">
+
+			<b>Iniciá sesión a CAMPS</b>
+			<p>Iniciá sesión para poder ver tus citas y reservar nuevos turnos.</p>
+			
+		</div>
+	</div>
 	<div class="login">
-		<form action="login.php" method="POST" class="login_form">
+		<form action="login.php" method="POST" class="login-form">
 			<h5>Introduzca su Email</h5>
 			<input type="text" class="input-text" placeholder="Email" name="email">
 			<h5>Contraseña:</h5>
@@ -27,9 +36,6 @@
 			<p class="sin-turnos">¿No tenes cuenta? <a href="registrarse.php">Registrate</a></p>
 			<input type="submit" class="input-submit" value="Iniciar sesion">
 		</form>
-	</div>	
-	<div class="login-bg">
-		<!-- <img src="images/medicos_login.png" alt=""> -->
 	</div>
 </div>
 	<script src="<?php echo(RUTA)?>/js/scripts.js"></script>

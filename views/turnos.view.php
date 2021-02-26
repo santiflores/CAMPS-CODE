@@ -19,7 +19,7 @@
 			</h2>
 			<div class="botones_panel">
 			<div>
-        		<button class="botonestitulo botones_cards" id="boton_dropdown" onclick="agregarEspecialidad()">Filtrar turnos</button>
+        		<button class="botones-titulo botones_cards" id="boton_dropdown">Filtrar turnos</button>
 				<form id="agregar" method="GET" enctype="multipart/form-data" action="<?php htmlspecialchars($_SERVER['PHP_SELF'])?>">
 					<h6><b>Seleccionar fecha</b></h6> 
 					<input type="date" class="input-date" name="fecha">

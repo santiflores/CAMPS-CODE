@@ -141,7 +141,7 @@
 			</div>
 		<?php endif;?>
 		<br>
-		<a href="ausencias.php?id=<?php echo($_GET['id']);?>" class="botonestitulo botones_cards">
+		<a href="ausencias.php?id=<?php echo($_GET['id']);?>" class="botones-titulo botones_cards">
 			Ausencias
 		</a>
 		<input class="input-submit" type="submit" name="submit" value="Editar Medico">

@@ -13,9 +13,18 @@
 </head>
 <body>
 	<?php require'header.php'?>
-	<div class="wrapper_login">
-		<div class="registrarse">
-			<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST" class="login_form">
+	<div class="wrapper-login">
+		<div class="login-bg flex-center">
+			<img src="images/rectangle 4.png" alt="" class="login-angle">
+			<div class="login-text">
+
+				<b>Crea tu cuenta de CAMPS</b>
+				<p>Con tu cuenta de CAMPS vas a poder reservar turnos para estudios medicos y consultas con decenas de profesionales.</p>
+				
+			</div>
+		</div>
+		<div class="login">
+			<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST" class="login-form">
 				<input type="text" class="input-text" placeholder="Nombre" name="nombre" value="<?php echo($nombre)?>">
 				<input type="text" class="input-text" placeholder="Apellido" name="apellido" value="<?php echo($apellido);?>">
 				<input type="text" class="input-text" placeholder="Email" name="email" value="<?php echo($email);?>">
@@ -23,7 +32,7 @@
 				<input type="password" class="input-pass" placeholder="Repetir Contraseña" name="password2">
 				<input type="text" class="input-text" placeholder="DNI" name="dni" value="<?php echo($dni);?>">
 				<input type="text" class="input-text" placeholder="Telefono (opcional)" name="telefono" value="<?php echo($telefono);?>">
-				<label for="">Obra Social</label>
+				<label>Obra Social</label>
 				<select class="input-text" name="obra_social">
 					<option disabled="true" selected>Seleccione una</option>
 					<?php

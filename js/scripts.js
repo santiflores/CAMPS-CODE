@@ -18,13 +18,23 @@ const DOMelements = {
 	bookForm: document.getElementById('reservar_turno'),
 	appointmentInfo: document.querySelectorAll('.reservar--card'),
 	calendar: document.querySelector('.calen-grid'),
-	medic_id: document.getElementById('medico_id'),
-	dataInput: document.getElementById("selected-day"),
-	CalenHoras: document.querySelectorAll(".horarios"),
+	patientInfo: {
+		userId: document.querySelector('#id'),
+		medicId: document.getElementById('medico_id'),
+		dataInput: document.getElementById("selected-day"),
+		dataInputTime: document.getElementById("selected-time"),
+		pnr: document.getElementById('pnr'),
+		name: document.getElementById('nombre'),
+		lastName: document.getElementById('apellido'),
+		dni: document.getElementById('dni'),
+		birthDate: document.getElementById('fecha-nac')
+	},
 	calenDays: document.querySelectorAll(".calen-dia"),
-	dataInputTime: document.getElementById("selected-time"),
+	CalenHoras: document.querySelectorAll(".horarios"),
 	fechaEnUI: document.getElementById("fecha-del-turno"),
 	appointmentFormBtns: document.querySelectorAll('.turno-formulario-buttons'),
+	btnForMe: document.querySelector('#btn-para-mi'),
+	btnPnr: document.querySelector('#btn-pnr'),
 	appointmentForm: document.querySelector('#turno-formulario'),
 	
 	borrarBtns: document.querySelectorAll(".borrar-btn"),
@@ -55,22 +65,20 @@ DOMelements.headerItems.forEach(item => {
 });
 
 function displayDropdown(button, dropdown) {
-	button.forEach(el=>{
-		el.addEventListener('click', ()=>{
-			if (dropdown.style.display == 'block') {
-				dropdown.style.display='none';
-			} else {
-				dropdown.style.display='block';
-			}
-		});
-	})
+	button.addEventListener('click', ()=>{
+		if (dropdown.style.display == 'block') {
+			dropdown.style.display='none';
+		} else {
+			dropdown.style.display='block';
+		}
+	});
 }
 
-displayDropdown(DOMelements.navDropBtn, DOMelements.navDropdown);
 
 if (DOMelements.dropdownBtn != null) {
 	displayDropdown(DOMelements.dropdownBtn, DOMelements.dropdown);
 }
+// displayDropdown(DOMelements.navDropBtn, DOMelements.navDropdown);
 
 
 if (DOMelements.nuevoHorarioBtn != null) {
@@ -218,7 +226,7 @@ if (DOMelements.calenDays != null) {
 				day.classList.add('calen-dia--focus');
 				
 				let curDataDate = day.dataset.selectedDate;
-				DOMelements.dataInput.value = curDataDate;
+				DOMelements.patientInfo.dataInput.value = curDataDate;
 				DOMelements.fechaEnUI.innerHTML = curDataDate;
 				
 				loadSchedule(curDataDate);
@@ -235,7 +243,7 @@ function loadSchedule(date) {
 	let ajaxPetition = new XMLHttpRequest();
 	ajaxPetition.open('POST', 'traer_horarios.php');
 
-	let medic_id = DOMelements.medic_id.value;
+	let medic_id = DOMelements.patientInfo.medic_id.value;
 	if (date != '' & medic_id != '') {
 		let parameters = 'medico_id=' + medic_id + '&fecha=' + date; 
 		
@@ -253,19 +261,23 @@ function loadScheduleUI(petition, date){
 
 		oldAppointments.parentNode.removeChild(oldAppointments);
 	}
-	let appointments = document.createElement('div');
-	appointments.classList.add('horarios-modal');
-	DOMelements.calendar.appendChild(appointments);
+	let appointmentsModal = document.createElement('div');
+	appointmentsModal.classList.add('horarios-modal');
+	DOMelements.calendar.appendChild(appointmentsModal);
 
-	appointments.appendChild(loader)
+	appointmentsModal.appendChild(loader)
 	
 	petition.onload = ()=>{	
 		let data = JSON.parse(petition.responseText);
-		appointments.removeChild(loader);
-		appointments.innerHTML += `<h4>Turnos disponibles el dia ${date}</h4>`;
+		let appointmentsWrapper = document.createElement('div');
+		appointmentsWrapper.classList.add('wrapper-horarios')
+		appointmentsModal.removeChild(loader);
+		appointmentsModal.innerHTML += `<b>Turnos disponibles el dia ${date}</b>`;
+		appointmentsModal.appendChild(appointmentsWrapper);
+
 		for (let i = 0; i < data.length; i++) {
 			const appointment = data[i]['horario'];
-			appointments.innerHTML += `
+			appointmentsWrapper.innerHTML += `
 			<a class="calen-dia horarios" data-selected-time="${appointment}">${appointment}</a>
 			
 			`;
@@ -275,12 +287,12 @@ function loadScheduleUI(petition, date){
 
 }
 
-function calenHorasEvents(date) {
+function calenHorasEvents(date){
 	
-	calenHoras = document.querySelectorAll(".horarios");
+	calenHoras = document.querySelectorAll(".horarios" );
 		
 	calenHoras.forEach( (time) => {
-		console.log(time);
+
 		time.addEventListener('click', () => {
 			
 			calenHoras.forEach(function name(time) {
@@ -288,10 +300,21 @@ function calenHorasEvents(date) {
 			})
 			time.classList.add('calen-dia--focus');
 			let curDataHora = time.dataset.selectedTime;
-			DOMelements.dataInputTime.value = curDataHora;
+			DOMelements.patientInfo.dataInputTime.value = curDataHora;
 			
-			DOMelements.fechaEnUI.innerHTML = date;
-			DOMelements.fechaEnUI.innerHTML += ' a las ' + curDataHora;
+			DOMelements.fechaEnUI.innerHTML = date + ' a las ' + curDataHora;
+
+			let isFormIncomplete;
+			if (DOMelements.patientInfo.pnr.value === 'true') {
+				for (const input in DOMelements.patientInfo) {
+					if (DOMelements.patientInfo[input].value != ''){
+						isFormIncomplete = true;
+						
+					}
+				}
+			} else if (DOMelements.patientInfo.pnr.value === 'true') {
+				
+			}
 		});
 	})
 
@@ -306,49 +329,157 @@ function getOffset(el) {
 }
 
 if (DOMelements.appointmentFormBtns != null) {
-	DOMelements.appointmentFormBtns.forEach((btn)=>{
-// 		//parentDiv son los divs adentro del wrapperDiv
-		btn.addEventListener('click',()=>{
-			let parentDiv = btn.parentNode,
-				parentDivOffset = getOffset(parentDiv),
-				wrapperDiv = parentDiv.parentNode,
-				patientForm = document.createElement('div');
-			patientForm.classList.add('reservar--card');
+
+		//parentDiv son los divs adentro del wrapperDiv
+	let parentDiv = DOMelements.appointmentFormBtns[0].parentNode
+	
+	DOMelements.btnPnr.addEventListener('click', ()=>{
 			
-			patientForm.style.width = parentDiv.offsetWidth+'px'
-			patientForm.style.height = parentDiv.offsetHeight+'px'
-			wrapperDiv.appendChild(patientForm);
-			patientForm.classList.add('turno-formulario');
-			parentDiv.style.display = "none";
-			// 	wrapperDivBottom = getOffset(wrapperDiv),
-			// 	firstSibling = DOMelements.appointmentInfo[0],
-			// 	firstSiblingTop = getOffset(firstSibling);
+		wrapperDiv = parentDiv.parentNode,
+		wrapperHeight = wrapperDiv.offsetHeight,
+		wrapperWidth = wrapperDiv.offsetWidth,
+		wrapperOffset = getOffset(wrapperDiv),
+		patientForm = document.createElement('div');
+		
+		patientForm.classList.add('reservar--card');
+		
+		wrapperDiv.parentNode.style.height = wrapperDiv.parentNode.offsetHeight +'px';
+		patientForm.style.bottom = wrapperOffset.bottom +'px';
+		patientForm.style.height = wrapperHeight +'px';
+		patientForm.style.maxWidth = wrapperWidth +'px';
+		patientForm.innerHTML = `
+		<b>¿Para quien es el turno?</b>
+		<div class="form-paciente">
+			<p>Introduzca los datos del paciente</p>
+			<input type="text" class="input-text pnr-input" data-content="nombre" placeholder="Nombre" style="margin: 5px 20px;" value="">
+			<input type="text" class="input-text pnr-input" data-content="apellido" placeholder="Apellido" style="margin: 5px 20px;" value="">
+			<input type="number" class="input-text pnr-input" data-content="dni" placeholder="DNI" style="margin: 5px 20px;" value="">
+			<input type="date" class="input-text pnr-input" data-content="fecha_nac" style="margin: 5px 20px;" value="">
+			<span id="pnr-errores" class="alert"></span>
+			<div class="form-paciente--buttons">
+				<span id="pnr-cancelar" class="border-button form-paciente-btn"style="margin: 30px 5px;">Cancelar</span>
+				<span id="pnr-guardar" class="border-button form-paciente-btn"style="margin: 30px 5px;">Guardar</span>
+			</div>
+		</div>
+		`;
+		patientForm.classList.add('turno-formulario');
+		wrapperDiv.style.display = "none";
+		wrapperDiv.parentNode.appendChild(patientForm);
+		
+		let formBtns = document.querySelectorAll('.form-paciente-btn'),
+		pnrInput = document.querySelectorAll('.pnr-input');
+		
+		formBtns.forEach((btn)=>{
+			btn.addEventListener('click',()=>{
+				
+				let pnrBtnId = btn.id;
+				if (pnrBtnId == 'pnr-cancelar') {
+					wrapperDiv.style.display = "block";
+					patientForm.parentNode.removeChild(patientForm);
+				} else if (pnrBtnId == 'pnr-guardar') {
+					
+					DOMelements.patientInfo.pnr.value = 'true';
+					
+					let pnrInfo = {
+						name: '',
+						lastName: '',
+						dni: '',
+						birthdate: ''
+					};
+					let error = false;
 
-			// firstSiblingTop = firstSiblingTop.top;
-			// wrapperDivBottom = wrapperDivBottom.bottom;
-			// parentDiv.classList.add('turno-formulario');
+					pnrInput.forEach((input)=>{
+						let contentType = input.dataset.content,
+						value = input.value;
+						
+						if (value == ''){
+							let errorBox = document.getElementById('pnr-errores');
+							errorBox.style.display = 'block';
+							errorBox.innerHTML = 'Por favor, rellene todos los campos';
+							error = true;
+						} else {
 
-			//Siblings = divs dentro del wrapper
-			// let siblings = DOMelements.appointmentInfo,
-			// 	siblingsWidth = wrapperDiv.offsetWidth,
-			// 	secondSiblingHeight = siblings[2].offsetHeight + 50;
+							switch (contentType) {
+								case 'nombre':
+									DOMelements.patientInfo.name.value = value
+									pnrInfo.name = value;
+									break;
+								case 'apellido':
+									DOMelements.patientInfo.lastName.value = value
+									pnrInfo.lastName = value;
+									break;
+								case 'dni':
+									DOMelements.patientInfo.dni.value = value
+									pnrInfo.dni = value;
+									break;
+								case 'fecha_nac':
+									DOMelements.patientInfo.birthDate.value = value
+									pnrInfo.birthDate = value;
+									break;
+							}
+											
+							
+						}
+					});
+					
+					if (error == false) {
+						
+						pnrCardHtml = `
+						<div>
+							<b>Datos del paciente</b>
+							<div class="pnr-card">
+								<div class="flex-center pnr-card--info">
+									${pnrInfo.name} ${pnrInfo.lastName}<br>
+									<span><b>DNI</b> ${pnrInfo.dni}</span>
+								</div>
+							</div>
+						</div>
+					`;
+					parentDiv.insertAdjacentHTML('afterBegin', pnrCardHtml)
+					wrapperDiv.style.display = "block";
+					
+					}
+				}
+				
+			});
+		})
+	})
+		DOMelements.btnForMe.addEventListener('click', ()=>{
+			
+			DOMelements.patientInfo.pnr.value = 'false';
 
-			// siblings[1].style.margin = "0px 30px " + secondSiblingHeight + 'px 30px'
-			// parentDiv.style.top = firstSiblingTop + 'px';
-			// parentDiv.style.height = wrapperDivBottom - firstSiblingTop + 'px';
-			// parentDiv.style.width = siblingsWidth + 'px';
-			// parentDiv.style.width = DOMelements.appointmentInfo[0].style.width;
-			// console.log(DOMelements.appointmentInfo[0].style);
-		});
+			let ajaxPetition = new XMLHttpRequest();
+			ajaxPetition.open('POST', 'ajax_info_usuario.php');
+		
+			let id = DOMelements.patientInfo.id.value;
+			if (id != '') {
+				let parameters = 'id=' + user_id; 
+				
+				ajaxPetition.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		
+				ajaxPetition.send(parameters)
+			}
+			loadScheduleUI(ajaxPetition, date)
 
-	});
+			console.log('para mi');
+			cardHtml = `
+			<div>
+				<b>Para quien es el turno</b>
+				<div class="pnr-card">
+				parami
+				</div>
+			</div>
+			`;
+			parentDiv.insertAdjacentHTML('afterBegin', cardHtml)
+
+		})
 
 }
 	
 if (DOMelements.borrarBtns != null) {
 	DOMelements.borrarBtns.forEach((btn) => {
 		btn.addEventListener('click', () => {
-			console.log(btn);
+
 			let btnId, title, text, link, options, HTMLverif;
 			btnId = btn.id;
 			link = btn.dataset.route;
@@ -384,9 +515,7 @@ if (DOMelements.borrarBtns != null) {
 						<a href="" class="flex-center verificacion--button">${options[0]}</a>
 						<a href="${link}" class="flex-center verificacion--danger">${options[1]}</a>
 					</div>
-				</div>
-				
-			`;
+				</div>`;
 			
 		})
 	})
