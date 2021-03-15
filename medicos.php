@@ -48,7 +48,7 @@
 				<div class="medico">
 					<img src="images/'. $foto .'" class="foto_medico" alt="">
 					<div class="info_medico">
-					<h4>'. $nombre .'</h4>
+					<span>'. $nombre .'</span>
 					<p>'. $especialidad_actual .'</p>
 					<p>'. $horario .'</p>
 					</div>

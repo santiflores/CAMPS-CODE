@@ -88,7 +88,7 @@ if (DOMelements.nuevoHorarioBtn != null) {
 	} else {
 		var fila = DOMelements.filasExistentes[DOMelements.filasExistentes.length - 1];
 		fila = fila.id.split('fila');
-		fila = parseInt(fila[1]) + 1;
+		fila = parseInt(fila[1]) + 2;
 	}
 
 	DOMelements.nuevoHorarioBtn.addEventListener('click', function() {
@@ -243,9 +243,9 @@ function loadSchedule(date) {
 	let ajaxPetition = new XMLHttpRequest();
 	ajaxPetition.open('POST', 'traer_horarios.php');
 
-	let medic_id = DOMelements.patientInfo.medic_id.value;
-	if (date != '' & medic_id != '') {
-		let parameters = 'medico_id=' + medic_id + '&fecha=' + date; 
+	let medicId = DOMelements.patientInfo.medicId.value;
+	if (date != '' & medicId != '') {
+		let parameters = 'medico_id=' + medicId + '&fecha=' + date; 
 		
 		ajaxPetition.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
@@ -328,8 +328,8 @@ function getOffset(el) {
 	};
 }
 
-if (DOMelements.appointmentFormBtns != null) {
-
+if (DOMelements.appointmentFormBtns.length > 0) {
+	console.log(DOMelements.appointmentFormBtns);
 		//parentDiv son los divs adentro del wrapperDiv
 	let parentDiv = DOMelements.appointmentFormBtns[0].parentNode
 	
@@ -451,26 +451,31 @@ if (DOMelements.appointmentFormBtns != null) {
 			let ajaxPetition = new XMLHttpRequest();
 			ajaxPetition.open('POST', 'ajax_info_usuario.php');
 		
-			let id = DOMelements.patientInfo.id.value;
+			let userId = DOMelements.patientInfo.userId.value;
 			if (id != '') {
-				let parameters = 'id=' + user_id; 
+				let parameters = 'id=' + userId; 
 				
 				ajaxPetition.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		
 				ajaxPetition.send(parameters)
 			}
-			loadScheduleUI(ajaxPetition, date)
+			// loadScheduleUI(ajaxPetition, date)
+			ajaxPetition.onload = ()=>{	
+				let data = JSON.parse(ajaxPetition.responseText);
+				cardHtml = `
+					<div>
+						<b>Datos del paciente</b>
+						<div class="pnr-card">
+							<div class="flex-center pnr-card--info">
+								${data[0][0]} ${data[0][1]}<br>
+								<span><b>DNI</b> ${data[0][2]}</span>
+							</div>
+						</div>
+					</div>
+				`;
+				parentDiv.insertAdjacentHTML('afterBegin', cardHtml)
+			} 
 
-			console.log('para mi');
-			cardHtml = `
-			<div>
-				<b>Para quien es el turno</b>
-				<div class="pnr-card">
-				parami
-				</div>
-			</div>
-			`;
-			parentDiv.insertAdjacentHTML('afterBegin', cardHtml)
 
 		})
 

@@ -4,7 +4,7 @@ error_reporting(0);
 header('Content-type: application/json; charset=utf-8');
 require 'admin/config.php';
 
-$id = $_GET['id'];
+$id = $_POST['id'];
 
 function conexion($bd_config)  {
 	try {

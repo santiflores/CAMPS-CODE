@@ -2,7 +2,7 @@
 if (isset($_SESSION['admin'])) {
 	$header = '
 	<li class="header-item"><a href="'. RUTA .'/index.php">Inicio CAMPS</a></li>
-	<li class="header-item"><a href="'. RUTA .'/admin/administracion.php">Panel de administracion</a></li>
+	<li class="header-item"><a href="'. RUTA .'/admin/administracion.php">Administracion</a></li>
 	<li class="header-item">
 		<div class="btn-group">
 			<button type="button" class="btn dropdown-toggle header_icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -55,8 +55,7 @@ if (isset($_SESSION['admin'])) {
 		<li class="header-item"><a href="'. RUTA .'/index.php">Inicio</a></li>
 		<li class="header-item"><a href="'. RUTA .'/sobre_nosotros.php">Quienes somos</a></li>
 		<li class="header-item"><a href="'. RUTA .'/medicos.php">Profesionales</a></li>
-		<li class="header-item"><a href="'. RUTA .'/login.php">Iniciar sesión</a></li>
-		<li class="header-item"><a href="'. RUTA .'/registrarse.php">Registrarse</a></li>
+		<li class="header-item"><a href="'. RUTA .'/login.php">Ingresar</a></li>
 		';
 	}
 
@@ -67,9 +66,9 @@ if (isset($_SESSION['admin'])) {
 	</a>
 		<div class="nav_boton_dropdown">
 			<svg width="60" height="70" viewBox="0 0 300 231" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<rect y="184" width="300" height="35" rx="15" fill="white"/>
-				<rect y="92" width="300" height="35" rx="15" fill="white"/>
-				<rect width="300" height="35" rx="15" fill="white"/>
+				<rect y="184" width="300" height="35" rx="15" fill="black"/>
+				<rect y="92" width="300" height="35" rx="15" fill="black"/>
+				<rect width="300" height="35" rx="15" fill="black"/>
 			</svg>
 	</div>
 	

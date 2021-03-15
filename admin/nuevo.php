@@ -48,12 +48,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	if ($contraseña !== $contraseña2) {
 		$errores .= "<li>Las contraseñas deben ser iguales</li>";
 	} 
-
+	print_r($contraseña);
 
 
 	if ($errores == '') {
 		$statement = $conexion->prepare(
-		'INSERT INTO`medicos`
+		'INSERT INTO `medicos`
 		(`nombre`, `especialidad`, `horario`, `foto`, `dni`, `email`, `pass`) 
 		VALUES (:nombre, :especialidad, :horario, :foto, :dni, :email, :pass);' 
 		);
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			));
 		}
 
-			header('Location: ' . RUTA . '/admin/administracion.php');
+		header('Location: ' . RUTA . '/admin/administracion.php');
 	}
 }
 

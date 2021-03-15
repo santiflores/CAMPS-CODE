@@ -26,11 +26,11 @@
 
 						<div class="wrapper_info_reserva">
 							<div class="flex-center-start info_paciente_consulta"><b>Información de la reserva</b></div>
-							<div class="flex-center-start paciente"><b>Profesional: </b> <?php echo $medico_actual['nombre'] ?></div>
-							<div class="flex-center-start paciente"><b>Especialidad: </b> <?php echo $especialidad ?></div>
-							<div class="flex-center-start paciente"><b>Fecha: </b> <?php echo $fecha ?></div>
-							<div class="flex-center-start paciente"><b>Hora: </b> <?php echo $hora ?></div>
-							<div class="flex-center-start paciente"><b>Paciente: </b> <?php echo $paciente['nombre'].' '. $paciente['apellido'] ?></div>
+							<div class="flex-center-start paciente"><b>Profesional: </b> <?php echo ' '.$medico_actual['nombre'] ?></div>
+							<div class="flex-center-start paciente"><b>Especialidad: </b> <?php echo ' '.$especialidad ?></div>
+							<div class="flex-center-start paciente"><b>Fecha: </b> <?php echo ' '.$fecha ?></div>
+							<div class="flex-center-start paciente"><b>Hora: </b> <?php echo ' '.$hora ?></div>
+							<div class="flex-center-start paciente"><b>Paciente: </b> <?php echo ' '.$paciente['nombre'].' '. $paciente['apellido'] ?></div>
 							<a class="flex-center boton_historia" href="mis_turnos.php">Gestionar mis turnos</a>
 						</div>
 					<?php

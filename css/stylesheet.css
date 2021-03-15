@@ -261,7 +261,7 @@ nav ul{
 
 nav ul li{
 	height: 70px;
-	width: 170px;
+	width: 180px;
 	display: inline-block;
 	margin: 0 20px;
 	display: flex;
@@ -322,7 +322,6 @@ nav ul li:hover{
 }	
 @media only screen and (max-width: 970px){
 	.header nav{
-		font-size: small;
 		display: none;
 	}
 	.nav_boton_dropdown{
@@ -331,7 +330,7 @@ nav ul li:hover{
 }
 @media only screen and (max-width: 450px){
 	header{
-		padding: 10px;
+		padding: 00px;
 	}
 	header, header *{
 		max-height: 50px;
@@ -625,6 +624,10 @@ footer{
 .info_medico p {
 	font-size: 1em;
 }
+.info_medico span{
+	font-size: 1.4em;
+	font-weight: 600;
+}
 .foto_medico{
 	height: 100%;
 	object-fit: cover;
@@ -670,7 +673,14 @@ footer{
 		font-size: 1em;
 	}
 }
-
+@media only screen and (max-width: 375px){
+	.info_medico{
+		font-size: 14px;
+	}
+	.info_medico span{
+		line-height: 20px;
+	}
+}
 /*
 
 Sacar Turno
@@ -795,8 +805,10 @@ Sacar Turno
 	margin: 0 auto 25px;
 }
 .calendario{
-	width: 620px;
-	height: 420px;
+	/* width: 620px;
+	height: 420px; */
+	width: 80%;
+	height: 100%;
 	margin: auto;
 }
 .calen-header{
@@ -805,8 +817,9 @@ Sacar Turno
 	height: 70px;
 	color: #FFF;
 	border: 1px solid #EEE;
+	border-radius: 5px;
 	font-weight: 600;
-	background-color: rgba(209, 63, 63, 0.9);
+	background-color: #EB5959;
 }
 .calen-title{
 	display: flex;
@@ -958,16 +971,16 @@ Sacar Turno
 }
 @media (max-width: 620px){
 	.calendario{
-		width: 100%;
-		height: 350px;
+		width: 90%;
 	}
 	.calen-grid{
-		height: 280px;
+		gap: 5px;
+		grid-template-rows: 40px;
 	}
 	.calen-dia{
 		font-size: 20px;
-		height: 35px;
-		width: 35px;
+		height: 40px;
+		/* width: 35px; */
 	}
 	.wrapper-calendario{
 		display: block;

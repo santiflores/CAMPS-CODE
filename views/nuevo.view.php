@@ -30,7 +30,7 @@
 			<label>Horario de atencion:</label>
 			<textarea class="input-text" name="horario" placeholder="Horario de atencion"></textarea>
 			<label>DNI</label>
-			<input type="text" class="input-text" name="dni" placeholder="DNI">
+			<input type="number" class="input-text" name="dni" placeholder="DNI">
 
 			<h5>Datos para el inicio de sesión:</h5>
 			<label>Email</label>

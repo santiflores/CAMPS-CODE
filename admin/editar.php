@@ -20,8 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$email = limpiardatos($_POST['email']);
 	$contraseña = $_POST['pass'];
 	$contraseña2 = $_POST['repetir_pass'];
-	$contraseña = hash('sha512', $contraseña);
-	$contraseña2 = hash('sha512', $contraseña2);
 	$filas = $_POST['fila'];
 	$valores = $_POST['valor'];
 	$horario_borrado_id = $_POST['horario_borrado_id'];
@@ -57,13 +55,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		));
 	}
 
-	if (isset($contraseña) && $contraseña == $contraseña2) {
+	if (!empty($contraseña) && $contraseña == $contraseña2) {
+		
+		$contraseña = hash('sha512', $contraseña);
+
 		$statement = $conexion->prepare(
 			'UPDATE `medicos`
-			SET `pass` = :pass'
+			SET `pass` = :pass
+			WHERE `id` = :id'
 		);
 		$statement->execute(array(
-			':pass' => $contraseña
+			':pass' => $contraseña,
+			':id' => $medico_id
 		));
 	}
 
@@ -130,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if (isset($valor['id'])) {
 		
 			$statement = $conexion->prepare(
-				'UPDATE precios_consulta
+				'UPDATE precios_consultas
 				SET medico_id = :medico_id, tipo = :tipo, valor = :valor
 				WHERE id = :id;'
 			);
