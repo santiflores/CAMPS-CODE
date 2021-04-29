@@ -18,7 +18,7 @@ function LimpiarDatos($datos){
 
 function obtenerEspecialidades($conexion){
 	$sentencia = $conexion->prepare(
-		'SELECT * FROM especialidades'
+		'SELECT * FROM especialidades ORDER BY especialidad ASC'
 	);
 	$sentencia->execute();
 	return $sentencia->fetchAll();

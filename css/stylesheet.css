@@ -348,7 +348,6 @@ nav ul li:hover{
 	right: 0;
 	padding: 10px;
 	margin: 0;
-
 }
 .mi-cuenta-group button{
 	display: flex;
@@ -519,6 +518,107 @@ Atencion Medica Medias
 	flex-direction: column;
 	margin: 0;
 }
+}
+/*
+	Nuestros Servicios
+*/
+.nuestros-servicios{
+	min-height: 650px;
+	width: 100%;
+	padding: 0 180px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+}
+.ilustracion-medicos{
+	height: 580px;
+	width: 100%;
+}
+.ilustracion-medicos img{
+	height: 35vw;
+	max-height: 580px;
+	position: absolute;
+	left: 10vw;
+}
+.nuestros-servicios--info{
+	max-width: 670px;
+	z-index: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	justify-content: space-between;
+}
+.nuestros-servicios--info span{
+	font-size: 2.5em;
+	margin: 60px 0;
+	font-weight: 800;
+	color: #3d3d3d;
+}
+.nuestros-servicios--cards{
+	max-width: 660px;
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 60px
+}
+.servicio-card{
+	background-color: #FFF;
+	width: 300px;
+	height: 370px;
+	margin: auto;
+	text-align: center;
+	overflow: hidden;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
+	display: grid;
+	grid-template-rows: 125px 195px 60px;
+}
+.consultorio-img{
+	background: url(http://localhost/centros_medicos/CAMPS/images/consultorios_medicos.jpg);
+}
+.ecografia-img{
+	background: url(http://localhost/centros_medicos/CAMPS/images/ecografias.jpg);
+}
+.servicio-card--titulo{
+	width: 100%;
+	height: 125px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	color: #FFF;
+	font-weight: 600;
+	font-size: 1.9em;
+	line-height: 1em;
+}
+.servicio-card--contenido{
+	padding: 20px;
+}
+.servicio-card .input-submit{
+	font-size: 18px;
+	width: 100%;
+}
+/*	Nuestros servicios medias	*/
+@media screen and (max-width: 1670px){
+	.ilustracion-medicos img{
+		left: 3vw;
+		height: 35vw;
+	}
+	.nuestros-servicios{
+		padding: 0 3vw;
+	}
+}
+@media screen and (max-width: 1400px){
+	.ilustracion-medicos{
+		display: none;
+	}
+	nuestros-servicios--cards{
+		flex-wrap: wrap;
+		padding: 0 30px;
+	}
+	.nuestros-servicios{
+		justify-content: center;
+	}
+	.nuestros-servicios--info{
+		align-items: center;
+	}
 }
 /*
 	Nuestros Servicios
