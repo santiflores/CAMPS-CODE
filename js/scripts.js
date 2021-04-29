@@ -66,10 +66,10 @@ DOMelements.headerItems.forEach(item => {
 
 function displayDropdown(button, dropdown) {
 	button.addEventListener('click', ()=>{
-		if (dropdown.style.display == 'block') {
+		if (dropdown.style.display == 'flex') {
 			dropdown.style.display='none';
 		} else {
-			dropdown.style.display='block';
+			dropdown.style.display='flex';
 		}
 	});
 }
@@ -272,7 +272,13 @@ function loadScheduleUI(petition, date){
 		let appointmentsWrapper = document.createElement('div');
 		appointmentsWrapper.classList.add('wrapper-horarios')
 		appointmentsModal.removeChild(loader);
-		appointmentsModal.innerHTML += `<b>Turnos disponibles el dia ${date}</b>`;
+		appointmentsModal.innerHTML += `
+			<b>Turnos disponibles el dia ${date}</b>
+			<button id="cancelar-fecha" type="button" class="botones-cerrar">
+			<img src="images/cruz.svg"></img>
+			</button>
+		`;
+		closeBtns();
 		appointmentsModal.appendChild(appointmentsWrapper);
 
 		for (let i = 0; i < data.length; i++) {
@@ -329,7 +335,6 @@ function getOffset(el) {
 }
 
 if (DOMelements.appointmentFormBtns.length > 0) {
-	console.log(DOMelements.appointmentFormBtns);
 		//parentDiv son los divs adentro del wrapperDiv
 	let parentDiv = DOMelements.appointmentFormBtns[0].parentNode
 	
@@ -362,6 +367,7 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 			</div>
 		</div>
 		`;
+		closeBtns();
 		patientForm.classList.add('turno-formulario');
 		wrapperDiv.style.display = "none";
 		wrapperDiv.parentNode.appendChild(patientForm);
@@ -427,6 +433,9 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 						pnrCardHtml = `
 						<div>
 							<b>Datos del paciente</b>
+							<button id="cancelar-pnr" type="button" class="botones-cerrar">
+							<img src="images/cruz.svg"></img>
+							</button>
 							<div class="pnr-card">
 								<div class="flex-center pnr-card--info">
 									${pnrInfo.name} ${pnrInfo.lastName}<br>
@@ -436,6 +445,7 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 						</div>
 					`;
 					parentDiv.insertAdjacentHTML('afterBegin', pnrCardHtml)
+					closeBtns()
 					wrapperDiv.style.display = "block";
 					
 					}
@@ -459,12 +469,15 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 		
 				ajaxPetition.send(parameters)
 			}
-			// loadScheduleUI(ajaxPetition, date)
+
 			ajaxPetition.onload = ()=>{	
 				let data = JSON.parse(ajaxPetition.responseText);
 				cardHtml = `
 					<div>
 						<b>Datos del paciente</b>
+						<button id="cancelar-pm" type="button" class="botones-cerrar">
+						<img src="images/cruz.svg"></img>
+						</button>
 						<div class="pnr-card">
 							<div class="flex-center pnr-card--info">
 								${data[0][0]} ${data[0][1]}<br>
@@ -474,11 +487,45 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 					</div>
 				`;
 				parentDiv.insertAdjacentHTML('afterBegin', cardHtml)
+				closeBtns()
 			} 
-
-
+			
 		})
 
+}
+
+// Boton para cerrar div
+
+function closeBtns(){
+	let closeBtns = document.querySelectorAll('.botones-cerrar');
+	closeBtns.forEach((btn)=>{
+		let parentDiv =  btn.parentNode;
+		let btnId = btn.id;
+		console.log(parentDiv);
+		btn.addEventListener('click', () => {
+			parentDiv.parentNode.removeChild(parentDiv);
+			switch (btnId) {
+				case 'cancelar-pm':
+					DOMelements.patientInfo.pnr.value = "";					
+					break;
+				case 'cancelar-pnr':
+					DOMelements.patientInfo.pnr.value = "";
+					DOMelements.patientInfo.name.value = "";
+					DOMelements.patientInfo.lastName.value = "";
+					DOMelements.patientInfo.dni.value = "";
+					DOMelements.patientInfo.birthDate.value = "";
+					break;
+				case 'cancelar-fecha'	:
+					DOMelements.patientInfo.dataInputTime.value = "";
+					DOMelements.patientInfo.dataInput.value = "";
+					DOMelements.fechaEnUI.innerHTML = "Seleccione una fecha";
+					break;
+				default:
+					break;
+			}
+		})
+	});
+	
 }
 	
 if (DOMelements.borrarBtns != null) {
@@ -490,8 +537,8 @@ if (DOMelements.borrarBtns != null) {
 			link = btn.dataset.route;
 			switch (btnId) {
 				case 'turno':
-					title = '¿Esta seguro/a que quiere cancelar su turno?';
-					text = 'Si cancela su turno no podra recuperarlo y debera reprogramarlo.';
+					title = '¿Estas seguro/a que queres cancelar tu turno?';
+					text = 'Si cancelas tu turno, lo vas a perder vas a tener que reprogramarlo.';
 					options = ['No, conservar turno', 'Si, cancelar turno'];
 				break;
 				case 'medico':
@@ -500,8 +547,8 @@ if (DOMelements.borrarBtns != null) {
 					options = ['No, conservar medico', 'Si, eliminar medico'];
 				break;
 				case 'especialidad':
-					title = '¿Esta seguro/a de que quiere eliminar esta especialidad?';
-					text = 'Si la elimina, todos los medicos dentro de esta especialidad no estaran disponibles para el publico.';
+					title = '¿Estas seguro/a de que deseas eliminar esta especialidad?';
+					text = 'Todos los medicos dentro de esta especialidad dejaran de ser visibles al público.';
 					options = ['No, conservar especialidad', 'Si, eliminar especialidad'];				
 				break;
 			}

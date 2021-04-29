@@ -34,18 +34,11 @@ try {
 
 	// Content
 	$mail->isHTML(true);                                  // Set email format to HTML
-	$mail->Subject = 'CAMPS - Verificacion de la cuenta';
+	$mail->Subject = 'CAMPS - Cambiar Contraseña';
 	$mail->Body = '
-	Gracias por registrarte!<br><br>
-
-	Por favor haz click en el siguiente enlance para activar tu cuenta:
-	http://localhost/centros_medicos/CAMPS/activar.php?h='.$hash;
-
-	$mail->AltBody = '
-	Gracias por registrarte!<br><br>
-
-	Por favor haz click en el siguiente enlance para activar tu cuenta:
-	http://localhost/centros_medicos/CAMPS/activar.php?h='.$hash;
+	Tu contraseña se cambió correctamente!<br><br>';
+	$mail->AltBody = 
+    'tu contraseña se cambió correctamente!<br><br>';
 
 	$mail->send();
 	echo 'Message has been sent';

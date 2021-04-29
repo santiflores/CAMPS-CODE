@@ -18,7 +18,7 @@ function LimpiarDatos($datos){
 
 function obtenerEspecialidades($conexion){
 	$sentencia = $conexion->prepare(
-		'SELECT * FROM especialidades'
+		'SELECT * FROM especialidades ORDER BY especialidad ASC'
 	);
 	$sentencia->execute();
 	return $sentencia->fetchAll();
@@ -26,7 +26,7 @@ function obtenerEspecialidades($conexion){
 
 function obtenerMedicos($conexion, $especialidad){
 	$sentencia = $conexion->prepare(
-		"SELECT * FROM medicos WHERE especialidad LIKE :especialidad"
+		"SELECT * FROM medicos WHERE especialidad LIKE :especialidad ORDER BY nombre ASC"
 	);
 	$sentencia->execute(array(
 		':especialidad' => $especialidad

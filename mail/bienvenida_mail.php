@@ -6,6 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
+
 // Instantiation and passing `true` enables exceptions
 $mail = new PHPMailer(true);
 
@@ -138,5 +139,5 @@ try {
 	$message = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 	
 }
-
 // echo($message);
+?>

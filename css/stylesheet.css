@@ -1,3 +1,8 @@
+:root{
+	/* --rojo-CAMPS: #EB5555;	 */
+	--rojo-CAMPS: #ec6161;	
+	/* --rojo-CAMPS: #EC5151;	 */	
+}
 *{
 	font-family: 'Open Sans', sans-serif;
 	margin: 0;
@@ -30,10 +35,14 @@
 	color: #FFF;
 	padding: 5px;
 	border-radius: 3px;
-	background: #ec6161;
+	background: var(--rojo-CAMPS);
 	border: none;
 	font-weight: 600;
 	width: 200px;
+}
+.input-submit:hover{
+	text-decoration: none;
+	color: #FFF;
 }
 .input-text,
 .input-date,
@@ -56,9 +65,6 @@
 	padding-left: 10px;
 	transition: 0.1s ease;
 }
-option{
-	border: 1px solid
-}
 .form{
 	width: 100%;
 	padding: 30px;
@@ -68,41 +74,73 @@ option{
 	text-align: center;
 	cursor: pointer;
 }
-.botones_cards{
-	width: 200px;
-	background: #EEE;
-	border: 1px solid #EEE;
-	font-weight: 600;
-	color: #3D3D3D;
-	margin-top: 30px;
-	margin-left: auto;
-	margin-right: auto;
-	transition: 0.4s ease;
+.botones-cerrar{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--rojo-CAMPS);
+	border: 2px solid var(--rojo-CAMPS);
+	border-radius: 50%;
+	height: 30px;
+	float: right;
 }
-.botones_cards:hover{
-	background: #FFF;
-	color: #3D3D3D;
-	transition: 0.4s ease;
+.botones-cerrar img{
+	height: 100%;
 }
 .botones-titulo{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	text-align: center;
 	text-decoration: none;
 	font-weight: 700px;
-	font-size: 1.1em;
+	font-size: 1em;
 	color: #3D3D3D;
 	width: 100%;
 	height: 50px;
 	margin-right: 10px;
-	border-radius: 30px;
-	transition: 0.3s ease;
+	border-radius: 5px;
+	width: 200px;
+	background: var(--rojo-CAMPS);
+	border: 1px solid #EEE;
+	font-weight: 600;
+	color: #FFF;
+	margin: 30px auto 0;
+	transition: 0.1s ease-in-out;
 }
 .botones-titulo:hover{
-	color: #AAA;
+	background: #FFF;
 	text-decoration: none;
-	transition: 0.3s ease;
+	color: var(--rojo-CAMPS);
+	border: 2px solid var(--rojo-CAMPS);
+}
+.border-button{
+	width: 160px;
+	height: 35px;
+	margin: 5px 10px 5px 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	border-radius: 3px;
+	border: 3px solid var(--rojo-CAMPS);
+	background: #FFF;
+	color: var(--rojo-CAMPS);
+	font-weight: 600;
+}
+.border-button:hover{
+	color: var(--rojo-CAMPS);
+	text-decoration: none;
+}
+.border-button:focus{
+	outline: none;
+	border: 2px solid var(--rojo-CAMPS);
+}
+.wide-btn{
+	justify-self: stretch;
+	width: 100%;
+	background-color: var(--rojo-CAMPS);
+	font-weight: 600;
+	color:#fff;
 }
 /*
 	Global loader
@@ -152,6 +190,7 @@ option{
 	align-items: center;
 	justify-content: space-between;
 	position: fixed;
+	z-index: 1;
 }
 .logoheader{
 	max-height: 90px;
@@ -172,11 +211,7 @@ option{
 .nav_boton_dropdown{
 	display: none;
 	background: none;
-	height: 70px;
-	width: 70px;
-	margin-right: 10px;
 	border: none;
-	float: right;
 	padding: 10px;
 }
 .drop_cerrar > *{
@@ -284,10 +319,10 @@ nav ul li a:hover{
 	text-decoration: none;
 }
 nav ul li:hover{
-	border-bottom: 8px solid #EC5151;
+	border-bottom: 8px solid var(--rojo-CAMPS);
 }
 .active{
-	border-bottom: 8px solid #EC5151;
+	border-bottom: 8px solid var(--rojo-CAMPS);
 }
 .botones{
 	border: 1px solid #fff;
@@ -298,20 +333,44 @@ nav ul li:hover{
 	text-decoration: none;
 }
 .botones:hover{
-	background-color: #EC5151;
+	background-color: var(--rojo-CAMPS);
 	color: #646464;
 	text-decoration: none;
 	transition: 0.3s ease-in-out;
+}
+.mi-cuenta-group{
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 10px;
+	margin: 0;
+	
+}
+.mi-cuenta-group button{
+	display: flex;
+	align-items: center;
+	justify-content: ;
+	flex-direction: column;
 }
 .header_icon{
 	padding: 0;
 }
 .header_icon--btn{
-	width: 60px;
-	height: 60px;
+	width: 50px;
+	height: 50px;
+}
+.header_icon span{
+	display: none;
+	line-height: 15px;
+	color: #3D3D3D;
+	font-size: 15px;
+	font-weight: 600;
 }
 .header_icon:hover{
 	background-color: transparent;
+}
+.header_icon::after{
+	display: none;
 }
 .dropdown-menu{
 	margin-top: 7px;
@@ -324,13 +383,22 @@ nav ul li:hover{
 	.header nav{
 		display: none;
 	}
+	.header{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.logoheader{
+		margin: 0;
+	}
 	.nav_boton_dropdown{
 		display: block;
 	}
 }
 @media only screen and (max-width: 450px){
 	header{
-		padding: 00px;
+		padding: 0;
 	}
 	header, header *{
 		max-height: 50px;
@@ -362,16 +430,15 @@ nav ul li:hover{
 Container de el titulo y botones
 */
 .container_title{
-	background-image: url(../images/fondo_CAMPS.png);
+	width: 100%;
+	height: 670px;
+	background-image: url(../images/familia-bici.jpg);
 	background-repeat: no-repeat;
 	background-size: 100%;
 	background-position: center;
-	width: 100%;
-	height: 100%;
 	display: flex;
-	align-items: flex-end;
-	justify-content: flex-end;
-	height: 350px;
+	align-items: center;
+	padding-left: 180px;
 }
 /*
 Media para en fondo del container del titulo
@@ -384,69 +451,45 @@ Media para en fondo del container del titulo
 /*
 Atencion medica
 */
-.atencion-medica{
-	width: 100%;
-	height: 450px;
+.atencion_medica{
+	max-width: 500px;
 	display: flex;
-	align-self: center;
-	justify-content: center;
+	align-items: space-between;
+	color: #FFF;
 }
-.atencion-medica--img{
-	width: 40%;
-	padding: 50px;
+.atencion-medica--titulo{
+	font-weight: 800;
+	line-height: 1.1em;
+	font-size: 2.81em;
+	max-width: 500px;
 }
-.atencion-medica--img img{
-	height: 100%;
-	margin: auto;
-}
-.atencion-medica--info{
-	width: 60%;
-	padding: 60px;
-	color: #6B6B6B;
-	display: flex;
-	justify-content: space-evenly;
-	
-}
-.atencion-medica--info h2{
-	font-weight: 600;
-	font-size: 2.5em;
-	max-width: 350px;
-}
-.atencion-medica--info p{
-	font-size: 1.5em;
-	max-width: 450px;
-	gap: 60px;
-}
-.atencion-medica--cards{
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
+.atencion-medica--texto{
+	margin: 30px 20px ;
+	font-size: 1.56em;
+	max-width: 500px;
 }
 .atencion-medica--card{
-	height: 120px;
-	width: 300px;
-	margin: 20px;
+	background-color: #FFF;
+	font-size: 1.1em;
+	width: 310px;
+	height: 150px;
+	padding: 14px;
+	gap: 14px;
 	border-radius: 5px;
-	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
 	overflow: hidden;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }
-.atencion-medica--card form{
-	width: 100%;
-	display: flex;
-	flex-direction: column;
+.atencion-medica--card b{
+	color: #333333;
 }
 .atencion-medica--card form div{
-	height: 85px;
+	height: 60px;
 }
-.atencion-medica--card form select{
-	margin: 0 20px
+.atencion-medica--card select{
+	margin: 0 10px 10px
 }
 .atencion-medica--card .input-submit{
-	width: 100%;
-	height: 35px;
+	width: 140px;
+	height: 40px;
 }
 .medicosya-card a{
 	color: inherit;
@@ -455,15 +498,124 @@ Atencion medica
 /*
 Atencion Medica Medias
 */
-@media only screen and (max-width: 450px){
+@media only screen and (max-width: 860px){
+	.atencion_medica{
+		margin: auto;
+		font-size: 14px;
+		padding: 25px;
+	}
+	.container_title{
+		padding: 0;
+	}
 .atencion-medica--info{
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
 	flex-direction: column;
-	margin: 0 0 0 0;
+	margin: 0;
 }
+}
+/*
+	Nuestros Servicios
+*/
+.nuestros-servicios{
+	min-height: 650px;
+	width: 100%;
+	padding: 0 180px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+}
+.ilustracion-medicos{
+	height: 580px;
+	width: 100%;
+}
+.ilustracion-medicos img{
+	height: 35vw;
+	max-height: 580px;
+	position: absolute;
+	left: 10vw;
+}
+.nuestros-servicios--info{
+	max-width: 670px;
+	z-index: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	justify-content: space-between;
+}
+.nuestros-servicios--info span{
+	font-size: 2.5em;
+	margin: 60px 0;
+	font-weight: 800;
+	color: #3d3d3d;
+}
+.nuestros-servicios--cards{
+	max-width: 660px;
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 60px
+}
+.servicio-card{
+	background-color: #FFF;
+	width: 300px;
+	height: 370px;
+	margin: auto;
+	text-align: center;
+	overflow: hidden;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
+	display: grid;
+	grid-template-rows: 125px 195px 60px;
+}
+.consultorio-img{
+	background: url(http://localhost/centros_medicos/CAMPS/images/consultorios_medicos.jpg);
+}
+.ecografia-img{
+	background: url(http://localhost/centros_medicos/CAMPS/images/ecografias.jpg);
+}
+.servicio-card--titulo{
+	width: 100%;
+	height: 125px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	color: #FFF;
+	font-weight: 600;
+	font-size: 1.9em;
+	line-height: 1em;
+}
+.servicio-card--contenido{
+	padding: 20px;
+}
+.servicio-card .input-submit{
+	font-size: 18px;
+	width: 100%;
+}
+/*	Nuestros servicios medias	*/
+@media screen and (max-width: 1670px){
+	.ilustracion-medicos img{
+		left: 3vw;
+		height: 35vw;
+	}
+	.nuestros-servicios{
+		padding: 0 3vw;
+	}
+}
+@media screen and (max-width: 1400px){
+	.ilustracion-medicos{
+		display: none;
+	}
+	nuestros-servicios--cards{
+		flex-wrap: wrap;
+		padding: 0 30px;
+	}
+	.nuestros-servicios{
+		justify-content: center;
+	}
+	.nuestros-servicios--info{
+		align-items: center;
+	}
 }
 /*
 Contacto
@@ -519,7 +671,7 @@ footer{
 	background: #E0E0E0;
 }
 .wrapper_footer{
-	width: 450px;
+	max-width: 450px;
 	margin-left: auto;
 	margin-right: auto;
 	font-size: 1.5em;
@@ -527,7 +679,9 @@ footer{
 }
 .logo_footer{
 	display: block;
-	margin: 10px auto;
+	margin: 0 auto 25px;
+	max-width: 300px;
+	width: 100%;
 }
 .footer_icon{
 	width: 27px;
@@ -540,7 +694,6 @@ footer{
 
 @media only screen and (max-width: 450px){
 	.wrapper_footer{
-		width: 100%;
 		padding: 0 21px 0 21px;
 	}
 }
@@ -557,22 +710,68 @@ footer{
 .titulo_medicos{
 	padding: 1em;
 	width: 100%;
-	height: 80px;
+	height: 150px;
 	display: flex;
 	align-items: center;
+	justify-content: space-evenly;
+	flex-direction: column;
+}
+.titulo_medicos p{
+	font-size: 30px;
+	font-weight: 600;
+	margin: 0;
 }
 .buscar{
 	padding: 0;
 	border: none;
-	display: inline-block;
-	width: 200px;
+	display: flex;
+	width: 40vw;
+	margin:auto;
 }
 .buscar .input-text{
+	border: 2px solid var(--rojo-CAMPS);
+	border-right: none;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
 	height: 40px;
 	margin: 0;
-	width: 100%;
+	width: 90%;
 	padding: 7px;
 }
+.select-especialidad{
+	border-radius: 5px;
+	border: 2px solid var(--rojo-CAMPS);
+	color: #DDD;
+	height: 40px;
+	padding: 5px;
+	transition: 0.1s ease-in-out;
+}
+.select-especialidad:focus{
+	outline: none;
+	color: rgb(199, 199, 199);
+}
+.select-especialidad option{
+	background-color: #FFF;
+	color: initial;
+}
+.buscar-submit{
+	height: 40px;
+	padding: 8px;
+	border: 2px solid var(--rojo-CAMPS);
+	border-left: none;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	background-color: var(--rojo-CAMPS);
+	color: #FFF;
+	transition: 0.1s ease-in-out;
+}
+.buscar-submit:hover{
+	background-color: var(--light-button-color);
+}
+.buscar-submit img{
+	height: 100%;
+}
+
 .especialidad{
 	width: 100%;
 	box-shadow: inset 0 -3px 10px 0 #CCC;
@@ -613,19 +812,22 @@ footer{
 .info_medico{
 	padding: 10px;
 	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
 }
 .info_medico > *{
 	margin: 0;
 	padding: 0;
 }
-.info_medico p:nth-child(even){
-	display: none;
-}
 .info_medico p {
-	font-size: 1em;
+	font-size: 0.9em;
 }
 .info_medico span{
+	justify-self: flex-start;
 	font-size: 1.4em;
+	line-height: 1em;
 	font-weight: 600;
 }
 .foto_medico{
@@ -636,8 +838,8 @@ footer{
 	grid-column: 1/3;
 	height: 40px;
 	width:100%;
-	background-color:#EB5555;
-	border-top: 1px solid #EB5555;
+	background-color:  var(--rojo-CAMPS);
+	border-top: 1px solid var(--rojo-CAMPS);
 	color: #FFF;
 	font-size: 1em;
 	font-weight: 600;
@@ -647,7 +849,23 @@ footer{
 	text-decoration: none;
 	border-top: 1px solid #EEE;
 	background-color: #FFF;
-	color: #EB5555;
+	color: var(--rojo-CAMPS);
+}
+.nuevo_medico_btn{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.nuevo_medico_btn a{
+	height: 50%;
+	border-radius: 50%;
+	transition: 0.1s ease-in-out;
+}
+.nuevo_medico_btn a:hover{
+	height: 55%;
+}
+.nuevo_medico_btn a img{
+	height: 100%;
 }
 
 /*    Medicos medias   */
@@ -765,7 +983,7 @@ Sacar Turno
 .turno-formulario{
 	-webkit-animation: pacienteFormulario 0.5s ease;
 	margin: 0;
-	border-top: 5px solid #EB5555;
+	border-top: 5px solid var(--rojo-CAMPS);
 	box-shadow: 0 0 10px rgb(0, 0, 0, 20%);
 }
 .reserva-submit{
@@ -773,14 +991,11 @@ Sacar Turno
 	width: 100%;
 	max-width: 290px;
 	border-radius: 5px;
+	border: 0;
 	margin: 0 30px 25px;
-	background-color: #E96767;
+	background-color: var(--rojo-CAMPS);
 	color: #FFFFFF;
 	font-weight: 600;
-}
-.bloqueado{
-	z-index: -1;
-	background-color: #e9676786;
 }
 .alert{
 	padding: 10px;
@@ -819,7 +1034,7 @@ Sacar Turno
 	border: 1px solid #EEE;
 	border-radius: 5px;
 	font-weight: 600;
-	background-color: #EB5959;
+	background-color: var(--rojo-CAMPS);
 }
 .calen-title{
 	display: flex;
@@ -869,7 +1084,7 @@ Sacar Turno
 }
 .calen-dia--focus{
 	color: #636363;
-	border: 1px solid #fcbdbd;
+	border: 1px solid var(--light-button-color);
 	text-decoration: none;
 	box-shadow: 0 0 10px #CCC;
 }
@@ -919,10 +1134,10 @@ Sacar Turno
 	box-shadow: 0 0 10px rgb(0, 0, 0, 16%);
 	padding: 0px 10px;
 	margin: 7px auto 25px;
-	border: 3px solid #E96767;
+	border: 3px solid var(--light-button-color);
 }
 .pnr-card--info{
-	color:#5c5c5c;
+	color:#AFAFAF;
 	width: 100%;
 	height: 100%;
 	font-size: 16px;
@@ -949,11 +1164,16 @@ Sacar Turno
 	max-width:140px;
 }
 .form-paciente--buttons > *:nth-child(even){
-	background-color: #EB5959;
+	background-color: var(--rojo-CAMPS);
+	border-color: var(--rojo-CAMPS);
 	color:#fff;
 }
-.form-paciente--buttons > *:nth-child(even):hover{
-	background-color: #EB5959;
+.form-paciente--buttons > *:nth-child(odd){
+	background-color: var(--light-button-color);
+	border-color: var(--light-button-color);
+	color:#fff;
+}
+.form-paciente--btn:hover{
 	color:#fff;
 }
 /*  Calendario medias  */
@@ -1045,21 +1265,42 @@ Sacar Turno
 /*
 About Us
 */
+.wrapper-about{
+	max-width: 1500px;
+	margin: auto;
+	padding: 30px 0;
+	box-shadow: none;
+}
 .about{
 	width: 100%;
-	background: #EEE;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-auto-rows: 200px;
+	grid-auto-rows: 250px;
 	grid-gap: 30px;
 	padding: 30px;
+	z-index: -1;
 }
 .about_info{
-	background: #FFF;
+	padding: 10px;
 	border-radius: 5px;
+	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
 }
 .about_info:nth-child(2){
 	grid-row: 1/3;
+}
+.about_info b{
+	font-size: 18px;
+}
+.about_info p{
+	margin: 5px;
+}
+.about--img{
+	padding: 0;
+	overflow: hidden;
+}
+.about--img img{
+	/* max-width: 100%; */
+	max-height: 100%;
 }
 /*  About medias  */
 @media only screen and (max-width: 1000px){
@@ -1184,37 +1425,40 @@ Registrarse
 	display: block;
 }
 .botones_panel{
-	margin-left: 50px;
 	display: flex;
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: space-between;
 	flex-wrap: wrap;
+	gap: 25px;
 }
 .botones_panel a, .botones_panel button, .botones_panel div{
 	margin: auto;
-	margin: 0 10px;
 	width: 210px;
 }
 #agregar{
+	display: none;
+	animation: especialidad 0.2s ease;
 	position: absolute;
 	margin: 0 auto;
-	padding: 0 20px;
-	animation: especialidad 0.3s ease;
-	border-radius: 2px;
+	padding: 20px;
+	border-radius: 5px;
 	background-color: #FFF;
-	display: none;
 	width: 250px;
-	height: 170px;
-	margin: 0 10px;
-	box-shadow: 0 0px 6px #CCC;
-	z-index: 1;
-	border-top: none;
+	height: 200px;
+	box-shadow: 0 0px 6px rgb(0, 0, 0, 15%);
+	overflow: hidden;
+	flex-direction: column;
+	justify-content: space-evenly;
+	z-index: 0;
+}
+#agregar > *{
+	width: 100%;
 }
 #agregar h6{
 	margin: 10px 0;
 }
 #agregar .input-date{
-	margin: 10px;
+	margin-bottom: 10px;
 }
 	#agregar .input-date:focus {
 		padding-left: 7px;
@@ -1222,12 +1466,16 @@ Registrarse
 #agregar .input-submit{
 	margin-top: 10px;
 }
+.agregar--buttons{
+	display: flex;
+	gap: 10px;
+}
 @keyframes especialidad{
 	from{
 		height: 0;
 	}
 	to{
-		height: 150px;
+		height: 200px;
 	}
 }
 .separador a{
@@ -1242,12 +1490,12 @@ Registrarse
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: 0.3s ease-in-out;
+	transition: 0.1s ease-in-out;
 }
 .separador a:hover{
 	background-color: #FFF;
 	color: #EB5555;
-	border: 1px solid #EB5555;
+	border: 2px solid var(--rojo-CAMPS);
 }
 .editar_borrar{
 	background: #EEE;
@@ -1262,7 +1510,7 @@ Registrarse
 	transition: 0.5s;
 }
 .editar_borrar a{
-	background-color:#EC5151;
+	background-color: var(--rojo-CAMPS);
 	color: #FFF;
 	display: inline-flex;
 	align-items: center;
@@ -1271,7 +1519,7 @@ Registrarse
 }
 .editar_borrar a:hover{
 	background-color:#FFF;
-	color: #EC5151;
+	color: var(--rojo-CAMPS);
 }
 /*  Administración Medias  */
 @media only screen and (max-width: 800px){
@@ -1279,7 +1527,7 @@ Registrarse
 		height: auto;
 		display: grid;
 		grid-template-columns:1fr;
-		grid-gap: 35px;
+		gap: 35px;
 	}
 	.administracion h2{
 		text-align: center;
@@ -1309,12 +1557,9 @@ Registrarse
 	height:100%;
 	margin: auto;
 	display: flex;
-	align-items: flex-start;
+	align-items: stretch;
 	flex-wrap: wrap;
 	box-shadow: 0 0 10px #EEE;
-}
-.agregar_medico h2{
-	width: 100%;
 }
 .agregar_medico_form{
 	width: 350px;
@@ -1325,22 +1570,17 @@ Registrarse
 	box-shadow: 0 0 10px #EEE;
 	justify-self: self-start;
 }
+.form-title{
+	font-size: 1.1em;
+	padding: 15px 0;
+	color: #333333;
+}
+.form-content{
+	padding: 0 5px;
+}
 .agregar_medico_form label{
 	font-weight: 600;
 	margin-top: 10px;
-}
-.nuevo-archivo{
-	border-radius: 10px;
-	box-shadow: 0 0 10px #DDD;
-	padding: 30px;
-	margin: 20px;
-}
-.input-file{
-	background-color: #F9F9F9;
-	padding: 25px;
-	border: none;
-	border-radius: 5px;
-	color: #CCC;
 }
 .horarios{
 	width: 100%;
@@ -1364,28 +1604,10 @@ Registrarse
 	padding: 5px;
 	height: 30px;
 }
-.border-button{
-	width: 160px;
-	height: 35px;
-	margin: 5px 10px 5px 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: #FFF;
-	border: none;
-	border-radius: 3px;
-	border: 3px solid #e65656;
-	background: #FFF;
-	color: #e65656;
-	font-weight: 600;
-}
-.border-button:hover{
-	color: #e65656;
-	text-decoration: none;
-}
-.border-button:focus{
-	outline: none;
-	border: 2px solid #e65656;
+.agregar_medico .input-submit{
+	width: 100%;
+	font-size: 20px;
+	height: 90px;
 }
 /*	Nuevo y editar medias	*/
 @media only screen and (max-width: 770px){
@@ -1397,6 +1619,84 @@ Registrarse
 	Pagina de medicos
 */
 
+
+/*	Landing page	*/
+.medico-landing{
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto 60px;
+	display: flex;
+	flex-direction: column;
+}
+.medico-landing--titulo{
+	color: #3D3D3D;
+	font-size: 30px;
+	margin: 30px 0;
+	font-weight: 800;
+}
+.medico-landing--grid{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	gap: 40px;
+}
+.ml-box{
+	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
+	border-radius: 5px;
+	overflow: hidden;
+}
+.ml-box:nth-child(3){
+	grid-row: 1/3;
+	grid-column: 2/3;
+}
+.ml-box-datos{
+	display: grid;
+	grid-template-columns: 1fr 165px;
+}
+.ml-box-datos > span{
+	height: 165px;
+	object-fit: contain;
+}
+.ml-box-datos > span img{
+	height: 165px;
+}
+.ml-box--header{
+	color: #FFF;
+	background-color: var(--rojo-CAMPS);
+	padding: 15px 20px;
+	font-size: 18px;
+}
+.ml-box--item{
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 55px;
+	font-size: 15px;
+	border-bottom: 1px solid #EEE;
+}
+.ml-box--item p{
+	padding: 0 20px;
+}
+.ml-box--item p{
+	margin: 0px;
+}
+.ml-usuario-foto{
+	height: 54px;
+}
+.ml-turno{
+	width: 100%;
+	padding: 0 20px;
+	display: flex;
+	justify-content: space-between;
+}
+.ml-turno--icon{
+	width: 20px;
+	height: 20px;
+	margin-left: 20px;
+	cursor: pointer;
+}
+
+/*	Medicos turnos	*/
 .turnos-am-pm{
 	display: flex;
 	align-items: center;
@@ -1411,7 +1711,7 @@ Registrarse
 }
 .turno{
 	background-color: #FFF;
-	border-left: 10px solid #EC5151;
+	border-left: 10px solid var(--rojo-CAMPS);
 	border-radius: 5px;
 	height: 80px;
 	width: 400px;
@@ -1509,12 +1809,12 @@ Turno
 	padding: 5px;
 	font-weight: 600;
 	color: #FFF;
-	background: #F35B5B;
+	background: var(--rojo-CAMPS);
 	transition: all 0.3s ease-in-out;
 }
 .mi-turno-btn:hover{
 	background-color: #FFF;
-	color: #F35B5B;
+	color: var(--rojo-CAMPS);
 	text-decoration: none;
 }
 .mi-turno-cancelar:hover{
@@ -1589,7 +1889,7 @@ Turno
 	padding-left: 25px;
 	height: 100px;
 	color: #FFF;
-	background-color: #F35B5B;
+	background-color: var(--rojo-CAMPS);
 }
 .mensaje-reserva{
 	width: 350px;
@@ -1630,9 +1930,9 @@ Turno
 	align-items: center;
 	justify-content: center;
 }
-.mi_cuenta_titulo{
-	max-width: 1060px;
+.titulo-bold{
 	width: 100%;
+	color: #525252;
 	font-weight: 600;
 	font-size: 2.1em;
 }
@@ -1692,8 +1992,8 @@ Turno
 	height: 35px;
 	border-radius: 3px;
 	margin-right: 5px;
+	color: #fff;
 	float: right;
-	background-color: #FC7474;
 }
 /*	Mi cuenta medias	*/
 @media only screen and (max-width: 660px){
@@ -1763,7 +2063,7 @@ Turno medico - Consulta
 	padding-left: 1em;
 }
 .boton_historia{
-	background: #f35b5b;
+	background: var(--rojo-CAMPS);
 	color: #FFF;
 	font-weight: 600;
 	font-size: 20px;
@@ -1771,7 +2071,7 @@ Turno medico - Consulta
 }
 .boton_historia:hover{
 	background-color: #FFF;
-	color: #f35b5b;
+	color: var(--rojo-CAMPS);
 	text-decoration: none;
 }
 .consulta_text{
@@ -1784,7 +2084,7 @@ Turno medico - Consulta
 	height: auto;
 }
 .titulo_receta{
-	background:#f35b5b;
+	background:var(--rojo-CAMPS);
 	height:100px;
 	color: #FFF;
 	font-weight: 600;
@@ -1797,7 +2097,7 @@ Turno medico - Consulta
 }
 .submit_turno{
 	height: 95px;
-	background:#f35b5b;
+	background:var(--rojo-CAMPS);
 	font-weight: 600;
 	color: #FFF;
 	border: 0;
@@ -1811,6 +2111,7 @@ Turno medico - Consulta
 	width: 100%;
 	height: 100%;
 	background-color: rgb(0, 0, 0, 40%);
+	z-index: 10;
 }
 .verificacion{
 	backdrop-filter: brightness(60%);
@@ -1832,7 +2133,7 @@ Turno medico - Consulta
 	padding: 25px;
 }
 .verificacion--title{
-	background:#f35b5b;
+	background:var(--rojo-CAMPS);
 	width: 100%;
 	max-height: 70px;
 	font-weight: 600;
@@ -1859,10 +2160,10 @@ Turno medico - Consulta
 	color: #3D3D3D;
 }
 .verificacion--danger{
-	color: #f35b5b;
+	color: var(--rojo-CAMPS);
 }
 .verificacion--danger:hover{
-	background-color: #f35b5b;
+	background-color: var(--rojo-CAMPS);
 	color: #FFF;
 }
 .verificacion--buttons a:hover{

@@ -13,13 +13,35 @@
 	<body>
 	<?php require 'header.php'?>
 		<section class="wrapper_especialidades">
-			<div class="titulo_medicos">
-				<h2>Saca tu turno</h2>
+		<div class="titulo_medicos">
+				<p>Selecciona un medico</p>
+				<div class="flex-center-start">
 				<form action="buscar.php" method="get" class="buscar">
-					<input type="text" class="input-text" placeholder="Buscar..." name="busqueda">
+					<input type="text" class="input-text" placeholder="Buscar medicos y especialidades..." name="busqueda">
+					<button type="submit" class="flex-center buscar-submit">
+						<img src="<?php echo(RUTA)?>/images/buscar.png" alt="Buscar">
+					</button>
 				</form>
-			</div>
 
+				<div class="botones_panel">
+					<div>
+						<button class="botones-titulo" id="boton_dropdown">Filtrar</button>
+						<form id="agregar" method="GET" enctype="multipart/form-data" action="<?php htmlspecialchars($_SERVER['PHP_SELF'])?>">
+							<h6><b>Selecciona una especialidad</b></h6> 
+							<select class="select-especialidad" name="especialidad">
+								<!-- <option disabled="true" selected="true">Seleccione una especialidad</option> -->
+								<option value="">Todas las especialidades</option>
+								<?php foreach($todas_especialidades as $especialidad):?>
+									<option value="<?php echo($especialidad[1]);?>"> <?php echo(ucfirst($especialidad[1]));?> </option>
+								<?php endforeach;?>
+							</select>
+							<input type="submit" class="input-submit" value="Filtrar">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 			<?php mostrarEspMedicos($especialidades, $conexion);?>
 
 		</section>

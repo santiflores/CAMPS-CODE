@@ -37,44 +37,66 @@
 			</li>
 			</ul>
 			Tambien podes registrarte como paciente con tus datos.
-		</div>
-		</div>
+		</div></div>
 		<?php require 'header.php'; ?>
+
+
 		<div class="container_title">
-		</div>
-		<section class="atencion-medica">
-			<div class="atencion-medica--img">
-				<img class="flex-center" src="images/undraw_medicine.svg" alt="Medicos">
-			</div>
-			<div class="atencion-medica--info">
-				<div>
-					<h2>¿Necesitas atención medica?</h2>
-					<p>Sacá un turno con un médico según su especialidad o fijate qué <a href="">medicos están atendiendo ahora mismo.</a></p>
-				</div>
-				<div class="atencion-medica--cards">
+			<div class="atencion_medica">
+				<div class="atencion-medica--info">
 					<div>
-						<div class="atencion-medica--card">
-							<form action="medicos.php" method="get">
-								<div class="flex-center">	
-									<select name="especialidad" class="input-text">
-										<option disabled="true" selected="true">Seleccione una especialidad</option>
-										<?php
-										$especialidades = obtenerEspecialidades($conexion);
-										foreach ($especialidades as $especialidad) {
-											$especialidad = $especialidad[1];
-											echo('<option value="'. $especialidad .'">'. $especialidad .'</option>');
-										}
-										?>
-									</select>
-								</div>
-								<input type="submit" value="Buscar" class="input-submit">
-							</form>
+						<p class="atencion-medica--titulo">¿Necesitas atención medica?</p>
+						<p class="atencion-medica--texto">Sacá un turno con un médico según su especialidad o consultá nuestra <a href="<?php echo RUTA?>/medicos.php">cartilla de medicos</a>.</p>
+					</div>
+					<div class="atencion-medica--card">
+						<form action="medicos.php" method="get">
+							<b>Encontrá tu medico</b>
+							<div class="flex-center">	
+								<select name="especialidad" class="input-text">
+									<option disabled="true" selected="true">Elegí una especialidad</option>
+									<?php
+									$especialidades = obtenerEspecialidades($conexion);
+									foreach ($especialidades as $especialidad) {
+										$especialidad = $especialidad[1];
+										echo('<option value="'. $especialidad .'">'. $especialidad .'</option>');
+									}
+									?>
+								</select>
+							</div>
+							<input type="submit" value="Buscar" class="input-submit">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<section class="nuestros-servicios">
+			<div class="ilustracion-medicos">
+				<img class="flex-center" src="images/undraw_medicine.png" alt="Medicos">
+			</div>
+			<div class="nuestros-servicios--info">
+				<span>Nuestros servicios</span>
+				<div class="nuestros-servicios--cards">
+					<div class="servicio-card ">
+						<div class="servicio-card--titulo consultorio-img flex-center">
+							Consultorios medicos
 						</div>
-						<div class="atencion-medica--card medicosya-card">
-							<a href="#">
-								Medicos disponibles ahora
-							</a>
+						<div class="servicio-card--contenido">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde necessitatibus ducimus odit voluptatibus.
 						</div>
+						<a class="flex-center input-submit" href="">
+							Sacá tu turno
+						</a>	
+					</div>
+					<div class="servicio-card">
+						<div class="servicio-card--titulo ecografia-img flex-center">
+							Ecografías
+						</div>
+						<div class="servicio-card--contenido">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde necessitatibus ducimus odit voluptatibus.
+						</div>
+						<a class="flex-center input-submit" href="">
+							Sacá tu turno
+						</a>	
 					</div>
 				</div>
 			</div>
