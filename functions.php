@@ -18,7 +18,7 @@ function LimpiarDatos($datos){
 
 function obtenerEspecialidades($conexion){
 	$sentencia = $conexion->prepare(
-		'SELECT * FROM especialidades ORDER BY especialidad ASC'
+		'SELECT * FROM especialidades'
 	);
 	$sentencia->execute();
 	return $sentencia->fetchAll();
@@ -59,13 +59,13 @@ function obtenerPrecios($conexion, $medico_id){
 }
 
 function obtenerMedicoPorId($conexion, $id){
-	$resultado = $conexion->query("SELECT id, nombre, especialidad, horario FROM medicos WHERE id = $id LIMIT 1");
+	$resultado = $conexion->query("SELECT id, nombre, especialidad, horario, foto FROM medicos WHERE id = $id LIMIT 1");
 	$resultado = $resultado->fetch();
 	return ($resultado) ? $resultado : false;
 }
 
 function obtenerPacientePorId($conexion, $id){
-	$resultado = $conexion->query("SELECT `id`, `nombre`, `apellido`, `dni`, `telefono`, `obra_social`, `email`, `pass` FROM usuarios WHERE id = $id LIMIT 1");
+	$resultado = $conexion->query("SELECT `id`, `nombre`, `apellido`, `fecha_de_nac`, `dni`, `telefono`, `obra_social`, `email`, `pass` FROM usuarios WHERE id = $id LIMIT 1");
 	$resultado = $resultado->fetch();
 	return ($resultado) ? $resultado : false;
 }
@@ -83,13 +83,13 @@ function obtenerAusenciasPorId($conexion, $id){
 function rangoHorario(){
 	$horarios = [
 		0 => ['8:30', '12:30'],
-		1 => ['17:30', '20:30']
+		1 => ['13:30', '20:30']
 	];
     $rango_horarios = [];
 	for ($i=0; $i < 2; $i++) {
 		$desde = $horarios[$i][0];
 		$hasta = $horarios[$i][1];
-		$intervalo = '30';
+		$intervalo = '15';
 		$hora_inicio = new DateTime($desde);
 		$hora_fin = new DateTime($hasta);
 		$hora_fin = $hora_fin->modify('+'. $intervalo .' minutes');

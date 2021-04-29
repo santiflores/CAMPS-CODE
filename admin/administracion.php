@@ -28,8 +28,7 @@ function mostrarMedicos($conexion){
                     <div class="medico">
                         <img src="'. RUTA .'/images/'. ($medico['foto']).'" class="foto_medico" alt="">
                     <div class="info_medico">
-                        <h4>'. $medico['nombre'].'</h4>
-                        <p>'. $medico['especialidad'].'</p>
+                            <span>'. $medico['nombre'].'</span>
                         <p>'. $medico['horario'].'</p>
                     </div>
                     <div class="editar_borrar">
@@ -42,7 +41,14 @@ function mostrarMedicos($conexion){
                     </div>
                 </div>');
             }
-          echo('</div>
+            
+            echo('
+            <div class="medico nuevo_medico_btn">
+            <a href="nuevo.php?especialidad='. $especialidad[1] .'" class="nuevo_medico_btn">
+                <img src="'. RUTA .'/images/boton_nuevo.svg" alt="Nuevo medico" class="">
+            </a>
+            </div>
+            </div>
         </div>');
     }
 }

@@ -13,7 +13,7 @@ if (isset($_SESSION['usuario'])){
 	$id = $_SESSION['usuario'];
 	
 	$statement = $conexion->prepare(
-		'SELECT * FROM turnos WHERE usuario_id = :id AND fecha > now() ORDER BY fecha ASC;'
+		'SELECT * FROM turnos WHERE usuario_id = :id AND fecha ORDER BY fecha ASC;'
 	);
 	$statement->execute(array(
 		':id' => $id

@@ -127,7 +127,7 @@
                 ');
             }
             ?>
-            <a href="<?php echo RUTA?>/medicos/turnos.php">Ver mas turnos</a>
+            <a href="<?php echo RUTA?>/medicos/turnos.php" class="wide-btn flex-center">Ver mas turnos</a>
         </div>
     </div>
     </section>

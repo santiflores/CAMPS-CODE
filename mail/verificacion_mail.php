@@ -38,13 +38,13 @@ try {
 	$mail->Body = '
 	Gracias por registrarte!<br><br>
 
-	Por favor haz click en el siguiente enlance para activar tu cuenta:
-	http://localhost/centros_medicos/CAMPS/activar.php?h='.$hash;
+	Por favor hace click en el siguiente enlance para activar tu cuenta:
+	<a href="http://localhost/centros_medicos/CAMPS/activar.php?h='.$hash.'">http://localhost/centros_medicos/CAMPS/activar.php?h='.$hash.'</a>';
 
 	$mail->AltBody = '
 	Gracias por registrarte!<br><br>
 
-	Por favor haz click en el siguiente enlance para activar tu cuenta:
+	Por favor hacé click en el siguiente enlance para activar tu cuenta:
 	http://localhost/centros_medicos/CAMPS/activar.php?h='.$hash;
 
 	$mail->send();

@@ -18,7 +18,8 @@
 	</div>
 	<form class="agregar_medico" method="post" enctype="multipart/form-data" action="<?php echo (htmlspecialchars($_SERVER['PHP_SELF']));?>">
 		<div class="form agregar_medico_form">
-			<h4>Informacion del medico</h4>
+			<b class="form-title">Informacion del medico:</b>
+			<div class="form-content">
 			<input type="hidden" name="id" value="<?php echo($_GET['id']);?>">
 			<label>Nombre y Apellido</label>
 			<input type="text" class="input-text" name="nombre" placeholder="Nombre y Apellido" value="<?php echo($nombre);?>">
@@ -32,14 +33,21 @@
 			<label>Horario de atencion:</label>
 			<textarea type="text" class="input-text" name="horario" placeholder="Horario de atencion"><?php echo($horario);?></textarea>
 			<label>DNI</label>
-			<input type="text" class="input-text" name="dni" placeholder="DNI" value="<?php echo($dni);?>">
-			<h6>Datos para el inicio de sesión:</h6>
+				<input type="text" class="input-text" name="dni" placeholder="DNI" value="<?php echo($dni);?>">
+			</div>
+
+			<b class="form-title">Datos para el inicio de sesión:</b>
+			
+			<div class="form-content">
 			<label>Email</label>
 			<input type="text" class="input-text" name="email" placeholder="Email" value="<?php echo($email);?>">
 			<label>Nueva contraseña</label>
 			<input type="password" class="input-pass" name="pass" placeholder="Contraseña del médico">
 			<label>Repetir nueva contraseña</label>
-			<input type="password" class="input-pass" name="repetir_pass" placeholder="Repetir contraseña">
+				<input type="password" class="input-pass" name="repetir_pass" placeholder="Repetir contraseña">
+				<label>Foto del medico (opcional)</label>
+				<input type="file" accept="image/x-png,image/gif,image/jpeg" name="thumb">
+			</div>
 		</div>
 		<div class="horarios">
 			<h4>Horario de atencion</h4>
@@ -131,20 +139,16 @@
 			</div>
 			<button class="border-button" id="borrar-precio" type="button">Borrar fila</button>
 		</div>
-		<div class="nuevo-archivo">
-			<h4>Selecciona una imagen:</h4>
-			<input type="file" name="thumb">
-		</div>
 		<?php if (!empty($errores)):?>
 			<div class="alert">
 				<?php echo($errores);?>
 			</div>
 		<?php endif;?>
 		<br>
-		<a href="ausencias.php?id=<?php echo($_GET['id']);?>" class="botones-titulo botones_cards">
+		<a href="ausencias.php?id=<?php echo($_GET['id']);?>" class="botones-titulo">
 			Ausencias
 		</a>
-		<input class="input-submit" type="submit" name="submit" value="Editar Medico">
+		<input class="input-submit" type="submit" value="Guardar cambios">
 	</form>
 	<?php require 'footer.php'?>
 	<script src="<?php echo RUTA?>/js/scripts.js"></script>

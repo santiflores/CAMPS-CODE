@@ -1,54 +1,51 @@
 <?php 
 if (isset($_SESSION['admin'])) {
 	$header = '
-	<li class="header-item"><a href="'. RUTA .'/index.php">Inicio CAMPS</a></li>
+	<li class="header-item"><a href="'. RUTA .'/index.php">Inicio</a></li>
 	<li class="header-item"><a href="'. RUTA .'/admin/administracion.php">Administracion</a></li>
-	<li class="header-item">
-		<div class="btn-group">
-			<button type="button" class="btn dropdown-toggle header_icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			<img class="header_icon--btn" alt="CAMPS" src="'. RUTA .'/images/user_icon.png">
-			 </button>
-			  <div class="dropdown-menu dropdown-menu-right">
-			  <a href="'. RUTA .'/admin_info.php" class="dropdown-item disabled">Configuracion del centro medico</a>
-			  <a href="'. RUTA .'/cerrar_sesion.php" class="dropdown-item">Cerrar sesion</a>
-			</div>
+	<div class="btn-group mi-cuenta-group">
+		<button type="button" class="btn dropdown-toggle header_icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<img class="header_icon--btn" alt="CAMPS" src="'. RUTA .'/images/user_icon.png">
+			</button>
+			<div class="dropdown-menu dropdown-menu-right">
+			<a href="'. RUTA .'/admin_info.php" class="dropdown-item disabled">Configuracion del centro medico</a>
+			<a href="'. RUTA .'/cerrar_sesion.php" class="dropdown-item">Cerrar sesion</a>
 		</div>
-	</li>
+	</div>
 	';
 }elseif (isset($_SESSION['medico'])) {
 	$header = '
-		<li class="header-item"><a href="'. RUTA .'/index.php">Inicio</a></li>
-		<li class="header-item">
-			<div class="btn-group">
-				<button type="button" class="btn dropdown-toggle header_icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<img class="header_icon--btn" alt="CAMPS" src="'. RUTA .'/images/medic.png">
-				</button>
-				<div class="dropdown-menu dropdown-menu-right">
-					<a href="'. RUTA .'/medicos/turnos.php" class="dropdown-item">Proximos Turnos</a>
-					<a href="" class="dropdown-item disabled">Mi cuenta</a>
-					<a href="'. RUTA .'/cerrar_sesion.php" class="dropdown-item">Cerrar sesion</a>
+		<li class="header-item"><a href="'. RUTA .'/medicos/prestador.php">Inicio</a></li>
+		<li class="header-item"><a href="'. RUTA .'/medicos/turnos.php">Proximos turnos</a></li>
+
+		<div class="btn-group mi-cuenta-group">
+			<button type="button" class="btn dropdown-toggle header_icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<img class="header_icon--btn" alt="CAMPS" src="'. RUTA .'/images/medic.png">
+			</button>
+			<div class="dropdown-menu dropdown-menu-right">
+				<a href="'. RUTA .'/medicos/turnos.php" class="dropdown-item">Proximos Turnos</a>
+				<a href="" class="dropdown-item disabled">Mi cuenta</a>
+				<a href="'. RUTA .'/cerrar_sesion.php" class="dropdown-item">Cerrar sesion</a>
 				</div>
 			</div>
-		</li>		
 	';
 } elseif (isset($_SESSION['usuario'])) {
 	$header = '
 		<li class="header-item"><a href="'. RUTA .'/index.php">Inicio</a></li>
 		<li class="header-item"><a href="'. RUTA .'/sobre_nosotros.php">Quienes somos</a></li>
 		<li class="header-item"><a href="'. RUTA .'/medicos.php">Profesionales</a></li>
-		<li class="header-item">
-			<div class="btn-group">
-				<button type="button" class="btn dropdown-toggle header_icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<!--<img class="header_icon--btn" alt="CAMPS" src="'. RUTA .'/images/user_icon.png">-->
-				<a href="'. RUTA .'/usuarios/mi_cuenta.php">Mi cuenta</a>
- 				</button>
-  				<div class="dropdown-menu dropdown-menu-right">
-				  <a href="'. RUTA .'/usuarios/mis_turnos.php" class="dropdown-item">Mis Turnos</a>
-				  <a href="'. RUTA .'/usuarios/mi_cuenta.php" class="dropdown-item">Mi cuenta</a>
-				  <a href="'. RUTA .'/cerrar_sesion.php" class="dropdown-item">Cerrar sesion</a>
-				</div>
+		<li class="header-item"><a href="'. RUTA .'/usuarios/mis_turnos.php">Mis turnos</a></li>
+		<div class="btn-group mi-cuenta-group">
+			<button type="button" class="btn dropdown-toggle header_icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<img class="header_icon--btn" alt="CAMPS" src="'. RUTA .'/images/user_icon.png">
+			<span href="'. RUTA .'/usuarios/mi_cuenta.php">Mi cuenta</span>
+			</button>
+			<div class="dropdown-menu dropdown-menu-right">
+				<a href="'. RUTA .'/usuarios/mis_turnos.php" class="dropdown-item">Mis Turnos</a>
+				<a href="'. RUTA .'/usuarios/mi_cuenta.php" class="dropdown-item">Mi cuenta</a>
+				<a href="'. RUTA .'/cerrar_sesion.php" class="dropdown-item">Cerrar sesion</a>
 			</div>
-		</li>
+		</div>
 	';
 } else {
 	$header = '

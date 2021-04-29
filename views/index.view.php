@@ -11,7 +11,7 @@
 		<script src="https://kit.fontawesome.com/aa681c14be.js" crossorigin="anonymous"></script>
 	</head>
 	<body>
-		<p style="margin: 0px;">
+		<!-- <p style="margin: 0px;">
 		<button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="width: 100%; border-radius: 0px;">
 		Version de prueba. Click para ver mas.
 		</button>
@@ -37,7 +37,7 @@
 			</li>
 			</ul>
 			Tambien podes registrarte como paciente con tus datos.
-		</div></div>
+		</div></div> -->
 		<?php require 'header.php'; ?>
 
 

@@ -17,47 +17,53 @@
 	</div>
 	<form class="agregar_medico" method="post" enctype="multipart/form-data" action="<?php echo (htmlspecialchars($_SERVER['PHP_SELF']));?>">
 		<div class="form agregar_medico_form">
-			<h4>Informacion del medico</h4>
+			<b class="form-title">Informacion del medico</b>
+			<div class="form-content">
 			<label>Nombre y Apellido</label>
 			<input type="text" class="input-text" name="nombre" placeholder="Nombre y Apellido">
 			<label>Especialidad</label>
 			<select class="input-text" name="especialidad">
-				<option selected="true" disabled="disabled">Seleccione una</option>	
-				<?php foreach ($especialidades as $especialidad) {
-					echo('<option value="'. $especialidad[1] .'">'. $especialidad[1] .'</option>');
-				}?>
+					<?php 
+					if (isset($_GET['especialidad']) && !empty($_GET['especialidad'])) {
+						echo('<option value="'. $_GET['especialidad'] .'">'. $_GET['especialidad'] .'</option>');
+					} else {
+						echo('<option selected="true" disabled="disabled">Seleccione una</option>');
+					}
+					foreach ($especialidades as $especialidad) {
+						echo('<option value="'. $especialidad[1] .'">'. $especialidad[1] .'</option>');
+					}?>
 			</select>
 			<label>Horario de atencion:</label>
 			<textarea class="input-text" name="horario" placeholder="Horario de atencion"></textarea>
 			<label>DNI</label>
 			<input type="number" class="input-text" name="dni" placeholder="DNI">
+			</div>
 
-			<h5>Datos para el inicio de sesión:</h5>
-			<label>Email</label>
-			<input type="text" class="input-text" name="email" placeholder="Email">
-			<label>Nueva contraseña</label>
-			<input type="password" class="input-pass" name="pass" placeholder="Contraseña del médico">
-			<label>Repetir nueva contraseña</label>
-			<input type="password" class="input-pass" name="repetir_pass" placeholder="Repetir contraseña">
+			<b class="form-title">Datos para el inicio de sesión:</b>
+			<div class="form-content">
+				<label>Email</label>
+				<input type="text" class="input-text" name="email" placeholder="Email">
+				<label>Nueva contraseña</label>
+				<input type="password" class="input-pass" name="pass" placeholder="Contraseña del médico">
+				<label>Repetir nueva contraseña</label>
+				<input type="password" class="input-pass" name="repetir_pass" placeholder="Repetir contraseña">
+				<label>Foto del medico (opcional)</label>
+				<input type="file" accept="image/x-png,image/gif,image/jpeg" name="thumb">
+			</div>
 		</div>
 
 		<div class="horarios">
-			<h4>Horario de atencion</h4>
+			<b class="form-title">Horario de atencion</b>
 			<button id="nuevo-horario-btn" class="border-button" type="button">Agregar nueva fila</button>
 			<div id="nuevo-horario-wrap"></div>
 			<button class="border-button" id="borrar-horario" type="button">Borrar fila</button>
 		</div>
 
 		<div class="horarios">
-			<h4>Precios de consulta</h4>
+			<b class="form-title">Precios de consulta</b>
 			<button id="nuevo-precio-btn" class="border-button" type="button">Agregar nueva fila</button>
 			<div id="nuevo-precio-wrap"></div>
 			<button class="border-button" id="borrar-precio" type="button">Borrar fila</button>
-		</div>
-
-		<div class="nuevo-archivo">
-			<h4>Selecciona una imagen:</h4>
-			<input type="file" name="thumb">
 		</div>
 		
 		<?php if (!empty($errores)):?>

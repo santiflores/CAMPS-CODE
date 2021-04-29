@@ -1,7 +1,7 @@
 :root{
-	/* --rojo-CAMPS: #EB5555;	 */
-	--rojo-CAMPS: #ec6161;	
-	/* --rojo-CAMPS: #EC5151;	 */	
+	/* --primary-blue: #ec6161; */
+	--primary-blue: #4f6d7a;
+	--secondary-gray: #CCC;
 }
 *{
 	font-family: 'Open Sans', sans-serif;
@@ -35,7 +35,7 @@
 	color: #FFF;
 	padding: 5px;
 	border-radius: 3px;
-	background: var(--rojo-CAMPS);
+	background: var(--primary-blue);
 	border: none;
 	font-weight: 600;
 	width: 200px;
@@ -78,8 +78,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: var(--rojo-CAMPS);
-	border: 2px solid var(--rojo-CAMPS);
+	background-color: var(--primary-blue);
+	border: 2px solid var(--primary-blue);
 	border-radius: 50%;
 	height: 30px;
 	float: right;
@@ -100,7 +100,7 @@
 	margin-right: 10px;
 	border-radius: 5px;
 	width: 200px;
-	background: var(--rojo-CAMPS);
+	background: var(--primary-blue);
 	border: 1px solid #EEE;
 	font-weight: 600;
 	color: #FFF;
@@ -110,8 +110,8 @@
 .botones-titulo:hover{
 	background: #FFF;
 	text-decoration: none;
-	color: var(--rojo-CAMPS);
-	border: 2px solid var(--rojo-CAMPS);
+	color: var(--primary-blue);
+	border: 2px solid var(--primary-blue);
 }
 .border-button{
 	width: 160px;
@@ -122,25 +122,29 @@
 	justify-content: center;
 	border: none;
 	border-radius: 3px;
-	border: 3px solid var(--rojo-CAMPS);
+	border: 3px solid var(--primary-blue);
 	background: #FFF;
-	color: var(--rojo-CAMPS);
+	color: var(--primary-blue);
 	font-weight: 600;
 }
 .border-button:hover{
-	color: var(--rojo-CAMPS);
+	color: var(--primary-blue);
 	text-decoration: none;
 }
 .border-button:focus{
 	outline: none;
-	border: 2px solid var(--rojo-CAMPS);
+	border: 2px solid var(--primary-blue);
 }
 .wide-btn{
 	justify-self: stretch;
 	width: 100%;
-	background-color: var(--rojo-CAMPS);
+	background-color: var(--primary-blue);
 	font-weight: 600;
 	color:#fff;
+}
+.wide-btn:hover{
+	color: #FFF;
+	text-decoration: #FFF;
 }
 /*
 	Global loader
@@ -152,7 +156,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	
+
 }
 @keyframes rotating {
     from{
@@ -319,10 +323,10 @@ nav ul li a:hover{
 	text-decoration: none;
 }
 nav ul li:hover{
-	border-bottom: 8px solid var(--rojo-CAMPS);
+	border-bottom: 8px solid var(--primary-blue);
 }
 .active{
-	border-bottom: 8px solid var(--rojo-CAMPS);
+	border-bottom: 8px solid var(--primary-blue);
 }
 .botones{
 	border: 1px solid #fff;
@@ -333,7 +337,7 @@ nav ul li:hover{
 	text-decoration: none;
 }
 .botones:hover{
-	background-color: var(--rojo-CAMPS);
+	background-color: var(--primary-blue);
 	color: #646464;
 	text-decoration: none;
 	transition: 0.3s ease-in-out;
@@ -344,7 +348,7 @@ nav ul li:hover{
 	right: 0;
 	padding: 10px;
 	margin: 0;
-	
+
 }
 .mi-cuenta-group button{
 	display: flex;
@@ -378,7 +382,7 @@ nav ul li:hover{
 .dropdown-item{
 	line-height: 20px;
 	height: 30px;
-}	
+}
 @media only screen and (max-width: 970px){
 	.header nav{
 		display: none;
@@ -622,7 +626,7 @@ Contacto
 */
 
 .contact_section{
-	height: 430px;	
+	height: 430px;
 }
 .contact_wrapper{
 	height: 100%;
@@ -729,7 +733,7 @@ footer{
 	margin:auto;
 }
 .buscar .input-text{
-	border: 2px solid var(--rojo-CAMPS);
+	border: 2px solid var(--secondary-gray);
 	border-right: none;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
@@ -740,7 +744,7 @@ footer{
 }
 .select-especialidad{
 	border-radius: 5px;
-	border: 2px solid var(--rojo-CAMPS);
+	border: 2px solid var(--secondary-gray);
 	color: #DDD;
 	height: 40px;
 	padding: 5px;
@@ -757,16 +761,16 @@ footer{
 .buscar-submit{
 	height: 40px;
 	padding: 8px;
-	border: 2px solid var(--rojo-CAMPS);
+	border: 2px solid var(--secondary-gray);
 	border-left: none;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
-	background-color: var(--rojo-CAMPS);
+	background-color: var(--secondary-gray);
 	color: #FFF;
 	transition: 0.1s ease-in-out;
 }
 .buscar-submit:hover{
-	background-color: var(--light-button-color);
+	background-color: #aaa;
 }
 .buscar-submit img{
 	height: 100%;
@@ -793,13 +797,16 @@ footer{
 	padding: 100px 0px;
 	margin: auto;
 	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
 	flex-wrap: wrap;
 	/* display: grid;
 	gap: 100px;
 	grid-template-columns: repeat(3, 1fr);*/
 }
 .medico{
-	margin: 50px;
+	margin: 20px;
+	height: 160px;
 	width: 100%;
 	max-width: 350px;
 	border-radius: 10px;
@@ -838,8 +845,8 @@ footer{
 	grid-column: 1/3;
 	height: 40px;
 	width:100%;
-	background-color:  var(--rojo-CAMPS);
-	border-top: 1px solid var(--rojo-CAMPS);
+	background-color:  var(--primary-blue);
+	border-top: 1px solid var(--primary-blue);
 	color: #FFF;
 	font-size: 1em;
 	font-weight: 600;
@@ -849,7 +856,7 @@ footer{
 	text-decoration: none;
 	border-top: 1px solid #EEE;
 	background-color: #FFF;
-	color: var(--rojo-CAMPS);
+	color: var(--primary-blue);
 }
 .nuevo_medico_btn{
 	display: flex;
@@ -983,7 +990,7 @@ Sacar Turno
 .turno-formulario{
 	-webkit-animation: pacienteFormulario 0.5s ease;
 	margin: 0;
-	border-top: 5px solid var(--rojo-CAMPS);
+	border-top: 5px solid var(--primary-blue);
 	box-shadow: 0 0 10px rgb(0, 0, 0, 20%);
 }
 .reserva-submit{
@@ -993,7 +1000,7 @@ Sacar Turno
 	border-radius: 5px;
 	border: 0;
 	margin: 0 30px 25px;
-	background-color: var(--rojo-CAMPS);
+	background-color: var(--primary-blue);
 	color: #FFFFFF;
 	font-weight: 600;
 }
@@ -1034,7 +1041,7 @@ Sacar Turno
 	border: 1px solid #EEE;
 	border-radius: 5px;
 	font-weight: 600;
-	background-color: var(--rojo-CAMPS);
+	background-color: var(--primary-blue);
 }
 .calen-title{
 	display: flex;
@@ -1164,14 +1171,14 @@ Sacar Turno
 	max-width:140px;
 }
 .form-paciente--buttons > *:nth-child(even){
-	background-color: var(--rojo-CAMPS);
-	border-color: var(--rojo-CAMPS);
+	background-color: var(--primary-blue);
+	border-color: var(--primary-blue);
 	color:#fff;
 }
 .form-paciente--buttons > *:nth-child(odd){
-	background-color: var(--light-button-color);
-	border-color: var(--light-button-color);
-	color:#fff;
+	background-color: var(--secondary-gray);
+	border-color: var(--secondary-gray);
+	color:#3d3d3d;
 }
 .form-paciente--btn:hover{
 	color:#fff;
@@ -1187,7 +1194,7 @@ Sacar Turno
 		grid-template-columns: 1fr;
 		height: auto;
 	}
-	
+
 }
 @media (max-width: 620px){
 	.calendario{
@@ -1243,7 +1250,7 @@ Sacar Turno
 	Modal - Horarios disponibles
 */
 @-webkit-keyframes modal-open {
-    from{	
+    from{
         height: 0px;
     }
     to{
@@ -1396,7 +1403,7 @@ Registrarse
 	.wrapper-login{
 		display:block;
 		height: auto;
-		
+
 	}
 	.login-bg{
 		display:none;
@@ -1417,7 +1424,7 @@ Registrarse
 	Pagina Administracion
 */
 .administracion{
-	box-shadow: 0 -2px 6px #CCC;
+	border-bottom: 1px solid #EEE;
 }
 .administracion h2{
 	font-weight: 600;
@@ -1495,7 +1502,7 @@ Registrarse
 .separador a:hover{
 	background-color: #FFF;
 	color: #EB5555;
-	border: 2px solid var(--rojo-CAMPS);
+	border: 2px solid var(--primary-blue);
 }
 .editar_borrar{
 	background: #EEE;
@@ -1510,7 +1517,7 @@ Registrarse
 	transition: 0.5s;
 }
 .editar_borrar a{
-	background-color: var(--rojo-CAMPS);
+	background-color: var(--primary-blue);
 	color: #FFF;
 	display: inline-flex;
 	align-items: center;
@@ -1519,7 +1526,7 @@ Registrarse
 }
 .editar_borrar a:hover{
 	background-color:#FFF;
-	color: var(--rojo-CAMPS);
+	color: var(--primary-blue);
 }
 /*  Administración Medias  */
 @media only screen and (max-width: 800px){
@@ -1648,6 +1655,8 @@ Registrarse
 .ml-box:nth-child(3){
 	grid-row: 1/3;
 	grid-column: 2/3;
+	display: grid;
+	grid-template-rows: 57px 1fr 60px;
 }
 .ml-box-datos{
 	display: grid;
@@ -1662,7 +1671,7 @@ Registrarse
 }
 .ml-box--header{
 	color: #FFF;
-	background-color: var(--rojo-CAMPS);
+	background-color: var(--primary-blue);
 	padding: 15px 20px;
 	font-size: 18px;
 }
@@ -1711,7 +1720,7 @@ Registrarse
 }
 .turno{
 	background-color: #FFF;
-	border-left: 10px solid var(--rojo-CAMPS);
+	border-left: 10px solid var(--primary-blue);
 	border-radius: 5px;
 	height: 80px;
 	width: 400px;
@@ -1809,12 +1818,12 @@ Turno
 	padding: 5px;
 	font-weight: 600;
 	color: #FFF;
-	background: var(--rojo-CAMPS);
+	background: var(--primary-blue);
 	transition: all 0.3s ease-in-out;
 }
 .mi-turno-btn:hover{
 	background-color: #FFF;
-	color: var(--rojo-CAMPS);
+	color: var(--primary-blue);
 	text-decoration: none;
 }
 .mi-turno-cancelar:hover{
@@ -1889,7 +1898,7 @@ Turno
 	padding-left: 25px;
 	height: 100px;
 	color: #FFF;
-	background-color: var(--rojo-CAMPS);
+	background-color: var(--primary-blue);
 }
 .mensaje-reserva{
 	width: 350px;
@@ -2063,7 +2072,7 @@ Turno medico - Consulta
 	padding-left: 1em;
 }
 .boton_historia{
-	background: var(--rojo-CAMPS);
+	background: var(--primary-blue);
 	color: #FFF;
 	font-weight: 600;
 	font-size: 20px;
@@ -2071,7 +2080,7 @@ Turno medico - Consulta
 }
 .boton_historia:hover{
 	background-color: #FFF;
-	color: var(--rojo-CAMPS);
+	color: var(--primary-blue);
 	text-decoration: none;
 }
 .consulta_text{
@@ -2084,7 +2093,7 @@ Turno medico - Consulta
 	height: auto;
 }
 .titulo_receta{
-	background:var(--rojo-CAMPS);
+	background:var(--primary-blue);
 	height:100px;
 	color: #FFF;
 	font-weight: 600;
@@ -2097,7 +2106,7 @@ Turno medico - Consulta
 }
 .submit_turno{
 	height: 95px;
-	background:var(--rojo-CAMPS);
+	background:var(--primary-blue);
 	font-weight: 600;
 	color: #FFF;
 	border: 0;
@@ -2133,7 +2142,7 @@ Turno medico - Consulta
 	padding: 25px;
 }
 .verificacion--title{
-	background:var(--rojo-CAMPS);
+	background:var(--primary-blue);
 	width: 100%;
 	max-height: 70px;
 	font-weight: 600;
@@ -2160,10 +2169,10 @@ Turno medico - Consulta
 	color: #3D3D3D;
 }
 .verificacion--danger{
-	color: var(--rojo-CAMPS);
+	color: var(--primary-blue);
 }
 .verificacion--danger:hover{
-	background-color: var(--rojo-CAMPS);
+	background-color: var(--primary-blue);
 	color: #FFF;
 }
 .verificacion--buttons a:hover{
