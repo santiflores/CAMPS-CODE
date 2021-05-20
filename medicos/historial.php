@@ -2,7 +2,7 @@
 require '../admin/config.php';
 require '../views/historial.view.php';
 
-comprobarSession('medico');
+comprobarSession($session_hash, 'medico');
 
 $conexion = conexion($bd_config);
 	if (!$conexion) {

@@ -3,7 +3,7 @@ session_start();
 require '../admin/config.php';
 require '../functions.php';
 
-comprobarSession('medico');
+comprobarSession($session_hash, 'medico');
 
 $conexion = conexion($bd_config);
 	if (!$conexion) {

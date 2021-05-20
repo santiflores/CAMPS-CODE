@@ -4,7 +4,7 @@ session_start();
 require 'config.php';
 require '../functions.php';
 
-comprobarSession('admin');
+comprobarSession($session_hash, 'admin');
 
 $conexion = conexion($bd_config);
 if(!$conexion){

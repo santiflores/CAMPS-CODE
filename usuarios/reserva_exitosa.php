@@ -4,7 +4,7 @@ session_start();
 require '../admin/config.php';
 require '../functions.php';
 
-comprobarSession('usuario');
+comprobarSession($session_hash, 'usuario');
 
 $conexion = conexion($bd_config);
 if(!$conexion){
@@ -15,11 +15,11 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
 	
 	$turno_id = $_GET['id'];
 	$statement = $conexion->prepare(
-	'SELECT * FROM turnos WHERE id = :id AND usuario_id = :usuario_id'
+	'SELECT * FROM turnos WHERE id = :id AND usuario_id = :usuario_id AND cancelado IS NULL'
 	);
 	$statement->execute(array(
 		':id' => $turno_id,
-		'usuario_id' => $_SESSION['usuario']
+		'usuario_id' => $_SESSION[$session_hash.'usuario']
 	));
 	$turno = $statement->fetch();
 
@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
 	} else {
 		$paciente = obtenerPacientePorId($conexion, $usuario_id);
 	}
-	if ($turno['estado'] == null) {
+	if ($turno['cancelado'] == null) {
 		$titulo = '¡Reserva exitosa!';
 		$mensaje = '
 		¡Muchas gracias! Tu reserva fue confiramda con éxito. Podés ver la informacion de tu turno en esta página o en tu casilla de email. <br><br

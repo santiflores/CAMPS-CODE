@@ -13,7 +13,7 @@
 	<body>
 		<?php require('header.php')?>
 		<div class="separador">
-			<h2>Informacion de la reserva</h2>
+			<b>Informacion de la reserva</b>
 		</div>
 		<div class="info-reserva-container">
 			<div class="flex-center-start reserva-exitosa--header">
@@ -23,7 +23,7 @@
 					<div class="mensaje-reserva">
 						<p><?php echo($mensaje);?></>
 					</div>	
-					<?php if ($turno['estado'] == null) {?>
+					<?php if ($turno['cancelado'] == null) {?>
 
 						<div class="wrapper_info_reserva">
 							<div class="flex-center-start info_paciente_consulta"><b>Información de la reserva</b></div>

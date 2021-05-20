@@ -6,7 +6,7 @@
 		<title>Reservar turno - CAMPS</title>
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<link rel="stylesheet" href="css/stylesheet.css">
+		<link rel="stylesheet" href="../css/stylesheet.css">
 		<link rel="shortcut icon" type="image.png" href="images/favicon_CAMPS.png">
 		<script src="https://kit.fontawesome.com/aa681c14be.js" crossorigin="anonymous"></script>
 	</head>
@@ -16,7 +16,7 @@
 			<b>Reservar turno</b>
 		</div>
 		<div class="wrapper-reservar">			
-			<?php displayReservarTurno($conexion, $session_hash, $medico_id, $semana_horarios, $medico_actual);?>
+			<?php displayReservarTurno($conexion, $medico_id, $semana_horarios, $medico_actual);?>
         </div>
 		<?php require 'footer.php'?>
 		<script src="<?php echo RUTA?>/js/scripts.js"></script>

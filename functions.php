@@ -23,44 +23,109 @@ function obtenerEspecialidades($conexion){
 	$sentencia->execute();
 	return $sentencia->fetchAll();
 }
-
-function obtenerMedicos($conexion, $especialidad){
+function obtenerEspecialidadPorNombre($conexion, $especialidad){
 	$sentencia = $conexion->prepare(
-		"SELECT * FROM medicos WHERE especialidad LIKE :especialidad ORDER BY nombre ASC"
+		'SELECT * FROM especialidades WHERE especialidad LIKE :especialidad'
 	);
 	$sentencia->execute(array(
 		':especialidad' => $especialidad
 	));
 	return $sentencia->fetchAll();
 }
+function obtenerSucursal($conexion, $nombre){
+	$statement = $conexion->prepare(
+		"SELECT * FROM sucursales WHERE nombre = :nombre LIMIT 1"
+	);
+	$statement->execute(array(
+		':nombre' => $nombre
+	));
+	return $statement->fetch();
+}
+function obtenerMedicos($conexion){
+	$sentencia = $conexion->prepare(
+		"SELECT id, nombre, especialidad, horario, foto FROM medicos"
+	);
+	$sentencia->execute();
+	return $sentencia->fetchAll();
+}
+function obtenerMedicosEspecialidad($conexion, $especialidad){
+	$sentencia = $conexion->prepare(
+		"SELECT id, nombre, especialidad, horario, foto FROM medicos WHERE especialidad LIKE :especialidad AND estado IS NULL ORDER BY nombre ASC"
+	);
+	$sentencia->execute(array(
+		':especialidad' => $especialidad
+	));
+	return $sentencia->fetchAll();
+}
+function obtenerMedicosFiltrados($conexion, $especialidad, $sucursal_id, $query){
+	// Preparamos los parametros
+	$sql = "SELECT id, nombre, especialidad, horario, foto FROM medicos WHERE estado IS NULL";
+	if ($sucursal_id) {
+		$sql .= " AND sucursal_id LIKE :sucursal_id";
+		$sucursal_param = [':sucursal_id' => $sucursal_id];
+	} else {
+		$sucursal_param = [];
+	}
+	if ($query) {
+		$sql .= " AND (nombre LIKE :query OR horario LIKE :query)";
+		$query_param = array(':query' => "%$query%");
+	} else {
+		$query_param = [];
+	}
+	if ($especialidad) {
+		$sql .= " AND especialidad LIKE :especialidad";
+		$especialidad_param = [':especialidad' => $especialidad];
+	} else {
+		$especialidad_param = [];
+	}
+	$sql .= ' ORDER BY nombre ASC';
+	$parametros = array_merge($especialidad_param, $sucursal_param, $query_param);
+	
+	// Consulta SQL con parametros
+	$sentencia = $conexion->prepare($sql);
+	$sentencia->execute($parametros);
+	return $sentencia->fetchAll();
+}
 
-function comprobarSession($session_type){
-	if (!isset($_SESSION[$session_type])) {
+function comprobarSession($session_hash, $session_type){
+	if (!isset($_SESSION[$session_hash.$session_type])) {
 		header ('Location: ' . RUTA . '/login.php');
 	}
 }
 
 function obtenerHorarios($conexion, $medico_id){
-	$statement = $conexion->query("SELECT * FROM horarios WHERE medico_id = $medico_id");
+	$statement = $conexion->prepare("SELECT * FROM horarios WHERE medico_id = :medico_id");
+	$statement->execute(array(
+		'medico_id' => $medico_id
+	));
 	$resultado = $statement->fetchAll();
 	return ($resultado) ? $resultado: false;
 }
 
 function obtenerMedicoCompleto($conexion, $id){
-	$resultado = $conexion->query("SELECT * FROM medicos WHERE id = $id LIMIT 1");
-	$resultado = $resultado->fetch();
+	$statement = $conexion->prepare("SELECT * FROM medicos WHERE id = :id");
+	$statement->execute(array(
+		":id" => $id
+	));
+	$resultado = $statement->fetch();
 	return ($resultado) ? $resultado : false;
 }
 
 function obtenerPrecios($conexion, $medico_id){
-	$statement = $conexion->query("SELECT * FROM precios_consultas WHERE medico_id = $medico_id");
+	$statement = $conexion->prepare("SELECT * FROM precios_consultas WHERE medico_id = :medico_id");
+	$statement->execute(array(
+		'medico_id' => $medico_id
+	));
 	$resultado = $statement->fetchAll();
 	return ($resultado) ? $resultado: false;
 }
 
 function obtenerMedicoPorId($conexion, $id){
-	$resultado = $conexion->query("SELECT id, nombre, especialidad, horario, foto FROM medicos WHERE id = $id LIMIT 1");
-	$resultado = $resultado->fetch();
+	$statement = $conexion->prepare("SELECT id, nombre, especialidad, horario, foto FROM medicos WHERE estado IS NULL AND id = :id");
+	$statement->execute(array(
+		':id' => $id
+	));
+	$resultado = $statement->fetch();
 	return ($resultado) ? $resultado : false;
 }
 

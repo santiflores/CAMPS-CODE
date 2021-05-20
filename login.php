@@ -49,10 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			// Admin
 			
 			if  ($email == $admin['username'] && $pass == $admin['password']) { 
-				$_SESSION['admin'] = $admin['username'];
+				$_SESSION[$session_hash.'admin'] = $admin['username'];
 				header('location: ' . RUTA . '/admin/administracion.php');
-			}
-			
+			}	
+
 			// usuario
 			$usuario_id = $conexion->prepare(
 				'SELECT id from usuarios WHERE email = :email AND pass = :pass;' 
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			if  (!empty($usuario_id)) { 
 				
 				$usuario_id = $usuario_id[0]['id'];
-				$_SESSION['usuario'] = $usuario_id;
+				$_SESSION[$session_hash.'usuario'] = $usuario_id;
 
 				if (isset($medico_id) && $medico_id != false) {
 				
@@ -79,10 +79,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				}
 			}
 			
+			//Recepcion
+
+			if  ($email == $recepcion['username'] && $pass == $recepcion['password']) { 
+				$_SESSION[$session_hash.'recepcion'] = $recepcion['username'];
+				header('location: ' . RUTA . '/recepcion/cartilla.php');
+			}
+			
 			// Medico
 			
 			$medico_id = $conexion->prepare(
-				'SELECT id from medicos WHERE email = :email AND pass = :pass;' 
+				'SELECT id from medicos WHERE email = :email AND pass = :pass; and estado is null' 
 			);
 			$medico_id->execute(array(
 				':email' => $email,
@@ -92,11 +99,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			
 			if  (!empty($medico_id)) { 
 				$medico_id = $medico_id['id'];
-				$_SESSION['medico'] = $medico_id;
+				$_SESSION[$session_hash.'medico'] = $medico_id;
 				header('location: ' . RUTA . '/medicos/turnos.php');
 			} else {
 				$errores .= '<li>Credenciales incorrectas</li>';
 			}
+			
 		}
 	}
 }

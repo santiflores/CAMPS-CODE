@@ -3,17 +3,17 @@ session_start();
 require '../admin/config.php';
 require '../functions.php';
 
-comprobarSession('usuario');
+comprobarSession($session_hash, 'usuario');
 
 $conexion = conexion($bd_config);
 if (!$conexion) {
 	header('location: error.php');
 }
-if (isset($_SESSION['usuario'])){
-	$id = $_SESSION['usuario'];
+if (isset($_SESSION[$session_hash.'usuario'])){
+	$id = $_SESSION[$session_hash.'usuario'];
 	
 	$statement = $conexion->prepare(
-		'SELECT * FROM turnos WHERE usuario_id = :id AND fecha ORDER BY fecha ASC;'
+		'SELECT * FROM turnos WHERE usuario_id = :id AND cancelado is null OR cancelado = 1 ORDER BY fecha ASC;'
 	);
 	$statement->execute(array(
 		':id' => $id
@@ -24,17 +24,17 @@ if (isset($_SESSION['usuario'])){
 	function mostrarTurnos($conexion, $turnos){
 		
 		echo('
-		<div class="mis-turnos-header">
+		<div class="lista-header">
 		<span class="flex-center-start">
 		Medico
 		</span>
-		<span class="flex-center-start mi-turno-especialidad">
+		<span class="flex-center-start lista-item-especialidad">
 		Especialidad
 		</span>
 		<span class="flex-center-start">
 		Fecha
 		</span>
-		<span class="flex-center-start mi-turno-hora">
+		<span class="flex-center-start lista-item-hora">
 		Hora
 		</span>
 		</div>
@@ -45,7 +45,7 @@ if (isset($_SESSION['usuario'])){
 			foreach ($turnos as $turno) {
 				
 				$id_turno = $turno['id'];
-				$estado = $turno['estado'];
+				$estado = $turno['cancelado'];
 				$fecha = new DateTime($turno['fecha']);
 				$fecha = date_format($fecha, 'd-m-Y');
 				$hora = date_format(new DateTime($turno['hora']), 'H:i');
@@ -62,24 +62,24 @@ if (isset($_SESSION['usuario'])){
 				if ($estado != null) {
 					echo('
 					<div class="turno-cancelado">
-						<span class="mi-turno-info">
+						<span class="lista-item-info">
 							<p class="sin-turnos">Tu turno fue cancelado. Comunicate con CAMPS para mas informacion.</p>
 						</span>
-						<span class="mi-turno-info">
+						<span class="lista-item-info">
 						'. $fecha .'
 						</span>
-						<span class="mi-turno-info mi-turno-hora">
+						<span class="lista-item-info lista-item-hora">
 						'. $hora .'
 						</span>
-						<a href="reserva_exitosa.php?id='. $id_turno .'" class="mi-turno-btn">
+						<a href="reserva_exitosa.php?id='. $id_turno .'" class="lista-item-btn">
 							Mas info
 						</a>
 					</div>
 					');
 				} else {
 					echo('
-					<div class="mi-turno">
-					<span class="mi-turno-info">');
+					<div class="lista-item">
+					<span class="lista-item-info">');
 					if ($medico == false) {
 						echo('<p class="sin-turnos">'. $nombre_medico .'</p>');
 					} else {
@@ -87,20 +87,20 @@ if (isset($_SESSION['usuario'])){
 					}	
 					echo('
 					</span>
-					<span class="mi-turno-info mi-turno-especialidad">
+					<span class="lista-item-info lista-item-especialidad">
 					'. $especialidad .'
 					</span>
-					<span class="mi-turno-info">
+					<span class="lista-item-info">
 					'. $fecha .'
 					</span>
-					<span class="mi-turno-info mi-turno-hora">
+					<span class="lista-item-info lista-item-hora">
 					'. $hora .'
 					</span>
-					<div class="mi-turno-btns">
-						<a href="reserva_exitosa.php?id='. $id_turno .'" class="mi-turno-btn">
+					<div class="lista-item-btns">
+						<a href="reserva_exitosa.php?id='. $id_turno .'" class="lista-item-btn">
 						Mas info
 						</a>
-						<span data-route="cancelar_turno.php?id='. $id_turno .'" class="flex-center mi-turno-btn borrar-btn" id="turno">
+						<span data-route="cancelar_turno.php?id='. $id_turno .'" class="flex-center lista-item-btn borrar-btn" id="turno">
 							Cancelar Turno
 							<!--<i class="far fa-trash-alt fa-lg"></i>-->
 						</span>

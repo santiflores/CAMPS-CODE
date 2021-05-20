@@ -111,7 +111,7 @@ try {
 	</style>
 	<body>
 	<div class="flex-center separador">
-		<h2>Informacion de la reserva</h2>
+		<b>Informacion de la reserva</b>
 	</div>
 		<div class="info-reserva-container">
 			<div class="flex-center reserva-exitosa--header">

@@ -2,14 +2,14 @@
 require '../admin/config.php';
 require '../functions.php';
 
-comprobarSession('usuario'); 
+comprobarSession($session_hash, 'usuario'); 
 
 $conexion = conexion($bd_config);
 if(!$conexion){
 	header('Location: ../error.php');
 }
 
-$user_id = $_SESSION['usuario'];
+$user_id = $_SESSION[$session_hash.'usuario'];
 
 $usuario = obtenerPacientePorId($conexion, $user_id);
 

@@ -1,7 +1,10 @@
 :root{
-	/* --primary-blue: #ec6161; */
 	--primary-blue: #4f6d7a;
+	--secondary-light-blue: #C0D6DF;
 	--secondary-gray: #CCC;
+}
+html{
+	font-size: 100%;
 }
 *{
 	font-family: 'Open Sans', sans-serif;
@@ -25,9 +28,10 @@
 }
 .input-textarea{
 	width:100%;
+	min-height: 100px;
 	border: none;
+	border-bottom: 1px solid #CCC;
 	padding: 10px 1em;
-	font-size: 1.3em;
 }
 .input-submit{
 	width: 100%;
@@ -366,7 +370,7 @@ nav ul li:hover{
 	display: none;
 	line-height: 15px;
 	color: #3D3D3D;
-	font-size: 15px;
+	font-size: 0.95em;
 	font-weight: 600;
 }
 .header_icon:hover{
@@ -434,7 +438,8 @@ Container de el titulo y botones
 */
 .container_title{
 	width: 100%;
-	height: 670px;
+	min-height: 550px;
+	height: 70vh;
 	background-image: url(../images/familia-bici.jpg);
 	background-repeat: no-repeat;
 	background-size: 100%;
@@ -465,16 +470,18 @@ Atencion medica
 	line-height: 1.1em;
 	font-size: 2.81em;
 	max-width: 500px;
+	margin: 0;
 }
 .atencion-medica--texto{
-	margin: 30px 20px ;
+	margin: 1.24em 1em ;
 	font-size: 1.56em;
 	max-width: 500px;
 }
 .atencion-medica--card{
 	background-color: #FFF;
 	font-size: 1.1em;
-	width: 310px;
+	width: 100%;
+	max-width: 310px;
 	height: 150px;
 	padding: 14px;
 	gap: 14px;
@@ -488,7 +495,13 @@ Atencion medica
 	height: 60px;
 }
 .atencion-medica--card select{
-	margin: 0 10px 10px
+	margin: 0 10px 10px;
+	padding: 5px;
+	border: 2px solid var(--primary-blue);
+	border-radius: 5px;
+}
+atencion-medica--card select:focus{
+	border: 3px solid var(--primary-blue);
 }
 .atencion-medica--card .input-submit{
 	width: 140px;
@@ -501,130 +514,38 @@ Atencion medica
 /*
 Atencion Medica Medias
 */
+@media screen and (max-height: 700px){
+	.container_title{
+		font-size: calc(0.7rem + 0.4vh);
+	}
+}
 @media only screen and (max-width: 860px){
 	.atencion_medica{
 		margin: auto;
-		font-size: 14px;
 		padding: 25px;
 	}
 	.container_title{
 		padding: 0;
 	}
-.atencion-medica--info{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	flex-direction: column;
-	margin: 0;
-}
-}
-/*
-	Nuestros Servicios
-*/
-.nuestros-servicios{
-	min-height: 650px;
-	width: 100%;
-	padding: 0 180px;
-	overflow: hidden;
-	display: flex;
-	align-items: center;
-}
-.ilustracion-medicos{
-	height: 580px;
-	width: 100%;
-}
-.ilustracion-medicos img{
-	height: 35vw;
-	max-height: 580px;
-	position: absolute;
-	left: 10vw;
-}
-.nuestros-servicios--info{
-	max-width: 670px;
-	z-index: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	justify-content: space-between;
-}
-.nuestros-servicios--info span{
-	font-size: 2.5em;
-	margin: 60px 0;
-	font-weight: 800;
-	color: #3d3d3d;
-}
-.nuestros-servicios--cards{
-	max-width: 660px;
-	display: flex;
-	flex-wrap: nowrap;
-	gap: 60px
-}
-.servicio-card{
-	background-color: #FFF;
-	width: 300px;
-	height: 370px;
-	margin: auto;
-	text-align: center;
-	overflow: hidden;
-	border-radius: 5px;
-	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
-	display: grid;
-	grid-template-rows: 125px 195px 60px;
-}
-.consultorio-img{
-	background: url(http://localhost/centros_medicos/CAMPS/images/consultorios_medicos.jpg);
-}
-.ecografia-img{
-	background: url(http://localhost/centros_medicos/CAMPS/images/ecografias.jpg);
-}
-.servicio-card--titulo{
-	width: 100%;
-	height: 125px;
-	background-repeat: no-repeat;
-	background-size: 100%;
-	color: #FFF;
-	font-weight: 600;
-	font-size: 1.9em;
-	line-height: 1em;
-}
-.servicio-card--contenido{
-	padding: 20px;
-}
-.servicio-card .input-submit{
-	font-size: 18px;
-	width: 100%;
-}
-/*	Nuestros servicios medias	*/
-@media screen and (max-width: 1670px){
-	.ilustracion-medicos img{
-		left: 3vw;
-		height: 35vw;
-	}
-	.nuestros-servicios{
-		padding: 0 3vw;
-	}
-}
-@media screen and (max-width: 1400px){
-	.ilustracion-medicos{
-		display: none;
-	}
-	nuestros-servicios--cards{
-		flex-wrap: wrap;
-		padding: 0 30px;
-	}
-	.nuestros-servicios{
-		justify-content: center;
-	}
-	.nuestros-servicios--info{
+	.atencion-medica--info{
+		display: flex;
 		align-items: center;
+		justify-content: center;
+		text-align: center;
+		flex-direction: column;
+		margin: 0;
+	}
+}
+@media only screen and (max-width: 860px){
+	.container_title{
+		height: auto;
+		font-size: 0.82rem;
 	}
 }
 /*
 	Nuestros Servicios
 */
 .nuestros-servicios{
-	min-height: 650px;
 	width: 100%;
 	padding: 0 180px;
 	overflow: hidden;
@@ -636,13 +557,13 @@ Atencion Medica Medias
 	width: 100%;
 }
 .ilustracion-medicos img{
-	height: 35vw;
-	max-height: 580px;
+	height: 30vw;
 	position: absolute;
 	left: 10vw;
 }
 .nuestros-servicios--info{
 	max-width: 670px;
+	padding-bottom: 50px;
 	z-index: 0;
 	display: flex;
 	flex-direction: column;
@@ -651,19 +572,21 @@ Atencion Medica Medias
 }
 .nuestros-servicios--info span{
 	font-size: 2.5em;
-	margin: 60px 0;
+	margin-bottom: 30px;
 	font-weight: 800;
 	color: #3d3d3d;
 }
 .nuestros-servicios--cards{
-	max-width: 660px;
+	width: 100%;
+	width: 660px;
 	display: flex;
 	flex-wrap: nowrap;
 	gap: 60px
 }
 .servicio-card{
 	background-color: #FFF;
-	width: 300px;
+	width: 100%;
+	max-width: 300px;
 	height: 370px;
 	margin: auto;
 	text-align: center;
@@ -693,7 +616,7 @@ Atencion Medica Medias
 	padding: 20px;
 }
 .servicio-card .input-submit{
-	font-size: 18px;
+	font-size: 1.12em;
 	width: 100%;
 }
 /*	Nuestros servicios medias	*/
@@ -710,21 +633,28 @@ Atencion Medica Medias
 	.ilustracion-medicos{
 		display: none;
 	}
-	nuestros-servicios--cards{
+	.nuestros-servicios--info span{
+		text-align: center;
+		font-size: 2em;
+		margin: 0;
+	}
+	.nuestros-servicios--cards{
+		width: 100%;
 		flex-wrap: wrap;
-		padding: 0 30px;
 	}
 	.nuestros-servicios{
+		padding: 25px;
+		height: auto;
 		justify-content: center;
 	}
 	.nuestros-servicios--info{
+		gap: 25px;
 		align-items: center;
 	}
 }
 /*
 Contacto
 */
-
 .contact_section{
 	height: 430px;
 }
@@ -769,7 +699,7 @@ Contacto
 /*
 Footer
 */
-footer{
+/* footer{
 	width: 100%;
 	padding: 50px 0 50px 0;
 	background: #E0E0E0;
@@ -792,7 +722,33 @@ footer{
 }
 .wrapper_footer h4{
 	text-align: center;
-}
+} */
+footer {
+	background-color: #f0f0f0;
+	padding: 50px;
+	}
+	footer-wrapper{
+		max-width: 1200px;
+	}
+	footer a {
+		max-width: 270px;
+		margin: 20px auto;
+		display: block;
+	}
+	footer a img{
+		width: 100%;
+		max-width: 270px
+	}
+	footer .logos-gf {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: space-evenly;
+		-ms-flex-pack: space-evenly;
+			justify-content: space-evenly;
+	-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+	}
 
 /*  Footer medias  */
 
@@ -812,16 +768,16 @@ footer{
 */
 
 .titulo_medicos{
-	padding: 1em;
 	width: 100%;
-	height: 150px;
+	padding: 30px;
+	min-height: 80px;
 	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
 	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 .titulo_medicos p{
-	font-size: 30px;
+	font-size: 1.4em;
 	font-weight: 600;
 	margin: 0;
 }
@@ -878,18 +834,19 @@ footer{
 
 .especialidad{
 	width: 100%;
-	box-shadow: inset 0 -3px 10px 0 #CCC;
 }
 .separador{
-	min-height: 90px;
+	min-height: 80px;
 	display: flex;
 	align-items: center;
 	padding: 20px 25px;
-	background-color: #EEE;
+	background-color: #f5f5f5;
 	color: #3D3D3D;
 	width: 100%;
 }
-.separador h2{
+.separador b{
+	color: #333333;
+	font-size: 1.7em;
 	margin: 0;
 }
 .wrapper_medicos{
@@ -998,12 +955,9 @@ footer{
 		font-size: 1em;
 	}
 }
-@media only screen and (max-width: 375px){
-	.info_medico{
-		font-size: 14px;
-	}
+@media only screen and (max-width: 375px){	
 	.info_medico span{
-		line-height: 20px;
+		line-height: 1em;
 	}
 }
 /*
@@ -1175,7 +1129,8 @@ Sacar Turno
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 20px;
+	font-size: 1.2em;
+	font-weight: 600;
 	color: #3D3D3D;
 	background: #FFF;
 	border-radius: 5px;
@@ -1184,14 +1139,13 @@ Sacar Turno
 	cursor: pointer;
 }
 .calen-dia:hover{
-	color: #636363;
 	text-decoration: none;
 	box-shadow: 0 0 10px #CCC;
 	transition: 0.3s;
 }
 .calen-dia--focus{
-	color: #636363;
-	border: 1px solid var(--light-button-color);
+	background-color: var(--secondary-light-blue);
+	color: #FFF;
 	text-decoration: none;
 	box-shadow: 0 0 10px #CCC;
 }
@@ -1226,6 +1180,11 @@ Sacar Turno
 	align-items: center;
 	justify-content: center;
 }
+form-paciente b{
+	align-self: flex-start;
+	text-align: left;
+	font-size: 0.9em;
+}
 .pnr-input{
 	border: 1px solid #d8d8d8;
 	height: 40px;
@@ -1247,13 +1206,13 @@ Sacar Turno
 	color:#AFAFAF;
 	width: 100%;
 	height: 100%;
-	font-size: 16px;
+	font-size: 1em;
 	font-weight: 600;
 	flex-direction: column;
 }
 .pnr-card b{
 	text-align: left;
-	font-size: 13px;
+	font-size: 0.81em;
 	color:#2b2b2b;
 }
 #pnr-errores{
@@ -1305,7 +1264,6 @@ Sacar Turno
 		grid-template-rows: 40px;
 	}
 	.calen-dia{
-		font-size: 20px;
 		height: 40px;
 		/* width: 35px; */
 	}
@@ -1396,7 +1354,7 @@ About Us
 	grid-row: 1/3;
 }
 .about_info b{
-	font-size: 18px;
+	font-size: 1.12em;
 }
 .about_info p{
 	margin: 5px;
@@ -1453,10 +1411,10 @@ Login
 	width: 370px;
 }
 .login-text b{
-	font-size: 50px;
+	font-size: 3.12em;
 }
 .login-text p{
-	font-size: 25px;
+	font-size: 1.56em;
 }
 .login-bg{
 	background-image: url(../images/medicos_login.png);
@@ -1488,7 +1446,7 @@ Registrarse
 	background-color: #FFF;
 }
 .login-form .input-submit{
-	font-size: 20px;
+	font-size: 1.25em;
 	width: 100%;
 
 }
@@ -1713,7 +1671,7 @@ Registrarse
 }
 .agregar_medico .input-submit{
 	width: 100%;
-	font-size: 20px;
+	font-size: 1.25em;
 	height: 90px;
 }
 /*	Nuevo y editar medias	*/
@@ -1737,7 +1695,7 @@ Registrarse
 }
 .medico-landing--titulo{
 	color: #3D3D3D;
-	font-size: 30px;
+	font-size: 1.87em;
 	margin: 30px 0;
 	font-weight: 800;
 }
@@ -1773,15 +1731,28 @@ Registrarse
 	color: #FFF;
 	background-color: var(--primary-blue);
 	padding: 15px 20px;
-	font-size: 18px;
+	font-size: 1.12em;
 }
 .ml-box--item{
 	display: flex;
 	align-items: center;
 	width: 100%;
 	height: 55px;
-	font-size: 15px;
+	font-size: 0.9em;
 	border-bottom: 1px solid #EEE;
+}
+.ml-box--btn{
+	background-color: #eee;
+	color: #333333;
+	font-weight: 600;
+	text-decoration: none;
+	font-size: 1.2em;
+	transition: 0.3s ease-in-out;
+}
+.ml-box--btn:hover{
+	color: #333333;
+	text-decoration: none;
+	background-color: #f5f5f5;
 }
 .ml-box--item p{
 	padding: 0 20px;
@@ -1830,7 +1801,7 @@ Registrarse
 	align-items: center;
 	justify-content: space-between;
 	box-shadow: 0 0 10px #E0E0E0;
-	font-size: 30px;
+	font-size: 1.9;
 }
 .three-dots{
 	min-height: 40px;
@@ -1861,34 +1832,36 @@ Registrarse
 /*
 Turno
 */
-.mis-turnos-wrapper{
+.lista-wrapper{
 	width: 1200px;
 	min-height: 700px;
-	font-size: 20px;
+	font-size: 1.25em;
 	margin: auto;
 	box-shadow: 0 0 10px #CCCCCC;
 }
-.mis-turnos-wrapper p{
+.lista-wrapper p{
 	margin: 0;
 }
-.mis-turnos-header{
-	height: 60px;
+.lista-header{
+	height: 70px;
 	width: 100%;
-	background: #EEEEEE;
-	font-size: 1em;
-	color: #AFAFAF;
+	background: #f5f5f5;
+	font-size: 1.1em;
+	font-weight: 600;
 	display: grid;
-	grid-template-columns: 4fr 4fr 2fr 1fr 3fr;
+	grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
 }
-.mis-turnos-header > span{
+.lista-header > span{
+	display: flex;
+	align-items: center;
+	height: auto;
 	padding-left: 1em;
-	border-right: 1px solid #707070;
 }
-.mi-turno{
+.lista-item{
 	height: 80px;
 	width: 100%;
 	display: grid;
-	grid-template-columns: 4fr 4fr 2fr 1fr 3fr;
+	grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
 	border-bottom: 1px solid #EEE;
 	font-size: 1em;
 }
@@ -1900,72 +1873,73 @@ Turno
 	border-bottom: 1px solid #EEE;
 	font-size: 1em;
 }
-.mi-turno-info{
+.lista-item-info{
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
 	padding: 0 1em;
 }
-.mi-turno-btns{
+.lista-item-btns{
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 1px;
 }
-.mi-turno-btn{
+.lista-item-btn{
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	text-align: center;
 	padding: 5px;
 	font-weight: 600;
 	color: #FFF;
 	background: var(--primary-blue);
 	transition: all 0.3s ease-in-out;
 }
-.mi-turno-btn:hover{
+.lista-item-btn:hover{
 	background-color: #FFF;
 	color: var(--primary-blue);
 	text-decoration: none;
 }
-.mi-turno-cancelar:hover{
+.lista-item-cancelar:hover{
 	color: #FFF;
 }
 /*	Mis turnos medias	*/
 @media only screen and (max-width: 1200px){
-	.mis-turnos-wrapper{
+	.lista-wrapper{
 		width: 100%;
-		font-size: 16px;
+		font-size: 1em;
 	}
 }
 @media only screen and (max-width: 1000px){
-	.mi-turno-btns{
+	.lista-item-btns{
 		grid-template-columns: 1fr;
 		grid-template-rows: 1fr 1fr;
 	}
-	.mi-turno,
+	.lista-item,
 	.turno-cancelado{
 		height: 120px;
 	}
 }
 @media only screen and (max-width: 800px){
-	.mi-turno-especialidad{
+	.lista-item-especialidad{
 		display: none;
 	}
-	.mi-turno,
-	.mis-turnos-header{
+	.lista-item,
+	.lista-header{
 		grid-template-columns: 3fr 2fr 1fr 2fr;
 	}
 }
 @media only screen and (max-width: 550px){
-	.mis-turnos-wrapper{
+	.lista-wrapper{
 		font-size: 12;
 	}
 }
 @media only screen and (max-width: 420px){
-	.mi-turno-hora{
+	.lista-item-hora{
 		display: none;
 	}
-	.mis-turnos-header,
-	.mi-turno{
+	.lista-header,
+	.lista-item{
 		grid-template-columns: 3fr 2fr 2fr;
 	}
 	.turno-cancelado{
@@ -2002,7 +1976,7 @@ Turno
 }
 .mensaje-reserva{
 	width: 350px;
-	font-size: 20px;
+	font-size: 1.25em;
 }
 .wrapper_info_reserva{
 	width: 335px;
@@ -2175,7 +2149,7 @@ Turno medico - Consulta
 	background: var(--primary-blue);
 	color: #FFF;
 	font-weight: 600;
-	font-size: 20px;
+	font-size: 1.25em;
 	transition: all 0.3s ease-in-out;
 }
 .boton_historia:hover{
@@ -2246,7 +2220,7 @@ Turno medico - Consulta
 	width: 100%;
 	max-height: 70px;
 	font-weight: 600;
-	font-size: 20px;
+	font-size: 1.25em;
 	color: #FFF;
 }
 .verificacion--buttons{
@@ -2302,4 +2276,97 @@ Turno medico - Consulta
 }
 .activar_cuenta--img{
 	height: 200px;
+}
+
+.body-wrap{
+	display: flex;
+}
+.busqueda{
+	width: 300px;
+	min-height: calc(90vh - 140px);
+	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
+}
+.busqueda .input-text{
+	border: 1px solid #BBB;
+	border-radius: 5px;
+	width: 100%;
+	max-width: 300px;
+	margin: 15px 0;
+}
+.busqueda--header{
+	height: 80px;
+	padding: 25px;
+	font-size: 20px;
+	border-bottom: 1px solid #CCC;
+}
+.busqueda--inner{
+	color: #BBBBBB;
+	flex-direction: column;
+	padding: 25px;
+}
+.filtros--item{
+	max-width: 300px;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgb(0, 0, 0, 15%);
+	padding: 15px;
+	margin: 20px 0;
+}
+.filtros--item label{
+	display: inline;
+}
+.filtros--item select{
+	height: 35px;
+	width: 100%;
+	border-radius: 5px;
+	border: 2px solid var(--primary-blue);
+	margin: 0;
+}
+.busqueda .border-button{
+	width: 100px;
+	margin-left: 150px;
+}
+.content-wrapper{
+	width: calc(100vw - 300px);
+}
+.content-wrapper .lista-wrapper{
+	box-shadow: none;
+	width: 100%;
+	max-width: none;
+}
+.content-wrapper .lista-header{
+	grid-template-columns: 2fr 2fr 6fr;
+}
+.content-wrapper .lista-item{
+	grid-template-columns: 2fr 2fr 4fr 2fr;
+}
+@media only screen and (max-width: 1400px){
+	.content-wrapper{
+		font-size: calc(0.9rem + 0.2vw);
+	}
+	.content-wrapper .lista-item-btns{
+		width: 225px;
+	}
+	.content-wrapper .lista-item, 
+	.content-wrapper .lista-header{
+		grid-template-columns: 4fr 3fr 225px;
+	}
+	.content-wrapper .lista-item span:nth-child(3){
+		display: none;
+	}
+}
+@media only screen and (max-width: 1000px){
+	.body-wrap{
+		flex-direction: column;
+	}
+	.busqueda{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		max-width: none;
+		width: 100%;
+	}
+	.content-wrapper{
+		width: 100%;
+	}
 }

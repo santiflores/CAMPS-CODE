@@ -12,37 +12,69 @@
 	</head>
 	<body>
 	<?php require 'header.php'?>
+                <div class="titulo_medicos">
+                    <p>Cartilla de medicos</p>
+                </div>
+	<div class="body-wrap">
+            <div class="busqueda">
+                <div class="busqueda--header">
+                    <b>Opciones de Busqueda</b>
+                </div>
+                <form action="<?php echo($_SERVER['PHP_SELF'])?>" class="busqueda--inner" id="filtros">
+                    <div class="combo-busqueda">
+                        <b>Buscar medicos</b>
+                        <input type="text" class="input-text" name="busqueda" placeholder="Buscar..." value="<?php if (!empty($_GET['busqueda'])){echo($_GET['busqueda']);}?>">
+                        <span class="border-button" id="filtros-submit">Buscar</span>
+                    </div>
+                    <div class="filtros">
+                        <b>Filtros</b>
+                        <div class="filtros--item">
+                            <b>Especialidad</b>
+                            <select name="especialidad" class="input-select" id="filtro-select">
+                                <option disabled="true" selected="true">Elegí una especialidad</option>
+                                <option value="" class="filtro-option" id="option">Todas las especialidades</option>
+                                <?php
+                                if (isset($_GET['especialidad']) && !empty($_GET['especialidad'])) {
+                                    echo('<option selected="true" class="filtro-option">'.$_GET['especialidad'].'</option>');
+                                } else {
+                                    echo('
+                                    <option disabled="true" selected="true">Elegí una especialidad</option>');
+                                    
+                                }
+                                $especialidades = obtenerEspecialidades($conexion);
+                                foreach ($especialidades as $especialidad) {
+                                    $especialidad = $especialidad[1];
+                                    echo('<option value="'. $especialidad .'">'. $especialidad .'</option>');
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="filtros--item">
+                            <b>Centros medicos</b>
+                            <div class="filtro-radio">
+                                <input type="radio" name="sucursal" id="alderetes" value="alderetes" <?php if (!empty($_GET['sucursal'])){
+                                    if ($_GET['sucursal']=='alderetes') {
+                                        echo('checked');
+                                    }
+                                    }?>>
+                                <label for="alderetes">Alderetes</label>
+                            </div>
+                            <div class="filtro-radio">
+                                <input type="radio" name="sucursal" id="BdRS" value="BdRS" disabled <?php if (!empty($_GET['sucursal'])){
+                                    if ($_GET['sucursal']=='BdRS') {
+                                        echo('checked');
+                                    }
+                                    }?>>
+                                <label for="BdRS">Banda del Rio Salí (próximamente)</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="content-wrapper">
 		<section class="wrapper_especialidades">
-		<div class="titulo_medicos">
-				<p>Selecciona un medico</p>
-				<div class="flex-center-start">
-				<form action="buscar.php" method="get" class="buscar">
-					<input type="text" class="input-text" placeholder="Buscar medicos y especialidades..." name="busqueda">
-					<button type="submit" class="flex-center buscar-submit">
-						<img src="<?php echo(RUTA)?>/images/buscar.png" alt="Buscar">
-					</button>
-				</form>
-
-				<div class="botones_panel">
-					<div>
-						<button class="botones-titulo" id="boton_dropdown">Filtrar</button>
-						<form id="agregar" method="GET" enctype="multipart/form-data" action="<?php htmlspecialchars($_SERVER['PHP_SELF'])?>">
-							<h6><b>Selecciona una especialidad</b></h6> 
-							<select class="select-especialidad" name="especialidad">
-								<!-- <option disabled="true" selected="true">Seleccione una especialidad</option> -->
-								<option value="">Todas las especialidades</option>
-								<?php foreach($todas_especialidades as $especialidad):?>
-									<option value="<?php echo($especialidad[1]);?>"> <?php echo(ucfirst($especialidad[1]));?> </option>
-								<?php endforeach;?>
-							</select>
-							<input type="submit" class="input-submit" value="Filtrar">
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 		
-			<?php mostrarEspMedicos($especialidades, $conexion);?>
+			<?php mostrarEspMedicos($session_hash, $especialidades, $conexion);?>
 
 		</section>
 		<?php require 'views/footer.php';?>

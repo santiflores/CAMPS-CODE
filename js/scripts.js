@@ -15,6 +15,11 @@ const DOMelements = {
 	dropdownBtn: document.getElementById('boton_dropdown'),
 	dropdown: document.getElementById('agregar'),
 
+	filterForm: document.getElementById('filtros'),
+	filterSelect: document.querySelectorAll('#filtro-select'),
+	filterRadio: document.querySelectorAll('.filtro-radio'),
+	filterSubmit: document.getElementById('filtros-submit'),
+
 	bookForm: document.getElementById('reservar_turno'),
 	appointmentInfo: document.querySelectorAll('.reservar--card'),
 	calendar: document.querySelector('.calen-grid'),
@@ -43,9 +48,10 @@ const DOMelements = {
 	
 
 }
+const RUTA = 'http://localhost/centros_medicos/CAMPS/';
 let loader = document.createElement('div');
 loader.classList.add('loader-active');
-loader.innerHTML = '<img src="images/loader.png">'
+loader.innerHTML = `<img src="${RUTA}images/loader.png">`;
 
 window.addEventListener('scroll', ()=>{
 	let scrollPosition = window.scrollY;
@@ -78,7 +84,32 @@ function displayDropdown(button, dropdown) {
 if (DOMelements.dropdownBtn != null) {
 	displayDropdown(DOMelements.dropdownBtn, DOMelements.dropdown);
 }
-// displayDropdown(DOMelements.navDropBtn, DOMelements.navDropdown);
+
+function submitFilters(){
+	let inputs = DOMelements.filterForm.getElementsByTagName('input');
+	// console.log(inputs);
+	for (let input of inputs) {
+		console.log(input.id);
+		if (input.value == '') {
+			input.disabled = true
+		}
+	}
+	DOMelements.filterForm.submit();
+}
+DOMelements.filterSubmit.addEventListener('click', ()=>{
+	submitFilters();
+});
+document.addEventListener('input',(event)=>{
+	console.log(event.target.id);
+	if (event.target.id=='filtro-select') {
+		submitFilters();		
+	}
+});
+DOMelements.filterRadio.forEach(input=>{
+	input.addEventListener('click',()=>{
+		submitFilters();
+	})
+});
 
 
 if (DOMelements.nuevoHorarioBtn != null) {
@@ -139,76 +170,22 @@ if (DOMelements.nuevoHorarioBtn != null) {
 	});
 }
 
-
-if (DOMelements.nuevoPrecioBtn != null) {
-	var filasExistentes = DOMelements.filasExistentes;
-	if (filasExistentes.length == 0) {
-		var valor = 0;	
-	} else {
-		var valor = DOMelements.filasExistentes[DOMelements.filasExistentes.length - 1];
-		valor = valor.id.split('fila');
-		valor = parseInt(valor[1]) + 1;
-	}
-	DOMelements.nuevoPrecioBtn.addEventListener('click', function() {
-		
-		var nuevaFilaHTML = `
-		<div id="nueva-fila${valor}" class="nueva-fila">
-		
-		<label><b>Tipo:</b></label>
-		<select class="input-text" name="valor[${valor}][tipo]">
-		<option value="Sin obra social">Sin obra social<option>
-		<option value="OSDE">OSDE<option>
-		<option value="ASUNT">ASUNT<option>
-		<option value="GALENO">GALENO<option>
-		<option value="SWISS MEDICAL">SWISS MEDICAL<option>
-		</select>		
-		<label><b>Valor:</b></label>
-		<input type="number" class="input-text" name="valor[${valor}][valor]">
-		</div>`;
-		
-		DOMelements.nuevoPrecioWrap.insertAdjacentHTML('beforeend', nuevaFilaHTML);
-		
-		valor ++;
-		return valor;
-	});
-}
-
 if (DOMelements.borrarFila != null) {
 	let precioBorradoCount = 0;
 	let horarioBorradoCount = 0;
 	DOMelements.borrarFila.forEach(el => {
 		el.addEventListener('click', ()=>{
 			let id = el.id;
-			let parentNode;
-			switch (id) {
-				case 'borrar-horario':
-					parentNode = document.querySelector('#nuevo-horario-wrap');
-					let horarioBorrado = parentNode.removeChild(parentNode.lastElementChild);
-					horarioBorrado = horarioBorrado.firstElementChild.value;
-					if (horarioBorrado != null) {
-						DOMelements.nuevoHorarioWrap.insertAdjacentHTML('beforebegin', `
-							<input type="hidden" name="horario_borrado_id[${horarioBorradoCount}]" value="${horarioBorrado}">
-						`);
-						horarioBorradoCount += 1;
-					}
-					fila -= 1;
-					break;
-				case 'borrar-precio':
-					parentNode = document.querySelector('#nuevo-precio-wrap')
-					let valorBorrado = parentNode.removeChild(parentNode.lastElementChild);
-					valorBorrado = valorBorrado.firstElementChild.value;
-					
-					if (valorBorrado != null) {
-						DOMelements.nuevoPrecioWrap.insertAdjacentHTML('beforebegin',`
-							<input type="hidden" name="precio_borrado_id[${precioBorradoCount}]" value="${valorBorrado}">
-						`);
-						precioBorradoCount += 1;
-					}
-					valor -= 1;
-					break;
-				default:
-					break;
-				}
+			let parentNode = document.querySelector('#nuevo-horario-wrap');
+			let horarioBorrado = parentNode.removeChild(parentNode.lastElementChild);
+			horarioBorrado = horarioBorrado.firstElementChild.value;
+			if (horarioBorrado != null) {
+				DOMelements.nuevoHorarioWrap.insertAdjacentHTML('beforebegin', `
+					<input type="hidden" name="horario_borrado_id[${horarioBorradoCount}]" value="${horarioBorrado}">
+				`);
+				horarioBorradoCount += 1;
+			}
+			fila -= 1;
 		})		
 	});
 }
@@ -241,7 +218,7 @@ function loadSchedule(date) {
 	// Obtener horarios tomados por Ajax
 	
 	let ajaxPetition = new XMLHttpRequest();
-	ajaxPetition.open('POST', 'traer_horarios.php');
+	ajaxPetition.open('POST', `${RUTA}traer_horarios.php`);
 
 	let medicId = DOMelements.patientInfo.medicId.value;
 	if (date != '' & medicId != '') {
@@ -275,7 +252,7 @@ function loadScheduleUI(petition, date){
 		appointmentsModal.innerHTML += `
 			<b>Turnos disponibles el dia ${date}</b>
 			<button id="cancelar-fecha" type="button" class="botones-cerrar">
-			<img src="images/cruz.svg"></img>
+			<img src="${RUTA}images/cruz.svg"></img>
 			</button>
 		`;
 		closeBtns();
@@ -359,6 +336,7 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 			<input type="text" class="input-text pnr-input" data-content="nombre" placeholder="Nombre" style="margin: 5px 20px;" value="">
 			<input type="text" class="input-text pnr-input" data-content="apellido" placeholder="Apellido" style="margin: 5px 20px;" value="">
 			<input type="number" class="input-text pnr-input" data-content="dni" placeholder="DNI" style="margin: 5px 20px;" value="">
+				<b>Fecha de Nacimiento</b>
 			<input type="date" class="input-text pnr-input" data-content="fecha_nac" style="margin: 5px 20px;" value="">
 			<span id="pnr-errores" class="alert"></span>
 			<div class="form-paciente--buttons">
@@ -434,7 +412,7 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 						<div>
 							<b>Datos del paciente</b>
 							<button id="cancelar-pnr" type="button" class="botones-cerrar">
-							<img src="images/cruz.svg"></img>
+							<img src="${RUTA}images/cruz.svg"></img>
 							</button>
 							<div class="pnr-card">
 								<div class="flex-center pnr-card--info">
@@ -459,7 +437,7 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 			DOMelements.patientInfo.pnr.value = 'false';
 
 			let ajaxPetition = new XMLHttpRequest();
-			ajaxPetition.open('POST', 'ajax_info_usuario.php');
+			ajaxPetition.open('POST', `${RUTA}ajax_info_usuario.php`);
 		
 			let userId = DOMelements.patientInfo.userId.value;
 			if (id != '') {
@@ -476,7 +454,7 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 					<div>
 						<b>Datos del paciente</b>
 						<button id="cancelar-pm" type="button" class="botones-cerrar">
-						<img src="images/cruz.svg"></img>
+						<img src="${RUTA}images/cruz.svg"></img>
 						</button>
 						<div class="pnr-card">
 							<div class="flex-center pnr-card--info">
@@ -518,7 +496,7 @@ function closeBtns(){
 				case 'cancelar-fecha'	:
 					DOMelements.patientInfo.dataInputTime.value = "";
 					DOMelements.patientInfo.dataInput.value = "";
-					DOMelements.fechaEnUI.innerHTML = "Seleccione una fecha";
+					DOMelements.fechaEnUI.innerHTML = "Seleccionar en calendario";
 					break;
 				default:
 					break;

@@ -1,5 +1,5 @@
 <?php 
-if (isset($_SESSION['admin'])) {
+if (isset($_SESSION[$session_hash.'admin'])) {
 	$header = '
 	<li class="header-item"><a href="'. RUTA .'/index.php">Inicio</a></li>
 	<li class="header-item"><a href="'. RUTA .'/admin/administracion.php">Administracion</a></li>
@@ -13,7 +13,7 @@ if (isset($_SESSION['admin'])) {
 		</div>
 	</div>
 	';
-}elseif (isset($_SESSION['medico'])) {
+}elseif (isset($_SESSION[$session_hash.'medico'])) {
 	$header = '
 		<li class="header-item"><a href="'. RUTA .'/medicos/prestador.php">Inicio</a></li>
 		<li class="header-item"><a href="'. RUTA .'/medicos/turnos.php">Proximos turnos</a></li>
@@ -29,7 +29,7 @@ if (isset($_SESSION['admin'])) {
 				</div>
 			</div>
 	';
-} elseif (isset($_SESSION['usuario'])) {
+} elseif (isset($_SESSION[$session_hash.'usuario'])) {
 	$header = '
 		<li class="header-item"><a href="'. RUTA .'/index.php">Inicio</a></li>
 		<li class="header-item"><a href="'. RUTA .'/sobre_nosotros.php">Quienes somos</a></li>

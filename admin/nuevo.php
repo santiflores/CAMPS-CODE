@@ -3,7 +3,7 @@
 require 'config.php';
 require '../functions.php';
 
-comprobarSession('admin');
+comprobarSession($session_hash, 'admin');
 
 $conexion = conexion($bd_config);
 if(!$conexion){
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$contraseña = hash('sha512', $contraseña);
 	$contraseña2 = hash('sha512', $contraseña2);
 	$filas = $_POST['fila'];
-	$valores = $_POST['valor'];
+	// $valores = $_POST['valor'];
 	$thumb = $_FILES['thumb']['tmp_name'];
 	$archivo_subido = '../images/' . $_FILES['thumb']['name'];
 	move_uploaded_file($thumb, $archivo_subido);
@@ -41,16 +41,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	$foto = (!empty($_FILES['thumb']['name'])) ? $_FILES['thumb']['name'] : 'user.jpg';
 
-	if (empty($nombre) || empty($especialidad) || empty($horario) || empty($dni) || empty($email) || empty($contraseña) || empty($filas) || empty($valores)){
+	if (empty($nombre) || empty($especialidad) || empty($horario) || empty($dni) || empty($email) || empty($contraseña) || empty($filas)){
 		$errores .= "<li>Complete todos los campos</li>";
 	}
 
 	if ($contraseña !== $contraseña2) {
 		$errores .= "<li>Las contraseñas deben ser iguales</li>";
 	} 
-	print_r($contraseña);
 
 
+	print_r($errores);
 	if ($errores == '') {
 		$statement = $conexion->prepare(
 		'INSERT INTO `medicos`
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			':pass' => $contraseña
 		));
 
-		$medico_id = $conexion->query("SELECT id FROM medicos ORDER BY id DESC LIMIT 1");
+		$medico_id = $conexion->query("SELECT id FROM medicos WHERE estado IS NULL ORDER BY id DESC LIMIT 1");
 		$medico_id = $medico_id->fetch();
 		
 		foreach ($filas as $fila) {

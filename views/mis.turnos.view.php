@@ -13,9 +13,9 @@
 	<body>
 		<?php require '../views/header.php';?>
 		<div class="separador">
-			<h2>Mis turnos</h2>
+			<b>Mis turnos</b>
 		</div>
-		<div class="mis-turnos-wrapper">
+		<div class="lista-wrapper">
 			<?php mostrarTurnos($conexion, $turnos)?> 
 		</div>
 		<?php require '../views/footer.php'?>

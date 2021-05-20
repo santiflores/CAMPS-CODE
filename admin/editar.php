@@ -2,7 +2,7 @@
 require 'config.php';
 require '../functions.php';
 
-comprobarSession('admin');
+comprobarSession($session_hash, 'admin');
 
 $conexion = conexion($bd_config);
 if(!$conexion){
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$statement = $conexion->prepare(
 				'INSERT INTO horarios
 					(medico_id, dia, desde, intervalo, hasta)
-					VALUES(:medico_id, :dia, :desde, :intervalo, :hasta);'
+					VALUES(:medico_id, :dia, :desde, :intervalo, :hasta)'
 				);
 			$statement->execute(array(
 				':medico_id' => $medico_id,

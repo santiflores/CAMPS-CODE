@@ -4,7 +4,7 @@ session_start();
 require 'admin/config.php';
 require 'functions.php';
 
-comprobarSession('usuario');
+comprobarSession($session_hash, 'usuario');
 
 $conexion = conexion($bd_config);
 if(!$conexion){
@@ -62,7 +62,7 @@ function rangoHorarioDiario($medico_id, $dia, $conexion){
 
 function checkearTurnoDisponible($conexion, $dia_actual, $medico_id){
 	$statement = $conexion->prepare(
-		"SELECT id, fecha FROM turnos WHERE medico_id = :id AND `fecha` = :fecha;"
+		"SELECT id, fecha FROM turnos WHERE medico_id = :id AND `fecha` = :fecha AND cancelado IS NULL;"
 	);
 	$statement->execute(array(
 		':id' => $medico_id,
@@ -251,7 +251,7 @@ function mostrarHorarios($conexion, $medico_id, $semana_horarios) {
 	$horarios_camps = rangoHorario();
 	
 	$statement = $conexion->prepare(
-		"SELECT hora FROM turnos WHERE fecha = :fecha AND medico_id = :medico_id"
+		"SELECT hora FROM turnos WHERE fecha = :fecha AND medico_id = :medico_id AND cancelado IS NULL"
 	);
 	$statement->execute(array(
 		':fecha' => $fecha,
@@ -543,7 +543,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 
 
 	$errores = 0;
-	$usuario_id = $_SESSION['usuario'];
+	$usuario_id = $_SESSION[$session_hash.'usuario'];
 	$medico_id = limpiarDatos($_POST['id']);
 	$fecha = limpiarDatos($_POST['fecha']);
 	$hora = limpiarDatos($_POST['hora']);
@@ -556,7 +556,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 	}
 
 	// Checkeo si el turno esta tomado en la base de datos 
-	$statement = $conexion->prepare('SELECT id FROM turnos WHERE fecha = :fecha AND hora = :hora');
+	$statement = $conexion->prepare('SELECT id FROM turnos WHERE fecha = :fecha AND hora = :hora AND cancelado IS NULL');
 	$statement->execute(array(
 		':fecha' => $fechaYmd,
 		':hora' => $hora

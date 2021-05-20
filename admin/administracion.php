@@ -3,7 +3,7 @@
 require 'config.php';
 require '../functions.php';
 
-comprobarSession('admin');
+comprobarSession($session_hash, 'admin');
 
 $conexion = conexion($bd_config);
 if (!$conexion) {
@@ -13,11 +13,11 @@ if (!$conexion) {
 function mostrarMedicos($conexion){
     $especialidades = obtenerEspecialidades($conexion);
     foreach($especialidades as $especialidad){
-        $medicos = obtenerMedicos($conexion, $especialidad[1]);
+        $medicos = obtenerMedicosEspecialidad($conexion, $especialidad[1]);
         echo('
         <div class="especialidad">
           <div class="separador">
-            <h2>'. $especialidad['especialidad'].'</h2>
+            <b>'. $especialidad['especialidad'].'</b>
             <a class="borrar-btn" id="especialidad" data-route="borrar_especialidad.php?id='. $especialidad['ID'].'">
               <i class="far fa-trash-alt fa-lg"></i>
             </a>

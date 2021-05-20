@@ -3,7 +3,7 @@ session_start();
 require '../admin/config.php';
 require '../functions.php';
 
-comprobarSession('usuario'); 
+comprobarSession($session_hash, 'usuario'); 
 
 $conexion = conexion($bd_config);
 if(!$conexion){
@@ -11,18 +11,18 @@ if(!$conexion){
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $id = $_GET['id'];
-      if (!$id) {
-        header('Location:' . RUTA . '/usuarios/mis_turnos.php');
-      }
-    $statement = $conexion->prepare(
-        'DELETE FROM turnos WHERE id = :id'
-    );
-    $statement->execute(array(
-        ':id'=> $id
-    ));
+		$id = $_GET['id'];
+			if (!$id) {
+				header('Location:' . RUTA . '/usuarios/mis_turnos.php');
+			}
+		$statement = $conexion->prepare(
+				'UPDATE `turnos` SET `cancelado` = 1 WHERE id = :id'
+		);
+		$statement->execute(array(
+				':id'=> $id
+		));
 
-    $statement->fetchAll();
-    header('Location: '. RUTA .'/usuarios/mis_turnos.php');
+		$statement->fetchAll();
+		header('Location: '. RUTA .'/usuarios/mis_turnos.php');
 }
 ?>

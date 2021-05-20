@@ -42,7 +42,7 @@
 	</div>
 	<div class="especialidad">
 	<div class="separador">
-		<h3><b><?php echo $titulo; ?></b></h3>
+		<b><?php echo $titulo; ?></b>
 	</div>
 	<div class="wrapper_medicos">
 		<?php foreach($resultados as $medico){	
@@ -50,7 +50,7 @@
 		$especialidad_actual = $medico['especialidad'];
 		$horario = $medico['horario'];
 		$foto = $medico['foto'];
-		$checkSession = (isset($_SESSION['usuario'])) ? 'reservar_turno.php?id=' . $medico['id'] : 'login.php?id=' . $medico['id'];	
+		$checkSession = (isset($_SESSION[$session_hash.'usuario'])) ? 'reservar_turno.php?id=' . $medico['id'] : 'login.php?id=' . $medico['id'];	
 		?>
 			<div class="medico">
 				<img src="images/<?php echo($foto)?>" class="foto_medico" alt="">

@@ -8,8 +8,8 @@ if(!$conexion){
 	header('Location: ../error.php');
 }
 
-// $user_id = $_SESSION['usuario'];
-// comprobarSession('usuario'); 
+// $user_id = $_SESSION[$session_hash.'usuario'];
+// comprobarSession($session_hash, 'usuario'); 
 
 // $usuario = obtenerPacientePorId($conexion, $user_id);
 

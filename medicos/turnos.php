@@ -3,14 +3,14 @@ session_start();
 require '../admin/config.php';
 require '../functions.php';
 
-comprobarSession('medico');
+comprobarSession($session_hash, 'medico');
 
 $conexion = conexion($bd_config);
 	if (!$conexion) {
 		header('location: error.php');
 	}
 
-$medico_id = $_SESSION['medico'];
+$medico_id = $_SESSION[$session_hash.'medico'];
 $medico = obtenerMedicoPorId($conexion, $medico_id);
 
 if (!empty($_GET['fecha'])) {
@@ -26,7 +26,7 @@ if (!empty($_GET['fecha'])) {
 
 
 $statement = $conexion->prepare(
-	'SELECT id, usuario_id, hora, no_registrado_id FROM turnos WHERE medico_id = :medico_id AND fecha = :fecha;'
+	'SELECT id, usuario_id, hora, no_registrado_id FROM turnos WHERE medico_id = :medico_id AND fecha = :fecha AND cancelado IS NULL;'
 );
 $statement->execute(array(
 	':medico_id' => $medico_id,
@@ -54,7 +54,7 @@ function mostrarTurnos($turnos_hoy, $conexion){
 	
 	echo('
 	<div class="separador">
-		<h2>Turno mañana</h2>
+		<b>Turno mañana</b>
 	</div>
 	<div class="turnos-am-pm">
 	');
@@ -93,7 +93,7 @@ function mostrarTurnos($turnos_hoy, $conexion){
 	echo('
 	</div>
 	<div class="separador">
-		<h2>Turno tarde</h2>
+		<b>Turno tarde</b>
 	</div>
 	<div class="turnos-am-pm">
 	');

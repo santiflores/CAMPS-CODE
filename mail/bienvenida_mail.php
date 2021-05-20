@@ -112,7 +112,7 @@ try {
 	</style>
 	<body>
 	<div class="flex-center separador">
-		<h2>¡Te damos la bienvenida a CAMPS!</h2>
+		<b>¡Te damos la bienvenida a CAMPS!</b>
 	</div>
 		<div class="info-reserva-container">
 			<div class="flex-center reserva-exitosa--header">

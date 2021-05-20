@@ -3,7 +3,7 @@
 require 'config.php';
 require '../functions.php';
 
-comprobarSession('admin');
+comprobarSession($session_hash, 'admin');
 
 $conexion = conexion($bd_config);
 if(!$conexion){
@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['QUERY_STRING'])){
 	$busqueda = limpiarDatos($_GET['busqueda']);
 
 	$statement = $conexion->prepare(
-		"SELECT * FROM medicos WHERE nombre LIKE :busqueda or horario de atención LIKE :busqueda or especialidad LIKE :busqueda"
+		"SELECT * FROM medicos WHERE nombre LIKE :busqueda or horario de atención LIKE :busqueda or especialidad LIKE :busqueda and estado is null"
 	);
 	$statement->execute(array(':busqueda' => "%$busqueda%"));
 	

@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-require 'admin/config.php';
-require 'functions.php';
+require '../admin/config.php';
+require '../functions.php';
 
-comprobarSession($session_hash, 'usuario');
+// comprobarSession($session_hash, 'recepcion');
 
 $conexion = conexion($bd_config);
 if(!$conexion){
@@ -244,13 +244,13 @@ function mostrarPrecios($conexion, $medico_id) {
 }
 
 
-function displayReservarTurno($conexion, $session_hash, $medico_id, $semana_horarios, $medico_actual){
+function displayReservarTurno($conexion, $medico_id, $semana_horarios, $medico_actual){
 	$precios = mostrarPrecios($conexion, $medico_id);
 	$medico_actual = obtenerMedicoPorId($conexion, $medico_id);
 	if ($_GET['id'] == true) {	
 		echo('
 			<form class="info-consulta" id="reservar_turno" method="post" action="'. $_SERVER["PHP_SELF"] .'">	
-				<input type="hidden" id="id" name="id" value="'. $_SESSION[$session_hash.'usuario'] .'">
+				<input type="hidden" id="id" name="id" value="'. $_SESSION[$session_hash.'recepcion'] .'">
 				<input type="hidden" id="medico_id" name="medico_id" value="'. $medico_id .'">
 				<input type="hidden" name="fecha" id="selected-day" value="">
 				<input type="hidden" name="hora" id="selected-time" value="">
@@ -264,8 +264,8 @@ function displayReservarTurno($conexion, $session_hash, $medico_id, $semana_hora
 				
 
 				<span class="flex-center-start reservar-turno--header">
-					<a href="medicos.php" class="flecha-volver">
-						<img src="images/flecha.svg">
+					<a href="cartilla.php" class="flecha-volver">
+						<img src="../images/flecha.svg">
 					</a>
 					<p class="info-consulta--nombre">'. $medico_actual['nombre'] .'</p>
 				</span>
@@ -284,9 +284,8 @@ function displayReservarTurno($conexion, $session_hash, $medico_id, $semana_hora
 
 					<div class="reservar--card" id="turno-formulario">
 					
-						<b>¿Para quien es el turno?</b>
-						<div class="turno-formulario-buttons border-button" id="btn-para-mi">Para mi</div>
-						<div class="turno-formulario-buttons border-button" id="btn-pnr">Otra persona</div>
+						<b>Ingrese los datos del paciente</b>
+						<div class="turno-formulario-buttons border-button" id="btn-pnr">Abrir formulario</div>
 					</div>
 
 					<span>');
@@ -332,7 +331,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {	
 
 	$errores = 0;
-	$usuario_id = $_SESSION[$session_hash.'usuario'];
+	$emisor_id = $_SESSION[$session_hash.'recepcion'];
 	$medico_id = limpiarDatos($_POST['medico_id']);
 	$fecha = limpiarDatos($_POST['fecha']);
 	$hora = limpiarDatos($_POST['hora']);
@@ -377,7 +376,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 			);
 
 			$statement->execute(array(
-				':emisor_id' => $usuario_id,
+				':emisor_id' => $emisor_id,
 				':nombre' => $pnr_nombre,
 				':apellido' => $pnr_apellido,
 				':dni' => $pnr_dni,
@@ -400,7 +399,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 			VALUES (:usuario_id, :medico_id, :no_registrado_id, :fecha, :hora)'
 		);
 		$statement->execute(array(
-			':usuario_id' => $usuario_id,
+			':usuario_id' => $emisor_id,
 			':medico_id' => $medico_id,
 			':no_registrado_id' => $pnr_id,
 			':fecha' => $fechaYmd,
@@ -416,7 +415,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 		$hora = date_format(new DateTime($turno['hora']), 'H:i');
 		$fecha = date_format(new DateTime($turno['fecha']), 'd-m-Y');
 		$medico_id = $turno['medico_id'];
-		$usuario_id = $turno['usuario_id'];
+		$emisor_id = $turno['usuario_id'];
 		$pnr_id = $turno['no_registrado_id'];
 		
 		if ($pnr_id != null) {
@@ -428,14 +427,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 		$medico_actual = obtenerMedicoPorId($conexion, $medico_id);
 		$especialidad = $medico_actual['especialidad'];
 
-		
-
-		require('mail/reserva_mail.php');
-		header('Location: usuarios/reserva_exitosa.php?id='. $turno['id']);
-
 	} else {
 		header('Location: reservar_turno.php?id='. $medico_id .'&error='. $errores);
 	}
 }
-require 'views/reservar.view.php';
+require '../views/recepcion_reservar.view.php';
 ?>

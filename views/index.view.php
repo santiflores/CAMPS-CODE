@@ -70,7 +70,7 @@
 			</div>
 		</div>
 		<section class="nuestros-servicios">
-			<div class="ilustracion-medicos">
+			<div class="flex-center-start ilustracion-medicos">
 				<img class="flex-center" src="images/undraw_medicine.png" alt="Medicos">
 			</div>
 			<div class="nuestros-servicios--info">
@@ -83,7 +83,7 @@
 						<div class="servicio-card--contenido">
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde necessitatibus ducimus odit voluptatibus.
 						</div>
-						<a class="flex-center input-submit" href="">
+						<a class="flex-center input-submit" href="<?php echo RUTA?>/medicos.php">
 							Sacá tu turno
 						</a>	
 					</div>
@@ -94,7 +94,7 @@
 						<div class="servicio-card--contenido">
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde necessitatibus ducimus odit voluptatibus.
 						</div>
-						<a class="flex-center input-submit" href="">
+						<a class="flex-center input-submit" href="<?php echo RUTA?>/medicos.php?especialidad=ecografias">
 							Sacá tu turno
 						</a>	
 					</div>

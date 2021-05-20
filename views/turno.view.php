@@ -14,7 +14,7 @@
 <body>
 	<?php require '../views/header.php';?>
 <div class="separador">
-	<h2><?php echo($nombre.' - '. $horario);?></h2>
+	<b><?php echo($nombre.' - '. $horario);?></b>
 </div>
 <form class="wrapper_turno" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST">
 	<div class="wrapper_info_paciente">

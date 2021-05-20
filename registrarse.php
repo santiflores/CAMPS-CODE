@@ -8,7 +8,7 @@ if(!$conexion){
 	header('Location: ../error.php');
 }
 
-if (isset($_SESSION['usuario'])) {
+if (isset($_SESSION[$session_hash.'usuario'])) {
 	header('Location: index.php');;
 }
 $errores = '';

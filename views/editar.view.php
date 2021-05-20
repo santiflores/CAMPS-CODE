@@ -14,7 +14,7 @@
   <body>
 	<?php require 'header.php'?>
 	<div class="separador">
-		<h2>Editar información de <?php echo $nombre?></h2>
+		<b>Editar información de <?php echo $nombre?></b>
 	</div>
 	<form class="agregar_medico" method="post" enctype="multipart/form-data" action="<?php echo (htmlspecialchars($_SERVER['PHP_SELF']));?>">
 		<div class="form agregar_medico_form">
@@ -30,8 +30,8 @@
 					echo('<option value="'. $especialidad[1] .'">'. $especialidad[1] .'</option>');
 				}?>
 			</select>
-			<label>Horario de atencion:</label>
-			<textarea type="text" class="input-text" name="horario" placeholder="Horario de atencion"><?php echo($horario);?></textarea>
+			<label>Descripcion corta de horario:</label>
+			<textarea type="text" class="input-text" name="horario" placeholder="Escribi una descricion corta del horario de atencion del medico (los pacientes podrán verla)..."><?php echo($horario);?></textarea>
 			<label>DNI</label>
 				<input type="text" class="input-text" name="dni" placeholder="DNI" value="<?php echo($dni);?>">
 			</div>
