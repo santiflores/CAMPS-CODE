@@ -18,7 +18,7 @@ const DOMelements = {
 	filterForm: document.getElementById('filtros'),
 	filterSelect: document.querySelectorAll('#filtro-select'),
 	filterRadio: document.querySelectorAll('.filtro-radio'),
-	filterSubmit: document.getElementById('filtros-submit'),
+	searchSubmit: document.getElementById('busqueda-submit'),
 
 	bookForm: document.getElementById('reservar_turno'),
 	appointmentInfo: document.querySelectorAll('.reservar--card'),
@@ -86,18 +86,24 @@ if (DOMelements.dropdownBtn != null) {
 }
 
 function submitFilters(){
-	let inputs = DOMelements.filterForm.getElementsByTagName('input');
-	// console.log(inputs);
+	let inputs = DOMelements.filterForm.querySelectorAll('.filtro-input');
 	for (let input of inputs) {
-		console.log(input.id);
+		console.log(input);
+		console.log(input.value);
 		if (input.value == '') {
 			input.disabled = true
 		}
 	}
 	DOMelements.filterForm.submit();
 }
-DOMelements.filterSubmit.addEventListener('click', ()=>{
+DOMelements.searchSubmit.addEventListener('click', ()=>{
 	submitFilters();
+});
+
+DOMelements.filterForm.addEventListener('keypress', (e)=>{
+	if (e.key === 'Enter') {
+		submitFilters();
+    }
 });
 document.addEventListener('input',(event)=>{
 	console.log(event.target.id);

@@ -150,6 +150,101 @@ html{
 	color: #FFF;
 	text-decoration: #FFF;
 }
+
+.body-wrap{
+	display: flex;
+	overflow: hidden;
+	border-top: 1px solid #eee;
+}
+.busqueda{
+	width: 300px;
+	min-height: calc(90vh - 140px);
+	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
+}
+.busqueda .input-text{
+	border: 1px solid #BBB;
+	border-radius: 5px;
+	width: 100%;
+	max-width: 300px;
+	margin: 15px 0;
+}
+.busqueda--header{
+	height: 80px;
+	padding: 25px;
+	font-size: 20px;
+	border-bottom: 1px solid #CCC;
+}
+.busqueda--inner{
+	color: #BBBBBB;
+	flex-direction: column;
+	padding: 25px;
+}
+.filtros--item{
+	max-width: 300px;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgb(0, 0, 0, 15%);
+	padding: 15px;
+	margin: 20px 0;
+}
+.filtros--item label{
+	display: inline;
+}
+.filtros--item select{
+	height: 35px;
+	width: 100%;
+	border-radius: 5px;
+	border: 2px solid var(--primary-blue);
+	margin: 0;
+}
+.busqueda .border-button{
+	width: 100px;
+	margin-left: 150px;
+}
+.content-wrapper{
+	width: calc(100vw - 300px);
+}
+.content-wrapper .lista-wrapper{
+	box-shadow: none;
+	width: 100%;
+	max-width: none;
+}
+.content-wrapper .lista-header{
+	grid-template-columns: 2fr 2fr 6fr;
+}
+.content-wrapper .lista-item{
+	grid-template-columns: 2fr 2fr 4fr 2fr;
+}
+@media only screen and (max-width: 1400px){
+	.content-wrapper{
+		font-size: calc(0.9rem + 0.2vw);
+	}
+	.content-wrapper .lista-item-btns{
+		width: 225px;
+	}
+	.content-wrapper .lista-item, 
+	.content-wrapper .lista-header{
+		grid-template-columns: 4fr 3fr 225px;
+	}
+	.content-wrapper .lista-item span:nth-child(3){
+		display: none;
+	}
+}
+@media only screen and (max-width: 1000px){
+	.body-wrap{
+		flex-direction: column;
+	}
+	.busqueda{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		max-width: none;
+		width: 100%;
+	}
+	.content-wrapper{
+		width: 100%;
+	}
+}
 /*
 	Global loader
 */
@@ -840,6 +935,7 @@ footer {
 	display: flex;
 	align-items: center;
 	padding: 20px 25px;
+	gap: 25px;
 	background-color: #f5f5f5;
 	color: #3D3D3D;
 	width: 100%;
@@ -1544,10 +1640,9 @@ Registrarse
 	}
 }
 .separador a{
-	min-width: 60px;
+	width: 60px;
 	height: 60px;
 	border-radius: 30px;
-	margin-left: 30px;
 	background-color: #EEE;
 	border: 1px solid #CCC;
 	color: #DDD;
@@ -2278,95 +2373,77 @@ Turno medico - Consulta
 	height: 200px;
 }
 
-.body-wrap{
-	display: flex;
-}
-.busqueda{
-	width: 300px;
-	min-height: calc(90vh - 140px);
+/*
+	Agenda de turnos
+*/
+.agenda{
+	height: calc(90px*12);
+	row-gap: 90px;
 	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
+	display: flex;
+	overflow: hidden;
 }
-.busqueda .input-text{
-	border: 1px solid #BBB;
-	border-radius: 5px;
-	width: 100%;
-	max-width: 300px;
-	margin: 15px 0;
-}
-.busqueda--header{
-	height: 80px;
-	padding: 25px;
-	font-size: 20px;
-	border-bottom: 1px solid #CCC;
-}
-.busqueda--inner{
-	color: #BBBBBB;
+.agenda-time-tags{
+	width: 55px;
+	display: flex;
 	flex-direction: column;
-	padding: 25px;
+	padding: 83px 10px 0;
+	color: #bbb;
+	font-weight: 600;
 }
-.filtros--item{
-	max-width: 300px;
-	border-radius: 5px;
-	box-shadow: 0 0 5px rgb(0, 0, 0, 15%);
-	padding: 15px;
-	margin: 20px 0;
+.time-tag{
+	text-align: right;
+	font-size: 14px;
+	line-height: 14px;
+	margin-bottom: 77px;
 }
-.filtros--item label{
-	display: inline;
-}
-.filtros--item select{
-	height: 35px;
+.agenda-column{
 	width: 100%;
-	border-radius: 5px;
-	border: 2px solid var(--primary-blue);
-	margin: 0;
+	min-width: 130px;
+	display: flex;
+	flex-direction: column;
 }
-.busqueda .border-button{
-	width: 100px;
-	margin-left: 150px;
+.agenda--header{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 90px;
+	background-color: var(--primary-blue);
+	color: #FFF;
 }
-.content-wrapper{
-	width: calc(100vw - 300px);
+.agenda--header span:nth-child(odd){
+	font-size: 13px;
+	font-weight: 600;
 }
-.content-wrapper .lista-wrapper{
-	box-shadow: none;
+.agenda--header span:nth-child(even){
+	font-size: 20px;
+	font-weight: 800;
+}
+.hour-block{
+	display: grid;
+	height: 90px;
 	width: 100%;
-	max-width: none;
+	border-top: 1px solid #EEE;
+	border-right: 1px solid #CCC;
 }
-.content-wrapper .lista-header{
-	grid-template-columns: 2fr 2fr 6fr;
+.agenda-appointment{
+	background-color: var(--secondary-light-blue);
+	width: 99%;
+	font-size: 12px;
+	padding: 0px 5px;
+	border-radius: 3px;
+	border-bottom: 1px solid #FFF;
 }
-.content-wrapper .lista-item{
-	grid-template-columns: 2fr 2fr 4fr 2fr;
+.block-quarters{
+	grid-template-rows: 1fr 1fr 1fr 1fr;
 }
-@media only screen and (max-width: 1400px){
-	.content-wrapper{
-		font-size: calc(0.9rem + 0.2vw);
-	}
-	.content-wrapper .lista-item-btns{
-		width: 225px;
-	}
-	.content-wrapper .lista-item, 
-	.content-wrapper .lista-header{
-		grid-template-columns: 4fr 3fr 225px;
-	}
-	.content-wrapper .lista-item span:nth-child(3){
-		display: none;
-	}
+.block-thirds{
+	grid-template-rows: 1fr 1fr 1fr;
 }
-@media only screen and (max-width: 1000px){
-	.body-wrap{
-		flex-direction: column;
-	}
-	.busqueda{
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		max-width: none;
-		width: 100%;
-	}
-	.content-wrapper{
-		width: 100%;
-	}
+.block-halfs{
+	grid-template-rows: 1fr 1fr;
+}
+.agenda-break{
+	background-color: #eee;
 }

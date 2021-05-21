@@ -12,55 +12,12 @@
 	</head>
 	<body>
 		<?php require 'header.php'; ?>
+        <div class="titulo_medicos">
+            <p>Cartilla de medicos</p>
+        </div>
         <div class="body-wrap">
-            <div class="busqueda">
-                <div class="busqueda--header">
-                    <b>Opciones de Busqueda</b>
-                </div>
-                <form action="<?php echo($_SERVER['PHP_SELF'])?>" class="busqueda--inner">
-                    <div class="combo-busqueda">
-                        <b>Buscar medicos</b>
-                        <input type="text" class="input-text" name="busqueda" placeholder="Buscar...">
-                        <input type="submit" value="Buscar" class="border-button">
-                    </div>
-                    <div class="filtros">
-                        <b>Filtros</b>
-                        <div class="filtros--item">
-                            <b>Especialidad</b>
-                            <select name="especialidad" class="input-select">
-                                <option disabled="true" selected="true">Elegí una especialidad</option>
-                                <option value="">Todas las especialidades</option>
-                                <?php
-                                if (isset($_GET['especialidad']) && $_GET['especialidad']) {
-                                    echo('<option selected="true">'.$_GET['especialidad'].'</option>                                    ');
-                                }
-                                $especialidades = obtenerEspecialidades($conexion);
-                                foreach ($especialidades as $especialidad) {
-                                    $especialidad = $especialidad[1];
-                                    echo('<option value="'. $especialidad .'">'. $especialidad .'</option>');
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="filtros--item">
-                            <b>Centros medicos</b>
-                            <div>
-                                <input type="radio" name="sucursal" id="alderetes" value="alderetes">
-                                <label for="alderetes">Alderetes</label>
-                            </div>
-                            <div>
-                                <input type="radio" name="sucursal" id="BdRS" value="BdRS" disabled>
-                                <label for="BdRS">Banda del Rio Salí (próximamente)</label>
-                            </div>
-                        </div>
-                        <input type="submit" value="Aplicar" class="border-button">
-                    </div>
-                </form>
-            </div>
+            <?php require '../views/busqueda.php'?>
             <div class="content-wrapper">
-                <div class="titulo_medicos">
-                    <p>Cartilla de medicos</p>
-                </div>
                 <div class="lista-header">
                     <span>
                         Nombre y apellido

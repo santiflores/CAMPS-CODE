@@ -3,7 +3,7 @@
 require '../admin/config.php';
 require '../functions.php';
 
-// comprobarSession($session_hash, 'recepcion');
+comprobarSession($session_hash, 'recepcion');
 
 $conexion = conexion($bd_config);
 if (!$conexion) {
@@ -45,7 +45,7 @@ function mostrarMedicos($medicos){
         '. $medico['horario'] .'
         </span>
         <div class="lista-item-btns">
-            <a href=".php?id='. $medico['id'] .'" class="lista-item-btn">
+            <a href="turnos.php?id='. $medico['id'] .'" class="lista-item-btn">
                 Ver turnos
             </a>
             <a href="reservar_turno.php?id='. $medico['id'] .'" class="flex-center lista-item-btn">
