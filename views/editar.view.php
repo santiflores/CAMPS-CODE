@@ -10,11 +10,14 @@
 	<link rel="shortcut icon" type="image.png" href="<?php echo(RUTA);?>/images/favicon_CAMPS.png">
 	<script src="https://kit.fontawesome.com/aa681c14be.js" crossorigin="anonymous"></script>
   </head>
-  </head>
+</head>
   <body>
 	<?php require 'header.php'?>
 	<div class="separador">
-		<b>Editar información de <?php echo $nombre?></b>
+		<a href="administracion.php" class="flecha-volver">
+			<img src="../images/flecha.svg">
+		</a>
+		<b>Editar datos de <?php echo $medico['nombre']?></b>
 	</div>
 	<form class="agregar_medico" method="post" enctype="multipart/form-data" action="<?php echo (htmlspecialchars($_SERVER['PHP_SELF']));?>">
 		<div class="form agregar_medico_form">
@@ -113,32 +116,32 @@
 		 </div>
 			<button class="border-button" id="borrar-horario" type="button">Borrar fila</button>
 		</div>
-		 <div class="horarios">
+		 <!-- <div class="horarios">
 			<h4>Precios de consulta</h4>
 			<button id="nuevo-precio-btn" class="border-button" type="button">Agregar nueva fila</button>
 			<div id="nuevo-precio-wrap">
 				<?php 
-				$fila_precio = 0;
-				foreach($precios as $precio):
-				$id = $precio['id'];
-				$precio_id = $precio['id'];
-				$tipo = $precio['tipo'];
-				$valor = $precio['valor'];
+				// $fila_precio = 0;
+				// foreach($precios as $precio):
+				// $id = $precio['id'];
+				// $precio_id = $precio['id'];
+				// $tipo = $precio['tipo'];
+				// $valor = $precio['valor'];
 				?>
-				<div id="nueva-fila<?php echo $fila_precio;?>" class="nueva-fila">
-					<input type="hidden" name="valor[<?php echo($fila_precio);?>][id]" value="<?php echo($id);?>">
+				<div id="nueva-fila<?php //echo $fila_precio;?>" class="nueva-fila">
+					<input type="hidden" name="valor[<?php// echo($fila_precio);?>][id]" value="<?php// echo($id);?>">
 					<label><b>Tipo:</b></label>
-					<input type="text" class="input-text" name="valor[<?php echo $fila_precio;?>][tipo]" placeholder="Ej: OSDE, etc" value="<?php echo($tipo);?>">		
+					<input type="text" class="input-text" name="valor[<?php// echo $fila_precio;?>][tipo]" placeholder="Ej: OSDE, etc" value="<?php// echo($tipo);?>">		
 					<label><b>Valor:</b></label>
-					<input type="number" class="input-text" name="valor[<?php echo $fila_precio;?>][valor]" value="<?php echo($valor);?>">
+					<input type="number" class="input-text" name="valor[<?php// echo $fila_precio;?>][valor]" value="<?php// echo($valor);?>">
 				</div>
 
 				<?php
-				$fila_precio ++;
-				endforeach;?>
+				//$fila_precio ++;
+				//endforeach;?>
 			</div>
 			<button class="border-button" id="borrar-precio" type="button">Borrar fila</button>
-		</div>
+		</div> -->
 		<?php if (!empty($errores)):?>
 			<div class="alert">
 				<?php echo($errores);?>

@@ -13,22 +13,22 @@
             <div class="filtros--item">
                 <b>Especialidad</b>
                 <select name="especialidad" class="input-select filtro-input" id="filtro-select">
-                    <option disabled="true" selected="true">Elegí una especialidad</option>
-                    <option value="" class="filtro-option" id="option">Todas las especialidades</option>
                     <?php
                     if (isset($_GET['especialidad']) && !empty($_GET['especialidad'])) {
                         echo('<option selected="true" class="filtro-option">'.$_GET['especialidad'].'</option>');
                     } else {
                         echo('
                         <option disabled="true" selected="true">Elegí una especialidad</option>');
-                        
                     }
+                    echo('
+                        <option value="" class="filtro-option" id="option">Todas las especialidades</option>
+                    ');
+
                     $especialidades = obtenerEspecialidades($conexion);
                     foreach ($especialidades as $especialidad) {
                         $especialidad = $especialidad[1];
                         echo('<option value="'. $especialidad .'">'. $especialidad .'</option>');
-                    }
-                    ?>
+                    }?>
                 </select>
             </div>
             <div class="filtros--item">
@@ -50,6 +50,7 @@
                     <label for="BdRS">Banda del Rio Salí (próximamente)</label>
                 </div>
             </div>
+            <a href="<?php echo($_SERVER['PHP_SELF'])?>" class="limpiar-filtros">Limpiar filtros</a>
         </div>
     </form>
 </div>

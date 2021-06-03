@@ -1,5 +1,6 @@
 :root{
 	--primary-blue: #4f6d7a;
+	--primary-light: #4f6d7ac4;
 	--secondary-light-blue: #C0D6DF;
 	--secondary-gray: #CCC;
 }
@@ -179,6 +180,18 @@ html{
 	flex-direction: column;
 	padding: 25px;
 }
+.limpiar-filtros{
+	font-size: 0.9em;
+	color: inherit;
+	font-weight: 600;
+	text-decoration: underline;
+	float: right;
+	transition: 0.1s ease-in-out;
+}
+.limpiar-filtros:hover{
+	color: #333333;
+	text-decoration: none;
+}
 .filtros--item{
 	max-width: 300px;
 	border-radius: 5px;
@@ -196,9 +209,16 @@ html{
 	border: 2px solid var(--primary-blue);
 	margin: 0;
 }
-.busqueda .border-button{
+.combo-busqueda .border-button{
 	width: 100px;
 	margin-left: 150px;
+}
+.filtros > .border-button{
+	width: 100%;
+	height: 50px;
+}
+.filtros--item .border-button{
+	width: 200px;
 }
 .content-wrapper{
 	width: calc(100vw - 300px);
@@ -268,6 +288,7 @@ html{
 .loader-active img{
 	height: 50px;
     -webkit-animation: rotating 2s linear infinite;
+    animation: rotating 2s linear infinite;
 }
 
 /*
@@ -317,8 +338,8 @@ html{
 	border: none;
 	padding: 10px;
 }
-.drop_cerrar > *{
-	transition: all 0.5s ease-in-out;
+.drop_cerrar{
+	padding: 20px;
 }
 .nav_boton_dropdown img{
 	height: 100%;
@@ -326,6 +347,7 @@ html{
 }
 .wrapper_drop_first{
 	min-width: 330px;
+	height: 70px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -335,16 +357,17 @@ html{
 }
 #navbar_dropdown{
 	z-index: 1;
-	max-width: 400px;
+	width: 400px;
 	display: none;
-	animation-duration: 0.5s;
+	animation-duration: 0.3s;
 	animation-name: slidein;
 	position: fixed;
 	top: 0;
 	right: 0;
 	height: 100%;
 	margin: auto;
-	background: #D13F3F;
+	background: #FFF;
+	box-shadow: 0 0 10px rgb(0, 0, 0, 10%);
 }
 #navbar_dropdown ul{
 	width: 100%;
@@ -353,27 +376,27 @@ html{
 	list-style: none;
 }
 #navbar_dropdown ul > li{
-	width: 100%;
 	line-height: 90px;
 	font-weight: 600;
-}
-#navbar_dropdown ul > li .botones{
-	border: none;
-	background: none;
-}
-#navbar_dropdown ul > li .botones:hover{
-	background: none;
+	width: 100%;
+	height: 100%;
 }
 #navbar_dropdown ul > li:hover{
-	background-color: #FF7070;
+	background-color: #EEE;
 	transition: all 0.3s ease-in-out;
 }
 #navbar_dropdown ul > li > a{
 	font-size: 2em;
-	color: #FFF;
+	color: #333;
+	width: 100%;
+	height: 100%;
 	text-decoration: none;
 	font-size: 1em;
 	transition: 0.3s ease;
+}
+#navbar_dropdown .active{
+	border: none;
+	background-color: var(--primary-light);
 }
 @keyframes slidein {
 	from {
@@ -451,7 +474,6 @@ nav ul li:hover{
 .mi-cuenta-group button{
 	display: flex;
 	align-items: center;
-	justify-content: ;
 	flex-direction: column;
 }
 .header_icon{
@@ -490,6 +512,7 @@ nav ul li:hover{
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
+		height: 90px;
 	}
 	.logoheader{
 		margin: 0;
@@ -502,14 +525,14 @@ nav ul li:hover{
 	header{
 		padding: 0;
 	}
-	header, header *{
+	#navbar_dropdown{
+		width: 100%;
+	}
+	header{
 		max-height: 50px;
 	}
 	.logoheader{
 		height: 100%;
-	}
-	.wrapper_drop_first .logoheader{
-		width: 67%;
 	}
 	.logoheader img{
 		height: 100%;
@@ -521,11 +544,6 @@ nav ul li:hover{
 		to{
 			width: 100%;
 		}
-	}
-}
-@media only screen and (max-width: 330px){
-	.wrapper_drop_first{
-		min-width: 100%;
 	}
 }
 /*
@@ -751,13 +769,11 @@ Atencion Medica Medias
 Contacto
 */
 .contact_section{
-	height: 430px;
+	height: auto;
 }
 .contact_wrapper{
-	height: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	margin-bottom: 210px;
 }
 .contact_info{
 	border-radius: 5px;
@@ -775,9 +791,6 @@ Contacto
 /*  Contact medias  */
 
 @media only screen and (max-width: 750px){
-	.contact_section{
-		height: 850px;
-	}
 	.contact_section iframe{
 		height: 250px;
 	}
@@ -787,7 +800,6 @@ Contacto
 	.contact_info{
 		padding: 15px;
 		margin-top: 15px;
-		height: 200px;
 	}
 }
 
@@ -1139,6 +1151,7 @@ Sacar Turno
 }
 .turno-formulario{
 	-webkit-animation: pacienteFormulario 0.5s ease;
+	animation: pacienteFormulario 0.5s ease;
 	margin: 0;
 	border-top: 5px solid var(--primary-blue);
 	box-shadow: 0 0 10px rgb(0, 0, 0, 20%);
@@ -1212,7 +1225,7 @@ Sacar Turno
 }
 .calen-grid{
 	width: 100%;
-	height: 335px;
+	height: 385px;
 	display: inline-grid;
 	grid-template-columns:repeat(7, 1fr);
 	grid-template-rows: 50px;
@@ -1411,8 +1424,17 @@ form-paciente b{
         height: 310px;
     }
 }
+@keyframes modal-open {
+    from{
+        height: 0px;
+    }
+    to{
+        height: 310px;
+    }
+}
 .horarios-modal{
     -webkit-animation: modal-open 0.5s ease;
+	animation: modal-open 0.5s ease;
 	padding: 25px;
 	grid-column: 1/8;
 	grid-row: 1/6;
@@ -1655,7 +1677,7 @@ Registrarse
 .separador a:hover{
 	background-color: #FFF;
 	color: #EB5555;
-	border: 2px solid var(--primary-blue);
+	border: 1px solid var(--primary-blue);
 }
 .editar_borrar{
 	background: #EEE;
@@ -1743,8 +1765,6 @@ Registrarse
 	margin-top: 10px;
 }
 .horarios{
-	width: 100%;
-	max-width: 425px;
 	padding: 30px;
 }
 .nueva-fila{
@@ -2026,16 +2046,15 @@ Turno
 }
 @media only screen and (max-width: 550px){
 	.lista-wrapper{
-		font-size: 12;
+		font-size: 12px;
+	}
+	.turno-cancelado, .lista-item{
+		height: 50px;
 	}
 }
 @media only screen and (max-width: 420px){
 	.lista-item-hora{
 		display: none;
-	}
-	.lista-header,
-	.lista-item{
-		grid-template-columns: 3fr 2fr 2fr;
 	}
 	.turno-cancelado{
 		grid-template-columns: 2fr 1fr;
@@ -2109,6 +2128,8 @@ Turno
 	justify-content: center;
 }
 .titulo-bold{
+	margin: auto;
+	max-width: 850px;
 	width: 100%;
 	color: #525252;
 	font-weight: 600;
@@ -2152,7 +2173,7 @@ Turno
 	width: 100%;
 }
 .cambiar_contraseña{
-	height:180px;
+	height: auto;
 	display:grid;
 }
 .contraseña-actual{
@@ -2178,6 +2199,12 @@ Turno
 	.nueva-repetir-contraseña{
 		display: block;
 	}
+	.nueva-repetir-contraseña{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
 }
 @media only screen and (max-width: 500px){
 	.cuenta_info_item{
@@ -2197,12 +2224,6 @@ Turno
 		font-size: 1.2em;
 		font-weight: 600;
 		padding: 15px;
-	}
-}
-@media only screen and (max-width: 350px){
-	.cuenta_info_item{
-		padding:5px 25px;
-		height:100px;
 	}
 }
 /*

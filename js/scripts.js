@@ -4,11 +4,11 @@ const DOMelements = {
 	nuevoHorarioBtn: document.getElementById('nuevo-horario-btn'),
 	nuevoHorarioWrap: document.getElementById('nuevo-horario-wrap'),
 	filasExistentes: document.querySelectorAll('.nueva-fila'),
-	borrarFila: document.querySelectorAll('.border-button'),
+	borrarHorario: document.querySelector('#borrar-horario'),
 
-	nuevoPrecioBtn: document.getElementById('nuevo-precio-btn'),
-	nuevoPrecioWrap: document.getElementById('nuevo-precio-wrap'),
-	borrarprecioBtn: document.getElementById('borrar-precio'),
+	// nuevoPrecioBtn: document.getElementById('nuevo-precio-btn'),
+	// nuevoPrecioWrap: document.getElementById('nuevo-precio-wrap'),
+	// borrarprecioBtn: document.getElementById('borrar-precio'),
 
 	navDropBtn: document.querySelectorAll('.nav_boton_dropdown'),
 	navDropdown: document.querySelector('#navbar_dropdown'),
@@ -34,6 +34,7 @@ const DOMelements = {
 		dni: document.getElementById('dni'),
 		birthDate: document.getElementById('fecha-nac')
 	},
+	appointmentWrapper: document.querySelector('.wrapper-reservar'),
 	calenDays: document.querySelectorAll(".calen-dia"),
 	CalenHoras: document.querySelectorAll(".horarios"),
 	fechaEnUI: document.getElementById("fecha-del-turno"),
@@ -41,6 +42,7 @@ const DOMelements = {
 	btnForMe: document.querySelector('#btn-para-mi'),
 	btnPnr: document.querySelector('#btn-pnr'),
 	appointmentForm: document.querySelector('#turno-formulario'),
+	appointmentSubmit: document.querySelector('.reserva-submit'),
 	
 	borrarBtns: document.querySelectorAll(".borrar-btn"),
 	changePassForm: document.getElementById('cambiar_contraseña_form'),
@@ -49,6 +51,20 @@ const DOMelements = {
 
 }
 const RUTA = 'http://localhost/centros_medicos/CAMPS/';
+DOMelements.navDropBtn.forEach((el)=>{
+	el.addEventListener('click', ()=>{
+
+		let dropdown = DOMelements.navDropdown;
+		console.log(dropdown.style.display);
+		if (dropdown.style.display == '' || dropdown.style.display == 'none') {
+			dropdown.style.display = 'block'
+		} else {
+			dropdown.style.display = 'none'
+		}
+	
+	});
+});
+
 let loader = document.createElement('div');
 loader.classList.add('loader-active');
 loader.innerHTML = `<img src="${RUTA}images/loader.png">`;
@@ -85,38 +101,38 @@ if (DOMelements.dropdownBtn != null) {
 	displayDropdown(DOMelements.dropdownBtn, DOMelements.dropdown);
 }
 
-function submitFilters(){
-	let inputs = DOMelements.filterForm.querySelectorAll('.filtro-input');
-	for (let input of inputs) {
-		console.log(input);
-		console.log(input.value);
-		if (input.value == '') {
-			input.disabled = true
+if (DOMelements.filterForm !== null) {
+	
+	function submitFilters(){
+		let inputs = DOMelements.filterForm.querySelectorAll('.filtro-input');
+		for (let input of inputs) {
+			if (input.value == '') {
+				input.disabled = true
+			}
 		}
+		DOMelements.filterForm.submit();
 	}
-	DOMelements.filterForm.submit();
+	DOMelements.searchSubmit.addEventListener('click', ()=>{
+		submitFilters();
+	});
+	
+	DOMelements.filterForm.addEventListener('keypress', (e)=>{
+		if (e.key === 'Enter') {
+			submitFilters();
+		}
+	});
+	document.addEventListener('input',(event)=>{
+		if (event.target.id=='filtro-select') {
+			submitFilters();		
+		}
+	});
+	DOMelements.filterRadio.forEach(input=>{
+		input.addEventListener('click',()=>{
+			submitFilters();
+		})
+	});
 }
-DOMelements.searchSubmit.addEventListener('click', ()=>{
-	submitFilters();
-});
-
-DOMelements.filterForm.addEventListener('keypress', (e)=>{
-	if (e.key === 'Enter') {
-		submitFilters();
-    }
-});
-document.addEventListener('input',(event)=>{
-	console.log(event.target.id);
-	if (event.target.id=='filtro-select') {
-		submitFilters();		
-	}
-});
-DOMelements.filterRadio.forEach(input=>{
-	input.addEventListener('click',()=>{
-		submitFilters();
-	})
-});
-
+	
 
 if (DOMelements.nuevoHorarioBtn != null) {
 	var filasExistentes = DOMelements.filasExistentes;
@@ -139,6 +155,7 @@ if (DOMelements.nuevoHorarioBtn != null) {
 			horarios[i] = ("0" + hh).slice(-2) + ':' + ("0" + mm).slice(-2); // pushing data in array in [00:00 - 12:00 AM/PM format]
 			inicio += x;
 		}
+		console.log(horarios);
 		
 		var nuevaFilaHTML = `
 		<div id="nueva-fila${fila}" class="nueva-fila">
@@ -171,18 +188,21 @@ if (DOMelements.nuevoHorarioBtn != null) {
 			document.getElementById('desde' + fila).innerHTML += '<option value="' + horarios[i] + '">' + horarios[i] + '</option>';
 			document.getElementById('hasta' + fila).innerHTML += '<option value="' + horarios[i] + '">' + horarios[i] + '</option>';
 		}
+		console.log(DOMelements.nuevoHorarioWrap);
+		console.log(nuevaFilaHTML);
+		console.log(fila);
+		console.log('Hola');
 		fila++;
+		console.log(fila);
 		return fila;
 	});
 }
 
-if (DOMelements.borrarFila != null) {
-	let precioBorradoCount = 0;
+if (DOMelements.borrarHorario != null) {
 	let horarioBorradoCount = 0;
-	DOMelements.borrarFila.forEach(el => {
-		el.addEventListener('click', ()=>{
-			let id = el.id;
-			let parentNode = document.querySelector('#nuevo-horario-wrap');
+	DOMelements.borrarHorario.addEventListener('click', ()=>{
+			let parentNode;
+			parentNode = document.querySelector('#nuevo-horario-wrap');
 			let horarioBorrado = parentNode.removeChild(parentNode.lastElementChild);
 			horarioBorrado = horarioBorrado.firstElementChild.value;
 			if (horarioBorrado != null) {
@@ -192,10 +212,50 @@ if (DOMelements.borrarFila != null) {
 				horarioBorradoCount += 1;
 			}
 			fila -= 1;
+	});
+}
+	//en caso de que usemos precio de consulta, usar este codigo encerrado en /**/
+	/*
+if (DOMelements.borrarFila != null) {
+	let precioBorradoCount = 0;
+	let horarioBorradoCount = 0;
+	DOMelements.borrarFila.forEach(el => {
+		el.addEventListener('click', ()=>{
+			let id = el.id;
+			let parentNode;
+			switch (id) {
+				case 'borrar-horario':
+					parentNode = document.querySelector('#nuevo-horario-wrap');
+					let horarioBorrado = parentNode.removeChild(parentNode.lastElementChild);
+					horarioBorrado = horarioBorrado.firstElementChild.value;
+					if (horarioBorrado != null) {
+						DOMelements.nuevoHorarioWrap.insertAdjacentHTML('beforebegin', `
+							<input type="hidden" name="horario_borrado_id[${horarioBorradoCount}]" value="${horarioBorrado}">
+						`);
+						horarioBorradoCount += 1;
+					}
+					fila -= 1;
+					break;
+				case 'borrar-precio':
+					parentNode = document.querySelector('#nuevo-precio-wrap')
+					let valorBorrado = parentNode.removeChild(parentNode.lastElementChild);
+					valorBorrado = valorBorrado.firstElementChild.value;
+					
+					if (valorBorrado != null) {
+						DOMelements.nuevoPrecioWrap.insertAdjacentHTML('beforebegin',`
+							<input type="hidden" name="precio_borrado_id[${precioBorradoCount}]" value="${valorBorrado}">
+						`);
+						precioBorradoCount += 1;
+					}
+					valor -= 1;
+					break;
+				default:
+					break;
+				}
 		})		
 	});
 }
-
+	*/
 
 
 if (DOMelements.calenDays != null) {
@@ -222,7 +282,6 @@ if (DOMelements.calenDays != null) {
 function loadSchedule(date) {
 	
 	// Obtener horarios tomados por Ajax
-	
 	let ajaxPetition = new XMLHttpRequest();
 	ajaxPetition.open('POST', `${RUTA}traer_horarios.php`);
 
@@ -263,12 +322,11 @@ function loadScheduleUI(petition, date){
 		`;
 		closeBtns();
 		appointmentsModal.appendChild(appointmentsWrapper);
-
+		
 		for (let i = 0; i < data.length; i++) {
 			const appointment = data[i]['horario'];
 			appointmentsWrapper.innerHTML += `
-			<a class="calen-dia horarios" data-selected-time="${appointment}">${appointment}</a>
-			
+				<a class="calen-dia horarios" data-selected-time="${appointment}">${appointment}</a>
 			`;
 		}
 		calenHorasEvents(date);
@@ -407,8 +465,6 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 									pnrInfo.birthDate = value;
 									break;
 							}
-											
-							
 						}
 					});
 					
@@ -420,7 +476,7 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 							<button id="cancelar-pnr" type="button" class="botones-cerrar">
 							<img src="${RUTA}images/cruz.svg"></img>
 							</button>
-							<div class="pnr-card">
+							<div class="pnr-card"> 
 								<div class="flex-center pnr-card--info">
 									${pnrInfo.name} ${pnrInfo.lastName}<br>
 									<span><b>DNI</b> ${pnrInfo.dni}</span>
@@ -430,6 +486,7 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 					`;
 					parentDiv.insertAdjacentHTML('afterBegin', pnrCardHtml)
 					closeBtns()
+					patientForm.parentNode.removeChild(patientForm);
 					wrapperDiv.style.display = "block";
 					
 					}
@@ -438,6 +495,7 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 			});
 		})
 	})
+	
 		DOMelements.btnForMe.addEventListener('click', ()=>{
 			
 			DOMelements.patientInfo.pnr.value = 'false';
@@ -478,6 +536,12 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 
 }
 
+//Ponemos loader cuando apretamos el button Reservar turno
+if (DOMelements.appointmentSubmit!= null) {
+	DOMelements.appointmentSubmit.addEventListener('click', ()=>{
+		appointmentWrapper.appendChild(loader);
+	})
+}
 // Boton para cerrar div
 
 function closeBtns(){
@@ -485,7 +549,6 @@ function closeBtns(){
 	closeBtns.forEach((btn)=>{
 		let parentDiv =  btn.parentNode;
 		let btnId = btn.id;
-		console.log(parentDiv);
 		btn.addEventListener('click', () => {
 			parentDiv.parentNode.removeChild(parentDiv);
 			switch (btnId) {
@@ -527,8 +590,8 @@ if (DOMelements.borrarBtns != null) {
 				break;
 				case 'medico':
 					title = '¿Estas seguro/a que deseas dar de baja este medico?';
-					text = 'Si das de baja a este medico se eliminará por completo y no podrás recuperar la información de este.';
-					options = ['No, conservar medico', 'Si, eliminar medico'];
+					text = 'Al darlo de baja, dejará de ser visible para los pacientes y todos los turnos que hayan sido reservados se cancelarán..';
+					options = ['No, conservar', 'Si, dar de baja'];
 				break;
 				case 'especialidad':
 					title = '¿Estas seguro/a de que deseas eliminar esta especialidad?';

@@ -67,15 +67,9 @@ if (isset($_SESSION[$session_hash.'admin'])) {
 	
 	<div id="navbar_dropdown">
 		<div class="wrapper_drop_first">
-			<a href="<?php echo RUTA;?>/index.php" class="logoheader">
-				<img src="<?php echo RUTA?>/images/logo_camps.png" alt="">
-			</a>
 			<div class="nav_boton_dropdown drop_cerrar">
-				<svg width="60" height="70" viewBox="0 0 300 231" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<rect x="24.7487" width="300" height="35" rx="15" transform="rotate(45 24.7487 0)" fill="white"/>
-				<rect x="0.197735" y="212.132" width="300" height="35" rx="15" transform="rotate(-45 0.197735 212.132)" fill="white"/>
-			</svg>
-		</div>
+				<img src="<?php echo RUTA?>/images/cerrar.png" alt="Cerrar">
+			</div>
 		</div>
 		<ul>
 			<?php echo($header);?>

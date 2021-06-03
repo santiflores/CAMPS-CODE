@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	$medico_id = $_POST['id'];
+	$medico = obtenerMedicoPorId($conexion, $medico);
 	$desde = limpiarDatos($_POST['desde']);
 	$hasta = limpiarDatos($_POST['hasta']);
 	$motivo = limpiarDatos($_POST['motivo']);
@@ -38,5 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 } else {
 	header('Location: administracion.php');
 }
+$medico = obtenerMedicoPorId($conexion, $medico_id);
 require '../views/ausencias.view.php';
 ?>

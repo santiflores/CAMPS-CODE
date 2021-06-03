@@ -13,7 +13,10 @@
   <body>
 	<?php require 'header.php'?>
 	<div class="separador">
-		<b>Ingrese un nuevo medico</b>
+		<a href="administracion.php" class="flecha-volver">
+			<img src="../images/flecha.svg">
+		</a>
+		<b>Nuevo medico</b>
 	</div>
 	<form class="agregar_medico" method="post" enctype="multipart/form-data" action="<?php echo (htmlspecialchars($_SERVER['PHP_SELF']));?>">
 		<div class="form agregar_medico_form">

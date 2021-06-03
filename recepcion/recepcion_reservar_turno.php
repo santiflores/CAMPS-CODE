@@ -228,24 +228,24 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 	');
 }
 
-function mostrarPrecios($conexion, $medico_id) {
-	$statement = $conexion->prepare(
-		'SELECT * FROM precios_consultas WHERE medico_id = :id'
-	);
-	$statement->execute(array(
-		':id' => $medico_id
-	));
-	$precios = $statement->fetchAll();
-	$valor = '';
-	foreach ($precios as $precio) {
-		$valor .= '<li>'. $precio['tipo'] .': $'. $precio['valor'] .'</li>';
-	}
-	return $valor;
-}
+// function mostrarPrecios($conexion, $medico_id) {
+	// $statement = $conexion->prepare(
+	// 	'SELECT * FROM precios_consultas WHERE medico_id = :id'
+	// );
+	// $statement->execute(array(
+	// 	':id' => $medico_id
+	// ));
+	// $precios = $statement->fetchAll();
+	// $valor = '';
+	// foreach ($precios as $precio) {
+	// 	$valor .= '<li>'. $precio['tipo'] .': $'. $precio['valor'] .'</li>';
+	// }
+	// return $valor;
+// }
 
 
 function displayReservarTurno($conexion, $medico_id, $semana_horarios, $medico_actual){
-	$precios = mostrarPrecios($conexion, $medico_id);
+	// $precios = mostrarPrecios($conexion, $medico_id);
 	$medico_actual = obtenerMedicoPorId($conexion, $medico_id);
 	if ($_GET['id'] == true) {	
 		echo('

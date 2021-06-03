@@ -12,9 +12,16 @@
 </head>
 <body>
 	<?php require 'header.php'?>
+	<div class="separador">
+		<a href="editar.php?id=<?php echo $medico_id?>" class="flecha-volver">
+			<img src="../images/flecha.svg">
+		</a>
+		<b>Ausencias de <?php echo $medico['nombre']?></b>
+	</div>
 	<form class="agregar_medico" method="post" enctype="multipart/form-data" action="<?php echo (htmlspecialchars($_SERVER['PHP_SELF']));?>">
 		<div class="form agregar_medico_form">
-			<h2>Nueva ausencia</h2>
+			<b class="form-title">Nueva ausencia</b>
+			<br>
 			<input type="hidden" name="id" value="<?php echo($_GET['id']);?>">
 			<label>Desde</label>
 			<input type="date" min="" max="" class="input-date" name="desde">
@@ -25,9 +32,9 @@
 			<input type="submit" class="input-submit" value="Agregar ausencia">
 		</div>
 		<div class="horarios">
-		<h2>
+		<b class="form-title">
 			Ausencias
-		</h2>
+		</b>
 		<?php 
 		if ($ausencias == false) {
 			echo('<p class="sin-turnos">No hay ninguna ausencia</p>');

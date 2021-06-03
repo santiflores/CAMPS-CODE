@@ -13,7 +13,7 @@
 	<body>
 		<?php require 'header.php'?>
 		<div class="wrapper_mi_cuenta">
-			<span class="mi_cuenta_titulo">Mi cuenta</span>
+			<span class="titulo-bold">Mi cuenta</span>
 			<div class="mi_cuenta_info">
 				<div class="cuenta_info_titulo">
 					Información para el inicio de sesión

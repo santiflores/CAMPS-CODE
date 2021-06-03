@@ -43,17 +43,18 @@ function rangoHorarioDiario($medico_id, $dia, $conexion){
 		return $rango_horarios;
 		
 	} else {
+		echo 'false bro';
 		return false;
 	}
 }
 
 function checkearTurnoDisponible($conexion, $dia_actual, $medico_id){
 	$statement = $conexion->prepare(
-		"SELECT id, fecha FROM turnos WHERE medico_id = :id AND `fecha` = :fecha AND cancelado IS NULL;"
+		"SELECT id, fecha FROM turnos WHERE `medico_id` = :id AND `fecha` = :fecha AND cancelado IS NULL;"
 	);
 	$statement->execute(array(
 		':id' => $medico_id,
-		':fecha' => "`".$dia_actual."`"
+		':fecha' => $dia_actual
 	));
 	$turnos_dia = $statement->fetchAll();
 	return $turnos_dia;
@@ -68,10 +69,9 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 		$mes = date_format($mes_seleccionado, 'm');
 	} else {
 		$mes_seleccionado = new DateTime;
-		$dias = cal_days_in_month(CAL_GREGORIAN, date_format($mes_seleccionado, 'm'), date_format($mes_seleccionado, 'Y'));
-		$mes = $mes_seleccionado->modify("+$dias days");
-		$año = date_format($mes_seleccionado, 'Y');
-		$mes = date_format($mes_seleccionado, 'm');
+		$fecha_seleccionada = explode('-', date_format($mes_seleccionado, 'Y-m-d'));
+		$año = $fecha_seleccionada[0];
+		$mes= sprintf("%02d", $fecha_seleccionada[1]+1);
 	}
 
 	$meses = [
@@ -195,7 +195,7 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 		</div>
 		<div class="calen-grid">
 	');
-	
+	$dias_disponibles = 0;
 	foreach ($mes_completo as $dia) {
 		$dia = new DateTime($dia);
 		$diaYmd = $dia->format('Y-m-d');
@@ -207,17 +207,18 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 		$dia_de_semana = date_format($dia_de_semana, 'D');
 
 		$clases = 'calen-dia';
-		
 		if (!in_array($dia, $mes_hoy_arr)) {
-			$clases .= ' dia-bloqueado';	
+			$clases .= ' dia-bloqueado';
 		} else if (empty($semana_horarios[$dia_de_semana])) {
-			$clases .= ' dia-bloqueado';				
+			$clases .= ' dia-bloqueado';			
 		} else if (in_array($dia, $rango_ausencias)) {
 			$clases .= ' dia-bloqueado';
 		} else if (in_array($dia, $feriados_arr)) {
 			$clases .= ' dia-bloqueado';
 		} else if (count($semana_horarios[$dia_de_semana]) === count($turnos_dia)) {
 			$clases .= ' dia-bloqueado';
+		} else {
+			$dias_disponibles ++;
 		}
 		
 		echo('<a class="'. $clases .'" data-selected-date="'. $dia .'">'. $dia_calen .'</a>');
@@ -228,24 +229,24 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 	');
 }
 
-function mostrarPrecios($conexion, $medico_id) {
-	$statement = $conexion->prepare(
-		'SELECT * FROM precios_consultas WHERE medico_id = :id'
-	);
-	$statement->execute(array(
-		':id' => $medico_id
-	));
-	$precios = $statement->fetchAll();
-	$valor = '';
-	foreach ($precios as $precio) {
-		$valor .= '<li>'. $precio['tipo'] .': $'. $precio['valor'] .'</li>';
-	}
-	return $valor;
-}
+// function mostrarPrecios($conexion, $medico_id) {
+// 	$statement = $conexion->prepare(
+// 		'SELECT * FROM precios_consultas WHERE medico_id = :id'
+// 	);
+// 	$statement->execute(array(
+// 		':id' => $medico_id
+// 	));
+// 	$precios = $statement->fetchAll();
+// 	$valor = '';
+// 	foreach ($precios as $precio) {
+// 		$valor .= '<li>'. $precio['tipo'] .': $'. $precio['valor'] .'</li>';
+// 	}
+// 	return $valor;
+// }
 
 
 function displayReservarTurno($conexion, $session_hash, $medico_id, $semana_horarios, $medico_actual){
-	$precios = mostrarPrecios($conexion, $medico_id);
+	// $precios = mostrarPrecios($conexion, $medico_id);
 	$medico_actual = obtenerMedicoPorId($conexion, $medico_id);
 	if ($_GET['id'] == true) {	
 		echo('
@@ -264,18 +265,15 @@ function displayReservarTurno($conexion, $session_hash, $medico_id, $semana_hora
 				
 
 				<span class="flex-center-start reservar-turno--header">
-					<a href="medicos.php" class="flecha-volver">
-						<img src="images/flecha.svg">
-					</a>
 					<p class="info-consulta--nombre">'. $medico_actual['nombre'] .'</p>
 				</span>
 				<div>
-					<div class="reservar--card">
+					<!--<div class="reservar--card">
 						<b>Precio de la consulta:</b>
 							<ul class="lista-precio">
-							'. $precios .'
-							</ul>
-					</div>
+							'.// $precios .'
+							'</ul>
+					</div>-->
 
 					<div class="reservar--card">
 						<b>Fecha del turno</b>

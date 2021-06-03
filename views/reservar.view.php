@@ -13,6 +13,9 @@
 	<body>
 		<?php require 'header.php'?>
 		<div class="separador">
+			<a href="medicos.php" class="flecha-volver">
+				<img src="images/flecha.svg">
+			</a>
 			<b>Reservar turno</b>
 		</div>
 		<div class="wrapper-reservar">			

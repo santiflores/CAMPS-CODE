@@ -16,7 +16,7 @@ if ($dia == 'Mon') {
 	$dia = 'martes';
 } else if($dia == 'Wed'){
 	$dia = 'miercoles';
-} else if ('Thu') {
+} else if ($dia == 'Thu') {
 	$dia = 'jueves';
 }else if($dia == 'Fri'){
 	$dia = 'viernes';
@@ -37,6 +37,7 @@ if (!empty($medico_id) && !empty($fecha)) {
 		);
 		$statement->bind_param("is", $medico_id, $dia);
 		$statement->execute();
+		
 		$turnos_hoy = $statement->get_result();
 		
 		$turnos_hoy_formateados = [];
@@ -51,7 +52,7 @@ if (!empty($medico_id) && !empty($fecha)) {
 			
 			$hora_inicio = new DateTime($desde);
 			$hora_fin = new DateTime($hasta);
-
+			
 			$hora_fin = $hora_fin->modify('+'. $intervalo .' minutes');
 			
 			$entrada = new DatePeriod($hora_inicio, new DateInterval('PT'. $intervalo .'M'), $hora_fin);
@@ -85,7 +86,6 @@ if (!empty($medico_id) && !empty($fecha)) {
 		}
 		
 		// Quitamos todos los turnos que no esten disponibles del array rango_horario
-
 		foreach ($turnos_hoy_formateados as $horario) {	 // Turnos hoy son todos los horaios del dia
 			if (!in_array($horario, $turnos_tomados_formateados) && in_array($horario, $horarios_centro_medico)) {
 				array_push($horarios_disponibles, $horario);
