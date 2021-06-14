@@ -167,6 +167,18 @@ function rangoHorario(){
     }
     return $rango_horarios;
 }
+
+function llamarFeriados($fecha){
+	$año = date_format($fecha, 'Y');
+	$url = "http://nolaborables.com.ar/api/v2/feriados/$año?formato=mensual";
+	$curl = curl_init($url);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+	$response = curl_exec($curl);
+	
+	$result = json_decode($response);
+	
+	return $result;
+}
 //trae las obras sociales de la base de datos
 function obrasSociales($conexion){
 	$resultado = $conexion->query("SELECT * FROM obras_sociales");

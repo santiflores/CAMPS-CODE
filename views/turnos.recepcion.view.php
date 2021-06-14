@@ -46,7 +46,9 @@
                         <span class="time-tag">20:00</span>
                         <span class="time-tag">21:00</span>
                     </div>
-                    <div class="agenda-column">
+                    
+                    <?php mostrarAgenda($dias_en_pantalla);?>
+                    <!-- <div class="agenda-column">
                         <div class="agenda--header">
                             <span>
                                 Jueves
@@ -168,7 +170,7 @@
                         <div class="hour-block"></div>
                         <div class="hour-block"></div>
                         <div class="hour-block"></div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

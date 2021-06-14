@@ -48,7 +48,7 @@ const DOMelements = {
 	changePassForm: document.getElementById('cambiar_contraseña_form'),
 	changePassBtn: document.getElementById("cambiar_contraseña"),
 	
-
+	agenda: document.querySelector('.agenda')
 }
 const RUTA = 'http://localhost/centros_medicos/CAMPS/';
 DOMelements.navDropBtn.forEach((el)=>{
@@ -644,4 +644,51 @@ if (DOMelements.changePassBtn != null) {
 		`;
 		
 	});
+}
+
+// Agenda
+console.log(DOMelements.agenda);
+if (DOMelements.agenda != null) {
+	function getAgenda() {
+
+		let ajaxPetition = new XMLHttpRequest();
+		ajaxPetition.open('POST', `${RUTA}/recepcion/agenda_ajax.php`);
+		
+		const getParams = new URLSearchParams(window.location.search);
+		let medicId = getParams.get('id');
+		let date;
+		if(getParams.has('fecha')){
+			date = getParams.get('medico_id');
+		} else {
+			date = new Date().toISOString().slice(0, 10)
+		}
+
+		if (date != '' & medicId != '') {
+			let parameters = 'medico_id=' + medicId + '&fecha=' + date; 
+			console.log(parameters);
+			ajaxPetition.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+			ajaxPetition.send(parameters)
+			console.log('loading');
+		}
+
+		// Recibo los turnos en JSON y los muestro en pantalla
+		ajaxPetition.onload = ()=>{
+			let data = JSON.parse(ajaxPetition.responseText);
+			console.log(data.values);
+			// console.log('loaded '. data.length);
+			for (let i = 0; i < data.length; i++) {
+				console.log(data[i]);
+				// const day = data[i];
+				
+				// let column = document.createElement('div');
+	
+				// column.innerHTML = day;
+				// console.log(column);
+			}
+
+		}
+		
+	}
+	// getAgenda();
 }

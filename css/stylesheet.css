@@ -329,6 +329,26 @@ html{
 	width: auto;
 	max-height: 50px;
 }
+.atencion-preferencial{
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	top: 10px;
+	left: 10px;
+	padding: 5px 15px;
+	font-size: 13px;
+	border-radius: 5px;
+	color: #FFF;
+	height: 60px;
+	width: 250px;
+	background-color: #740268;
+}
+.atencion-preferencial img{
+	height: 30px;
+	margin: 10px;
+}
+
 /*
 * Navegación
 */
@@ -357,6 +377,7 @@ html{
 }
 #navbar_dropdown{
 	z-index: 1;
+	position: relative;
 	width: 400px;
 	display: none;
 	animation-duration: 0.3s;
@@ -376,14 +397,15 @@ html{
 	list-style: none;
 }
 #navbar_dropdown ul > li{
+	border-bottom: 1px solid #f5f5f5;
 	line-height: 90px;
 	font-weight: 600;
 	width: 100%;
 	height: 100%;
+	transition: 0.2s ease-in-out;
 }
 #navbar_dropdown ul > li:hover{
 	background-color: #EEE;
-	transition: all 0.3s ease-in-out;
 }
 #navbar_dropdown ul > li > a{
 	font-size: 2em;
@@ -397,6 +419,17 @@ html{
 #navbar_dropdown .active{
 	border: none;
 	background-color: var(--primary-light);
+}
+#navbar_dropdown .logoheader{
+	position: absolute;
+	left: 49%;
+	right: 51%;
+	top: 10px;
+	height: 50px;
+	margin: auto;
+}
+#navbar_dropdown .logoheader img{
+	height: 100%;
 }
 @keyframes slidein {
 	from {
@@ -769,7 +802,8 @@ Atencion Medica Medias
 Contacto
 */
 .contact_section{
-	height: auto;
+	font-size: 20px;
+	min-height: 350px;
 }
 .contact_wrapper{
 	display: grid;
@@ -777,15 +811,12 @@ Contacto
 }
 .contact_info{
 	border-radius: 5px;
-	padding: 50px;
+	padding: 30px;
 	color: #6B6B6B;
 }
-.contact_section h2{
+.contact_section span{
 	font-weight: 600;
-	font-size: 3.1em;
-}
-.contact_section p{
-	font-size: 1.5em;
+	font-size: 1.8em;
 }
 
 /*  Contact medias  */
@@ -800,6 +831,7 @@ Contacto
 	.contact_info{
 		padding: 15px;
 		margin-top: 15px;
+		font-size: 1rem;
 	}
 }
 
@@ -943,7 +975,7 @@ footer {
 	width: 100%;
 }
 .separador{
-	min-height: 80px;
+	max-height: 80px;
 	display: flex;
 	align-items: center;
 	padding: 20px 25px;
@@ -954,7 +986,7 @@ footer {
 }
 .separador b{
 	color: #333333;
-	font-size: 1.7em;
+	font-size: 1.5em;
 	margin: 0;
 }
 .wrapper_medicos{
@@ -2398,7 +2430,7 @@ Turno medico - Consulta
 	Agenda de turnos
 */
 .agenda{
-	height: calc(90px*12);
+	height: calc(70px*12);
 	row-gap: 90px;
 	box-shadow: 0 0 10px rgb(0, 0, 0, 15%);
 	display: flex;
@@ -2408,7 +2440,7 @@ Turno medico - Consulta
 	width: 55px;
 	display: flex;
 	flex-direction: column;
-	padding: 83px 10px 0;
+	padding: 73px 10px 0;
 	color: #bbb;
 	font-weight: 600;
 }
@@ -2416,7 +2448,7 @@ Turno medico - Consulta
 	text-align: right;
 	font-size: 14px;
 	line-height: 14px;
-	margin-bottom: 77px;
+	margin-bottom: 56px;
 }
 .agenda-column{
 	width: 100%;
@@ -2429,7 +2461,7 @@ Turno medico - Consulta
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height: 90px;
+	height: 80px;
 	background-color: var(--primary-blue);
 	color: #FFF;
 }
@@ -2443,10 +2475,10 @@ Turno medico - Consulta
 }
 .hour-block{
 	display: grid;
-	height: 90px;
+	height: 70px;
 	width: 100%;
 	border-top: 1px solid #EEE;
-	border-right: 1px solid #CCC;
+	border-right: 1px solid #EEE;
 }
 .agenda-appointment{
 	background-color: var(--secondary-light-blue);

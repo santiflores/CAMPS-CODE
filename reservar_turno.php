@@ -43,7 +43,6 @@ function rangoHorarioDiario($medico_id, $dia, $conexion){
 		return $rango_horarios;
 		
 	} else {
-		echo 'false bro';
 		return false;
 	}
 }

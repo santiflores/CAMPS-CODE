@@ -48,7 +48,7 @@ function mostrarMedicos($medicos){
             <a href="turnos.php?id='. $medico['id'] .'" class="lista-item-btn">
                 Ver turnos
             </a>
-            <a href="reservar_turno.php?id='. $medico['id'] .'" class="flex-center lista-item-btn">
+            <a href="recepcion_reservar_turno.php?id='. $medico['id'] .'" class="flex-center lista-item-btn">
                 Reservar turno
             </a>
         </div>

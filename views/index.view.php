@@ -11,6 +11,10 @@
 		<script src="https://kit.fontawesome.com/aa681c14be.js" crossorigin="anonymous"></script>
 	</head>
 	<body>
+		<div class="atencion-preferencial">
+			<span>Atencion preferencial para socios de Asispre.</span>
+			<img src="images/logo-asispre.png" class="logo-asispre"></img>
+		</div>
 		<!-- <p style="margin: 0px;">
 		<button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="width: 100%; border-radius: 0px;">
 		Version de prueba. Click para ver mas.

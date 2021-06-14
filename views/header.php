@@ -70,6 +70,9 @@ if (isset($_SESSION[$session_hash.'admin'])) {
 			<div class="nav_boton_dropdown drop_cerrar">
 				<img src="<?php echo RUTA?>/images/cerrar.png" alt="Cerrar">
 			</div>
+			<div class="logoheader">
+				<img src="<?php echo RUTA;?>/images/logo_camps.png" alt="CAMPS">
+			</div>
 		</div>
 		<ul>
 			<?php echo($header);?>
