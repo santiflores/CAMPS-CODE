@@ -4,7 +4,7 @@ session_start();
 require '../admin/config.php';
 require '../functions.php';
 
-// comprobarSession($session_hash, 'recepcion');
+comprobarSession($session_hash, 'recepcion');
 
 $conexion = conexion($bd_config);
 if(!$conexion){
@@ -34,7 +34,7 @@ function rangoHorarioDiario($medico_id, $dia, $conexion){
 			$hora_fin = $hora_fin->modify('+'. $intervalo .' minutes');
 
 			$entrada = new DatePeriod($hora_inicio, new DateInterval('PT'. $intervalo .'M'), $hora_fin);
-			
+			print_r($entrada);
 			foreach ($entrada as $horario ) {
 				array_push($rango_horarios, $horario->format('H:i'));
 			}
@@ -59,9 +59,10 @@ function checkearTurnoDisponible($conexion, $dia_actual, $medico_id){
 	return $turnos_dia;
 }
 
-function mostrarCalen($conexion, $medico_id, $semana_horarios){
-
-	
+function mostrarCalen($conexion, $medico_id, $semana_horarios){	
+	echo '<pre>';
+	// print_r($semana_horarios);
+	echo '</pre>';
 	if (empty($_GET['mes'])) {
 		$mes_seleccionado =  new DateTime;
 		$año = date_format($mes_seleccionado, 'Y');
@@ -88,19 +89,8 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 		'11' => 'Noviembre',
 		'12' => 'Diciembre'
 	];
-	
-	$statement = $conexion->prepare(
-		"SELECT fecha FROM feriados;"
-	);
-	$statement->execute();
-	$feriados = $statement->fetchAll();
-	$feriados_arr = array();
-	
-	foreach ($feriados as $feriado) {
-		$dia = new DateTime($feriado['fecha']);
-		$dia = date_format($dia, 'd-m-Y');
-		array_push($feriados_arr, $dia);
-	}
+
+	$feriados_arr = llamarFeriados($conexion, '01-'.$mes.'-'.$año);
 
 	
 
@@ -209,15 +199,20 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 		$clases = 'calen-dia';
 		
 		if (!in_array($dia, $mes_hoy_arr)) {
-			$clases .= ' dia-bloqueado';	
+			$clases .= ' dia-bloqueado';
+			echo 1;
 		} else if (empty($semana_horarios[$dia_de_semana])) {
-			$clases .= ' dia-bloqueado';				
+			$clases .= ' dia-bloqueado';
+			echo 2;
 		} else if (in_array($dia, $rango_ausencias)) {
 			$clases .= ' dia-bloqueado';
+			echo 3;
 		} else if (in_array($dia, $feriados_arr)) {
 			$clases .= ' dia-bloqueado';
+			echo 4;
 		} else if (count($semana_horarios[$dia_de_semana]) === count($turnos_dia)) {
 			$clases .= ' dia-bloqueado';
+			echo 5;
 		}
 		
 		echo('<a class="'. $clases .'" data-selected-date="'. $dia .'">'. $dia_calen .'</a>');
@@ -228,29 +223,28 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 	');
 }
 
-// function mostrarPrecios($conexion, $medico_id) {
-	// $statement = $conexion->prepare(
-	// 	'SELECT * FROM precios_consultas WHERE medico_id = :id'
-	// );
-	// $statement->execute(array(
-	// 	':id' => $medico_id
-	// ));
-	// $precios = $statement->fetchAll();
-	// $valor = '';
-	// foreach ($precios as $precio) {
-	// 	$valor .= '<li>'. $precio['tipo'] .': $'. $precio['valor'] .'</li>';
-	// }
-	// return $valor;
-// }
+function mostrarPrecios($conexion, $medico_id) {
+	$statement = $conexion->prepare(
+		'SELECT * FROM precios_consultas WHERE medico_id = :id'
+	);
+	$statement->execute(array(
+		':id' => $medico_id
+	));
+	$precios = $statement->fetchAll();
+	$valor = '';
+	foreach ($precios as $precio) {
+		$valor .= '<li>'. $precio['tipo'] .': $'. $precio['valor'] .'</li>';
+	}
+	return $valor;
+}
 
 
 function displayReservarTurno($conexion, $medico_id, $semana_horarios, $medico_actual){
-	// $precios = mostrarPrecios($conexion, $medico_id);
+	$precios = mostrarPrecios($conexion, $medico_id);
 	$medico_actual = obtenerMedicoPorId($conexion, $medico_id);
 	if ($_GET['id'] == true) {	
 		echo('
-			<form class="info-consulta" id="reservar_turno" method="post" action="'. $_SERVER["PHP_SELF"] .'">	
-				<input type="hidden" id="id" name="id" value="'. $_SESSION[$session_hash.'recepcion'] .'">
+			<form class="info-consulta" id="reservar_turno" method="post" action="'. $_SERVER["PHP_SELF"] .'">
 				<input type="hidden" id="medico_id" name="medico_id" value="'. $medico_id .'">
 				<input type="hidden" name="fecha" id="selected-day" value="">
 				<input type="hidden" name="hora" id="selected-time" value="">
@@ -286,6 +280,7 @@ function displayReservarTurno($conexion, $medico_id, $semana_horarios, $medico_a
 					
 						<b>Ingrese los datos del paciente</b>
 						<div class="turno-formulario-buttons border-button" id="btn-pnr">Abrir formulario</div>
+						<div class="turno-formulario-buttons border-button" id="btn-pnr">Ingresar Dni del paciente</div>
 					</div>
 
 					<span>');
@@ -327,6 +322,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 		'Thu' => rangoHorarioDiario($medico_id, 'jueves', $conexion),
 		'Fri' => rangoHorarioDiario($medico_id, 'viernes', $conexion)
 	];
+	print_r(rangoHorarioDiario($medico_id, 'lunes', $conexion));
 	
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {	
 
@@ -412,10 +408,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 		$statement->execute();
 		$turno = $statement->fetch();
 		
+		$secretaria_id= 1;
+
 		$hora = date_format(new DateTime($turno['hora']), 'H:i');
 		$fecha = date_format(new DateTime($turno['fecha']), 'd-m-Y');
 		$medico_id = $turno['medico_id'];
-		$emisor_id = $turno['usuario_id'];
+		$emisor_id = $secretaria_id;
 		$pnr_id = $turno['no_registrado_id'];
 		
 		if ($pnr_id != null) {

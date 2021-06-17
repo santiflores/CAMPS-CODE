@@ -87,11 +87,14 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 		'11' => 'Noviembre',
 		'12' => 'Diciembre'
 	];
-	
+	$mes_hoy = new DateTime;
+	$mes_hoy = intval(date_format($mes_hoy, 'm'));
 	$statement = $conexion->prepare(
-		"SELECT fecha FROM feriados;"
+		"SELECT * FROM feriados WHERE mes = :mes;"
 	);
-	$statement->execute();
+	$statement->execute(array(
+	':mes' => $mes_hoy
+	));
 	$feriados = $statement->fetchAll();
 	$feriados_arr = array();
 	
@@ -249,11 +252,11 @@ function displayReservarTurno($conexion, $session_hash, $medico_id, $semana_hora
 	$medico_actual = obtenerMedicoPorId($conexion, $medico_id);
 	if ($_GET['id'] == true) {	
 		echo('
-			<form class="info-consulta" id="reservar_turno" method="post" action="'. $_SERVER["PHP_SELF"] .'">	
-				<input type="hidden" id="id" name="id" value="'. $_SESSION[$session_hash.'usuario'] .'">
+			<form class="info-consulta" id="reservar_turno" method="post" action="'. $_SERVER["PHP_SELF"] .'">
 				<input type="hidden" id="medico_id" name="medico_id" value="'. $medico_id .'">
 				<input type="hidden" name="fecha" id="selected-day" value="">
 				<input type="hidden" name="hora" id="selected-time" value="">
+				<input type="hidden" name="id" id="id" value="'.$_SESSION[$session_hash.'usuario'].'">
 
 				<input type="hidden" name="pnr" id="pnr" value="">
 				<input type="hidden" name="nombre" id="nombre" value="">
@@ -267,13 +270,6 @@ function displayReservarTurno($conexion, $session_hash, $medico_id, $semana_hora
 					<p class="info-consulta--nombre">'. $medico_actual['nombre'] .'</p>
 				</span>
 				<div>
-					<!--<div class="reservar--card">
-						<b>Precio de la consulta:</b>
-							<ul class="lista-precio">
-							'.// $precios .'
-							'</ul>
-					</div>-->
-
 					<div class="reservar--card">
 						<b>Fecha del turno</b>
 						<span class="input-text" id="fecha-del-turno">Seleccionar en calendario</span>

@@ -93,7 +93,7 @@ $dias_en_pantalla = 0;
 $fecha_iterada = new DateTime($fecha);
 $año_principal = date_format($fecha_iterada, 'D');
 $ultimo_año_iterado = $año_principal;
-$feriados_iterados = llamarFeriados($fecha_iterada);
+$feriados = llamarFeriados($conexion, $fecha_iterada);
 $dias_en_pantalla = [];
 
 
@@ -111,12 +111,12 @@ while (count($dias_en_pantalla) != 5) {
     
     if ($año_iterado != $ultimo_año_iterado) {
         $ultimo_año_iterado = $año_iterado;
-        $feriados_iterados = llamarFeriados($fecha_iterada);
+        $feriados_iterados = llamarFeriados($conexion, $mes);
     }
 
 
     // Chequeo que no se muestren feriados ni dias que el medico no trabaje
-    if (!in_array($fecha_iterada_dmY, $rango_ausencias) && !isset($feriados[$mes]->$dia) && isset($semana_horarios[$dia_de_semana]) && !empty($semana_horarios[$dia_de_semana])) {
+    if (!in_array($fecha_iterada_dmY, $rango_ausencias) && in_array($feriados, ) && isset($semana_horarios[$dia_de_semana]) && !empty($semana_horarios[$dia_de_semana])) {
         $dias_en_pantalla["$fecha_iterada_str"] = [];
         $rango_diario = $semana_horarios[$dia_de_semana];
         $statement = $conexion->prepare(
