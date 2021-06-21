@@ -24,14 +24,14 @@
                 if ($turno['no_registrado_id'] != null) {
                     $proximo_paciente = obtenerPnrPorId($conexion, $turno['no_registrado_id']);
                 } else {
-                    $proximo_paciente = obtenerPacientePorId($conexion, $turno['usuario_id']);
+                    $proximo_paciente = obtenerPacientePorId($conexion, $turno['paciente_id']);
                 }
                 $nombre = $proximo_paciente['nombre'].' '.$proximo_paciente['apellido'];
                 $obra_social = $proximo_paciente['obra_social'];
                 $dni = $proximo_paciente['dni'];
                 
                 $timestamp = new DateTime;
-                $fecha_nac =  new DateTime($proximo_paciente['fecha_de_nac']);
+                $fecha_nac =  new DateTime($proximo_paciente['fecha_nac']);
                 $edad = $timestamp->diff($fecha_nac)->format("%Y");
 
                 echo('
@@ -96,6 +96,7 @@
             <div class="ml-box--header">
                 <b>Turnos para hoy</b>
             </div>
+            <div>
             <?php
             if (count($turnos_hoy) > 0){
 
@@ -103,7 +104,7 @@
                     if ($turno['no_registrado_id'] != null) {
                         $paciente = obtenerPnrPorId($conexion, $turno['no_registrado_id']);
                     } else {
-                        $paciente = obtenerPacientePorId($conexion, $turno['usuario_id']);
+                        $paciente = obtenerPacientePorId($conexion, $turno['paciente_id']);
                     }
                     $nombre = $paciente['nombre'].' '.$paciente['apellido'];
                     $hora = date_format(new DateTime($turno['hora']), 'H:i');
@@ -127,6 +128,7 @@
                 ');
             }
             ?>
+            </div>
             <a class="ml-box--btn flex-center" href="<?php echo RUTA?>/medicos/turnos.php">Ver más turnos</a>
         </div>
     </div>

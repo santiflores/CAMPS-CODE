@@ -26,7 +26,7 @@ if (!empty($_GET['fecha'])) {
 
 
 $statement = $conexion->prepare(
-	'SELECT id, usuario_id, hora, no_registrado_id FROM turnos WHERE medico_id = :medico_id AND fecha = :fecha AND cancelado IS NULL;'
+	'SELECT id, paciente_id, hora, emisor_id FROM turnos WHERE medico_id = :medico_id AND fecha = :fecha AND cancelado IS NULL;'
 );
 $statement->execute(array(
 	':medico_id' => $medico_id,
@@ -67,7 +67,7 @@ function mostrarTurnos($turnos_hoy, $conexion){
 		foreach ($turnos_am as $turno) {
 			$hora = date_format(new Datetime($turno['hora']), 'H:i');
 			$turno_id = $turno['id'];
-			$paciente_id = $turno['usuario_id'];
+			$paciente_id = $turno['paciente_id'];
 			
 			$pnr = $turno['no_registrado_id'];
 			
@@ -107,7 +107,7 @@ function mostrarTurnos($turnos_hoy, $conexion){
 		foreach ($turnos_pm as $turno) {
 			$hora = date_format(new Datetime($turno['hora']), 'H:i');
 			$turno_id = $turno['id'];
-			$paciente_id = $turno['usuario_id'];
+			$paciente_id = $turno['paciente_id'];
 			$pnr = $turno['no_registrado_id'];
 			
 			if ($pnr != null) {

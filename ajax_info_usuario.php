@@ -22,7 +22,7 @@ if($conexion->connect_errno){
 }
 
 $statement = $conexion->prepare(
-    "SELECT nombre, apellido, dni FROM usuarios WHERE id = :id"
+    "SELECT nombre, apellido, dni FROM pacientes WHERE id = :id"
 );
 $statement->execute(array(
     ':id' => $id

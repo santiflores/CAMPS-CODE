@@ -87,24 +87,8 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 		'11' => 'Noviembre',
 		'12' => 'Diciembre'
 	];
-	$mes_hoy = new DateTime;
-	$mes_hoy = intval(date_format($mes_hoy, 'm'));
-	$statement = $conexion->prepare(
-		"SELECT * FROM feriados WHERE mes = :mes;"
-	);
-	$statement->execute(array(
-	':mes' => $mes_hoy
-	));
-	$feriados = $statement->fetchAll();
-	$feriados_arr = array();
-	
-	foreach ($feriados as $feriado) {
-		$dia = new DateTime($feriado['fecha']);
-		$dia = date_format($dia, 'd-m-Y');
-		array_push($feriados_arr, $dia);
-	}
 
-	
+	$feriados_arr = llamarFeriados($conexion, '01-'.$mes.'-'.$año);	
 
 	$statement = $conexion->prepare(
 		"SELECT desde, hasta FROM ausencias WHERE medico_id = :id;"
@@ -262,7 +246,7 @@ function displayReservarTurno($conexion, $session_hash, $medico_id, $semana_hora
 				<input type="hidden" name="nombre" id="nombre" value="">
 				<input type="hidden" name="apellido" id="apellido" value="">
 				<input type="hidden" name="dni" id="dni" value="">
-				<input type="hidden" name="fecha_de_nac" id="fecha-nac" value="">
+				<input type="hidden" name="fecha_nac" id="fecha-nac" value="">
 		
 				
 
@@ -355,17 +339,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 		$pnr_nombre = limpiarDatos($_POST['nombre']);
 		$pnr_apellido = limpiarDatos($_POST['apellido']);
 		$pnr_dni = limpiarDatos($_POST['dni']);
-		$pnr_fecha_de_nac = limpiarDatos($_POST['fecha_de_nac']);
+		$pnr_fecha_nac = limpiarDatos($_POST['fecha_nac']);
 
-		if (empty($pnr_nombre) || empty($pnr_apellido) || empty($pnr_dni) || empty($pnr_fecha_de_nac) || empty($pnr)) {
+		if (empty($pnr_nombre) || empty($pnr_apellido) || empty($pnr_dni) || empty($pnr_fecha_nac) || empty($pnr)) {
 			$errores += 1;
 		}
 
 		if (empty($errores)) {
 
 			$statement = $conexion->prepare(
-				'INSERT INTO usuarios_no_registrados 
-				(`emisor_id`, `nombre`, `apellido`, `dni`, `fecha_de_nac`)
+				'INSERT INTO pacientes 
+				(`emisor_id`, `nombre`, `apellido`, `dni`, `fecha_nac`)
 				VALUES (:emisor_id, :nombre, :apellido, :dni, :fecha_nac)'
 			);
 
@@ -374,10 +358,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 				':nombre' => $pnr_nombre,
 				':apellido' => $pnr_apellido,
 				':dni' => $pnr_dni,
-				':fecha_nac' => $pnr_fecha_de_nac
+				':fecha_nac' => $pnr_fecha_nac
 			));
 
-			$statement = $conexion->query('SELECT id FROM usuarios_no_registrados ORDER BY id DESC LIMIT 1');
+			$statement = $conexion->query('SELECT id FROM pacientes ORDER BY id DESC LIMIT 1');
 			$statement = $statement->fetch();
 			
 			$pnr_id = $statement[0]; 
@@ -389,15 +373,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 	if (empty($errores)) {
 		
 		$statement = $conexion->prepare(
-			'INSERT INTO turnos (`usuario_id`, `medico_id`, `no_registrado_id`, `fecha`, `hora`)
-			VALUES (:usuario_id, :medico_id, :no_registrado_id, :fecha, :hora)'
+			'INSERT INTO turnos (`paciente_id`, `medico_id`, `fecha`, `hora`, `emisor_id`)
+			VALUES (:paciente_id, :medico_id, :fecha, :hora, :emisor_id)'
 		);
 		$statement->execute(array(
-			':usuario_id' => $usuario_id,
+			':paciente_id' => $pnr_id,
 			':medico_id' => $medico_id,
-			':no_registrado_id' => $pnr_id,
 			':fecha' => $fechaYmd,
-			':hora' => $hora
+			':hora' => $hora,
+			'emisor_id' => $usuario_id
 		));
 
 		$statement = $conexion->prepare(
@@ -409,8 +393,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 		$hora = date_format(new DateTime($turno['hora']), 'H:i');
 		$fecha = date_format(new DateTime($turno['fecha']), 'd-m-Y');
 		$medico_id = $turno['medico_id'];
-		$usuario_id = $turno['usuario_id'];
-		$pnr_id = $turno['no_registrado_id'];
+		$usuario_id = $turno['emisor_id'];
+		$pnr_id = $turno['paciente_id'];
 		
 		if ($pnr_id != null) {
 			$paciente = obtenerPnrPorId($conexion, $pnr_id);

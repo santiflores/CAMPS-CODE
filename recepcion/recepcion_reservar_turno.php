@@ -34,7 +34,6 @@ function rangoHorarioDiario($medico_id, $dia, $conexion){
 			$hora_fin = $hora_fin->modify('+'. $intervalo .' minutes');
 
 			$entrada = new DatePeriod($hora_inicio, new DateInterval('PT'. $intervalo .'M'), $hora_fin);
-			print_r($entrada);
 			foreach ($entrada as $horario ) {
 				array_push($rango_horarios, $horario->format('H:i'));
 			}
@@ -61,7 +60,6 @@ function checkearTurnoDisponible($conexion, $dia_actual, $medico_id){
 
 function mostrarCalen($conexion, $medico_id, $semana_horarios){	
 	echo '<pre>';
-	// print_r($semana_horarios);
 	echo '</pre>';
 	if (empty($_GET['mes'])) {
 		$mes_seleccionado =  new DateTime;
@@ -159,7 +157,7 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 			<div class="calen-title">');
 			if (isset($_GET['mes'])) {
 				echo('
-				<a href="reservar_turno.php?id='. $medico_id.'">
+				<a href="recepcion_reservar_turno.php?id='. $medico_id.'">
 					<i class="fas fa-arrow-left"></i>
 				</a>');
 			}
@@ -168,7 +166,7 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 
 			if (empty($_GET['mes'])) {
 				echo('
-				<a href="reservar_turno.php?id='.$medico_id.'&mes=prox">
+				<a href="recepcion_reservar_turno.php?id='.$medico_id.'&mes=prox">
 					<i class="fas fa-arrow-right"></i>
 				</a>');
 			}
@@ -200,19 +198,14 @@ function mostrarCalen($conexion, $medico_id, $semana_horarios){
 		
 		if (!in_array($dia, $mes_hoy_arr)) {
 			$clases .= ' dia-bloqueado';
-			echo 1;
 		} else if (empty($semana_horarios[$dia_de_semana])) {
 			$clases .= ' dia-bloqueado';
-			echo 2;
 		} else if (in_array($dia, $rango_ausencias)) {
 			$clases .= ' dia-bloqueado';
-			echo 3;
 		} else if (in_array($dia, $feriados_arr)) {
 			$clases .= ' dia-bloqueado';
-			echo 4;
 		} else if (count($semana_horarios[$dia_de_semana]) === count($turnos_dia)) {
 			$clases .= ' dia-bloqueado';
-			echo 5;
 		}
 		
 		echo('<a class="'. $clases .'" data-selected-date="'. $dia .'">'. $dia_calen .'</a>');
@@ -242,7 +235,7 @@ function mostrarPrecios($conexion, $medico_id) {
 function displayReservarTurno($conexion, $medico_id, $semana_horarios, $medico_actual){
 	$precios = mostrarPrecios($conexion, $medico_id);
 	$medico_actual = obtenerMedicoPorId($conexion, $medico_id);
-	if ($_GET['id'] == true) {	
+	if ($_GET['id'] == true) {
 		echo('
 			<form class="info-consulta" id="reservar_turno" method="post" action="'. $_SERVER["PHP_SELF"] .'">
 				<input type="hidden" id="medico_id" name="medico_id" value="'. $medico_id .'">
@@ -253,14 +246,11 @@ function displayReservarTurno($conexion, $medico_id, $semana_horarios, $medico_a
 				<input type="hidden" name="nombre" id="nombre" value="">
 				<input type="hidden" name="apellido" id="apellido" value="">
 				<input type="hidden" name="dni" id="dni" value="">
-				<input type="hidden" name="fecha_de_nac" id="fecha-nac" value="">
+				<input type="hidden" name="fecha_nac" id="fecha-nac" value="">
 		
 				
 
 				<span class="flex-center-start reservar-turno--header">
-					<a href="cartilla.php" class="flecha-volver">
-						<img src="../images/flecha.svg">
-					</a>
 					<p class="info-consulta--nombre">'. $medico_actual['nombre'] .'</p>
 				</span>
 				<div>
@@ -279,8 +269,8 @@ function displayReservarTurno($conexion, $medico_id, $semana_horarios, $medico_a
 					<div class="reservar--card" id="turno-formulario">
 					
 						<b>Ingrese los datos del paciente</b>
-						<div class="turno-formulario-buttons border-button" id="btn-pnr">Abrir formulario</div>
-						<div class="turno-formulario-buttons border-button" id="btn-pnr">Ingresar Dni del paciente</div>
+						<div class="turno-formulario-buttons border-button" id="btn-pnr">Paciente nuevo</div>
+						<div class="turno-formulario-buttons border-button" id="btn-pr">Paciente registrado</div>
 					</div>
 
 					<span>');
@@ -313,7 +303,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 	$medico_actual = obtenerMedicoPorId($conexion, $medico_id);
 	if ($medico_actual == false) {
 		$id = $_COOKIE['medico_id'];
-		header('Location: reservar_turno.php?id='. $id);
+		header('Location: recepcion_reservar_turno.php?id='. $id);
 	}
 	$semana_horarios = [
 		'Mon' => rangoHorarioDiario($medico_id, 'lunes', $conexion),
@@ -322,17 +312,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 		'Thu' => rangoHorarioDiario($medico_id, 'jueves', $conexion),
 		'Fri' => rangoHorarioDiario($medico_id, 'viernes', $conexion)
 	];
-	print_r(rangoHorarioDiario($medico_id, 'lunes', $conexion));
 	
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {	
 
 	$errores = 0;
-	$emisor_id = $_SESSION[$session_hash.'recepcion'];
+	$emisor_id = 0;
 	$medico_id = limpiarDatos($_POST['medico_id']);
 	$fecha = limpiarDatos($_POST['fecha']);
 	$hora = limpiarDatos($_POST['hora']);
-	$pnr = limpiarDatos($_POST['pnr']);
-	$pnr_id = null;
 	$fechaYmd = date_format(new DateTime($fecha), 'Y-m-d');
 
 	if (empty($hora)) {
@@ -350,40 +337,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 	if ($turno_tomado != false) {
 		$errores = 5;
 	}
+	
+	$pnr_nombre = limpiarDatos($_POST['nombre']);
+	$pnr_apellido = limpiarDatos($_POST['apellido']);
+	$pnr_dni = limpiarDatos($_POST['dni']);
+	$pnr_fecha_nac = limpiarDatos($_POST['fecha_nac']);
 
+	if (empty($pnr_nombre) || empty($pnr_apellido) || empty($pnr_dni) || empty($pnr_fecha_nac) || empty($pnr)) {
+		$errores += 1;
+	}
 
-	if ($pnr == 'true') {
+	if (empty($errores)) {
 
-		$pnr_nombre = limpiarDatos($_POST['nombre']);
-		$pnr_apellido = limpiarDatos($_POST['apellido']);
-		$pnr_dni = limpiarDatos($_POST['dni']);
-		$pnr_fecha_de_nac = limpiarDatos($_POST['fecha_de_nac']);
+		$statement = $conexion->prepare(
+			'INSERT INTO pacientes 
+			(`emisor_id`, `nombre`, `apellido`, `dni`, `fecha_nac`)
+			VALUES (:emisor_id, :nombre, :apellido, :dni, :fecha_nac)'
+		);
 
-		if (empty($pnr_nombre) || empty($pnr_apellido) || empty($pnr_dni) || empty($pnr_fecha_de_nac) || empty($pnr)) {
-			$errores += 1;
-		}
+		$statement->execute(array(
+			':emisor_id' => $emisor_id,
+			':nombre' => $pnr_nombre,
+			':apellido' => $pnr_apellido,
+			':dni' => $pnr_dni,
+			':fecha_nac' => $pnr_fecha_nac
+		));
 
-		if (empty($errores)) {
-
-			$statement = $conexion->prepare(
-				'INSERT INTO usuarios_no_registrados 
-				(`emisor_id`, `nombre`, `apellido`, `dni`, `fecha_de_nac`)
-				VALUES (:emisor_id, :nombre, :apellido, :dni, :fecha_nac)'
-			);
-
-			$statement->execute(array(
-				':emisor_id' => $emisor_id,
-				':nombre' => $pnr_nombre,
-				':apellido' => $pnr_apellido,
-				':dni' => $pnr_dni,
-				':fecha_nac' => $pnr_fecha_de_nac
-			));
-
-			$statement = $conexion->query('SELECT id FROM usuarios_no_registrados ORDER BY id DESC LIMIT 1');
-			$statement = $statement->fetch();
-			
-			$pnr_id = $statement[0]; 
-		}
+		$statement = $conexion->query('SELECT id FROM pacientes ORDER BY id DESC LIMIT 1');
+		$statement = $statement->fetch();
+		
+		$pnr_id = $statement[0]; 
 	}
 
 
@@ -426,7 +409,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 		$especialidad = $medico_actual['especialidad'];
 
 	} else {
-		header('Location: reservar_turno.php?id='. $medico_id .'&error='. $errores);
+		header('Location: recepcion_reservar_turno.php?id='. $medico_id .'&error='. $errores);
 	}
 }
 require '../views/recepcion_reservar.view.php';

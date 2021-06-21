@@ -39,7 +39,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$errores = '<li>Por favor rellena todos los datos correctamente</li>';
 	} else {
 
-		$statement = $conexion->prepare('SELECT * FROM usuarios WHERE email = :email LIMIT 1');
+		$statement = $conexion->prepare('SELECT * FROM pacientes WHERE email = :email LIMIT 1');
 		$statement->execute(array(':email' => $email));
 
 		$resultado = $statement->fetch();

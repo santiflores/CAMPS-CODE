@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
 		$contraseña_DB = $nueva_contraseña;
 		$statement = $conexion->prepare(
-			'UPDATE `usuarios`
+			'UPDATE `pacientes`
 			SET `pass` = :pass
 			WHERE  `id` = :id;'
 		);

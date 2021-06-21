@@ -130,13 +130,13 @@ function obtenerMedicoPorId($conexion, $id){
 }
 
 function obtenerPacientePorId($conexion, $id){
-	$resultado = $conexion->query("SELECT `id`, `nombre`, `apellido`, `fecha_de_nac`, `dni`, `telefono`, `obra_social`, `email`, `pass` FROM usuarios WHERE id = $id LIMIT 1");
+	$resultado = $conexion->query("SELECT `id`, `nombre`, `apellido`, `fecha_nac`, `dni`, `telefono`, `obra_social`, `email`, `pass` FROM pacientes WHERE id = $id LIMIT 1");
 	$resultado = $resultado->fetch();
 	return ($resultado) ? $resultado : false;
 }
 
 function obtenerPnrPorId($conexion, $id){
-	$resultado = $conexion->query("SELECT id, emisor_id, nombre, apellido, dni, fecha_de_nac FROM usuarios_no_registrados WHERE id = $id LIMIT 1");
+	$resultado = $conexion->query("SELECT id, emisor_id, nombre, apellido, dni, fecha_nac FROM pacientes WHERE id = $id LIMIT 1");
 	$resultado = $resultado->fetch();
 	return ($resultado) ? $resultado : false;
 }

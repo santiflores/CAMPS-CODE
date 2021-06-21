@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 			// usuario
 			$usuario_id = $conexion->prepare(
-				'SELECT id from usuarios WHERE email = :email AND pass = :pass;' 
+				'SELECT id from pacientes WHERE email = :email AND pass = :pass;' 
 			);
 			$usuario_id->execute(array(
 				':email' => $email,

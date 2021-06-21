@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	));
 	$paciente_actual = $statement->fetch();
 
-	$usuario_id = $paciente_actual['usuario_id'];
+	$usuario_id = $paciente_actual['emisor_id'];
 	$medico_id = $paciente_actual['medico_id'];
 	$paciente = obtenerPacientePorId($conexion, $paciente_actual['id']);
 	$horario = new DateTime($paciente_actual['hora']);
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	
 
 	$statement = $conexion->prepare(
-		'SELECT * FROM usuarios WHERE id = :id;'
+		'SELECT * FROM pacientes WHERE id = :id;'
 	);
 	$statement->execute(array(
 	':id' => $usuario_id
@@ -51,11 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')  {
    
 	$statement = $conexion->prepare(
 		'INSERT INTO `historia` 
-		(`usuario_id`, `medico_id`, `fecha`, `info`,)
-		VALUES (:usuario_id, :medico_id, :fecha, :info)'
+		(`paciente_id`, `medico_id`, `fecha`, `info`,)
+		VALUES (:paciente_id, :medico_id, :fecha, :info)'
 	);
 	$statement->execute(array(
-		'usuario_id' => $usuario_id['usuario_id'],
+		'paciente_id' => $usuario_id['usuario_id'],
 		'medico_id' => $medico_id['medico_id'],
 		'fecha' => $fecha['fecha'],
 		'info' => $info['info'],

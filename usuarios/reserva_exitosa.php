@@ -26,7 +26,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
 	$hora = date_format(new DateTime($turno['hora']), 'H:i');
 	$fecha = date_format(new DateTime($turno['fecha']), 'd-m-Y');
 	$medico_id = $turno['medico_id'];
-	$usuario_id = $turno['usuario_id'];
+	$usuario_id = $turno['paciente_id'];
 	$pnr_id = $turno['no_registrado_id'];
 	
 	if ($pnr_id != null) {

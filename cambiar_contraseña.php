@@ -35,7 +35,7 @@ if (isset($hash) && !empty($hash)) {
 		
 	$contraseña_DB = $nueva_contraseña;
 	$statement = $conexion->prepare(
-		'UPDATE `usuarios`
+		'UPDATE `activar`
 		SET `pass` = :pass
 		WHERE  `id` = :id;'
 	);

@@ -41,6 +41,7 @@ const DOMelements = {
 	appointmentFormBtns: document.querySelectorAll('.turno-formulario-buttons'),
 	btnForMe: document.querySelector('#btn-para-mi'),
 	btnPnr: document.querySelector('#btn-pnr'),
+	btnPr:  document.querySelector('#btn-pr'),
 	appointmentForm: document.querySelector('#turno-formulario'),
 	appointmentSubmit: document.querySelector('.reserva-submit'),
 	
@@ -55,7 +56,7 @@ DOMelements.navDropBtn.forEach((el)=>{
 	el.addEventListener('click', ()=>{
 
 		let dropdown = DOMelements.navDropdown;
-		console.log(dropdown.style.display);
+		
 		if (dropdown.style.display == '' || dropdown.style.display == 'none') {
 			dropdown.style.display = 'block'
 		} else {
@@ -155,7 +156,7 @@ if (DOMelements.nuevoHorarioBtn != null) {
 			horarios[i] = ("0" + hh).slice(-2) + ':' + ("0" + mm).slice(-2); // pushing data in array in [00:00 - 12:00 AM/PM format]
 			inicio += x;
 		}
-		console.log(horarios);
+		
 		
 		var nuevaFilaHTML = `
 		<div id="nueva-fila${fila}" class="nueva-fila">
@@ -188,12 +189,9 @@ if (DOMelements.nuevoHorarioBtn != null) {
 			document.getElementById('desde' + fila).innerHTML += '<option value="' + horarios[i] + '">' + horarios[i] + '</option>';
 			document.getElementById('hasta' + fila).innerHTML += '<option value="' + horarios[i] + '">' + horarios[i] + '</option>';
 		}
-		console.log(DOMelements.nuevoHorarioWrap);
-		console.log(nuevaFilaHTML);
-		console.log(fila);
-		console.log('Hola');
+		
 		fila++;
-		console.log(fila);
+		
 		return fila;
 	});
 }
@@ -376,9 +374,9 @@ function getOffset(el) {
 }
 
 if (DOMelements.appointmentFormBtns.length > 0) {
-		//parentDiv son los divs adentro del wrapperDiv
+	//parentDiv son los divs adentro del wrapperDiv
 	let parentDiv = DOMelements.appointmentFormBtns[0].parentNode
-	
+
 	DOMelements.btnPnr.addEventListener('click', ()=>{
 			
 		wrapperDiv = parentDiv.parentNode,
@@ -496,44 +494,113 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 		})
 	})
 	
+	if (DOMelements.btnForMe != null) {
+		
 		DOMelements.btnForMe.addEventListener('click', ()=>{
 			
 			DOMelements.patientInfo.pnr.value = 'false';
-
+			
 			let ajaxPetition = new XMLHttpRequest();
 			ajaxPetition.open('POST', `${RUTA}ajax_info_usuario.php`);
-		
+			
 			let userId = DOMelements.patientInfo.userId.value;
 			if (id != '') {
 				let parameters = 'id=' + userId; 
 				
 				ajaxPetition.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		
+				
 				ajaxPetition.send(parameters)
 			}
-
+			
 			ajaxPetition.onload = ()=>{	
 				let data = JSON.parse(ajaxPetition.responseText);
 				cardHtml = `
-					<div>
-						<b>Datos del paciente</b>
-						<button id="cancelar-pm" type="button" class="botones-cerrar">
-						<img src="${RUTA}images/cruz.svg"></img>
-						</button>
-						<div class="pnr-card">
-							<div class="flex-center pnr-card--info">
-								${data[0][0]} ${data[0][1]}<br>
-								<span><b>DNI</b> ${data[0][2]}</span>
-							</div>
-						</div>
-					</div>
+				<div>
+				<b>Datos del paciente</b>
+				<button id="cancelar-pm" type="button" class="botones-cerrar">
+				<img src="${RUTA}images/cruz.svg"></img>
+				</button>
+				<div class="pnr-card">
+				<div class="flex-center pnr-card--info">
+				${data[0][0]} ${data[0][1]}<br>
+				<span><b>DNI</b> ${data[0][2]}</span>
+				</div>
+				</div>
+				</div>
 				`;
 				parentDiv.insertAdjacentHTML('afterBegin', cardHtml)
 				closeBtns()
 			} 
 			
 		})
+		
+	}
+	
+	function submitDNIsearch(dni) {
+		
+		let ajaxPetition = new XMLHttpRequest();
+		ajaxPetition.open('POST', `${RUTA}recepcion/buscar_paciente_dni.php`);
 
+		let parameters = 'dni=' + dni; 
+		
+		ajaxPetition.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		
+		ajaxPetition.send(parameters)
+		
+		ajaxPetition.onload = ()=>{	
+			let data = JSON.parse(ajaxPetition.responseText);
+
+			DOMelements.patientInfo.pnr.value = 'true';
+
+			DOMelements.patientInfo.name.value = data[0]['nombre'];
+			DOMelements.patientInfo.lastName.value = data[0]['apellido'];
+			DOMelements.patientInfo.dni.value = data[0]['dni'];
+			DOMelements.patientInfo.birthDate.value = data[0]['fecha_nac'];
+
+			cardHtml = `
+			<div>
+			<b>Datos del paciente</b>
+			<button id="cancelar-pm" type="button" class="botones-cerrar">
+			<img src="${RUTA}images/cruz.svg"></img>
+			</button>
+			<div class="pnr-card">
+			<div class="flex-center pnr-card--info">
+			${data[0]['nombre']} ${data[0]['apellido']}<br>
+			<span><b>DNI</b> ${data[0]['dni']}</span>
+			</div> 
+			</div>
+			</div>`;
+			
+			parentDiv.insertAdjacentHTML('afterBegin', cardHtml)
+			closeBtns()
+		} 
+	}
+	if (DOMelements.btnPr != null) {
+		DOMelements.btnPr.addEventListener('click', ()=>{
+			
+			formHtml = `
+			<div>
+				<b>Ingrese el DNI</b>
+				<button id="cancelar-pm" type="button" class="botones-cerrar"></button>
+				<div class="pnr-card">
+					<input id="dni-form" type='text' placeholder="DNI del paciente" class="input-text"></input>
+					<span class="border-button" id="DNI-submit">Buscar paciente</span>
+				</div>
+			</div>
+			`
+			parentDiv.insertAdjacentHTML('afterBegin', formHtml);
+			
+			submitBtn = document.querySelector('#DNI-submit');
+			DNIinput = document.querySelector('#dni-form')
+			submitBtn.addEventListener('click', ()=>{
+				dni = DNIinput.value
+				if (dni != '') {	
+					submitDNIsearch(dni);
+				}
+			})
+
+		});
+	}
 }
 
 //Ponemos loader cuando apretamos el button Reservar turno
@@ -647,7 +714,6 @@ if (DOMelements.changePassBtn != null) {
 }
 
 // Agenda
-console.log(DOMelements.agenda);
 if (DOMelements.agenda != null) {
 	function getAgenda() {
 
@@ -665,26 +731,25 @@ if (DOMelements.agenda != null) {
 
 		if (date != '' & medicId != '') {
 			let parameters = 'medico_id=' + medicId + '&fecha=' + date; 
-			console.log(parameters);
+			
 			ajaxPetition.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
 			ajaxPetition.send(parameters)
-			console.log('loading');
+			
 		}
 
 		// Recibo los turnos en JSON y los muestro en pantalla
 		ajaxPetition.onload = ()=>{
 			let data = JSON.parse(ajaxPetition.responseText);
-			console.log(data.values);
-			// console.log('loaded '. data.length);
+			
 			for (let i = 0; i < data.length; i++) {
-				console.log(data[i]);
+				
 				// const day = data[i];
 				
 				// let column = document.createElement('div');
 	
 				// column.innerHTML = day;
-				// console.log(column);
+				
 			}
 
 		}

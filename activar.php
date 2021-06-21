@@ -23,7 +23,7 @@ if (isset($_GET['h']) && !empty($_GET['h'])) {
 	if ($cuenta != false) {
 		
 		$statement = $conexion->prepare(
-			'INSERT INTO `usuarios` 
+			'INSERT INTO `pacientes` 
 			(`nombre`, `apellido`, `pass`, `email`, `dni`, `telefono`, `obra_social`) 
 			VALUES (:nombre, :apellido, :pass, :email, :dni, :telefono, :obraSocial);');
 		$statement->execute(array(
