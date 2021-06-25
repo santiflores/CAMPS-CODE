@@ -127,7 +127,7 @@ if (!empty($medico_id) && !empty($fecha)) {
 			$dias_en_pantalla["$fecha_iterada_str"] = [];
 			$rango_diario = $semana_horarios[$dia_de_semana];
 			$statement = $conexion->prepare(
-				"SELECT id, usuario_id, hora FROM turnos WHERE medico_id = :id AND fecha = :fecha"
+				"SELECT id, paciente_id, hora FROM turnos WHERE medico_id = :id AND fecha = :fecha"
 			);
 			$statement->execute(array(
 				':id' => $medico_id,

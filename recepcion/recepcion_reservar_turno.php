@@ -374,7 +374,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 	if (empty($errores)) {
 		
 		$statement = $conexion->prepare(
-			'INSERT INTO turnos (`usuario_id`, `medico_id`, `no_registrado_id`, `fecha`, `hora`)
+			'INSERT INTO turnos (`paciente_id`, `medico_id`, `no_registrado_id`, `fecha`, `hora`)
 			VALUES (:usuario_id, :medico_id, :no_registrado_id, :fecha, :hora)'
 		);
 		$statement->execute(array(

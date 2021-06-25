@@ -377,7 +377,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 			VALUES (:paciente_id, :medico_id, :fecha, :hora, :emisor_id)'
 		);
 		$statement->execute(array(
-			':paciente_id' => $pnr_id,
+			':paciente_id' => $usuario_id,
 			':medico_id' => $medico_id,
 			':fecha' => $fechaYmd,
 			':hora' => $hora,

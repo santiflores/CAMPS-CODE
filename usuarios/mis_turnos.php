@@ -13,7 +13,7 @@ if (isset($_SESSION[$session_hash.'usuario'])){
 	$id = $_SESSION[$session_hash.'usuario'];
 	
 	$statement = $conexion->prepare(
-		'SELECT * FROM turnos WHERE usuario_id = :id AND cancelado is null OR cancelado = 1 ORDER BY fecha ASC;'
+		'SELECT * FROM turnos WHERE paciente_id = :id AND cancelado is null OR cancelado = 1 ORDER BY fecha ASC;'
 	);
 	$statement->execute(array(
 		':id' => $id
