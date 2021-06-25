@@ -11,12 +11,14 @@ if (!$conexion) {
 }
 if (isset($_SESSION[$session_hash.'usuario'])){
 	$id = $_SESSION[$session_hash.'usuario'];
-	
+	$hoy = date_format(new DateTime(), 'Y-m-d');
+	print_r($hoy);
 	$statement = $conexion->prepare(
-		'SELECT * FROM turnos WHERE paciente_id = :id AND cancelado is null OR cancelado = 1 ORDER BY fecha ASC;'
+		'SELECT * FROM turnos WHERE fecha >= :fecha AND paciente_id = :id ORDER BY fecha ASC;'
 	);
 	$statement->execute(array(
-		':id' => $id
+		':id' => $id,
+		':fecha' => $hoy
 	));
 	$turnos = $statement->fetchAll();
 	
@@ -117,6 +119,8 @@ if (isset($_SESSION[$session_hash.'usuario'])){
 			');
 		}
 	}	
+} else {
+	header('Location: login.php');
 }
 require '../views/mis.turnos.view.php';
 ?>

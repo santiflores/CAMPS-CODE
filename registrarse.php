@@ -32,6 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$dni = limpiarDatos($_POST['dni']);
 	$telefono = isset($_POST['telefono']) ? limpiarDatos($_POST['telefono']) : null;
 	$obra_social = limpiarDatos($_POST['obra_social']);
+	$fecha_nac = limpiarDatos($_POST['fecha_nac']);
 	
 
 
@@ -39,13 +40,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$errores = '<li>Por favor rellena todos los datos correctamente</li>';
 	} else {
 
-		$statement = $conexion->prepare('SELECT * FROM pacientes WHERE email = :email LIMIT 1');
-		$statement->execute(array(':email' => $email));
+		$statement = $conexion->prepare('SELECT * FROM pacientes WHERE email = :email OR dni = :dni LIMIT 1');
+		$statement->execute(array(
+			':dni' => $dni,
+			':email' => $email
+		));
 
 		$resultado = $statement->fetch();
 
 		if ($resultado != false) {
-			$errores .= '<li>El email ya esta en uso</li>';
+			if ($resultado['dni'] == $dni && !empty($email)) {
+				$errores .= '<li>Ya existe una cuenta asociada a ese numero de documento.</li>';
+			} elseif ($resultado['email'] == $email) {
+				$errores .= '<li>El email ya esta en uso</li>';
+			}
 		}
 
 		$password = hash('sha512', $password);
@@ -66,8 +74,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$hash = md5(rand(0,1000));
 		$statement = $conexion->prepare(
 			'INSERT INTO `cuentas_a_activar` 
-			(`hash`, `nombre`, `apellido`, `pass`, `email`, `dni`, `telefono`, `obra_social`) 
-			VALUES (:h, :nombre, :apellido, :pass, :email, :dni, :telefono, :obraSocial);');
+			(`hash`, `nombre`, `apellido`, `pass`, `email`, `dni`, `telefono`, `obra_social` `fecha_nac`) 
+			VALUES (:h, :nombre, :apellido, :pass, :email, :dni, :telefono, :obraSocial, :fecha_nac);');
 		$statement->execute(array(
 			':h' => $hash,
 			':nombre' => $nombre,
@@ -76,7 +84,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			':email' => $email,
 			':dni' => $dni,
 			':telefono' => $telefono,
-			':obraSocial' => $obra_social
+			':obraSocial' => $obra_social,
+			':fecha_nac' => $fecha_nac
 		));
 		require 'mail/verificacion_mail.php';
 		// Despues de registrar al usuario redirigimos para activar la cuenta.	

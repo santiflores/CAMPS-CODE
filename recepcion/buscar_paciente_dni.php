@@ -13,7 +13,7 @@ if(!$conexion){
 
 $dni = $_POST['dni'];
 
-$statement = $conexion->prepare('SELECT nombre, apellido, dni, fecha_nac FROM pacientes WHERE dni = :dni LIMIT 1;');
+$statement = $conexion->prepare('SELECT id, nombre, apellido, dni, fecha_nac FROM pacientes WHERE dni = :dni LIMIT 1;');
 $statement->execute(array(
     ':dni' => $dni
 ));

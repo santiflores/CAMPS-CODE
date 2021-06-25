@@ -25,13 +25,23 @@
 		</div>
 		<div class="login">
 			<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST" class="login-form">
+				<label>Nombre:</label>
 				<input type="text" class="input-text" placeholder="Nombre" name="nombre" value="<?php echo($nombre)?>">
+				<label>Apellido:</label>
 				<input type="text" class="input-text" placeholder="Apellido" name="apellido" value="<?php echo($apellido);?>">
-				<input type="text" class="input-text" placeholder="Email" name="email" value="<?php echo($email);?>">
-				<input type="password" class="input-pass" placeholder="Contraseña" name="password" value="<?php echo($contraseña_guardada);?>">
-				<input type="password" class="input-pass" placeholder="Repetir Contraseña" name="password2">
+				<label>DNI:</label>
 				<input type="text" class="input-text" placeholder="DNI" name="dni" value="<?php echo($dni);?>">
+				<label>Fecha de nacimiento:</label>
+				<input type="text" class="input-text" name="fecha_nac">
+				<label>Email:</label>
+				<input type="text" class="input-text" placeholder="Email" name="email" value="<?php echo($email);?>">
+				<label>Contraseña:</label>
+				<input type="password" class="input-pass" placeholder="Contraseña" name="password" value="<?php echo($contraseña_guardada);?>">
+				<label>Repetir contraseña:</label>
+				<input type="password" class="input-pass" placeholder="Repetir Contraseña" name="password2">
+				<label>Telefono (opcional):</label>
 				<input type="text" class="input-text" placeholder="Telefono (opcional)" name="telefono" value="<?php echo($telefono);?>">
+				<label>Obra social:</label>
 				<label>Obra Social</label>
 				<select class="input-text" name="obra_social">
 					<option disabled="true" selected>Seleccione una</option>

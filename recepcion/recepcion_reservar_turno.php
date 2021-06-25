@@ -58,9 +58,7 @@ function checkearTurnoDisponible($conexion, $dia_actual, $medico_id){
 	return $turnos_dia;
 }
 
-function mostrarCalen($conexion, $medico_id, $semana_horarios){	
-	echo '<pre>';
-	echo '</pre>';
+function mostrarCalen($conexion, $medico_id, $semana_horarios){
 	if (empty($_GET['mes'])) {
 		$mes_seleccionado =  new DateTime;
 		$año = date_format($mes_seleccionado, 'Y');
@@ -234,6 +232,7 @@ function mostrarPrecios($conexion, $medico_id) {
 
 function displayReservarTurno($conexion, $medico_id, $semana_horarios, $medico_actual){
 	$precios = mostrarPrecios($conexion, $medico_id);
+	$error = $_GET['error'];
 	$medico_actual = obtenerMedicoPorId($conexion, $medico_id);
 	if ($_GET['id'] == true) {
 		echo('
@@ -243,6 +242,8 @@ function displayReservarTurno($conexion, $medico_id, $semana_horarios, $medico_a
 				<input type="hidden" name="hora" id="selected-time" value="">
 
 				<input type="hidden" name="pnr" id="pnr" value="">
+				<input type="hidden" name="pr" id="pr" value="">
+				<input type="hidden" name="paciente_id" id="paciente_id" value="">
 				<input type="hidden" name="nombre" id="nombre" value="">
 				<input type="hidden" name="apellido" id="apellido" value="">
 				<input type="hidden" name="dni" id="dni" value="">
@@ -321,9 +322,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 	$fecha = limpiarDatos($_POST['fecha']);
 	$hora = limpiarDatos($_POST['hora']);
 	$fechaYmd = date_format(new DateTime($fecha), 'Y-m-d');
+	
+	$pnr = limpiarDatos($_POST['pnr']);
+	$pr = limpiarDatos($_POST['pr']);
 
-	if (empty($hora)) {
-		$errores += 2;
+	if (empty($hora) || empty($fecha) || empty($medico_id)) { 
+		$errores += 1;
 	}
 
 	// Checkeo si el turno esta tomado en la base de datos 
@@ -338,76 +342,70 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 		$errores = 5;
 	}
 	
-	$pnr_nombre = limpiarDatos($_POST['nombre']);
-	$pnr_apellido = limpiarDatos($_POST['apellido']);
-	$pnr_dni = limpiarDatos($_POST['dni']);
-	$pnr_fecha_nac = limpiarDatos($_POST['fecha_nac']);
+	if ($pr == 'true') {
+		$paciente_id = $_POST['paciente_id'];
+		if (empty($paciente_id)) {
+			$errores += 1;
+		}
+	} else if ($pnr == 'true') {
+		
+		
+		// Agrego el nuevo paciente a la base de datos
+		$pnr_nombre = limpiarDatos($_POST['nombre']);
+		$pnr_apellido = limpiarDatos($_POST['apellido']);
+		$pnr_dni = limpiarDatos($_POST['dni']);
+		$pnr_fecha_nac = limpiarDatos($_POST['fecha_nac']);
+		
+		if (empty($pnr_nombre) || empty($pnr_apellido) || empty($pnr_dni) || empty($pnr_fecha_nac) || empty($pnr)) {
+			$errores += 1;
+		}
+		
+		$statement = $conexion->prepare(
+			'INSERT INTO pacientes (nombre, apellido, dni, fecha_nac, emisor_id) VALUES(:nombre, :apellido, :dni, :fecha_nac, 0);'
+		);
+		$statement->execute();
 
-	if (empty($pnr_nombre) || empty($pnr_apellido) || empty($pnr_dni) || empty($pnr_fecha_nac) || empty($pnr)) {
-		$errores += 1;
+		// Obtengo el id al paciente nuevo
+		$statement = $conexion->prepare(
+			'SELECT id FROM pacientes ORDER BY  id DESC LIMIT 1;'
+		);
+		$statement->execute();
+		$paciente_id = $statement->fetch();
+		print_r($paciente_id);
+		$paciente_id = $paciente_id[0];
+
 	}
 
 	if (empty($errores)) {
-
-		$statement = $conexion->prepare(
-			'INSERT INTO pacientes 
-			(`emisor_id`, `nombre`, `apellido`, `dni`, `fecha_nac`)
-			VALUES (:emisor_id, :nombre, :apellido, :dni, :fecha_nac)'
-		);
-
-		$statement->execute(array(
-			':emisor_id' => $emisor_id,
-			':nombre' => $pnr_nombre,
-			':apellido' => $pnr_apellido,
-			':dni' => $pnr_dni,
-			':fecha_nac' => $pnr_fecha_nac
-		));
-
-		$statement = $conexion->query('SELECT id FROM pacientes ORDER BY id DESC LIMIT 1');
-		$statement = $statement->fetch();
-		
-		$pnr_id = $statement[0]; 
-	}
-
-
-
-	if (empty($errores)) {
 		
 		$statement = $conexion->prepare(
-			'INSERT INTO turnos (`paciente_id`, `medico_id`, `no_registrado_id`, `fecha`, `hora`)
-			VALUES (:usuario_id, :medico_id, :no_registrado_id, :fecha, :hora)'
+			'INSERT INTO turnos (`paciente_id`, `medico_id`, `emisor_id`, `fecha`, `hora`)
+			VALUES (:paciente_id, :medico_id, 0, :fecha, :hora)'
 		);
 		$statement->execute(array(
-			':usuario_id' => $emisor_id,
+			':paciente_id' => $paciente_id,
 			':medico_id' => $medico_id,
-			':no_registrado_id' => $pnr_id,
 			':fecha' => $fechaYmd,
 			':hora' => $hora
 		));
 
+		// Preparo los datos para enviar mail
 		$statement = $conexion->prepare(
 			'SELECT * FROM turnos WHERE cancelado IS NULL ORDER BY id DESC LIMIT 1'
 		);
 		$statement->execute();
 		$turno = $statement->fetch();
-		
-		$secretaria_id= 1;
 
 		$hora = date_format(new DateTime($turno['hora']), 'H:i');
 		$fecha = date_format(new DateTime($turno['fecha']), 'd-m-Y');
 		$medico_id = $turno['medico_id'];
-		$emisor_id = $secretaria_id;
-		$pnr_id = $turno['no_registrado_id'];
+		$emisor_id = 0;
 		
-		if ($pnr_id != null) {
-			$paciente = obtenerPnrPorId($conexion, $pnr_id);
-		} else {
-			$paciente = obtenerPacientePorId($conexion, $usuario_id);
-		}
+		$paciente = obtenerPacientePorId($conexion, $paciente_id);
+		$medico = obtenerMedicoPorId($conexion, $medico_id);
+		$especialidad = $medico['especialidad'];
 
-		$medico_actual = obtenerMedicoPorId($conexion, $medico_id);
-		$especialidad = $medico_actual['especialidad'];
-
+		header('Location: cartilla.php');
 	} else {
 		header('Location: recepcion_reservar_turno.php?id='. $medico_id .'&error='. $errores);
 	}

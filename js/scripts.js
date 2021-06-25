@@ -28,6 +28,8 @@ const DOMelements = {
 		medicId: document.getElementById('medico_id'),
 		dataInput: document.getElementById("selected-day"),
 		dataInputTime: document.getElementById("selected-time"),
+		pr: document.getElementById('pr'),
+		patientId: document.getElementById('paciente_id'),
 		pnr: document.getElementById('pnr'),
 		name: document.getElementById('nombre'),
 		lastName: document.getElementById('apellido'),
@@ -315,7 +317,7 @@ function loadScheduleUI(petition, date){
 		appointmentsModal.innerHTML += `
 			<b>Turnos disponibles el dia ${date}</b>
 			<button id="cancelar-fecha" type="button" class="botones-cerrar">
-			<img src="${RUTA}images/cruz.svg"></img>
+			<img src="${RUTA}images/cruz_blanca.svg"></img>
 			</button>
 		`;
 		closeBtns();
@@ -472,7 +474,7 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 						<div>
 							<b>Datos del paciente</b>
 							<button id="cancelar-pnr" type="button" class="botones-cerrar">
-							<img src="${RUTA}images/cruz.svg"></img>
+							<img src="${RUTA}images/cruz_blanca.svg"></img>
 							</button>
 							<div class="pnr-card"> 
 								<div class="flex-center pnr-card--info">
@@ -518,7 +520,7 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 				<div>
 				<b>Datos del paciente</b>
 				<button id="cancelar-pm" type="button" class="botones-cerrar">
-				<img src="${RUTA}images/cruz.svg"></img>
+				<img src="${RUTA}images/cruz_blanca.svg"></img>
 				</button>
 				<div class="pnr-card">
 				<div class="flex-center pnr-card--info">
@@ -550,18 +552,15 @@ if (DOMelements.appointmentFormBtns.length > 0) {
 		ajaxPetition.onload = ()=>{	
 			let data = JSON.parse(ajaxPetition.responseText);
 
-			DOMelements.patientInfo.pnr.value = 'true';
+			DOMelements.patientInfo.pr.value = 'true';
 
-			DOMelements.patientInfo.name.value = data[0]['nombre'];
-			DOMelements.patientInfo.lastName.value = data[0]['apellido'];
-			DOMelements.patientInfo.dni.value = data[0]['dni'];
-			DOMelements.patientInfo.birthDate.value = data[0]['fecha_nac'];
+			DOMelements.patientInfo.patientId.value = data[0]['id'];
 
 			cardHtml = `
 			<div>
 			<b>Datos del paciente</b>
-			<button id="cancelar-pm" type="button" class="botones-cerrar">
-			<img src="${RUTA}images/cruz.svg"></img>
+			<button id="cancelar-pr" type="button" class="botones-cerrar">
+			<img src="${RUTA}images/cruz_blanca.svg"></img>
 			</button>
 			<div class="pnr-card">
 			<div class="flex-center pnr-card--info">

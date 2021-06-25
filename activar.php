@@ -24,8 +24,8 @@ if (isset($_GET['h']) && !empty($_GET['h'])) {
 		
 		$statement = $conexion->prepare(
 			'INSERT INTO `pacientes` 
-			(`nombre`, `apellido`, `pass`, `email`, `dni`, `telefono`, `obra_social`) 
-			VALUES (:nombre, :apellido, :pass, :email, :dni, :telefono, :obraSocial);');
+			(`nombre`, `apellido`, `pass`, `email`, `dni`, `telefono`, `obra_social`, fecha_nac) 
+			VALUES (:nombre, :apellido, :pass, :email, :dni, :telefono, :obraSocial :fecha_nac);');
 		$statement->execute(array(
 			':nombre' => $cuenta['nombre'],
 			':apellido' => $cuenta['apellido'],
@@ -33,7 +33,8 @@ if (isset($_GET['h']) && !empty($_GET['h'])) {
 			':email' => $cuenta['email'],
 			':dni' => $cuenta['dni'],
 			':telefono' => $cuenta['telefono'],
-			':obraSocial' => $cuenta['obra_social']
+			':obraSocial' => $cuenta['obra_social'],
+			':fecha_nac' => $cuenta['fecha_nac']
 		));
 		
 		// Borrar la cuenta activada de la tabla temporal en la base de datos
