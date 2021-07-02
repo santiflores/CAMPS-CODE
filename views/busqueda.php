@@ -1,6 +1,6 @@
 <div class="busqueda">
     <div class="busqueda--header">
-        <b>Opciones de Busqueda</b>
+        <b>Opciones de Busqueda</b><span id="busqueda-dropdown"><img src="<?php echo RUTA?>/images/flecha_dark.png" alt="" srcset=""></span>
     </div>
     <form action="<?php echo($_SERVER['PHP_SELF'])?>" class="busqueda--inner" id="filtros">
         <div class="combo-busqueda">

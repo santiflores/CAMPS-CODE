@@ -232,7 +232,21 @@ function mostrarPrecios($conexion, $medico_id) {
 
 function displayReservarTurno($conexion, $medico_id, $semana_horarios, $medico_actual){
 	$precios = mostrarPrecios($conexion, $medico_id);
-	$error = $_GET['error'];
+	if (isset($_GET['error'])) {
+		switch ($_GET['error']) {
+			case '1':
+				$error = '<li>Elegí una fecha y hora valida</li>';
+				break;
+			case '2':
+				$error = '<li>Ingresá los datos del paciente</li>';
+				break;
+			case '3':
+				$error = '<li>El turno seleccionado no está disponible</li>';
+				break;
+			default:
+				break;
+		}
+	}
 	$medico_actual = obtenerMedicoPorId($conexion, $medico_id);
 	if ($_GET['id'] == true) {
 		echo('
@@ -327,7 +341,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 	$pr = limpiarDatos($_POST['pr']);
 
 	if (empty($hora) || empty($fecha) || empty($medico_id)) { 
-		$errores += 1;
+		$errores = 1;
 	}
 
 	// Checkeo si el turno esta tomado en la base de datos 
@@ -339,13 +353,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_SERVER['QUERY_STRING'])) {
 	$turno_tomado = $statement->fetch();
 	
 	if ($turno_tomado != false) {
-		$errores = 5;
+		$errores = 3;
 	}
 	
 	if ($pr == 'true') {
 		$paciente_id = $_POST['paciente_id'];
 		if (empty($paciente_id)) {
-			$errores += 1;
+			$errores = 2;
 		}
 	} else if ($pnr == 'true') {
 		

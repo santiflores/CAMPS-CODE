@@ -114,7 +114,7 @@ if (isset($_SESSION[$session_hash.'usuario'])){
 		} else {
 			echo('
 			<div class="turnos-am-pm">
-			<p class="sin-turnos" >No tienes ningun turno reservado</p>
+			<p class="sin-turnos" >No tenes ningun turno reservado</p>
 			</div>
 			');
 		}

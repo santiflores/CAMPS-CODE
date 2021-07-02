@@ -12,10 +12,32 @@
 </head>
 <body>
 	<?php require 'views/header.php'?>
-	<div class="about">
-		<div class="about_info"></div>
-		<div class="about_info"></div>
-		<div class="about_info"></div>
+	<div class="wrapper-about">
+		<div class="about-inner">
+			<p class="about-title">Quienes somos</p>
+			<div class="about-info">
+				Nuestro Centro Medico (CAMPS) fue fundado hace más de 20 años con la idea de concebir un Centro de Especialidades que brinde a las familias tucumanas acceso a consultorios de atención médica primaria con profesionales de primer nivel.<br><br>
+				Con el paso de los años incorporamos a nuestro proyecto nuevos profesionales y equipamientos que nos permitieron crecer y sumar una gran variedad de Servicios y Especialidades Médicas.<br><br>
+				El objetivo central que tenemos es cuidar tu salud dándote una atención de calidad abarcando una gran variedad de especialidades médicas. Contamos con la infraestructura necesaria para brindarla y personal altamente capacitado para dar respuesta a tus necesidades en Consultas y Prácticas médicas.
+			</div>
+			<div class="about-stats">
+				<p class="stats--title">En CAMPS tendrás la tranquilidad<br>de estar en buenas manos.</p>
+				<div class="stats--circle-group">
+					<div class="stat">
+						<div class="circle-stat flex-center">+20</div>
+						<p>años de trayectoria</p>
+					</div>
+					<div class="stat">
+						<div class="circle-stat flex-center">+10.000</div>
+						<p>atenciones medicas por año</p>
+					</div>
+					<div class="stat">
+						<div class="circle-stat flex-center">17</div>
+						<p>diferentes especialidades</p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<?php require 'views/footer.php'?>
 	<script src="<?php echo RUTA?>/js/scripts.js"></script>

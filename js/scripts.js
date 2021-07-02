@@ -15,6 +15,8 @@ const DOMelements = {
 	dropdownBtn: document.getElementById('boton_dropdown'),
 	dropdown: document.getElementById('agregar'),
 
+	searchDropBtn: document.getElementById('busqueda-dropdown'),
+	searchInner: document.querySelector('.busqueda--inner'),
 	filterForm: document.getElementById('filtros'),
 	filterSelect: document.querySelectorAll('#filtro-select'),
 	filterRadio: document.querySelectorAll('.filtro-radio'),
@@ -99,6 +101,20 @@ function displayDropdown(button, dropdown) {
 	});
 }
 
+if (DOMelements.searchDropBtn != null) {
+	let searchInnerState = false;
+	DOMelements.searchDropBtn.addEventListener('click', ()=>{
+		if (searchInnerState) {
+			DOMelements.searchDropBtn.style.transform='rotate(0deg)';
+			DOMelements.searchInner.classList.remove('busqueda-abierto');
+			searchInnerState = false;
+		} else {
+			DOMelements.searchDropBtn.style.transform='rotate(180deg)';
+			DOMelements.searchInner.classList.add('busqueda-abierto');
+			searchInnerState = true;
+		}
+	});
+}
 
 if (DOMelements.dropdownBtn != null) {
 	displayDropdown(DOMelements.dropdownBtn, DOMelements.dropdown);

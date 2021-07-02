@@ -60,7 +60,7 @@ function mostrarTurnos($turnos_hoy, $conexion){
 	');
 	if (empty($turnos_am)) {
 		echo('
-		<p class="sin-turnos">No tienes ningun turno</p>
+		<p class="sin-turnos">No tenes ningun turno</p>
 		');
 	} else {
 
@@ -100,7 +100,7 @@ function mostrarTurnos($turnos_hoy, $conexion){
 
 	if (empty($turnos_pm)) {
 		echo('
-		<p class="sin-turnos">No tienes ningun turno</p>
+		<p class="sin-turnos">No tenes ningun turno</p>
 		');
 	} else {
 
